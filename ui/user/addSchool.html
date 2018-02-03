@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>JessicaWhite | professional fashion photography</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<link href="css/prettyPhoto.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/theme.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/docs.css" rel="stylesheet">
+<link href="js/google-code-prettify/prettify.css" rel="stylesheet">
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->    
+</head>
+<body>
+	<!--header-->
+    <div class="header">
+    	<div class="wrap">
+        	<div class="navbar navbar_ clearfix">
+            	<div class="container">
+                    <div class="row">
+                        <div class="span4">
+                        	<div class="logo"><a href="index.html"><img src="img/logo.png" alt="" /></a>
+                        </div>                      										
+                        </div>
+						<div  class="span4">
+								  <h2>Revamp Government Schools </h2>
+						</div>
+                        <div class="span8">
+                        	<div class="follow_us">
+                                <ul>
+                                    <li><a href="#" class="facebook">Facebook</a></li>
+                                    <li><a href="#" class="vimeo">Vimeo</a></li>
+                                    <li><a href="#" class="tumbrl">Tumbrl</a></li>
+                                    <li><a href="#" class="twitter">Twitter</a></li>
+                                    <li><a href="#" class="delicious">Delicious</a></li>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                            <nav id="main_menu">
+                                <div class="menu_wrap">
+                                    <ul class="nav sf-menu">
+                                      <li class="current"><a href="index.html">Home</a></li>
+                                      <li><a href="about.html">About Us</a></li>
+                                      <li class="sub-menu"><a href="javascript:{}">Features</a>
+                                          <ul>
+                                              <li><a href="scaffolding.html"><span>-</span>Origin</a></li>
+                                              <li><a href="typography.html"><span>-</span>Vision</a></li>
+                                              <li><a href="shortcodes.html"><span>-</span>Mission</a></li>
+                                              <li><a href="tables.html"><span>-</span>Working Model</a></li>                                          
+                                          </ul>                                          
+                                      </li>
+                                      <li class="sub-menu"><a href="javascript:{}">Gallery</a>
+                                           <ul>
+                                              <li><a href="portfolio_2columns.html"><span>-</span>Pictures</a></li>
+                                              <li><a href="portfolio_3columns.html"><span>-</span>Videos</a></li>
+                                              <li><a href="portfolio_4columns.html"><span>-</span>Stories</a></li>                                      
+                                          </ul>
+                                      </li>                                  
+                                      <li class="sub-menu"><a href="javascript:{}">Blog</a>
+                                           <ul>
+                                              <li><a href="blog.html"><span>-</span>Blog with right sidebar</a></li>
+                                              <li><a href="blog_post.html"><span>-</span>Blog post</a></li>                                      
+                                          </ul>
+                                      </li>
+                                      <li><a href="contacts.html">Contacts</a></li>
+                                    </ul>
+                                </div>
+                             </nav>                            
+                        </div>
+                    </div>                
+                </div>
+             </div>
+        </div>    
+    </div>
+    <!--//header-->
+
+    <section id="main">
+      <div class="container">
+        <article id="main-col">
+          <center><h1 class="page-title">Register the school </h1></center>
+          <ui>
+             <div data-role="main" class="ui-content">
+                <label>School Name</label><br>
+                <input type="text" class="textboxclass" placeholder="Enter School Name">
+              </div>
+              <div>
+                <label for="select-native-1">School Type:</label></div>
+                <div>
+   <select name="select-native-1" class ="selectBoxclass" id="schType" >
+       <option value="1">Nursery</option>
+       <option value="2">Primary</option>
+       <option value="3">Middle School</option>
+       <option value="4">Secondary</option>
+       <option value="5">Higher Secondary</option>
+   </select>
+               </div>
+
+          <div>     <label for="email">School Email: <span>*</span></label></div>
+         <div><input type="email" class="textboxclass" id="schEmail" name="email" placeholder="Email"/>
+        <div> <label for="name">Principal Name : <span>*</span></label>
+         <div><input type="text" name="name" class="textboxclass" id="principalName" placeholder="Principal / Headmaster Name">
+         <div><label for="email">Principal Email: <span>*</span></label>
+         <div><input type="email" class="textboxclass" id="principalEmail" name="email" placeholder="Email"/>
+         <div><label for="name">Number of Students : <span>*</span></label>
+         <div><input type="text" class="textboxclass" name="name" id="noOfStudents" placeholder="Enter Number of Students">
+         <div><label for="name">Number of Teachers : <span>*</span></label>
+         <div><input type="text"  class="textboxclass" name="name" id="noOfTeachers" placeholder="Enter number of Teachers">
+         <div><label for="name">Upload School Photos: <span>*</span></label>
+
+
+<style>
+  .thumb {
+    height: 75px;
+    border: 1px solid #000;
+    margin: 10px 5px 0 0;
+    }
+ </style>
+
+<input type="file" id="files" name="files[]" multiple />
+<output id="list"></output>
+
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+   // Loop through the FileList and render image files as thumbnails.
+   for (var i = 0, f; f = files[i]; i++) {
+
+     // Only process image files.
+     if (!f.type.match('image.*')) {
+       continue;
+     }
+
+     var reader = new FileReader();
+
+     // Closure to capture the file information.
+     reader.onload = (function(theFile) {
+       return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                        '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+    };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+ </script>
+</div>
+
+
+         <div><label for="name">School Address : <span>*</span></label>
+         <div><input type="text" class="textboxclass" name="name" id="schHouseNbr" placeholder="House number">
+         <div><input type="text"  class="textboxclass" name="name" id="schStreetName" placeholder="Street Name">
+         <div><input type="text" class="textboxclass" name="name" id="schTownname" placeholder="Town/Village Name">
+         <div><input type="text" class="textboxclass" name="name" id="schPinCode" placeholder="PinCode">
+             <div><label  for="select-native-1">District:</label>
+             <div><select class ="selectBoxclass" name="select-native-1" id="district">
+                 <option value="1">Cuddalore</option>
+                 <option value="2">Thanjavur</option>
+                 <option value="3">Kanchipuram</option>
+                 <option value="4">Chengalpattu</option>
+                 <option value="5">Thiruvannamalai</option>
+             </select>
+             <div><label for="select-native-1">State:</label>
+             <div><select class ="selectBoxclass" name="select-native-1" id="state">
+                 <option value="1">Tamilnadu</option>
+                 <option value="2">Karnataka</option>
+                 <option value="3">Telengana</option>
+                 <option value="4">AndhraPradhesh</option>
+                 <option value="5">Kerala</option>
+             </select>
+         <div><label for="select-native-1">Country:</label>
+             <div><select class ="selectBoxclass" name="select-native-1" id="country">
+                 <option value="1">INDIA</option>
+             </select>
+
+             <div><label for="info">Requirements in Detail:</label></div>
+
+             <div><textarea class="textareaclass" name="addinfo" id="schRequirements" placeholder="Message"></textarea>
+               <div><label for="name">Create User id : <span>*</span></label>
+               <div><input type="text" class="textboxclass" name="name" id="userId" placeholder="Enter user id or email">
+               <div><label for="name">Create Password : <span>*</span></label>
+               <div><input type="text"  class="textboxclass" name="name" id="password" placeholder="Enter Yo of Teacur Password">
+                 
+             <div><a href="addSchoolSuccessPage.html"><input type="submit" data-inline="true" value="Submit" data-theme="b"></a>
+
+
+          </ui>
+
+        </article>
+
+        <aside id="sidebar">
+          <div class="dark">
+            <h3>What We Do</h3>
+            Under Construction
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      <p>Help US to develop our schools. Many Thanks for Visiting</p>
+    </footer>
+  </body>
+</html>
