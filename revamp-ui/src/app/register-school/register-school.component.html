@@ -1,0 +1,147 @@
+<head>
+  <meta charset="utf-8">
+  <title>Revamp | Register School</title>
+</head>
+<div class="page_container">
+  <div class="breadcrumb">
+    <div class="wrap">
+      <div class="container">
+        Welcome Message. Register here your school here
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="wrap">
+    <div class="container">
+      <section>
+        <div class="row">
+          <div class="span8">
+            <form class="form-horizontal" name="form" (ngSubmit)="register()" #f="ngForm" novalidate>
+              <fieldset>
+
+                <legend>Provide school details along with requirements</legend>
+                <div class="control-group">
+                  <label class="control-label" for="input01">School Name</label>
+                  <div class="controls">
+                    <input type="text" name="schoolName" [(ngModel)]="model.schoolName" #schoolName="ngModel" class="input-xlarge">
+                  </div>
+
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="input01">Headmaster Name</label>
+                  <div class="controls">
+                    <input type="text" class="input-xlarge" name="headMasterName" [(ngModel)]="model.headMasterName" #headMasterName="ngModel"
+                      placeholder="Get name from user id">
+                  </div>
+                </div>
+                
+                  <div class="control-group">
+                    <label class="control-label" for="input01">Headmaster Email </label>
+                    <div class="controls">
+                      <input type="text" class="input-xlarge" name="headMasterEmail" [(ngModel)]="model.headMasterEmail" #headMasterEmail="ngModel">
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="input01">Number of Students</label>
+                    <div class="controls">
+                      <input type="text" class="input-small" name="numberOfStudents" [(ngModel)]="model.numberOfStudents" #numberOfStudents="ngModel">
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="input01">Number of Teachers</label>
+                    <div class="controls">
+                      <input type="text" class="input-small" name="numberOfTeachers" [(ngModel)]="model.numberOfTeachers" #numberOfTeachers="ngModel">
+                    </div>
+                  </div>
+
+
+                  <div class="control-group">
+                    <label class="control-label" for="input01">School Address </label>
+                    <div class="controls">
+                      <input type="text" class="input-xlarge" name="schoolAddress" [(ngModel)]="model.schoolAddress" #schoolAddress="ngModel">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="input01">Street Name</label>
+                    <div class="controls">
+                      <input type="text" class="input-xlarge" name="addressLine1" [(ngModel)]="model.addressLine1" #addressLine1="ngModel">
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="input01">Town/City</label>
+                    <div class="controls">
+                      <input type="text" class="input-xlarge" name="city" [(ngModel)]="model.city" #city="ngModel">
+                    </div>
+                  </div>
+
+                  
+                  <div class="control-group">
+                    <label class="control-label" for="select01">Select District</label>
+                    <div class="controls">
+                      <select id="select01"  name="district" [(ngModel)]="model.district" #district="ngModel">
+                        <option>Cuddalore</option>
+                        <option>Kanchipuram</option>
+                        <option>Chengalpattu</option>
+                        <option>Thiruvanamalai</option>
+                        <option>Villupuram</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="multiSelect">Select School Type</label>
+                    <div class="controls">
+                      <select multiple="multiple" id="multiSelect" name="schoolType" [(ngModel)]="model.schoolType" #schoolType="ngModel">
+                        <option>Nursery</option>
+                        <option>Primary</option>
+                        <option>Middle School</option>
+                        <option>Secondary School</option>
+                        <option>Higher Secondary School</option>
+
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="fileInput">Upload proof of identity of the school </label>
+                    <div class="controls">
+                      <input class="input-file" id="fileInput" type="file" (change)="saveImage($event)" accept=".jpg,.jpeg,.png" >
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="textarea">Message/Requirements</label>
+                    <div class="controls">
+                      <textarea class="input-xlarge" id="textarea" rows="3" name="requirements" [(ngModel)]="model.requirements" #requirements="ngModel"></textarea>
+                    </div>
+                  </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn send_btn">Submit </button>
+                  <button class="btn dark_btn">Cancel</button>
+                </div>
+              </fieldset>
+            </form>
+
+          </div>
+          <div class="span4">
+            <h3>What we do</h3>
+            <p>On successful registration, we will validate the details provided through a volunteer assigned to your school</p>
+            <ul>
+              <li>We will send you the details of volunteer through email/post. Please provide access to Volunteer with valid
+                identity
+              </li>
+            </ul>
+            <hr>
+            <h3>What's Next</h3>
+            <p>After submission of your information, email will be sent to your with School Registraion details within 7-10
+              working days</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</div>
