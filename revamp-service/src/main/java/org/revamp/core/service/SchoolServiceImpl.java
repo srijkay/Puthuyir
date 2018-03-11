@@ -1,5 +1,7 @@
 package org.revamp.core.service;
 
+import java.util.List;
+
 import org.revamp.core.dao.SchoolDAO;
 import org.revamp.core.model.School;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,21 @@ public class SchoolServiceImpl implements SchoolService {
 
 	public School get(long id) {
 		return schoolDAO.get(id);
+	}
+
+	@Override
+	public List<School> getAll() {
+		return schoolDAO.getAll();
+	}
+
+	@Override
+	public List<School> getAllByCity(String cityId) {
+		return schoolDAO.getAllByCity(cityId);
+	}
+
+	@Override
+	public List<School> getAllByDistrict(String districtId) {
+		return schoolDAO.getAllByDistrict(districtId);
 	}
 
 }

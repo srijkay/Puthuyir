@@ -1,10 +1,14 @@
 package org.revamp.core.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
@@ -13,8 +17,6 @@ import org.hibernate.annotations.Proxy;
 @Table(name = "address")
 @Proxy(lazy = false)
 public class Address implements java.io.Serializable {
-
-
 
 	private static final long serialVersionUID = 1956522127988632591L;
 
@@ -25,18 +27,13 @@ public class Address implements java.io.Serializable {
 
 	@Column(name = "address_line_1")
 	private String addressLine1;
-	
+
 	@Column(name = "address_line_2")
 	private String addressLine2;
 
-	@Column(name = "city")
-	private String city;
-	
-	@Column(name = "district")
-	private String district;
-
-	@Column(name = "state")
-	private String state;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "city_id")
+	private City city;
 
 	public long getAddressId() {
 		return addressId;
@@ -62,35 +59,19 @@ public class Address implements java.io.Serializable {
 		this.addressLine2 = addressLine2;
 	}
 
-	public String getCity() {
+	public City getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public void setCity(City city) {
 		this.city = city;
-	}
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
 	}
 
 	@Override
 	public String toString() {
 		return "Address [addressId=" + addressId + ", addressLine1="
 				+ addressLine1 + ", addressLine2=" + addressLine2 + ", city="
-				+ city + ", district=" + district + ", state=" + state + "]";
+				+ city + "]";
 	}
-	
+
 }

@@ -30,7 +30,9 @@ public class ImageController {
 				Image uploadFile = new Image();
 				uploadFile.setImage(aFile.getBytes());
 				long id = imageService.save(uploadFile);
-				return ResponseEntity.ok().body(id);
+				uploadFile.setImageId(id);
+				uploadFile.setImage(null);
+				return ResponseEntity.ok().body(uploadFile);
 			}
 		}
 

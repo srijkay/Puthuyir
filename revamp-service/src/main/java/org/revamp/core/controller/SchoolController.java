@@ -1,5 +1,7 @@
 package org.revamp.core.controller;
 
+import java.util.List;
+
 import org.revamp.core.model.School;
 import org.revamp.core.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,24 @@ public class SchoolController {
 	public ResponseEntity<School> get(@PathVariable("id") long schoolId) {
 		School school = schoolService.get(schoolId);
 		return ResponseEntity.ok().body(school);
+	}
+	
+	@GetMapping("/school")
+	public ResponseEntity<List<School>> getAll() {
+		List<School> schools = schoolService.getAll();
+		return ResponseEntity.ok().body(schools);
+	}
+	
+	@GetMapping("/school/city/{cityid}")
+	public ResponseEntity<List<School>> getAllByCity(@PathVariable("cityid") String cityId) {
+		List<School> schools = schoolService.getAllByCity(cityId);
+		return ResponseEntity.ok().body(schools);
+	}
+	
+	@GetMapping("/school/district/{districtid}")
+	public ResponseEntity<List<School>> getAllByDistrict(@PathVariable("districtid") String districtId) {
+		List<School> schools = schoolService.getAllByDistrict(districtId);
+		return ResponseEntity.ok().body(schools);
 	}
 
 }
