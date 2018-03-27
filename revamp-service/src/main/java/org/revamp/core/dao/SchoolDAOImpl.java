@@ -32,7 +32,7 @@ public class SchoolDAOImpl implements SchoolDAO {
 	@Override
 	public List<School> getAllByCity(String cityId) {
 		return sessionFactory.getCurrentSession()
-				.createQuery("FROM School s where s.address.city.cityId = :cityId")
+				.createQuery("FROM School s where s.address.city = :cityId")
 				.setParameter("cityId", cityId).list();
 	}
 
@@ -40,7 +40,7 @@ public class SchoolDAOImpl implements SchoolDAO {
 	@Override
 	public List<School> getAllByDistrict(String districtId) {
 		return sessionFactory.getCurrentSession()
-				.createQuery("FROM School s where s.address.city.district.districtId = :districtId")
+				.createQuery("FROM School s where s.address.city.district = :districtId")
 				.setParameter("districtId", districtId).list();
 	}
 

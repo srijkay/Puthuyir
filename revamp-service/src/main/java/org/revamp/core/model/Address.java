@@ -1,14 +1,10 @@
 package org.revamp.core.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
@@ -31,9 +27,19 @@ public class Address implements java.io.Serializable {
 	@Column(name = "address_line_2")
 	private String addressLine2;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "city_id")
-	private City city;
+	@Column(name = "district_id")
+	private String district;
+
+	@Column(name = "city_id")
+	private String city;
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
 
 	public long getAddressId() {
 		return addressId;
@@ -59,19 +65,19 @@ public class Address implements java.io.Serializable {
 		this.addressLine2 = addressLine2;
 	}
 
-	public City getCity() {
-		return city;
+	public String getDistrict() {
+		return district;
 	}
 
-	public void setCity(City city) {
-		this.city = city;
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 
 	@Override
 	public String toString() {
 		return "Address [addressId=" + addressId + ", addressLine1="
-				+ addressLine1 + ", addressLine2=" + addressLine2 + ", city="
-				+ city + "]";
+				+ addressLine1 + ", addressLine2=" + addressLine2
+				+ ", district=" + district + ", city=" + city + "]";
 	}
 
 }
