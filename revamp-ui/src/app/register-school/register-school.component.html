@@ -26,98 +26,106 @@
                 <div class="control-group">
                   <label class="control-label" for="input01">School Name</label>
                   <div class="controls">
-                    <input type="text" name="schoolName" [(ngModel)]="model.schoolName" #schoolName="ngModel" class="input-xlarge">
+                    <input type="text" name="schoolName" [(ngModel)]="school.schoolName" #schoolName="ngModel" class="input-xlarge">
                   </div>
 
                 </div>
                 <div class="control-group">
                   <label class="control-label" for="input01">Headmaster Name</label>
                   <div class="controls">
-                    <input type="text" class="input-xlarge" name="headMasterName" [(ngModel)]="model.headMasterName" #headMasterName="ngModel"
+                    <input type="text" class="input-xlarge" name="headMasterName" [(ngModel)]="school.headMasterName" #headMasterName="ngModel"
                       placeholder="Get name from user id">
                   </div>
                 </div>
+
+                <div class="control-group">
+                  <label class="control-label" for="input01">Headmaster Email </label>
+                  <div class="controls">
+                    <input type="text" class="input-xlarge" name="headMasterEmail" [(ngModel)]="school.headMasterEmail" #headMasterEmail="ngModel">
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label" for="input01">Number of Students</label>
+                  <div class="controls">
+                    <input type="number" class="input-small" name="numberOfStudents" [(ngModel)]="school.numberOfStudents" #numberOfStudents="ngModel">
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label" for="input01">Number of Teachers</label>
+                  <div class="controls">
+                    <input type="number" class="input-small" name="numberOfTeachers" [(ngModel)]="school.numberOfTeachers" #numberOfTeachers="ngModel">
+                  </div>
+                </div>
+
+
+                <div class="control-group">
+                  <label class="control-label" for="input01">School Address </label>
+                  <div class="controls">
+                    <input type="text" class="input-xlarge" name="addressLine1" [(ngModel)]="school.address.addressLine1" #addressLine1="ngModel">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="input01">Street Name</label>
+                  <div class="controls">
+                    <input type="text" class="input-xlarge" name="addressLine2" [(ngModel)]="school.address.addressLine2" #addressLine1="ngModel">
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label" for="input01">Town/City</label>
+                  <div class="controls">
+                    <input type="text" class="input-xlarge" name="city" [(ngModel)]="school.address.city" #city="ngModel">
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label" for="select01">Select State</label>
+                  <div class="controls">
+                    <select id="select01" (change)="onStateChange($event.target.value)" name="state">
+                      <option value="" disabled selected>Select your option</option>
+                      <option *ngFor="let state of states" [value]="state.stateId">{{state.stateName}}</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="control-group ">
+                  <label class="control-label " for="select01 ">Select District</label>
+                  <div class="controls ">
+                    <select id="select01 " name="district " [(ngModel)]="school.address.district" #district="ngModel">
+                      <option *ngFor="let district of districts " [value]="district.districtId ">{{district.districtName}}</option>
+                    </select>
+                  </div>
+                </div>
+
                 
-                  <div class="control-group">
-                    <label class="control-label" for="input01">Headmaster Email </label>
-                    <div class="controls">
-                      <input type="text" class="input-xlarge" name="headMasterEmail" [(ngModel)]="model.headMasterEmail" #headMasterEmail="ngModel">
-                    </div>
-                  </div>
+                <div class="control-group">
+                  <label class="control-label" for="multiSelect">Select School Type</label>
+                  <div class="controls">
+                    <select multiple="multiple" id="multiSelect" name="schoolType" [(ngModel)]="school.schoolTypeList" #schoolType="ngModel">
+                      <option>Nursery</option>
+                      <option>Primary</option>
+                      <option>Middle School</option>
+                      <option>Secondary School</option>
+                      <option>Higher Secondary School</option>
 
-                  <div class="control-group">
-                    <label class="control-label" for="input01">Number of Students</label>
-                    <div class="controls">
-                      <input type="text" class="input-small" name="numberOfStudents" [(ngModel)]="model.numberOfStudents" #numberOfStudents="ngModel">
-                    </div>
+                    </select>
                   </div>
-
-                  <div class="control-group">
-                    <label class="control-label" for="input01">Number of Teachers</label>
-                    <div class="controls">
-                      <input type="text" class="input-small" name="numberOfTeachers" [(ngModel)]="model.numberOfTeachers" #numberOfTeachers="ngModel">
-                    </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="fileInput">Upload proof of identity of the school </label>
+                  <div class="controls">
+                    <input class="input-file" id="fileInput" type="file" (change)="saveImage($event)" accept=".jpg,.jpeg,.png">
                   </div>
-
-
-                  <div class="control-group">
-                    <label class="control-label" for="input01">School Address </label>
-                    <div class="controls">
-                      <input type="text" class="input-xlarge" name="schoolAddress" [(ngModel)]="model.schoolAddress" #schoolAddress="ngModel">
-                    </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="textarea">Message/Requirements</label>
+                  <div class="controls">
+                    <textarea class="input-xlarge" id="textarea" rows="3" name="requirements" [(ngModel)]="school.requirements" #requirements="ngModel"></textarea>
                   </div>
-                  <div class="control-group">
-                    <label class="control-label" for="input01">Street Name</label>
-                    <div class="controls">
-                      <input type="text" class="input-xlarge" name="addressLine1" [(ngModel)]="model.addressLine1" #addressLine1="ngModel">
-                    </div>
-                  </div>
-
-                  <div class="control-group">
-                    <label class="control-label" for="input01">Town/City</label>
-                    <div class="controls">
-                      <input type="text" class="input-xlarge" name="city" [(ngModel)]="model.city" #city="ngModel">
-                    </div>
-                  </div>
-
-                  
-                  <div class="control-group">
-                    <label class="control-label" for="select01">Select District</label>
-                    <div class="controls">
-                      <select id="select01"  name="district" [(ngModel)]="model.district" #district="ngModel">
-                        <option>Cuddalore</option>
-                        <option>Kanchipuram</option>
-                        <option>Chengalpattu</option>
-                        <option>Thiruvanamalai</option>
-                        <option>Villupuram</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label" for="multiSelect">Select School Type</label>
-                    <div class="controls">
-                      <select multiple="multiple" id="multiSelect" name="schoolType" [(ngModel)]="model.schoolType" #schoolType="ngModel">
-                        <option>Nursery</option>
-                        <option>Primary</option>
-                        <option>Middle School</option>
-                        <option>Secondary School</option>
-                        <option>Higher Secondary School</option>
-
-                      </select>
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label" for="fileInput">Upload proof of identity of the school </label>
-                    <div class="controls">
-                      <input class="input-file" id="fileInput" type="file" (change)="saveImage($event)" accept=".jpg,.jpeg,.png" >
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label" for="textarea">Message/Requirements</label>
-                    <div class="controls">
-                      <textarea class="input-xlarge" id="textarea" rows="3" name="requirements" [(ngModel)]="model.requirements" #requirements="ngModel"></textarea>
-                    </div>
-                  </div>
+                </div>
                 <div class="form-actions">
                   <button type="submit" class="btn send_btn">Submit </button>
                   <button class="btn dark_btn">Cancel</button>

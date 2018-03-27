@@ -1,48 +1,98 @@
 import { Component, OnInit } from '@angular/core';
+import { SchoolService } from '../services/school.service';
+import { State } from '../models/state';
+import { District } from '../models/district';
+import { Image } from '../models/image';
+import { School } from '../models/school';
+import { Address } from '../models/address';
+import { City } from '../models/city';
+
 
 @Component({
   selector: 'app-register-school',
   templateUrl: './register-school.component.html',
-  styleUrls: ['./register-school.component.css']
+  styleUrls: ['./register-school.component.css'],
+  providers: [SchoolService]
 })
 export class RegisterSchoolComponent implements OnInit {
 
-  model: any = {};
+  school: School;
+  states: State[] = [];
+  districts: District[] = [];
+  cities: City[] = [];
+  image: Image;
 
-  constructor() { }
+
+  constructor(
+    private schoolService: SchoolService
+  ) {
+  }
 
   ngOnInit() {
 
+    this.school = new School();
+    let address: Address = new Address();
+    this.school.address = address;
+   
+
+
+    this.schoolService
+      .getAllStates()
+      .subscribe(
+        (states) => {
+          this.states = states;
+          console.log(this.states);
+        }
+      );
+
   }
 
-  register() {
-      console.log(this.model);
-      
+  onStateChange(stateValue) {
+    console.log(stateValue);
+    this.schoolService
+      .getDistrictsByState(stateValue)
+      .subscribe(
+        (districts) => {
+          this.districts = districts;
+          console.log(this.districts);
+        }
+      );
+
   }
+
+  
 
   saveImage(event) {
     let fileList: FileList = event.target.files;
-    if(fileList.length > 0) {
-        let file: File = fileList[0];
+    if (fileList.length > 0) {
+      let file: File = fileList[0];
 
-        console.log(file);
+      console.log(file);
 
-        /*
-        let formData:FormData = new FormData();
-        formData.append('uploadFile', file, file.name);
-        let headers = new Headers();
-        
-        headers.append('Content-Type', 'multipart/form-data');
-        headers.append('Accept', 'application/json');
-        let options = new RequestOptions({ headers: headers });
-        this.http.post(`${this.apiEndPoint}`, formData, options)
-            .map(res => res.json())
-            .catch(error => Observable.throw(error))
-            .subscribe(
-                data => console.log('success'),
-                error => console.log(error)
-            )*/
+      this.schoolService
+        .saveImage(file)
+        .subscribe(
+          (image) => {
+            this.image = image;
+            this.school.proofOfIdentity = this.image.imageId;
+            console.log(this.image.imageId);
+          }
+        );
+
     }
-}
+  }
+
+  register() {
+    console.log(JSON.stringify(this.school));
+    this.school.schoolType = this.school.schoolTypeList.join();
+    this.schoolService
+    .register(this.school)
+    .subscribe(
+      (data) => {
+        console.log("success");
+      }
+    );
+    
+  }
 
 }
