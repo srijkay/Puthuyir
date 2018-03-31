@@ -1,0 +1,6 @@
+1. Checkout
+2. Update src\main\resources\db.properties with mysql credentials
+3. Execute src\docs\dbscripts\full.sql in mysql
+4. mvn clean compile install
+5. copy .war from /target folder to tomcat webapps
+6. start tomcat
