@@ -1,0 +1,5 @@
+1. Install node-v8.9.4-x64, VSCodeSetup-x64-1.20.1, python-3.6.4
+2. Checkout revamp-ui project
+3. npm install –g angular-cli
+4. ng serve
+5. Launch http://localhost:4200/registerschool
