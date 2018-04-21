@@ -7,17 +7,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { RegisterSchoolComponent } from './register-school/register-school.component';
 import { SchoolService } from './services/school.service';
+import { NewlyAddedSchoolsComponent } from './newly-added-schools/newly-added-schools.component';
 
 
 const appRoutes: Routes = [
   { path: 'home', component: AppComponent },
   { path: 'registerschool', component: RegisterSchoolComponent },
+  { path: 'newlyaddedschools', component: NewlyAddedSchoolsComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ]
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterSchoolComponent
+    RegisterSchoolComponent,
+    NewlyAddedSchoolsComponent
     
   ],
   imports: [

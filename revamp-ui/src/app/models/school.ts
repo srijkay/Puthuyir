@@ -11,6 +11,7 @@ export class School {
     address: Address;
     proofOfIdentity: number;
     requirements: string;
+    dateAdded: Date;
 
    
     constructor(values: Object = {}) {

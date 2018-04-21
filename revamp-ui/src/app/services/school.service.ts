@@ -75,4 +75,15 @@ export class SchoolService {
       })
   }
 
+  public getAllSchools(): Observable<School[]> {
+    return this.http
+      .get(API_URL + '/school')
+      .map(response => {
+        const schools = response.json();
+        return schools.map((school) => new School(school));
+      })
+
+  }
+
+
 }
