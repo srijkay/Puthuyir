@@ -1,39 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { SchoolService } from '../services/school.service';
+import { UserService } from '../services/User.service';
 import { CommonService } from '../services/common.service';
 import { State } from '../models/state';
 import { District } from '../models/district';
 import { Image } from '../models/image';
-import { School } from '../models/school';
+import { User } from '../models/user';
+import { Role } from '../models/role';
 import { Address } from '../models/address';
 import { City } from '../models/city';
 
-
 @Component({
-  selector: 'app-register-school',
-  templateUrl: './register-school.component.html',
-  styleUrls: ['./register-school.component.css'],
-  providers: [SchoolService,CommonService]
+  selector: 'app-register-user',
+  templateUrl: './register-user.component.html',
+  styleUrls: ['./register-user.component.css'],
+  providers: [UserService,CommonService]
 })
-export class RegisterSchoolComponent implements OnInit {
+export class RegisterUserComponent implements OnInit {
 
-  school: School;
+  user: User;
+  roles: Role[] = [];
   states: State[] = [];
   districts: District[] = [];
   cities: City[] = [];
   image: Image;
 
-
   constructor(
-    private schoolService: SchoolService,private commonService: CommonService
+    private userService: UserService,private commonService: CommonService
   ) {
   }
 
   ngOnInit() {
-
-    this.school = new School();
+    this.user = new User();
     let address: Address = new Address();
-    this.school.address = address;
+    this.user.address = address;
    
 
 
@@ -46,6 +45,14 @@ export class RegisterSchoolComponent implements OnInit {
         }
       );
 
+      this.userService
+      .getAllRoles()
+      .subscribe(
+        (roles) => {
+          this.roles = roles;
+          console.log(this.roles);
+        }
+      );
   }
 
   onStateChange(stateValue) {
@@ -61,8 +68,6 @@ export class RegisterSchoolComponent implements OnInit {
 
   }
 
-  
-
   saveImage(event) {
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
@@ -75,7 +80,7 @@ export class RegisterSchoolComponent implements OnInit {
         .subscribe(
           (image) => {
             this.image = image;
-            this.school.proofOfIdentity = this.image.imageId;
+            this.user.identityProof = this.image.imageId;
             console.log(this.image.imageId);
           }
         );
@@ -84,10 +89,9 @@ export class RegisterSchoolComponent implements OnInit {
   }
 
   register() {
-    console.log(JSON.stringify(this.school));
-    this.school.schoolType = this.school.schoolTypeList.join();
-    this.schoolService
-    .register(this.school)
+    console.log(JSON.stringify(this.user));
+    this.userService
+    .register(this.user)
     .subscribe(
       (data) => {
         console.log("success");
@@ -95,5 +99,6 @@ export class RegisterSchoolComponent implements OnInit {
     );
     
   }
+
 
 }
