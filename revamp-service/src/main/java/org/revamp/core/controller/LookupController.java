@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.revamp.core.model.City;
 import org.revamp.core.model.District;
+import org.revamp.core.model.Role;
 import org.revamp.core.model.State;
 import org.revamp.core.service.LookupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,12 @@ public class LookupController {
 			@PathVariable("districtid") String districtId) {
 		List<City> cities = lookupService.getCities(districtId);
 		return ResponseEntity.ok().body(cities);
+	}
+	
+	@GetMapping("/roles")
+	public ResponseEntity<List<Role>> getRoles() {
+		List<Role> roles = lookupService.getRoles();
+		return ResponseEntity.ok().body(roles);
 	}
 
 }

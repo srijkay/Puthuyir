@@ -1,5 +1,7 @@
 package org.revamp.core.model;
 
+import java.util.Date;
+
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
@@ -43,6 +45,16 @@ public class School implements java.io.Serializable {
 
 	@Column(name = "requirements")
 	private String requirements;
+	
+	@Column(name = "date_created")
+	@Basic
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateAdded;
+	
+	@PrePersist
+	protected void onCreate() {
+		dateAdded = new Date();
+	}
 
 	public long getSchoolId() {
 		return schoolId;
@@ -123,6 +135,14 @@ public class School implements java.io.Serializable {
 	public void setRequirements(String requirements) {
 		this.requirements = requirements;
 	}
+	
+	public Date getDateAdded() {
+		return dateAdded;
+	}
+
+	public void setDateAdded(Date dateAdded) {
+		this.dateAdded = dateAdded;
+	}
 
 	@Override
 	public String toString() {
@@ -132,7 +152,9 @@ public class School implements java.io.Serializable {
 				+ ", numberOfStudents=" + numberOfStudents
 				+ ", numberOfTeachers=" + numberOfTeachers + ", address="
 				+ address + ", proofOfIdentity=" + proofOfIdentity
-				+ ", requirements=" + requirements + "]";
+				+ ", requirements=" + requirements + ", dateAdded=" + dateAdded
+				+ "]";
 	}
+
 
 }

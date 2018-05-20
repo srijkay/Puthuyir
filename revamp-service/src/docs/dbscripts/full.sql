@@ -6,6 +6,8 @@ DROP DATABASE IF EXISTS `revamp_db`;
 CREATE DATABASE IF NOT EXISTS `revamp_db`;
 USE `revamp_db`;
 
+
+
 /********************************************************
     The state table, to hold contact info for entities
 ********************************************************/
@@ -103,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
 	`address_id`INT NOT NULL,
 	`proof_of_identity_id`INT,
 	`requirements` VARCHAR(500) NOT NULL,
+	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`school_id`),
 	CONSTRAINT `revamp_db`.`school`.`address_id`
 	FOREIGN KEY (`address_id`)
@@ -114,17 +117,64 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
 	ON UPDATE CASCADE
 );
 
-/********************************************************
-Static Data
-********************************************************/
+DROP TABLE IF EXISTS `revamp_db`.`role`;
 
-delete from revamp_db.state;
+CREATE TABLE IF NOT EXISTS revamp_db.role(
+  `roleid` varchar(45) NOT NULL,
+  `rolename` varchar(45) DEFAULT NULL,
+  `accesslevel` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`roleid`)
+);
+
+DROP TABLE IF EXISTS `revamp_db`.`user`;
+CREATE TABLE IF NOT EXISTS revamp_db.user(
+  `userid` bigint(20) NOT NULL AUTO_INCREMENT ,
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `status` varchar(45) DEFAULT 'REGISTERED',
+  `addressid`INT NOT NULL,
+  `roleid` varchar(45) NOT NULL,
+  `identityproof` INT NOT NULL,
+  `phonenumber` varchar(45) DEFAULT NULL,
+  `emailaddress` varchar(45) DEFAULT NULL,
+  `createdate` datetime(6) DEFAULT NULL,
+  `updateddate` datetime(6) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `passwordhint` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`userid`),
+  CONSTRAINT `revamp_db`.`user`.`addressid`
+  FOREIGN KEY (`addressid`)
+  REFERENCES `revamp_db`.`address` (`address_id`),
+  CONSTRAINT `revamp_db`.`user`.`identityproof`
+  FOREIGN KEY (`identityproof`)
+  REFERENCES `revamp_db`.`image` (`image_id`),
+  CONSTRAINT `revamp_db`.`user`.`roleid`
+  FOREIGN KEY (`roleid`)
+  REFERENCES `revamp_db`.`role` (`roleid`)
+  
+);
+
+DROP TABLE IF EXISTS `revamp_db`.`audittrail`;
+CREATE TABLE IF NOT EXISTS revamp_db.audittrail(
+  `userid` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `roleid` bigint(20) DEFAULT NULL,
+  `lastlogindate` datetime(6) DEFAULT NULL,
+  `lastupdateddate` datetime(6) DEFAULT NULL,
+  `comments` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `audittrail_user_userid_idx` (`userid`),
+  CONSTRAINT `audittrail_user_userid` FOREIGN KEY (`userid`) REFERENCES `revamp_db`.`user` (`userid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+); 
+
+
+
 insert into revamp_db.state 
 (state_id, state_name) 
 values ('TN', 'Tamil Nadu');
 
 
-delete from revamp_db.district;
+
 insert into revamp_db.district 
 (district_id, district_name, state_id) 
 values ('kanchipuram', 'Kanchipuram','TN');
@@ -133,7 +183,7 @@ insert into revamp_db.district
 values ('tiruvallur', 'Tiruvallur','TN');
 
 
-delete from revamp_db.city;
+
 insert into revamp_db.city 
 (city_id, city_name, district_id) 
 values ('ennore', 'Ennore','tiruvallur');
@@ -148,6 +198,28 @@ insert into revamp_db.city
 values ('vallakottai', 'Vallakottai','kanchipuram');
 
 
+insert into revamp_db.role
+(roleid, rolename, accesslevel) 
+values ('admin','Admin /Super user', '');
+
+insert into revamp_db.role
+(roleid, rolename, accesslevel) 
+values ('sponsor','Sponsor', '');
+
+insert into revamp_db.role
+(roleid, rolename, accesslevel) 
+values ('volunteer', 'Volunteer','');
+
+insert into revamp_db.role
+(roleid, rolename, accesslevel) 
+values ('beneficiary', 'Beneficiary', '');
+
+insert into revamp_db.role
+(roleid, rolename, accesslevel) 
+values ('approver','Approver','');
+
+
+
 
 insert into revamp_db.address 
 (address_line_1, address_line_2, district_id, city_id ) 
@@ -160,3 +232,4 @@ values (1, null);
 insert into revamp_db.school 
 (school_name, school_type, head_master_name, head_master_email, number_of_students, number_of_teachers, address_id, proof_of_identity_id,  requirements) 
 values ('test', 'test','test','test', 5, 1, 1, 1,'test');
+

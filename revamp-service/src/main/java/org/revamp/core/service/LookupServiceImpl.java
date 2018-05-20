@@ -5,6 +5,7 @@ import java.util.List;
 import org.revamp.core.dao.LookupDAO;
 import org.revamp.core.model.City;
 import org.revamp.core.model.District;
+import org.revamp.core.model.Role;
 import org.revamp.core.model.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,11 @@ public class LookupServiceImpl implements LookupService {
 	@Override
 	public List<City> getCities(String districtId) {
 		return lookupDAO.getCities(districtId);
+	}
+	
+	@Override
+	public List<Role> getRoles() {
+		return lookupDAO.getRoles();
 	}
 
 
