@@ -72,164 +72,221 @@
 
 
                           <legend>Provide school details along with requirements</legend>
+
+                          <div class="tabbable" style="margin-bottom: 9px;">
+                                                    <ul class="nav nav-tabs">
+                                                      <li class="active">
+                                                      <li class="active"><a href="#1" data-toggle="tab">Add School</a></li>
+                                                      <li><a href="#2" data-toggle="tab">Add Contacts</a></li>
+                                                      <li><a href="#3" data-toggle="tab">Add Address</a></li>
+                                                      <li><a href="#4" data-toggle="tab">Add Requirements</a></li>
+                                                      <li><a href="#5" data-toggle="tab">Upload Pictures</a></li>
+                                                      </ul>
+
+                        <div class="tab-content">
+                        <div class="tab-pane active" id="1">
+
                           <div class="control-group">
-                            <label class="control-label" for="input01">School  Name</label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
+          <label class="control-label" for="input01">School  Name</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" id="input01">
+           </div>
 
-                          </div>
-						<div class="control-group">
-                            <label class="control-label" for="input01">Headmaster Name</label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
-                        </div>
+        </div>
 
-						<div class="control-group">
-                            <label class="control-label" for="input01">Headmaster Email </label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
-                        </div>
-						
-						<div class="control-group">
-                            <label class="control-label" for="input01">Headmaster Contact Number </label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
-                        </div>
 
-							<div class="control-group">
-                            <label class="control-label" for="input01">Number of Students</label>
-                            <div class="controls">
-                              <input type="text" class="input-small" id="input01">
-                             </div>
-                        </div>
 
-							<div class="control-group">
-                            <label class="control-label" for="input01">Number of Teachers</label>
-                            <div class="controls">
-                              <input type="text" class="input-small" id="input01">
-                             </div>
-                        </div>
+                <div class="control-group">
+                  <label class="control-label" for="multiSelect">Select School Type</label>
+                  <div class="controls">
+                    <select multiple="multiple" id="multiSelect">
+                      <option>Nursery</option>
+        <option>Primary</option>
+                      <option>Middle School</option>
+                      <option>Secondary School</option>
+                      <option>Higher Secondary School</option>
 
-						<div class="control-group">
-                            <label class="control-label" for="input01">School Contact Number</label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
-                        </div>
+        </select>
+                  </div>
+                </div>
 
-						<div class="control-group">
-                            <label class="control-label" for="input01">School Address </label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
-                        </div>
-							<div class="control-group">
-                            <label class="control-label" for="input01">Street Name</label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
-                        </div>
 
-							<div class="control-group">
-                            <label class="control-label" for="input01">Town/City</label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
-                        </div>
 
-                         <!-- <div class="control-group">
-                            <label class="control-label" for="optionsCheckbox">Checkbox</label>
-                            <div class="controls">
-                              <label class="checkbox">
-                                <input type="checkbox" id="optionsCheckbox" value="option1">
-                                Option one is this and that&mdash;be sure to include why it's great
-                              </label>
+<div class="control-group">
+          <label class="control-label" for="input01">Number of Students</label>
+          <div class="controls">
+            <input type="text" class="input-small" id="input01">
+           </div>
+      </div>
+
+<div class="control-group">
+          <label class="control-label" for="input01">Number of Teachers</label>
+          <div class="controls">
+            <input type="text" class="input-small" id="input01">
+           </div>
+      </div>
+
+
+
+                        </div>
+                        <div class="tab-pane" id="2">
+                        <div class="row">
+
+  <div class="span10">
+
+    <div class="control-group">
+              <label class="control-label" for="input01">Primary Contact</label>
+              <div class="controls">
+                <input type="text" class="input-xlarge" id="input01" placeholder="Get name from user id">
+               </div>
+          </div>
+
+    <div class="control-group">
+              <label class="control-label" for="input01">Primary Contact Email </label>
+              <div class="controls">
+                <input type="text" class="input-xlarge" id="input01">
+               </div>
+          </div>
+
+
+          <div class="control-group">
+                    <label class="control-label" for="input01">Secondary Contact</label>
+                    <div class="controls">
+                      <input type="text" class="input-xlarge" id="input01" placeholder="Get name from user id">
+                     </div>
+                </div>
+
+          <div class="control-group">
+                    <label class="control-label" for="input01">Secondary Contact Email </label>
+                    <div class="controls">
+                      <input type="text" class="input-xlarge" id="input01">
+                     </div>
+                </div>
+
+                <div class="control-group">
+                          <label class="control-label" for="input01">Secondary Contact Phone Number </label>
+                          <div class="controls">
+                            <input type="text" class="input-xlarge" id="input01">
+                           </div>
+                      </div>
+
+  </div>
+  </div>
+  </div>
+
+  <div class="tab-pane" id="3">
+  <div class="row">
+
+<div class="span10">
+
+  <div class="control-group">
+            <label class="control-label" for="input01">School Address </label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" id="input01">
+             </div>
+        </div>
+  <div class="control-group">
+            <label class="control-label" for="input01">Street Name</label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" id="input01">
+             </div>
+        </div>
+
+  <div class="control-group">
+            <label class="control-label" for="input01">Town/City</label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" id="input01">
+             </div>
+        </div>
+
+         <!-- <div class="control-group">
+            <label class="control-label" for="optionsCheckbox">Checkbox</label>
+            <div class="controls">
+              <label class="checkbox">
+                <input type="checkbox" id="optionsCheckbox" value="option1">
+                Option one is this and that&mdash;be sure to include why it's great
+              </label>
+            </div>
+          </div> -->
+          <div class="control-group">
+            <label class="control-label" for="select01">Select District</label>
+            <div class="controls">
+              <select id="select01">
+                <option>Cuddalore</option>
+                <option>Kanchipuram</option>
+                <option>Chengalpattu</option>
+                <option>Thiruvanamalai</option>
+                <option>Villupuram</option>
+              </select>
+            </div>
+          </div>
+
+</div>
+</div>
+</div>
+
+<div class="tab-pane" id="4">
+<div class="row">
+
+<div class="span10">
+
+  <div class="control-group">
+                           <label class="control-label" for="select01">Select Requirement Type</label>
+                           <div class="controls">
+                             <select id="select01">
+                               <option>Select Type</option>
+                               <option>New Requirement</option>
+                               <option>Maintainence</option>
+                             </select>
+                           </div>
+                         </div>
+
+                                  <div class="control-group">
+
+
+                                          <label class="control-label" for="input01">1st requirement</label>
+                                          <div class="controls">
+                                            <input type="text" class="input-xlarge" id="input01">
+                                           </div>
+                                      </div>
+                                      <div class="control-group">
+                                                    <label class="control-label" for="input01">2nd Requirement</label>
+                                                    <div class="controls">
+                                                      <input type="text" class="input-xlarge" id="input01">
+                                                     </div>
+                                        </div>
+                                        <div class="control-group">
+                                                              <label class="control-label" for="input01">3rd Requirement</label>
+                                                              <div class="controls">
+                                                                <input type="text" class="input-xlarge" id="input01">
+                                                               </div>
+                                        </div>
+</div>
+</div>
+</div>
+
+<div class="tab-pane" id="5">
+<div class="row">
+
+<div class="span10">
+  <div class="control-group">
+                              <label class="control-label" for="fileInput">Upload proof of identity of the school </label>
+                              <div class="controls">
+                                <input class="input-file" id="fileInput" type="file">
+                              </div>
                             </div>
-                          </div> -->
-                          <div class="control-group">
-                            <label class="control-label" for="select01">Select District</label>
-                            <div class="controls">
-                              <select id="select01">
-                                <option>Cuddalore</option>
-                                <option>Kanchipuram</option>
-                                <option>Chengalpattu</option>
-                                <option>Thiruvanamalai</option>
-                                <option>Villupuram</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="control-group">
-                            <label class="control-label" for="multiSelect">Select School Type</label>
-                            <div class="controls">
-                              <select multiple="multiple" id="multiSelect">
-                                <option>Nursery</option>
-								<option>Primary</option>
-                                <option>Middle School</option>
-                                <option>Secondary School</option>
-                                <option>Higher Secondary School</option>
-
-								</select>
-                            </div>
-                          </div>
-
-                          <div class="control-group">
-                            <label class="control-label" for="select01">Select Requirement Type</label>
-                            <div class="controls">
-                              <select id="select01">
-                                <option>Select Type</option>
-                                <option>New Requirement</option>
-                                <option>Maintainence</option>
-                              </select>
-                            </div>
-                          </div>
+</div>
+</div>
+</div>
 
 
-                          <div class="control-group">
-                            <label class="control-label" for="fileInput">Upload proof of identity of the school </label>
-                            <div class="controls">
-                              <input class="input-file" id="fileInput" type="file">
-                            </div>
-                          </div>
 
-                          <div class="control-group">
-                                        <label class="control-label" for="input01">1st requirement</label>
-                                        <div class="controls">
-                                          <input type="text" class="input-xlarge" id="input01">
-                                         </div>
-                                    </div>
-                                    <div class="control-group">
-                                                  <label class="control-label" for="input01">2nd Requirement</label>
-                                                  <div class="controls">
-                                                    <input type="text" class="input-xlarge" id="input01">
-                                                   </div>
-                                              </div>
-                                              <div class="control-group">
-                                                            <label class="control-label" for="input01">3rd Requirement</label>
-                                                            <div class="controls">
-                                                              <input type="text" class="input-xlarge" id="input01">
-                                                             </div>
-                                                        </div>
                           <div class="form-actions">
                             <button type="submit" class="btn send_btn">Submit</button>
                             <button class="btn dark_btn">Cancel</button>
                           </div>
                         </fieldset>
                       </form>
-
-                    </div>
-                    <div class="span4">
-                      <h3>What we do</h3>
-                      <p>On successful registration, we will validate the details provided through a volunteer assigned to your school</p>
-                      <ul>
-                        <li>We will send you the details of volunteer through email/post. Please provide access to Volunteer with valid identity</li>
-                        </ul>
-                      <hr>
-                      <h3>What's Next</h3>
-                      <p>After submission of your information, email will be sent to your with School Registraion details within 7-10 working days</p>
                     </div>
                   </div>
                 </section>
