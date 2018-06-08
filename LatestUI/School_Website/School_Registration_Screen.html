@@ -17,6 +17,31 @@
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".add-row").click(function(){
+            var projType = $("#projType").val();
+            var asstType = $("#asstType").val();
+            var asstName = $("#asstName").val();
+            var qty = $("#qty").val();
+            var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + projType + "</td><td>" + asstType + "</td><td>" + asstName + "</td><td>" + qty + "</td></tr>";
+            $("table tbody").append(markup);
+        });
+
+        // Find and remove selected table rows
+        $(".delete-row").click(function(){
+            $("table tbody").find('input[name="record"]').each(function(){
+            	if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+            });
+        });
+    });
+</script>
+
 </head>
 <body>
 	<!--header-->
@@ -81,6 +106,7 @@
                                                       <li><a href="#3" data-toggle="tab">Add Address</a></li>
                                                       <li><a href="#4" data-toggle="tab">Add Requirements</a></li>
                                                       <li><a href="#5" data-toggle="tab">Upload Pictures</a></li>
+                                                      <li><a href="#6" data-toggle="tab">Edit Requirements</a></li>
                                                       </ul>
 
                         <div class="tab-content">
@@ -230,37 +256,78 @@
 
 <div class="span10">
 
-  <div class="control-group">
-                           <label class="control-label" for="select01">Select Requirement Type</label>
-                           <div class="controls">
-                             <select id="select01">
-                               <option>Select Type</option>
-                               <option>New Requirement</option>
-                               <option>Maintainence</option>
-                             </select>
-                           </div>
-                         </div>
-
-                                  <div class="control-group">
 
 
-                                          <label class="control-label" for="input01">1st requirement</label>
-                                          <div class="controls">
-                                            <input type="text" class="input-xlarge" id="input01">
-                                           </div>
-                                      </div>
-                                      <div class="control-group">
-                                                    <label class="control-label" for="input01">2nd Requirement</label>
-                                                    <div class="controls">
-                                                      <input type="text" class="input-xlarge" id="input01">
-                                                     </div>
-                                        </div>
-                                        <div class="control-group">
-                                                              <label class="control-label" for="input01">3rd Requirement</label>
-                                                              <div class="controls">
-                                                                <input type="text" class="input-xlarge" id="input01">
-                                                               </div>
-                                        </div>
+<form>
+
+		 <div class="control-group">
+            <label class="control-label" for="select01">Requirement Type</label>
+            <div class="controls">
+              <select id="projType">
+                <option>Select</option>
+                <option>New</option>
+                <option>Maintainence </option>
+              </select>
+            </div>
+          </div>
+
+		  <div class="control-group">
+            <label class="control-label" for="select01">Asset Type</label>
+            <div class="controls">
+              <select id="asstType">
+                <option>Select</option>
+                <option>Sports</option>
+                <option>Infrastructure</option>
+                <option>Others</option>
+              </select>
+            </div>
+          </div>
+		  <div class="control-group">
+            <label class="control-label" for="select01">Asset Name</label>
+            <div class="controls">
+              <select id="asstName">
+                <option>Select</option>
+                <option>Football</option>
+                <option>Bathroom</option>
+                <option>Others</option>
+              </select>
+            </div>
+          </div>
+
+		  <div class="control-group">
+            <label class="control-label" for="input01">Quantity</label>
+            <div class="controls">
+              <input type="text" class="input-small" id="qty">
+             </div>
+        </div>
+		<div class="control-group">
+    	<input type="button" class="add-row" value="Add Requirement">
+		</div>
+    </form>
+
+ <div class="tab-content">
+	<table class="table table-bordered table-striped">
+                                                      <thead>
+                                                          <tr>
+                                                            <th>Select</th>
+                                                            <th>Requirement Type</th>
+                                                            <th>Asset Type</th>
+                                                            <th>Asset Name</th>
+                                                            <th>Quantity</th>
+
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+
+
+
+                                                        </tbody>
+</table>
+		</div>
+    <div class="control-group">
+<button type="button" class="delete-row">Delete Requirement</button>
+</div>
+
 </div>
 </div>
 </div>
@@ -274,6 +341,42 @@
                               <div class="controls">
                                 <input class="input-file" id="fileInput" type="file">
                               </div>
+                            </div>
+</div>
+</div>
+</div>
+
+<div class="tab-pane" id="6">
+<div class="row">
+
+<div class="span10">
+  <div class="control-group">
+
+
+                                <table class="table table-bordered table-striped">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                          <th>S.No</th>
+                                                                                          <th>Project Type</th>
+                                                                                          <th>Asset Type</th>
+                                                                                          <th>Asset Name</th>
+                                                                                          <th>Quantity</th>
+
+                                                                                        </tr>
+                                                                                      </thead>
+                                                                                      <tbody>
+                                                                                        <tr>
+                                                                                         <td><input type="checkbox" name="record"></td>
+                                                                                          <td>New</td>
+                                                                                          <td>Sports</td>
+                                                                                          <td>Football</td>
+                              															<td>10</td>
+                                                                                        </tr>
+
+
+                                                                                      </tbody>
+                              </table>
+
                             </div>
 </div>
 </div>
