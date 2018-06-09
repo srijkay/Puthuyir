@@ -39,7 +39,34 @@
                 }
             });
         });
+
+        $('#asstType').change(function(){
+          if($('#asstType').val() === 'Other')
+             {
+             $('#other').show();
+             }
+          else
+             {
+             $('#other').hide();
+             }
+          });
+
+          $('#asstName').change(function(){
+            if($('#asstName').val() === 'OtherName')
+               {
+               $('#otherName').show();
+               }
+            else
+               {
+               $('#otherName').hide();
+               }
+            });
+
     });
+
+
+
+
 </script>
 
 </head>
@@ -275,12 +302,20 @@
             <label class="control-label" for="select01">Asset Type</label>
             <div class="controls">
               <select id="asstType">
-                <option>Select</option>
+                <option selected>Select</option>
                 <option>Sports</option>
                 <option>Infrastructure</option>
-                <option>Others</option>
+                <option value="Other">Others</option>
               </select>
             </div>
+
+            <div class="control-group">
+                  <div class="controls">
+                    <input type="text" name="other" class="input-xlarge" id="other" style="display: none;"/>
+                   </div>
+              </div>
+
+
           </div>
 		  <div class="control-group">
             <label class="control-label" for="select01">Asset Name</label>
@@ -289,10 +324,15 @@
                 <option>Select</option>
                 <option>Football</option>
                 <option>Bathroom</option>
-                <option>Others</option>
+                <option value="OtherName">Others</option>
               </select>
             </div>
-          </div>
+            <div class="control-group">
+                  <div class="controls">
+                    <input type="text" name="other" class="input-xlarge" id="otherName" style="display: none;"/>
+                   </div>
+              </div>
+        </div>
 
 		  <div class="control-group">
             <label class="control-label" for="input01">Quantity</label>
