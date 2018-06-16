@@ -104,7 +104,6 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
 	`number_of_teachers`INT NOT NULL,
 	`address_id`INT NOT NULL,
 	`proof_of_identity_id`INT,
-	`requirements` VARCHAR(500) NOT NULL,
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`school_id`),
 	CONSTRAINT `revamp_db`.`school`.`address_id`
@@ -113,6 +112,53 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
     CONSTRAINT `revamp_db`.`school`.`proof_of_identity_id`
 	FOREIGN KEY (`proof_of_identity_id`)
 	REFERENCES `revamp_db`.`image` (`image_id`)
+	ON DELETE NO ACTION
+	ON UPDATE CASCADE
+);
+
+DROP TABLE IF EXISTS `revamp_db`.`reqtype`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`reqtype`(
+	`reqtype_id` varchar(45) NOT NULL,
+	`reqtype_desc` varchar(45) NOT NULL,
+	PRIMARY KEY (`reqtype_id`)
+);
+
+DROP TABLE IF EXISTS `revamp_db`.`assettype`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`assettype`(
+	`assettype_id` varchar(45) NOT NULL,
+	`assettype_desc` varchar(45) NOT NULL,
+	PRIMARY KEY (`assettype_id`)
+);
+
+DROP TABLE IF EXISTS `revamp_db`.`asset`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`asset`(
+	`asset_id` varchar(45) NOT NULL,
+	`assetname` varchar(45) NOT NULL,
+    `assettype_id` varchar(45) NOT NULL,
+	PRIMARY KEY (`asset_id`),
+    CONSTRAINT `revamp_db`.`asset`.`assettype_id`
+	FOREIGN KEY (`assettype_id`)
+	REFERENCES `revamp_db`.`assettype` (`assettype_id`)
+	ON DELETE NO ACTION
+	ON UPDATE CASCADE
+);
+
+DROP TABLE IF EXISTS `revamp_db`.`requirement`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
+	`requirement_id`INT NOT NULL AUTO_INCREMENT,
+	`school_id` INT NOT NULL,
+	`reqtype` varchar(45) NOT NULL,
+    `assettype` varchar(45) NOT NULL,
+    `assetname` varchar(45) NOT NULL,    
+    `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`requirement_id`),
+	CONSTRAINT `revamp_db`.`requirement`.`school_id`
+	FOREIGN KEY (`school_id`)
+	REFERENCES `revamp_db`.`school` (`school_id`)
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
 );
@@ -219,6 +265,49 @@ insert into revamp_db.role
 values ('approver','Approver','');
 
 
+insert into revamp_db.reqtype
+(reqtype_id, reqtype_desc) 
+values ('New','New');
+
+insert into revamp_db.reqtype
+(reqtype_id, reqtype_desc) 
+values ('Maintenance','Maintenance');
+
+insert into revamp_db.assettype
+(assettype_id, assettype_desc) 
+values ('Sports','Sports');
+
+insert into revamp_db.assettype
+(assettype_id, assettype_desc) 
+values ('Infrastructure','Infrastructure');
+
+insert into revamp_db.assettype
+(assettype_id, assettype_desc) 
+values ('Others','Others');
+
+
+
+insert into revamp_db.asset
+(asset_id, assetname, assettype_id) 
+values ('Football','Football','Sports');
+
+insert into revamp_db.asset
+(asset_id, assetname, assettype_id) 
+values ('Other_sports','Others','Sports');
+
+insert into revamp_db.asset
+(asset_id, assetname, assettype_id) 
+values ('Bathroom','Bathroom','Infrastructure');
+
+insert into revamp_db.asset
+(asset_id, assetname, assettype_id) 
+values ('Other_infra','Others','Infrastructure');
+
+
+insert into revamp_db.asset
+(asset_id, assetname, assettype_id) 
+values ('Others','Others','Others');
+
 
 
 insert into revamp_db.address 
@@ -230,6 +319,10 @@ insert into revamp_db.image
 values (1, null);
 
 insert into revamp_db.school 
-(school_name, school_type, head_master_name, head_master_email, number_of_students, number_of_teachers, address_id, proof_of_identity_id,  requirements) 
-values ('test', 'test','test','test', 5, 1, 1, 1,'test');
+(school_name, school_type, head_master_name, head_master_email, number_of_students, number_of_teachers, address_id, proof_of_identity_id) 
+values ('test', 'test','test','test', 5, 1, 1, 1);
+
+
+
+
 
