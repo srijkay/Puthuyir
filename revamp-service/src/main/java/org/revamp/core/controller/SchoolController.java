@@ -1,5 +1,6 @@
 package org.revamp.core.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.revamp.core.model.School;
@@ -22,6 +23,7 @@ public class SchoolController {
 	/*---Add new school---*/
 	@PostMapping("/school")
 	public ResponseEntity<School> save(@RequestBody School school) {
+		school.setDateAdded(new Date());
 		long id = schoolService.save(school);
 		school.setSchoolId(id);
 		return ResponseEntity.ok().body(school);

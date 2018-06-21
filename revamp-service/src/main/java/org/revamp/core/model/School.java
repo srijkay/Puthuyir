@@ -1,8 +1,25 @@
 package org.revamp.core.model;
 
-import org.hibernate.annotations.Proxy;
+import java.util.Date;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "school")
@@ -41,8 +58,18 @@ public class School implements java.io.Serializable {
 	@Column(name = "proof_of_identity_id")
 	private long proofOfIdentity;
 
-	@Column(name = "requirements")
-	private String requirements;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "school")
+	private List<Requirement> requirements;
+
+	@Column(name = "date_created")
+	@Basic
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateAdded;
+
+	@PrePersist
+	protected void onCreate() {
+		dateAdded = new Date();
+	}
 
 	public long getSchoolId() {
 		return schoolId;
@@ -116,12 +143,20 @@ public class School implements java.io.Serializable {
 		this.proofOfIdentity = proofOfIdentity;
 	}
 
-	public String getRequirements() {
+	public List<Requirement> getRequirements() {
 		return requirements;
 	}
 
-	public void setRequirements(String requirements) {
+	public void setRequirements(List<Requirement> requirements) {
 		this.requirements = requirements;
+	}
+
+	public Date getDateAdded() {
+		return dateAdded;
+	}
+
+	public void setDateAdded(Date dateAdded) {
+		this.dateAdded = dateAdded;
 	}
 
 	@Override
@@ -132,7 +167,8 @@ public class School implements java.io.Serializable {
 				+ ", numberOfStudents=" + numberOfStudents
 				+ ", numberOfTeachers=" + numberOfTeachers + ", address="
 				+ address + ", proofOfIdentity=" + proofOfIdentity
-				+ ", requirements=" + requirements + "]";
+				+ ", requirements=" + requirements + ", dateAdded=" + dateAdded
+				+ "]";
 	}
 
 }
