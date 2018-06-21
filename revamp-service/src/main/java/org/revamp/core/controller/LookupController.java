@@ -2,8 +2,11 @@ package org.revamp.core.controller;
 
 import java.util.List;
 
+import org.revamp.core.model.Asset;
+import org.revamp.core.model.AssetType;
 import org.revamp.core.model.City;
 import org.revamp.core.model.District;
+import org.revamp.core.model.ReqType;
 import org.revamp.core.model.Role;
 import org.revamp.core.model.State;
 import org.revamp.core.service.LookupService;
@@ -43,6 +46,25 @@ public class LookupController {
 	public ResponseEntity<List<Role>> getRoles() {
 		List<Role> roles = lookupService.getRoles();
 		return ResponseEntity.ok().body(roles);
+	}
+	
+	@GetMapping("/reqtypes")
+	public ResponseEntity<List<ReqType>> getReqTypes() {
+		List<ReqType> reqTypes = lookupService.getReqTypes();
+		return ResponseEntity.ok().body(reqTypes);
+	}
+	
+	@GetMapping("/assettypes")
+	public ResponseEntity<List<AssetType>> getAssetTypes() {
+		List<AssetType> assetTypes = lookupService.getAssetTypes();
+		return ResponseEntity.ok().body(assetTypes);
+	}
+
+	@GetMapping("/assets/assettype/{assettypeid}")
+	public ResponseEntity<List<Asset>> getAssets(
+			@PathVariable("assettypeid") String assetTypeId) {
+		List<Asset> assets = lookupService.getAssets(assetTypeId);
+		return ResponseEntity.ok().body(assets);
 	}
 
 }
