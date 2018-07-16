@@ -1,0 +1,15 @@
+
+# Java/Maven Temporary Files #
+*/target/**
+*.jar
+*.war
+*.ear
+.metadata
+
+# Eclipse #
+RemoteSystemsTempFiles/*
+revamp-service/.classpath
+revamp-service/.project
+revamp-service/.settings
+revamp-service/RemoteSystemsTempFiles
+revamp-service/.gitignore

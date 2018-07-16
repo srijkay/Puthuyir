@@ -31,8 +31,7 @@ CREATE TABLE IF NOT EXISTS revamp_db.district(
 	`district_name` VARCHAR(45),
     `state_id` VARCHAR(45),
 	PRIMARY KEY (`district_id`),
-    CONSTRAINT `revamp_db`.`district`.`state_id`
-	FOREIGN KEY (`state_id`)
+    FOREIGN KEY (`state_id`)
 	REFERENCES `revamp_db`.`state` (`state_id`)
 );
 
@@ -47,8 +46,7 @@ CREATE TABLE IF NOT EXISTS revamp_db.city(
 	`city_name` VARCHAR(45),
     `district_id` VARCHAR(45),
 	PRIMARY KEY (`city_id`),
-    CONSTRAINT `revamp_db`.`city`.`district_id`
-	FOREIGN KEY (`district_id`)
+  	FOREIGN KEY (`district_id`)
 	REFERENCES `revamp_db`.`district` (`district_id`)
 );
 
@@ -66,10 +64,8 @@ CREATE TABLE IF NOT EXISTS revamp_db.address(
 	`city_id` VARCHAR(45),
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`address_id`)	,
-    CONSTRAINT `revamp_db`.`address`.`city_id`
-	FOREIGN KEY (`city_id`)
+   FOREIGN KEY (`city_id`)
 	REFERENCES `revamp_db`.`city` (`city_id`),
-	CONSTRAINT `revamp_db`.`address`.`district_id`
 	FOREIGN KEY (`district_id`)
 	REFERENCES `revamp_db`.`district` (`district_id`)
 
@@ -106,11 +102,9 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
 	`proof_of_identity_id`INT,
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`school_id`),
-	CONSTRAINT `revamp_db`.`school`.`address_id`
 	FOREIGN KEY (`address_id`)
 	REFERENCES `revamp_db`.`address` (`address_id`),
-    CONSTRAINT `revamp_db`.`school`.`proof_of_identity_id`
-	FOREIGN KEY (`proof_of_identity_id`)
+    FOREIGN KEY (`proof_of_identity_id`)
 	REFERENCES `revamp_db`.`image` (`image_id`)
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
@@ -139,8 +133,7 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`asset`(
 	`assetname` varchar(45) NOT NULL,
     `assettype_id` varchar(45) NOT NULL,
 	PRIMARY KEY (`asset_id`),
-    CONSTRAINT `revamp_db`.`asset`.`assettype_id`
-	FOREIGN KEY (`assettype_id`)
+    FOREIGN KEY (`assettype_id`)
 	REFERENCES `revamp_db`.`assettype` (`assettype_id`)
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
@@ -156,7 +149,6 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
     `assetname` varchar(45) NOT NULL,    
     `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`requirement_id`),
-	CONSTRAINT `revamp_db`.`requirement`.`school_id`
 	FOREIGN KEY (`school_id`)
 	REFERENCES `revamp_db`.`school` (`school_id`)
 	ON DELETE NO ACTION
@@ -188,13 +180,10 @@ CREATE TABLE IF NOT EXISTS revamp_db.user(
   `password` varchar(50) DEFAULT NULL,
   `passwordhint` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`userid`),
-  CONSTRAINT `revamp_db`.`user`.`addressid`
   FOREIGN KEY (`addressid`)
   REFERENCES `revamp_db`.`address` (`address_id`),
-  CONSTRAINT `revamp_db`.`user`.`identityproof`
   FOREIGN KEY (`identityproof`)
   REFERENCES `revamp_db`.`image` (`image_id`),
-  CONSTRAINT `revamp_db`.`user`.`roleid`
   FOREIGN KEY (`roleid`)
   REFERENCES `revamp_db`.`role` (`roleid`)
   

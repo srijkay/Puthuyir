@@ -49,6 +49,7 @@ public class AppConfig {
 
       // Setting Hibernate properties
       props.put("hibernate.id.new_generator_mappings","false");
+      props.put("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
       
       props.put(SHOW_SQL, env.getProperty("hibernate.show_sql"));
       props.put(HBM2DDL_AUTO, env.getProperty("hibernate.hbm2ddl.auto"));
