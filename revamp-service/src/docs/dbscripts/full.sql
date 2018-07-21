@@ -105,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
 	`address_id`INT NOT NULL,
 	`proof_of_identity_id`INT,
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	`status` varchar(45) DEFAULT 'REGISTERED',
 	PRIMARY KEY (`school_id`),
 	CONSTRAINT `revamp_db`.`school`.`address_id`
 	FOREIGN KEY (`address_id`)
