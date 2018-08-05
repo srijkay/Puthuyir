@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS revamp_db.audittrail(
 ); 
 
 DROP TABLE IF EXISTS revamp_db.lookup;
-
+ 
 CREATE TABLE IF NOT EXISTS revamp_db.lookup(
 	
 	`field` VARCHAR(45),
@@ -466,34 +466,6 @@ null,
 null);
 
 
-insert into revamp_db.state 
-(state_id, state_name) 
-values ('TN', 'Tamil Nadu');
-
-
-
-insert into revamp_db.district 
-(district_id, district_name, state_id) 
-values ('kanchipuram', 'Kanchipuram','TN');
-insert into revamp_db.district 
-(district_id, district_name, state_id) 
-values ('tiruvallur', 'Tiruvallur','TN');
-
-
-
-insert into revamp_db.city 
-(city_id, city_name, district_id) 
-values ('ennore', 'Ennore','tiruvallur');
-insert into revamp_db.city 
-(city_id, city_name, district_id) 
-values ('puzhal', 'Puzhal','tiruvallur');
-insert into revamp_db.city 
-(city_id, city_name, district_id) 
-values ('padappai', 'Padappai','kanchipuram');
-insert into revamp_db.city 
-(city_id, city_name, district_id) 
-values ('vallakottai', 'Vallakottai','kanchipuram');
-
 
 
 
@@ -518,52 +490,6 @@ values ('beneficiary', 'Beneficiary', '');
 insert into revamp_db.role
 (roleid, rolename, accesslevel) 
 values ('approver','Approver','');
-
-
-insert into revamp_db.reqtype
-(reqtype_id, reqtype_desc) 
-values ('New','New');
-
-insert into revamp_db.reqtype
-(reqtype_id, reqtype_desc) 
-values ('Maintenance','Maintenance');
-
-insert into revamp_db.assettype
-(assettype_id, assettype_desc) 
-values ('Sports','Sports');
-
-insert into revamp_db.assettype
-(assettype_id, assettype_desc) 
-values ('Infrastructure','Infrastructure');
-
-insert into revamp_db.assettype
-(assettype_id, assettype_desc) 
-values ('Others','Others');
-
-
-
-insert into revamp_db.asset
-(asset_id, assetname, assettype_id) 
-values ('Football','Football','Sports');
-
-insert into revamp_db.asset
-(asset_id, assetname, assettype_id) 
-values ('Other_sports','Others','Sports');
-
-insert into revamp_db.asset
-(asset_id, assetname, assettype_id) 
-values ('Bathroom','Bathroom','Infrastructure');
-
-insert into revamp_db.asset
-(asset_id, assetname, assettype_id) 
-values ('Other_infra','Others','Infrastructure');
-
-
-insert into revamp_db.asset
-(asset_id, assetname, assettype_id) 
-values ('Others','Others','Others');
-
-
 
 
 
