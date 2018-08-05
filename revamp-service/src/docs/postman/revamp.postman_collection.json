@@ -21,7 +21,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "\r\n{\r\n  \"address\": {\r\n    \"addressLine1\": \"12 Vivekanandar Street\",\r\n    \"addressLine2\": \"Pudhu Nagar\",\r\n    \"city\": \"puzhal\",\r\n    \"district\": \"tiruvallur\"\r\n  },\r\n  \t \"proofOfIdentity\": 1,\r\n  \"schoolName\": \"Gov High School\",\r\n  \"schoolType\":\"High School\",\r\n  \"headMasterName\": \"Kumar\",\r\n  \"headMasterEmail\": \"kumar@gmail.com\",\r\n\t\"numberOfTechers\":10,\r\n\t\"numberOfStudents\":50,\r\n  \"requirements\": [\r\n  \t{\r\n  \t\t\t\"reqType\":\"New\",\r\n  \t\t\t\"assetType\":\"Sports\",\r\n  \t\t\t\"assetName\":\"Bat\",\r\n  \t\t\t\"quantity\":3\r\n  \t},\r\n  \t{\r\n  \t\t\t\"reqType\":\"New\",\r\n  \t\t\t\"assetType\":\"Infrastructure\",\r\n  \t\t\t\"assetName\":\"Bench\",\r\n  \t\t\t\"quantity\":10\r\n  \t}\r\n  \t\r\n  \t\r\n  \t]\r\n  \r\n  }"
+					"raw": "\r\n{\r\n  \"address\": {\r\n    \"addressLine1\": \"12 Vivekanandar Street\",\r\n    \"addressLine2\": \"Pudhu Nagar\",\r\n    \"city\": \"puzhal\",\r\n    \"district\": \"tiruvallur\"\r\n  },\r\n  \t \"proofOfIdentity\": 1,\r\n  \"schoolName\": \"Gov High School\",\r\n  \"schoolType\":\"High School\",\r\n  \"headMasterName\": \"Kumar\",\r\n  \"headMasterEmail\": \"kumar@gmail.com\",\r\n\t\"numberOfTechers\":10,\r\n\t\"numberOfStudents\":50,\r\n\t\"status\":\"REGISTERED\",\r\n\t\r\n  \"requirements\": [\r\n  \t{\r\n  \t\t\t\"reqType\":\"new\",\r\n  \t\t\t\"assetType\":\"sports\",\r\n  \t\t\t\"assetName\":\"Bat\",\r\n  \t\t\t\"quantity\":3\r\n  \t},\r\n  \t{\r\n  \t\t\t\"reqType\":\"new\",\r\n  \t\t\t\"assetType\":\"infrastructure\",\r\n  \t\t\t\"assetName\":\"Bench\",\r\n  \t\t\t\"quantity\":10\r\n  \t}\r\n  \t\r\n  \t\r\n  \t]\r\n  \r\n  }"
 				},
 				"description": null
 			},
@@ -71,17 +71,18 @@
 		{
 			"name": "GET /school/{id}",
 			"request": {
-				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/school/4",
+				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/school/2",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \n  \"schoolName\":\"Govt. High School\",\n  \"headMasterName\":\"Kumar\",\n  \"headMasterEmail\":\"kumar@gmail.com\",\n  \"numberOfTechers\":10,\n  \"numberOfStudents\":50,\n  \"address\" : {\n    \"addressLine1\":\"10, vivekanandhar street\",\n    \"city\":\"Tanjore\",\n    \"district\":\"Tanjore\",\n    \"state\":\"Tamil Nadu\"\n  },\n  \n  \"schoolType\":\"High School\",\n  \"requirements\":\"table 10, chair 20\"\n  \n  \n}"
+					"raw": "{\n\t\n\t\"schoolName\":\"Govt. High School\",\n\t\"headMasterName\":\"Kumar\",\n\t\"headMasterEmail\":\"kumar@gmail.com\",\n\t\"numberOfTechers\":10,\n\t\"numberOfStudents\":50,\n\t\"address\" : {\n\t\t\"addressLine1\":\"10, vivekanandhar street\",\n\t\t\"city\":\"Tanjore\",\n\t\t\"district\":\"Tanjore\",\n\t\t\"state\":\"Tamil Nadu\"\n\t},\n\t\n\t\"schoolType\":\"High School\",\n\t\"requirements\":\"table 10, chair 20\"\n\t\n\t\n}"
 				},
 				"description": null
 			},
@@ -145,28 +146,9 @@
 			"response": []
 		},
 		{
-			"name": "GET /states",
+			"name": "GET /lookup/field/state",
 			"request": {
-				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/states",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \n  \"schoolName\":\"Govt. High School\",\n  \"headMasterName\":\"Kumar\",\n  \"headMasterEmail\":\"kumar@gmail.com\",\n  \"numberOfTechers\":10,\n  \"numberOfStudents\":50,\n  \"address\" : {\n    \"addressLine1\":\"10, vivekanandhar street\",\n    \"city\":\"Tanjore\",\n    \"district\":\"Tanjore\",\n    \"state\":\"Tamil Nadu\"\n  },\n  \n  \"schoolType\":\"High School\",\n  \"requirements\":\"table 10, chair 20\"\n  \n  \n}"
-				},
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "GET /reqtypes",
-			"request": {
-				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/reqtypes",
+				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/lookup/field/state",
 				"method": "GET",
 				"header": [
 					{
@@ -184,9 +166,210 @@
 			"response": []
 		},
 		{
-			"name": "GET /assettypes",
+			"name": "GET /lookup/field/district by state",
 			"request": {
-				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/assettypes",
+				"url": {
+					"raw": "localhost:8080/revamp-service-1.0-SNAPSHOT/lookup/field/district?parentfield=state&parentkey=TN",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"revamp-service-1.0-SNAPSHOT",
+						"lookup",
+						"field",
+						"district"
+					],
+					"query": [
+						{
+							"key": "parentfield",
+							"value": "state",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "parentkey",
+							"value": "TN",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n  \"schoolName\":\"Govt. High School\",\n  \"headMasterName\":\"Kumar\",\n  \"headMasterEmail\":\"kumar@gmail.com\",\n  \"numberOfTechers\":10,\n  \"numberOfStudents\":50,\n  \"address\" : {\n    \"addressLine1\":\"10, vivekanandhar street\",\n    \"city\":\"Tanjore\",\n    \"district\":\"Tanjore\",\n    \"state\":\"Tamil Nadu\"\n  },\n  \n  \"schoolType\":\"High School\",\n  \"requirements\":\"table 10, chair 20\"\n  \n  \n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "GET /lookup/field/city",
+			"request": {
+				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/lookup/field/city",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n  \"schoolName\":\"Govt. High School\",\n  \"headMasterName\":\"Kumar\",\n  \"headMasterEmail\":\"kumar@gmail.com\",\n  \"numberOfTechers\":10,\n  \"numberOfStudents\":50,\n  \"address\" : {\n    \"addressLine1\":\"10, vivekanandhar street\",\n    \"city\":\"Tanjore\",\n    \"district\":\"Tanjore\",\n    \"state\":\"Tamil Nadu\"\n  },\n  \n  \"schoolType\":\"High School\",\n  \"requirements\":\"table 10, chair 20\"\n  \n  \n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "GET /lookup/field/city by district",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/revamp-service-1.0-SNAPSHOT/lookup/field/city?parentfield=district&parentkey=kanchipuram",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"revamp-service-1.0-SNAPSHOT",
+						"lookup",
+						"field",
+						"city"
+					],
+					"query": [
+						{
+							"key": "parentfield",
+							"value": "district",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "parentkey",
+							"value": "kanchipuram",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n  \"schoolName\":\"Govt. High School\",\n  \"headMasterName\":\"Kumar\",\n  \"headMasterEmail\":\"kumar@gmail.com\",\n  \"numberOfTechers\":10,\n  \"numberOfStudents\":50,\n  \"address\" : {\n    \"addressLine1\":\"10, vivekanandhar street\",\n    \"city\":\"Tanjore\",\n    \"district\":\"Tanjore\",\n    \"state\":\"Tamil Nadu\"\n  },\n  \n  \"schoolType\":\"High School\",\n  \"requirements\":\"table 10, chair 20\"\n  \n  \n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "GET /lookup/field/reqtype",
+			"request": {
+				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/lookup/field/reqtype",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n  \"schoolName\":\"Govt. High School\",\n  \"headMasterName\":\"Kumar\",\n  \"headMasterEmail\":\"kumar@gmail.com\",\n  \"numberOfTechers\":10,\n  \"numberOfStudents\":50,\n  \"address\" : {\n    \"addressLine1\":\"10, vivekanandhar street\",\n    \"city\":\"Tanjore\",\n    \"district\":\"Tanjore\",\n    \"state\":\"Tamil Nadu\"\n  },\n  \n  \"schoolType\":\"High School\",\n  \"requirements\":\"table 10, chair 20\"\n  \n  \n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "GET /lookup/field/assettype",
+			"request": {
+				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/lookup/field/assettype",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n  \"schoolName\":\"Govt. High School\",\n  \"headMasterName\":\"Kumar\",\n  \"headMasterEmail\":\"kumar@gmail.com\",\n  \"numberOfTechers\":10,\n  \"numberOfStudents\":50,\n  \"address\" : {\n    \"addressLine1\":\"10, vivekanandhar street\",\n    \"city\":\"Tanjore\",\n    \"district\":\"Tanjore\",\n    \"state\":\"Tamil Nadu\"\n  },\n  \n  \"schoolType\":\"High School\",\n  \"requirements\":\"table 10, chair 20\"\n  \n  \n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "GET /lookup/field/asset by assettype",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/revamp-service-1.0-SNAPSHOT/lookup/field/asset?parentfield=assettype&parentkey=Sports",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"revamp-service-1.0-SNAPSHOT",
+						"lookup",
+						"field",
+						"asset"
+					],
+					"query": [
+						{
+							"key": "parentfield",
+							"value": "assettype",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "parentkey",
+							"value": "Sports",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n  \"schoolName\":\"Govt. High School\",\n  \"headMasterName\":\"Kumar\",\n  \"headMasterEmail\":\"kumar@gmail.com\",\n  \"numberOfTechers\":10,\n  \"numberOfStudents\":50,\n  \"address\" : {\n    \"addressLine1\":\"10, vivekanandhar street\",\n    \"city\":\"Tanjore\",\n    \"district\":\"Tanjore\",\n    \"state\":\"Tamil Nadu\"\n  },\n  \n  \"schoolType\":\"High School\",\n  \"requirements\":\"table 10, chair 20\"\n  \n  \n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "GET /lookup/field/schooltype",
+			"request": {
+				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/lookup/field/schooltype",
 				"method": "GET",
 				"header": [
 					{
@@ -213,64 +396,6 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \n  \"schoolName\":\"Govt. High School\",\n  \"headMasterName\":\"Kumar\",\n  \"headMasterEmail\":\"kumar@gmail.com\",\n  \"numberOfTechers\":10,\n  \"numberOfStudents\":50,\n  \"address\" : {\n    \"addressLine1\":\"10, vivekanandhar street\",\n    \"city\":\"Tanjore\",\n    \"district\":\"Tanjore\",\n    \"state\":\"Tamil Nadu\"\n  },\n  \n  \"schoolType\":\"High School\",\n  \"requirements\":\"table 10, chair 20\"\n  \n  \n}"
-				},
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "GET /districts/state/{stateid}",
-			"request": {
-				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/districts/state/TN",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \n  \"schoolName\":\"Govt. High School\",\n  \"headMasterName\":\"Kumar\",\n  \"headMasterEmail\":\"kumar@gmail.com\",\n  \"numberOfTechers\":10,\n  \"numberOfStudents\":50,\n  \"address\" : {\n    \"addressLine1\":\"10, vivekanandhar street\",\n    \"city\":\"Tanjore\",\n    \"district\":\"Tanjore\",\n    \"state\":\"Tamil Nadu\"\n  },\n  \n  \"schoolType\":\"High School\",\n  \"requirements\":\"table 10, chair 20\"\n  \n  \n}"
-				},
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "GET /assets/assettype/{assettypeid}",
-			"request": {
-				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/assets/assettype/Infrastructure",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \n  \"schoolName\":\"Govt. High School\",\n  \"headMasterName\":\"Kumar\",\n  \"headMasterEmail\":\"kumar@gmail.com\",\n  \"numberOfTechers\":10,\n  \"numberOfStudents\":50,\n  \"address\" : {\n    \"addressLine1\":\"10, vivekanandhar street\",\n    \"city\":\"Tanjore\",\n    \"district\":\"Tanjore\",\n    \"state\":\"Tamil Nadu\"\n  },\n  \n  \"schoolType\":\"High School\",\n  \"requirements\":\"table 10, chair 20\"\n  \n  \n}"
-				},
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "GET /cities/district/{districtid}",
-			"request": {
-				"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/cities/district/kanchipuram",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
 					}
 				],
 				"body": {

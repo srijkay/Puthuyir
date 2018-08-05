@@ -65,6 +65,9 @@ public class School implements java.io.Serializable {
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateAdded;
+	
+	@Column(name = "status")
+	private String status;
 
 	@PrePersist
 	protected void onCreate() {
@@ -159,6 +162,14 @@ public class School implements java.io.Serializable {
 		this.dateAdded = dateAdded;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "School [schoolId=" + schoolId + ", schoolName=" + schoolName
@@ -168,7 +179,8 @@ public class School implements java.io.Serializable {
 				+ ", numberOfTeachers=" + numberOfTeachers + ", address="
 				+ address + ", proofOfIdentity=" + proofOfIdentity
 				+ ", requirements=" + requirements + ", dateAdded=" + dateAdded
-				+ "]";
+				+ ", status=" + status + "]";
 	}
 
+	
 }
