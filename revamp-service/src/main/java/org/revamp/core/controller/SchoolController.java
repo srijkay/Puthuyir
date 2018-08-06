@@ -42,6 +42,12 @@ public class SchoolController {
 		return ResponseEntity.ok().body(schools);
 	}
 	
+	@GetMapping("/school/name/{contains}")
+	public ResponseEntity<List<School>> getAllByName(@PathVariable("contains") String contains) {
+		List<School> schools = schoolService.getAllByName(contains);
+		return ResponseEntity.ok().body(schools);
+	}
+	
 	@GetMapping("/school/city/{cityid}")
 	public ResponseEntity<List<School>> getAllByCity(@PathVariable("cityid") String cityId) {
 		List<School> schools = schoolService.getAllByCity(cityId);
@@ -51,6 +57,12 @@ public class SchoolController {
 	@GetMapping("/school/district/{districtid}")
 	public ResponseEntity<List<School>> getAllByDistrict(@PathVariable("districtid") String districtId) {
 		List<School> schools = schoolService.getAllByDistrict(districtId);
+		return ResponseEntity.ok().body(schools);
+	}
+	
+	@GetMapping("/school/locality/{localityid}")
+	public ResponseEntity<List<School>> getAllByLocality(@PathVariable("localityid") String localityId) {
+		List<School> schools = schoolService.getAllByLocality(localityId);
 		return ResponseEntity.ok().body(schools);
 	}
 

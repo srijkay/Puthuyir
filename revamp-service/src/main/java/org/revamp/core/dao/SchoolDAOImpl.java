@@ -52,9 +52,24 @@ public class SchoolDAOImpl implements SchoolDAO {
 	@Override
 	public List<School> getAllByDistrict(String districtId) {
 		return sessionFactory.getCurrentSession()
-				.createQuery("FROM School s where s.address.city.district = :districtId")
+				.createQuery("FROM School s where s.address.district = :districtId")
 				.setParameter("districtId", districtId).list();
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<School> getAllByLocality(String localityId) {
+		return sessionFactory.getCurrentSession()
+				.createQuery("FROM School s where s.address.locality = :localityId")
+				.setParameter("localityId", localityId).list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<School> getAllByName(String contains) {
+		return sessionFactory.getCurrentSession()
+				.createQuery("FROM School s where lower(s.schoolName) like concat('%',:contains,'%')")
+				.setParameter("contains",contains.toLowerCase()).list();
+	}
 
 }

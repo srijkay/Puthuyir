@@ -12,7 +12,11 @@ public interface SchoolDAO {
 	
 	List<School> getAll();
 	
+	List<School> getAllByName(String contains);
+	
 	List<School> getAllByCity(String cityId);
 	
 	List<School> getAllByDistrict(String districtId);
+	
+	List<School> getAllByLocality(String localityId);
 }

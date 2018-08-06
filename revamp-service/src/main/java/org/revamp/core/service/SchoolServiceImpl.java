@@ -39,4 +39,14 @@ public class SchoolServiceImpl implements SchoolService {
 		return schoolDAO.getAllByDistrict(districtId);
 	}
 
+	@Override
+	public List<School> getAllByName(String contains) {
+		return schoolDAO.getAllByName(contains);
+	}
+
+	@Override
+	public List<School> getAllByLocality(String localityId) {
+		return schoolDAO.getAllByLocality(localityId);
+	}
+
 }

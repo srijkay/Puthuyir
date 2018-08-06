@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS revamp_db.address(
 	`address_line_2` VARCHAR(90),
 	`district_id` VARCHAR(45),
 	`city_id` VARCHAR(45),
+    `locality_id` VARCHAR(45),
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`address_id`)
 );
@@ -253,6 +254,61 @@ VALUES
 'district',
 'kanchipuram');
 
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('city',
+'chennai',
+'Chennai',
+'district',
+'kanchipuram');
+
+/********************************************************
+Locality
+********************************************************/
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('locality',
+'tambaram',
+'Tambaram',
+'city',
+'chennai');
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('locality',
+'pallavaram',
+'Pallavaram',
+'city',
+'chennai');
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('locality',
+'sholinganallur',
+'Sholinganallur',
+'city',
+'chennai');
 
 /********************************************************
 Requirement Type
@@ -494,8 +550,8 @@ values ('approver','Approver','');
 
 
 insert into revamp_db.address 
-(address_line_1, address_line_2, district_id, city_id ) 
-values ('test', 'test','tiruvallur','puzhal');
+(address_line_1, address_line_2, district_id, city_id, locality_id ) 
+values ('test', 'test','kanchipuram','chennai','tambaram');
 
 insert into revamp_db.image 
 (image_id, image ) 
