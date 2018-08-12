@@ -35,6 +35,9 @@ public class Address implements java.io.Serializable {
 
 	@Column(name = "locality_id")
 	private String locality;
+	
+	@Column(name = "pin_code")
+	private String pinCode;
 
 	public long getAddressId() {
 		return addressId;
@@ -84,12 +87,22 @@ public class Address implements java.io.Serializable {
 		this.locality = locality;
 	}
 
+	public String getPinCode() {
+		return pinCode;
+	}
+
+	public void setPinCode(String pinCode) {
+		this.pinCode = pinCode;
+	}
+
 	@Override
 	public String toString() {
 		return "Address [addressId=" + addressId + ", addressLine1="
 				+ addressLine1 + ", addressLine2=" + addressLine2
 				+ ", district=" + district + ", city=" + city + ", locality="
-				+ locality + "]";
+				+ locality + ", pinCode=" + pinCode + "]";
 	}
+
+
 
 }

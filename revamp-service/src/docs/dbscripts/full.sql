@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS revamp_db.address(
 	`district_id` VARCHAR(45),
 	`city_id` VARCHAR(45),
     `locality_id` VARCHAR(45),
+    `pin_code` VARCHAR(10),
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`address_id`)
 );
@@ -38,6 +39,36 @@ CREATE TABLE IF NOT EXISTS revamp_db.image(
 );
 
 
+DROP TABLE IF EXISTS `revamp_db`.`schoolinfo`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`schoolinfo`(
+	`school_info_id`INT NOT NULL AUTO_INCREMENT,
+    `school_reg_number`VARCHAR(45) NOT NULL,
+	`school_name`VARCHAR(45) NOT NULL,
+	`school_type`VARCHAR(45) NOT NULL,
+	`number_of_students`INT NOT NULL,
+	`number_of_teachers`INT NOT NULL,
+	PRIMARY KEY (`school_info_id`)
+	
+);
+
+DROP TABLE IF EXISTS `revamp_db`.`contacts`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`contacts`(
+	`contacts_id`INT NOT NULL AUTO_INCREMENT,
+	`pri_name` VARCHAR(45) NOT NULL,
+    `pri_num` VARCHAR(45) NOT NULL,
+	`pri_email` VARCHAR(90) NOT NULL,
+    `sec_name` VARCHAR(45),
+    `sec_num` VARCHAR(45),
+	`sec_email` VARCHAR(90),
+    PRIMARY KEY (`contacts_id`)
+	
+);
+
+
+
+
 /********************************************************
 The School table, to collect school information
 ********************************************************/
@@ -45,17 +76,19 @@ DROP TABLE IF EXISTS `revamp_db`.`school`;
 
 CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
 	`school_id`INT NOT NULL AUTO_INCREMENT,
-	`school_name`VARCHAR(45) NOT NULL,
-	`school_type`VARCHAR(45) NOT NULL,
-	`head_master_name` VARCHAR(45) NOT NULL,
-	`head_master_email` VARCHAR(90) NOT NULL,
-	`number_of_students`INT NOT NULL,
-	`number_of_teachers`INT NOT NULL,
-	`address_id`INT NOT NULL,
+	`school_info_id`INT NOT NULL,
+    `contacts_id`INT NOT NULL,
+    `address_id`INT NOT NULL,
 	`proof_of_identity_id`INT,
     `status`VARCHAR(45) DEFAULT 'REGISTERED',
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`school_id`),
+    CONSTRAINT `revamp_db`.`school`.`school_info_id`
+	FOREIGN KEY (`school_info_id`)
+	REFERENCES `revamp_db`.`schoolinfo` (`school_info_id`),
+    CONSTRAINT `revamp_db`.`school`.`contacts_id`
+	FOREIGN KEY (`contacts_id`)
+	REFERENCES `revamp_db`.`contacts` (`contacts_id`),
 	CONSTRAINT `revamp_db`.`school`.`address_id`
 	FOREIGN KEY (`address_id`)
 	REFERENCES `revamp_db`.`address` (`address_id`),
@@ -65,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
 );
+
 
 DROP TABLE IF EXISTS `revamp_db`.`requirement`;
 
@@ -547,19 +581,6 @@ insert into revamp_db.role
 (roleid, rolename, accesslevel) 
 values ('approver','Approver','');
 
-
-
-insert into revamp_db.address 
-(address_line_1, address_line_2, district_id, city_id, locality_id ) 
-values ('test', 'test','kanchipuram','chennai','tambaram');
-
-insert into revamp_db.image 
-(image_id, image ) 
-values (1, null);
-
-insert into revamp_db.school 
-(school_name, school_type, head_master_name, head_master_email, number_of_students, number_of_teachers, address_id, proof_of_identity_id) 
-values ('test', 'test','test','test', 5, 1, 1, 1);
 
 
 

@@ -21,13 +21,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "\r\n{\r\n  \"address\": {\r\n    \"addressLine1\": \"12 Vivekanandar Street\",\r\n    \"addressLine2\": \"Pudhu Nagar\",\r\n    \"city\": \"puzhal\",\r\n    \"district\": \"tiruvallur\"\r\n  },\r\n  \t \"proofOfIdentity\": 1,\r\n  \"schoolName\": \"Gov High School\",\r\n  \"schoolType\":\"High School\",\r\n  \"headMasterName\": \"Kumar\",\r\n  \"headMasterEmail\": \"kumar@gmail.com\",\r\n\t\"numberOfTechers\":10,\r\n\t\"numberOfStudents\":50,\r\n\t\"status\":\"REGISTERED\",\r\n  \"requirements\": [\r\n  \t{\r\n  \t\t\t\"reqType\":\"New\",\r\n  \t\t\t\"assetType\":\"Sports\",\r\n  \t\t\t\"assetName\":\"Bat\",\r\n  \t\t\t\"quantity\":3\r\n  \t},\r\n  \t{\r\n  \t\t\t\"reqType\":\"New\",\r\n  \t\t\t\"assetType\":\"Infrastructure\",\r\n  \t\t\t\"assetName\":\"Bench\",\r\n  \t\t\t\"quantity\":10\r\n  \t}\r\n  \t\r\n  \t\r\n  \t]\r\n  \r\n  }"
+					"raw": "{  \r\n   \"schoolInfo\":{  \r\n      \"schoolRegNo\":\"ABC123\",\r\n      \"schoolName\":\"Gov High School\",\r\n      \"schoolType\":\"High School\",\r\n      \"numberOfTeachers\":10,\r\n      \"numberOfStudents\":50\r\n   },\r\n   \"contacts\":{  \r\n      \"priName\":\"Kumar\",\r\n      \"priNum\":\"991234567\",\r\n      \"priEmail\":\"kumar@gmail.com\",\r\n      \"secName\":\"Saravanan\",\r\n      \"secNum\":\"991234568\",\r\n      \"secEmail\":\"sara@gmail.com\"\r\n   },\r\n   \"address\":{  \r\n      \"addressLine1\":\"12 Vivekanandar Street\",\r\n      \"addressLine2\":\"Pudhu Nagar\",\r\n      \"city\":\"chennai\",\r\n      \"district\":\"kanchipuram\",\r\n      \"locality\":\"tambaram\",\r\n      \"pinCode\":\"612345\"\r\n   },\r\n   \"proofOfIdentity\":1,\r\n   \"requirements\":[  \r\n      {  \r\n         \"reqType\":\"New\",\r\n         \"assetType\":\"Sports\",\r\n         \"assetName\":\"Bat\",\r\n         \"quantity\":3\r\n      },\r\n      {  \r\n         \"reqType\":\"New\",\r\n         \"assetType\":\"Infrastructure\",\r\n         \"assetName\":\"Bench\",\r\n         \"quantity\":10\r\n      }\r\n   ]\r\n}"
 				},
 				"description": null
 			},
 			"response": [
 				{
-					"id": "5c28591e-f012-4085-9846-5e9182c71e5a",
+					"id": "6087c2da-4381-4761-9fed-101521a34c05",
 					"name": "POST /school",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/school",
@@ -41,7 +41,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n{\r\n  \"address\": {\r\n    \"addressLine1\": \"12 Vivekanandar Street\",\r\n    \"addressLine2\": \"Pudhu Nagar\",\r\n    \"city\": \"puzhal\",\r\n    \"district\": \"tiruvallur\"\r\n  },\r\n  \t \"proofOfIdentity\": 1,\r\n  \"schoolName\": \"Gov High School\",\r\n  \"schoolType\":\"High School\",\r\n  \"headMasterName\": \"Kumar\",\r\n  \"headMasterEmail\": \"kumar@gmail.com\",\r\n\t\"numberOfTechers\":10,\r\n\t\"numberOfStudents\":50,\r\n\t\"status\":\"REGISTERED\",\r\n  \"requirements\": [\r\n  \t{\r\n  \t\t\t\"reqType\":\"New\",\r\n  \t\t\t\"assetType\":\"Sports\",\r\n  \t\t\t\"assetName\":\"Bat\",\r\n  \t\t\t\"quantity\":3\r\n  \t},\r\n  \t{\r\n  \t\t\t\"reqType\":\"New\",\r\n  \t\t\t\"assetType\":\"Infrastructure\",\r\n  \t\t\t\"assetName\":\"Bench\",\r\n  \t\t\t\"quantity\":10\r\n  \t}\r\n  \t\r\n  \t\r\n  \t]\r\n  \r\n  }"
+							"raw": "{  \r\n   \"schoolInfo\":{  \r\n      \"schoolRegNo\":\"ABC123\",\r\n      \"schoolName\":\"Gov High School\",\r\n      \"schoolType\":\"High School\",\r\n      \"numberOfTeachers\":10,\r\n      \"numberOfStudents\":50\r\n   },\r\n   \"contacts\":{  \r\n      \"priName\":\"Kumar\",\r\n      \"priNum\":\"991234567\",\r\n      \"priEmail\":\"kumar@gmail.com\",\r\n      \"secName\":\"Saravanan\",\r\n      \"secNum\":\"991234568\",\r\n      \"secEmail\":\"sara@gmail.com\"\r\n   },\r\n   \"address\":{  \r\n      \"addressLine1\":\"12 Vivekanandar Street\",\r\n      \"addressLine2\":\"Pudhu Nagar\",\r\n      \"city\":\"chennai\",\r\n      \"district\":\"kanchipuram\",\r\n      \"locality\":\"tambaram\",\r\n      \"pinCode\":\"612345\"\r\n   },\r\n   \"proofOfIdentity\":1,\r\n   \"requirements\":[  \r\n      {  \r\n         \"reqType\":\"New\",\r\n         \"assetType\":\"Sports\",\r\n         \"assetName\":\"Bat\",\r\n         \"quantity\":3\r\n      },\r\n      {  \r\n         \"reqType\":\"New\",\r\n         \"assetType\":\"Infrastructure\",\r\n         \"assetName\":\"Bench\",\r\n         \"quantity\":10\r\n      }\r\n   ]\r\n}"
 						}
 					},
 					"status": "OK",
@@ -70,7 +70,7 @@
 						{
 							"name": "date",
 							"key": "date",
-							"value": "Mon, 06 Aug 2018 00:43:05 GMT",
+							"value": "Sun, 12 Aug 2018 02:02:18 GMT",
 							"description": "The date and time that the message was sent"
 						},
 						{
@@ -93,8 +93,8 @@
 						}
 					],
 					"cookie": [],
-					"responseTime": 66,
-					"body": "{\"schoolId\":4,\"schoolName\":\"Gov High School\",\"schoolType\":\"High School\",\"headMasterName\":\"Kumar\",\"headMasterEmail\":\"kumar@gmail.com\",\"numberOfStudents\":50,\"numberOfTeachers\":0,\"address\":{\"addressId\":4,\"addressLine1\":\"12 Vivekanandar Street\",\"addressLine2\":\"Pudhu Nagar\",\"district\":\"tiruvallur\",\"city\":\"puzhal\",\"locality\":null},\"proofOfIdentity\":1,\"requirements\":[{\"requirementId\":5,\"reqType\":\"New\",\"assetType\":\"Sports\",\"assetName\":\"Bat\",\"quantity\":3,\"dateAdded\":1533516185098},{\"requirementId\":6,\"reqType\":\"New\",\"assetType\":\"Infrastructure\",\"assetName\":\"Bench\",\"quantity\":10,\"dateAdded\":1533516185102}],\"dateAdded\":1533516185082,\"status\":\"REGISTERED\"}"
+					"responseTime": 88,
+					"body": "{\"schoolId\":2,\"schoolInfo\":{\"schoolInfoId\":2,\"schoolRegNo\":\"ABC123\",\"schoolName\":\"Gov High School\",\"schoolType\":\"High School\",\"numberOfStudents\":50,\"numberOfTeachers\":10},\"contacts\":{\"contactsId\":2,\"priName\":\"Kumar\",\"priNum\":\"991234567\",\"priEmail\":\"kumar@gmail.com\",\"secName\":\"Saravanan\",\"secNum\":\"991234568\",\"secEmail\":\"sara@gmail.com\"},\"address\":{\"addressId\":2,\"addressLine1\":\"12 Vivekanandar Street\",\"addressLine2\":\"Pudhu Nagar\",\"district\":\"kanchipuram\",\"city\":\"chennai\",\"locality\":\"tambaram\",\"pinCode\":\"612345\"},\"proofOfIdentity\":1,\"requirements\":[{\"requirementId\":3,\"reqType\":\"New\",\"assetType\":\"Sports\",\"assetName\":\"Bat\",\"quantity\":3,\"dateAdded\":1534039338861},{\"requirementId\":4,\"reqType\":\"New\",\"assetType\":\"Infrastructure\",\"assetName\":\"Bench\",\"quantity\":10,\"dateAdded\":1534039338865}],\"dateAdded\":1534039338848,\"status\":\"REGISTERED\"}"
 				}
 			]
 		},
@@ -118,7 +118,7 @@
 			},
 			"response": [
 				{
-					"id": "e9aa73a3-adac-4b27-89db-5ca93d84f42b",
+					"id": "a614933a-bff6-4699-b2c8-d05cefb234c9",
 					"name": "POST /user",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/user",
@@ -210,7 +210,7 @@
 			},
 			"response": [
 				{
-					"id": "56fc737a-5ce5-4f57-b9e0-ff2f52ee2361",
+					"id": "9efacf84-5e6a-4147-b92a-44ce2899e7eb",
 					"name": "POST /image",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/image",
@@ -324,7 +324,7 @@
 			},
 			"response": [
 				{
-					"id": "67794254-71d5-47b9-8202-a7e4661bad22",
+					"id": "0033e77c-4d17-436f-9b57-ab62872572e4",
 					"name": "GET /school/{id}",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/school/2",
@@ -376,7 +376,7 @@
 					"body": "{\"schoolId\":2,\"schoolName\":\"Gov High School\",\"schoolType\":\"High School\",\"headMasterName\":\"Kumar\",\"headMasterEmail\":\"kumar@gmail.com\",\"numberOfStudents\":50,\"numberOfTeachers\":0,\"address\":{\"addressId\":2,\"addressLine1\":\"12 Vivekanandar Street\",\"addressLine2\":\"Pudhu Nagar\",\"district\":\"kanchipuram\",\"city\":\"chennai\",\"locality\":\"tambaram\"},\"proofOfIdentity\":1,\"requirements\":[{\"requirementId\":1,\"reqType\":\"New\",\"assetType\":\"Sports\",\"assetName\":\"Bat\",\"quantity\":3,\"dateAdded\":1533509936000},{\"requirementId\":2,\"reqType\":\"New\",\"assetType\":\"Infrastructure\",\"assetName\":\"Bench\",\"quantity\":10,\"dateAdded\":1533509936000}],\"dateAdded\":1533509936000,\"status\":null}"
 				},
 				{
-					"id": "205a5a84-5bcf-43f2-8e17-b6a65e1574d7",
+					"id": "f8bd877f-6f5a-4388-bbe6-c0cca5e6a00e",
 					"name": "GET /school/name/{contains}",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/school/name/hi",
@@ -449,7 +449,7 @@
 			},
 			"response": [
 				{
-					"id": "dc324cd1-69be-4c8a-a954-88ba25974b58",
+					"id": "50592d60-230f-4486-94a7-99c73a70e535",
 					"name": "GET /school/city/{cityid}",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/school/city/chennai",
@@ -522,7 +522,7 @@
 			},
 			"response": [
 				{
-					"id": "d9a5b88f-e29e-4ef8-a176-3c970e6d4688",
+					"id": "e04f0c4c-fb68-47b2-8c56-eb982f49df93",
 					"name": "GET /school/district/{districtId}",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/school/district/kanchipuram",
@@ -595,7 +595,7 @@
 			},
 			"response": [
 				{
-					"id": "e8eb06c1-bcb9-4cec-be5a-5ac97e72ee67",
+					"id": "0ab82be1-3d5e-4937-a658-53ec920346ef",
 					"name": "GET /school/locality/{localityId}",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/school/locality/tambaram",
@@ -668,7 +668,7 @@
 			},
 			"response": [
 				{
-					"id": "4fb7b08c-ca34-4b53-83b2-90be780c1832",
+					"id": "b6dbe50b-9b2c-4de9-ac67-b38cc617ead9",
 					"name": "GET /school",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/school",
@@ -741,7 +741,7 @@
 			},
 			"response": [
 				{
-					"id": "367c5f33-216f-4d73-9037-7e3e786672a3",
+					"id": "26c795bb-e02b-4a83-acf8-e15812881f62",
 					"name": "GET /lookup/field/state",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/lookup/field/state",
@@ -841,7 +841,7 @@
 			},
 			"response": [
 				{
-					"id": "d574d052-5e6d-4669-b9b8-64a4ed88ffb1",
+					"id": "741a029f-5dd0-41b7-82dd-3b61400874a2",
 					"name": "GET /lookup/field/district by state",
 					"originalRequest": {
 						"url": {
@@ -941,7 +941,7 @@
 			},
 			"response": [
 				{
-					"id": "d70c6dab-3bae-450f-8735-c4a510837ed3",
+					"id": "7474342e-b1ae-4400-80cd-d129f88dfd36",
 					"name": "GET /lookup/field/city",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/lookup/field/city",
@@ -1041,7 +1041,7 @@
 			},
 			"response": [
 				{
-					"id": "d4e0410a-9a01-47af-87f7-ce757d164cb6",
+					"id": "8d559bd2-82c8-4c6f-9d4c-cd0ab20af5d1",
 					"name": "GET /lookup/field/city by district",
 					"originalRequest": {
 						"url": {
@@ -1168,7 +1168,7 @@
 			},
 			"response": [
 				{
-					"id": "35b62c16-9fad-46ed-bfdf-b100b6910bf9",
+					"id": "ae84ea7a-4cbb-4578-9c29-c2b5007fe59f",
 					"name": "GET /lookup/field/locality by city",
 					"originalRequest": {
 						"url": {
@@ -1268,7 +1268,7 @@
 			},
 			"response": [
 				{
-					"id": "291f4f71-28ad-4031-b3de-e0cee254d69f",
+					"id": "e6c91189-45eb-4d7b-80cc-29656b55652f",
 					"name": "GET /lookup/field/reqtype",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/lookup/field/reqtype",
@@ -1341,7 +1341,7 @@
 			},
 			"response": [
 				{
-					"id": "d6c6ad92-7a58-45c4-8b29-24927f2ae3a7",
+					"id": "fd480a83-71c6-424a-b594-ee0ed1614d7e",
 					"name": "GET /lookup/field/assettype",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/lookup/field/assettype",
@@ -1441,7 +1441,7 @@
 			},
 			"response": [
 				{
-					"id": "1ab70508-a207-4852-8822-c8234532a6dc",
+					"id": "b3ffd496-dca4-4771-9714-338115d31f6a",
 					"name": "GET /lookup/field/asset by assettype",
 					"originalRequest": {
 						"url": {
@@ -1561,7 +1561,7 @@
 			},
 			"response": [
 				{
-					"id": "e7f2ff20-9f28-459c-8485-8cad81131de3",
+					"id": "5a97a325-06ff-4077-8b45-5835b29bd712",
 					"name": "GET /roles",
 					"originalRequest": {
 						"url": "localhost:8080/revamp-service-1.0-SNAPSHOT/roles",
