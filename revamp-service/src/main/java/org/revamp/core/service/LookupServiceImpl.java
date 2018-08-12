@@ -3,13 +3,8 @@ package org.revamp.core.service;
 import java.util.List;
 
 import org.revamp.core.dao.LookupDAO;
-import org.revamp.core.model.Asset;
-import org.revamp.core.model.AssetType;
-import org.revamp.core.model.City;
-import org.revamp.core.model.District;
-import org.revamp.core.model.ReqType;
+import org.revamp.core.model.Lookup;
 import org.revamp.core.model.Role;
-import org.revamp.core.model.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,38 +17,19 @@ public class LookupServiceImpl implements LookupService {
 	private LookupDAO lookupDAO;
 
 	@Override
-	public List<State> getStates() {
-		return lookupDAO.getStates();
-	}
-
-	@Override
-	public List<District> getDistricts(String stateId) {
-		return lookupDAO.getDistricts(stateId);
-	}
-
-	@Override
-	public List<City> getCities(String districtId) {
-		return lookupDAO.getCities(districtId);
-	}
-
-	@Override
 	public List<Role> getRoles() {
 		return lookupDAO.getRoles();
 	}
 
 	@Override
-	public List<ReqType> getReqTypes() {
-		return lookupDAO.getReqTypes();
+	public List<Lookup> lookup(String field) {
+		return lookupDAO.lookup(field);
 	}
 
 	@Override
-	public List<AssetType> getAssetTypes() {
-		return lookupDAO.getAssetTypes();
-	}
-
-	@Override
-	public List<Asset> getAssets(String assetTypeId) {
-		return lookupDAO.getAssets(assetTypeId);
+	public List<Lookup> lookupByParent(String field, String parentField,
+			String parentKey) {
+		return lookupDAO.lookupByParent(field, parentField, parentKey);
 	}
 
 }

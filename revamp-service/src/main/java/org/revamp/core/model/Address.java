@@ -33,13 +33,11 @@ public class Address implements java.io.Serializable {
 	@Column(name = "city_id")
 	private String city;
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
+	@Column(name = "locality_id")
+	private String locality;
+	
+	@Column(name = "pin_code")
+	private String pinCode;
 
 	public long getAddressId() {
 		return addressId;
@@ -73,11 +71,38 @@ public class Address implements java.io.Serializable {
 		this.district = district;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getLocality() {
+		return locality;
+	}
+
+	public void setLocality(String locality) {
+		this.locality = locality;
+	}
+
+	public String getPinCode() {
+		return pinCode;
+	}
+
+	public void setPinCode(String pinCode) {
+		this.pinCode = pinCode;
+	}
+
 	@Override
 	public String toString() {
 		return "Address [addressId=" + addressId + ", addressLine1="
 				+ addressLine1 + ", addressLine2=" + addressLine2
-				+ ", district=" + district + ", city=" + city + "]";
+				+ ", district=" + district + ", city=" + city + ", locality="
+				+ locality + ", pinCode=" + pinCode + "]";
 	}
+
+
 
 }

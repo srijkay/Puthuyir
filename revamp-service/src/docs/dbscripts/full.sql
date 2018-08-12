@@ -7,49 +7,6 @@ CREATE DATABASE IF NOT EXISTS `revamp_db`;
 USE `revamp_db`;
 
 
-
-/********************************************************
-    The state table, to hold contact info for entities
-********************************************************/
-
-DROP TABLE IF EXISTS revamp_db.state;
-
-CREATE TABLE IF NOT EXISTS revamp_db.state (
-    `state_id` VARCHAR(45) NOT NULL,
-    `state_name` VARCHAR(45),
-    PRIMARY KEY (`state_id`)
-);
-
-/********************************************************
-    The district table, to hold contact info for entities
-********************************************************/
-
-DROP TABLE IF EXISTS revamp_db.district;
-
-CREATE TABLE IF NOT EXISTS revamp_db.district(
-	`district_id` VARCHAR(45) NOT NULL,
-	`district_name` VARCHAR(45),
-    `state_id` VARCHAR(45),
-	PRIMARY KEY (`district_id`),
-    FOREIGN KEY (`state_id`)
-	REFERENCES `revamp_db`.`state` (`state_id`)
-);
-
-/********************************************************
-    The city table, to hold contact info for entities
-********************************************************/
-
-DROP TABLE IF EXISTS revamp_db.city;
-
-CREATE TABLE IF NOT EXISTS revamp_db.city(
-	`city_id` VARCHAR(45) NOT NULL,
-	`city_name` VARCHAR(45),
-    `district_id` VARCHAR(45),
-	PRIMARY KEY (`city_id`),
-  	FOREIGN KEY (`district_id`)
-	REFERENCES `revamp_db`.`district` (`district_id`)
-);
-
 /********************************************************
     The Address table, to hold contact info for entities
 ********************************************************/
@@ -62,13 +19,10 @@ CREATE TABLE IF NOT EXISTS revamp_db.address(
 	`address_line_2` VARCHAR(90),
 	`district_id` VARCHAR(45),
 	`city_id` VARCHAR(45),
+    `locality_id` VARCHAR(45),
+    `pin_code` VARCHAR(10),
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`address_id`)	,
-   FOREIGN KEY (`city_id`)
-	REFERENCES `revamp_db`.`city` (`city_id`),
-	FOREIGN KEY (`district_id`)
-	REFERENCES `revamp_db`.`district` (`district_id`)
-
+	PRIMARY KEY (`address_id`)
 );
 
 /********************************************************
@@ -85,6 +39,36 @@ CREATE TABLE IF NOT EXISTS revamp_db.image(
 );
 
 
+DROP TABLE IF EXISTS `revamp_db`.`schoolinfo`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`schoolinfo`(
+	`school_info_id`INT NOT NULL AUTO_INCREMENT,
+    `school_reg_number`VARCHAR(45) NOT NULL,
+	`school_name`VARCHAR(45) NOT NULL,
+	`school_type`VARCHAR(45) NOT NULL,
+	`number_of_students`INT NOT NULL,
+	`number_of_teachers`INT NOT NULL,
+	PRIMARY KEY (`school_info_id`)
+	
+);
+
+DROP TABLE IF EXISTS `revamp_db`.`contacts`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`contacts`(
+	`contacts_id`INT NOT NULL AUTO_INCREMENT,
+	`pri_name` VARCHAR(45) NOT NULL,
+    `pri_num` VARCHAR(45) NOT NULL,
+	`pri_email` VARCHAR(90) NOT NULL,
+    `sec_name` VARCHAR(45),
+    `sec_num` VARCHAR(45),
+	`sec_email` VARCHAR(90),
+    PRIMARY KEY (`contacts_id`)
+	
+);
+
+
+
+
 /********************************************************
 The School table, to collect school information
 ********************************************************/
@@ -92,52 +76,29 @@ DROP TABLE IF EXISTS `revamp_db`.`school`;
 
 CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
 	`school_id`INT NOT NULL AUTO_INCREMENT,
-	`school_name`VARCHAR(45) NOT NULL,
-	`school_type`VARCHAR(45) NOT NULL,
-	`head_master_name` VARCHAR(45) NOT NULL,
-	`head_master_email` VARCHAR(90) NOT NULL,
-	`number_of_students`INT NOT NULL,
-	`number_of_teachers`INT NOT NULL,
-	`address_id`INT NOT NULL,
+	`school_info_id`INT NOT NULL,
+    `contacts_id`INT NOT NULL,
+    `address_id`INT NOT NULL,
 	`proof_of_identity_id`INT,
+    `status`VARCHAR(45) DEFAULT 'REGISTERED',
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`school_id`),
+    CONSTRAINT `revamp_db`.`school`.`school_info_id`
+	FOREIGN KEY (`school_info_id`)
+	REFERENCES `revamp_db`.`schoolinfo` (`school_info_id`),
+    CONSTRAINT `revamp_db`.`school`.`contacts_id`
+	FOREIGN KEY (`contacts_id`)
+	REFERENCES `revamp_db`.`contacts` (`contacts_id`),
+	CONSTRAINT `revamp_db`.`school`.`address_id`
 	FOREIGN KEY (`address_id`)
 	REFERENCES `revamp_db`.`address` (`address_id`),
-    FOREIGN KEY (`proof_of_identity_id`)
+    CONSTRAINT `revamp_db`.`school`.`proof_of_identity_id`
+	FOREIGN KEY (`proof_of_identity_id`)
 	REFERENCES `revamp_db`.`image` (`image_id`)
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS `revamp_db`.`reqtype`;
-
-CREATE TABLE IF NOT EXISTS `revamp_db`.`reqtype`(
-	`reqtype_id` varchar(45) NOT NULL,
-	`reqtype_desc` varchar(45) NOT NULL,
-	PRIMARY KEY (`reqtype_id`)
-);
-
-DROP TABLE IF EXISTS `revamp_db`.`assettype`;
-
-CREATE TABLE IF NOT EXISTS `revamp_db`.`assettype`(
-	`assettype_id` varchar(45) NOT NULL,
-	`assettype_desc` varchar(45) NOT NULL,
-	PRIMARY KEY (`assettype_id`)
-);
-
-DROP TABLE IF EXISTS `revamp_db`.`asset`;
-
-CREATE TABLE IF NOT EXISTS `revamp_db`.`asset`(
-	`asset_id` varchar(45) NOT NULL,
-	`assetname` varchar(45) NOT NULL,
-    `assettype_id` varchar(45) NOT NULL,
-	PRIMARY KEY (`asset_id`),
-    FOREIGN KEY (`assettype_id`)
-	REFERENCES `revamp_db`.`assettype` (`assettype_id`)
-	ON DELETE NO ACTION
-	ON UPDATE CASCADE
-);
 
 DROP TABLE IF EXISTS `revamp_db`.`requirement`;
 
@@ -147,8 +108,10 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
 	`reqtype` varchar(45) NOT NULL,
     `assettype` varchar(45) NOT NULL,
     `assetname` varchar(45) NOT NULL,    
+    `quantity` INT NOT NULL,
     `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`requirement_id`),
+	CONSTRAINT `revamp_db`.`requirement`.`school_id`
 	FOREIGN KEY (`school_id`)
 	REFERENCES `revamp_db`.`school` (`school_id`)
 	ON DELETE NO ACTION
@@ -180,10 +143,13 @@ CREATE TABLE IF NOT EXISTS revamp_db.user(
   `password` varchar(50) DEFAULT NULL,
   `passwordhint` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`userid`),
+  CONSTRAINT `revamp_db`.`user`.`addressid`
   FOREIGN KEY (`addressid`)
   REFERENCES `revamp_db`.`address` (`address_id`),
+  CONSTRAINT `revamp_db`.`user`.`identityproof`
   FOREIGN KEY (`identityproof`)
   REFERENCES `revamp_db`.`image` (`image_id`),
+  CONSTRAINT `revamp_db`.`user`.`roleid`
   FOREIGN KEY (`roleid`)
   REFERENCES `revamp_db`.`role` (`roleid`)
   
@@ -202,35 +168,397 @@ CREATE TABLE IF NOT EXISTS revamp_db.audittrail(
   CONSTRAINT `audittrail_user_userid` FOREIGN KEY (`userid`) REFERENCES `revamp_db`.`user` (`userid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ); 
 
+DROP TABLE IF EXISTS revamp_db.lookup;
+ 
+CREATE TABLE IF NOT EXISTS revamp_db.lookup(
+	
+	`field` VARCHAR(45),
+    `key` VARCHAR(45),
+    `value` VARCHAR(100),
+    `parent_field` VARCHAR(45),
+    `parent_key` VARCHAR(45),
+	PRIMARY KEY (`field`,`key`),
+    CONSTRAINT `revamp_db`.`lookup`.`parent_field_key`
+    FOREIGN KEY (`parent_field`, `parent_key`)
+    REFERENCES `revamp_db`.`lookup` (`field`,`key`)
+    
+);
 
 
-insert into revamp_db.state 
-(state_id, state_name) 
-values ('TN', 'Tamil Nadu');
+/********************************************************
+State
+********************************************************/
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('state',
+'TN',
+'Tamil Nadu',
+null,
+null);
+
+
+/********************************************************
+District
+********************************************************/
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('district',
+'kanchipuram',
+'Kanchipuram',
+'state',
+'TN');
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('district',
+'tiruvallur',
+'Tiruvallur',
+'state',
+'TN');
+
+
+/********************************************************
+City
+********************************************************/
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('city',
+'ennore',
+'Ennore',
+'district',
+'tiruvallur');
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('city',
+'puzhal',
+'Puzhal',
+'district',
+'tiruvallur');
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('city',
+'padappai',
+'Padappai',
+'district',
+'kanchipuram');
+
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('city',
+'vallakottai',
+'Vallakottai',
+'district',
+'kanchipuram');
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('city',
+'chennai',
+'Chennai',
+'district',
+'kanchipuram');
+
+/********************************************************
+Locality
+********************************************************/
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('locality',
+'tambaram',
+'Tambaram',
+'city',
+'chennai');
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('locality',
+'pallavaram',
+'Pallavaram',
+'city',
+'chennai');
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('locality',
+'sholinganallur',
+'Sholinganallur',
+'city',
+'chennai');
+
+/********************************************************
+Requirement Type
+********************************************************/
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('reqtype',
+'new',
+'New Requirement',
+null,
+null);
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('reqtype',
+'maintenance',
+'Maintenance',
+null,
+null);
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('assettype',
+'sports',
+'Sports',
+null,
+null);
+
+
+/********************************************************
+Asset type
+********************************************************/
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('assettype',
+'infrastructure',
+'Infrastructure',
+null,
+null);
+
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('assettype',
+'others',
+'Others',
+null,
+null);
+
+
+/********************************************************
+Asset
+********************************************************/
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('asset',
+'football',
+'Football',
+'assettype',
+'sports');
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('asset',
+'other_sports',
+'Others',
+'assettype',
+'sports');
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('asset',
+'bathroom',
+'Bathroom',
+'assettype',
+'infrastructure');
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('asset',
+'other_infra',
+'Others',
+'assettype',
+'infrastructure');
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('asset',
+'others',
+'Others',
+'assettype',
+'others');
+
+
+/********************************************************
+School Type
+********************************************************/
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('schooltype',
+'nursery',
+'Nursery',
+null,
+null);
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('schooltype',
+'primary',
+'Primary',
+null,
+null);
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('schooltype',
+'middle',
+'Middle School',
+null,
+null);
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('schooltype',
+'secondary',
+'Secondary School',
+null,
+null);
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('schooltype',
+'highersecondary',
+'Higher Secondary School',
+null,
+null);
 
 
 
-insert into revamp_db.district 
-(district_id, district_name, state_id) 
-values ('kanchipuram', 'Kanchipuram','TN');
-insert into revamp_db.district 
-(district_id, district_name, state_id) 
-values ('tiruvallur', 'Tiruvallur','TN');
 
 
-
-insert into revamp_db.city 
-(city_id, city_name, district_id) 
-values ('ennore', 'Ennore','tiruvallur');
-insert into revamp_db.city 
-(city_id, city_name, district_id) 
-values ('puzhal', 'Puzhal','tiruvallur');
-insert into revamp_db.city 
-(city_id, city_name, district_id) 
-values ('padappai', 'Padappai','kanchipuram');
-insert into revamp_db.city 
-(city_id, city_name, district_id) 
-values ('vallakottai', 'Vallakottai','kanchipuram');
 
 
 insert into revamp_db.role
@@ -252,65 +580,6 @@ values ('beneficiary', 'Beneficiary', '');
 insert into revamp_db.role
 (roleid, rolename, accesslevel) 
 values ('approver','Approver','');
-
-
-insert into revamp_db.reqtype
-(reqtype_id, reqtype_desc) 
-values ('New','New');
-
-insert into revamp_db.reqtype
-(reqtype_id, reqtype_desc) 
-values ('Maintenance','Maintenance');
-
-insert into revamp_db.assettype
-(assettype_id, assettype_desc) 
-values ('Sports','Sports');
-
-insert into revamp_db.assettype
-(assettype_id, assettype_desc) 
-values ('Infrastructure','Infrastructure');
-
-insert into revamp_db.assettype
-(assettype_id, assettype_desc) 
-values ('Others','Others');
-
-
-
-insert into revamp_db.asset
-(asset_id, assetname, assettype_id) 
-values ('Football','Football','Sports');
-
-insert into revamp_db.asset
-(asset_id, assetname, assettype_id) 
-values ('Other_sports','Others','Sports');
-
-insert into revamp_db.asset
-(asset_id, assetname, assettype_id) 
-values ('Bathroom','Bathroom','Infrastructure');
-
-insert into revamp_db.asset
-(asset_id, assetname, assettype_id) 
-values ('Other_infra','Others','Infrastructure');
-
-
-insert into revamp_db.asset
-(asset_id, assetname, assettype_id) 
-values ('Others','Others','Others');
-
-
-
-insert into revamp_db.address 
-(address_line_1, address_line_2, district_id, city_id ) 
-values ('test', 'test','tiruvallur','puzhal');
-
-insert into revamp_db.image 
-(image_id, image ) 
-values (1, null);
-
-insert into revamp_db.school 
-(school_name, school_type, head_master_name, head_master_email, number_of_students, number_of_teachers, address_id, proof_of_identity_id) 
-values ('test', 'test','test','test', 5, 1, 1, 1);
-
 
 
 
