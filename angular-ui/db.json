@@ -1,0 +1,139 @@
+{
+  "schools": [
+    {
+      "id": 1,
+      "schoolInfo": {
+        "name": "asdf",
+        "type": "asdf",
+        "studNos": "asdf",
+        "teachNos": "asdf"
+      },
+      "contacts": {
+        "priName": "asdf",
+        "priNum": "asdf",
+        "priEmail": "asdf",
+        "secName": "null",
+        "secNum": "null",
+        "secEmail": "asdf"
+      },
+      "address": {
+        "addressLine1": "asdf",
+        "addressLine2": "asdf",
+        "city": "asdf",
+        "district": "asdf",
+        "state": "asdf"
+      },
+      "requirement": {
+        "reqType": "asdf",
+        "assetType": "asdf",
+        "assetName": "asdf",
+        "quantity": "asdf"
+      },
+      "proofOfId": {
+        "comments": "asdf"
+      }
+    },
+    {
+      "schoolInfo": {
+        "name": "asdf",
+        "type": "asdf",
+        "studNos": "asdf",
+        "teachNos": "asdf"
+      },
+      "contacts": {
+        "priName": "asdf",
+        "priNum": "asdf",
+        "priEmail": "asdf",
+        "secName": "null",
+        "secNum": "null",
+        "secEmail": "asdf"
+      },
+      "address": {
+        "addressLine1": "asdf",
+        "addressLine2": "asdf",
+        "city": "asdf",
+        "district": "asdf",
+        "state": "asdf"
+      },
+      "requirement": {
+        "reqType": "asdf",
+        "assetType": "asdf",
+        "assetName": "asdf",
+        "quantity": "asdf"
+      },
+      "proofOfId": {
+        "comments": "asdf"
+      },
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "schoolInfo": {
+        "name": "asdf",
+        "type": "asdf",
+        "studNos": 2,
+        "teachNos": 2
+      },
+      "contacts": {
+        "priName": "azsdf",
+        "priNum": "2017833683",
+        "priEmail": "sripysripy@gmail.com",
+        "secName": "Sundararajan",
+        "secNum": "2017833683",
+        "secEmail": "sripysripy@gmail.com"
+      },
+      "address": {
+        "addressLine1": "1115 Stony Brook Way",
+        "addressLine2": "22",
+        "city": "North Brunswick",
+        "district": "asdf",
+        "state": "asdf"
+      },
+      "requirement": {
+        "reqType": "asdf",
+        "assetType": "asdf",
+        "assetName": "asdf",
+        "quantity": 22
+      },
+      "proofOfId": {
+        "comments": "22"
+      },
+      "id": 4
+    },
+    {
+      "schoolInfo": {
+        "name": "",
+        "type": "-1",
+        "studNos": "",
+        "teachNos": ""
+      },
+      "contacts": {
+        "priName": "",
+        "priNum": "",
+        "priEmail": "",
+        "secName": null,
+        "secNum": null,
+        "secEmail": ""
+      },
+      "address": {
+        "addressLine1": "",
+        "addressLine2": "",
+        "city": "",
+        "district": "-1",
+        "state": "-1"
+      },
+      "requirement": {
+        "reqType": "-1",
+        "assetType": "-1",
+        "assetName": "-1",
+        "quantity": ""
+      },
+      "proofOfId": {
+        "comments": ""
+      },
+      "id": 5
+    }
+  ]
+}
