@@ -21,36 +21,41 @@
 
   <div class="container">
   <form [formGroup]="schoolRegForm" novalidate>
-    
-
       <ngb-tabset class="tabset1">
           <ngb-tab title="School Information">
             <ng-template ngbTabContent>
               <fieldset formGroupName="schoolInfo">
                 <div class="form-group">
-                  <label class="control-label">School Name</label><span class="text-danger" *ngIf="(name.touched && !name.dirty)">School name is required</span> 
-                  <input type="text" class="form-control" id="schoolName" formControlName="name">
-                  <div class="text-danger" *ngIf="(name.touched && !name.dirty)">
+                  <label class="control-label">School Name</label><span class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">School name is required</span> 
+                  <input type="text" class="form-control" id="schoolName" formControlName="schoolName">
+                  <div class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">
                     <p>School name is required</p>
                   </div>
                 </div>
-          
+                
                 <div class="form-group">
                   <label class="control-label">School Type</label>
-                  <select id="schoolType" class="form-control" formControlName="type" ng-required="required">
+                  <select id="schoolType" class="form-control" formControlName="schoolType" ng-required="required">
                     <option value="-1">Select School Type</option>
-                    <option value="asdf">asdf</option>
                     <option *ngFor='let schoolType of schoolTypesLD' [value]="schoolType.key">{{schoolType.value}}</option>
                   </select>
-                  <div class="text-danger" *ngIf="(type.touched && type.value=='-1')">
+                  <div class="text-danger" *ngIf="(schoolType.touched && schoolType.value=='-1')">
                     <p>School type is required</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label">School RegNo</label>
+                  <input type="text" class="form-control" id="schoolRegNo" formControlName="schoolRegNo">
+                  <div class="text-danger" *ngIf="(schoolRegNo.touched && !schoolRegNo.dirty)">
+                    <p>School RegNo is required</p>
                   </div>
                 </div>
           
                 <div class="form-group">
                   <label class="control-label">Number of Students</label>
-                  <input type="number" class="form-control" id="noOfStudents" formControlName="studNos">
-                  <div class="text-danger" *ngIf="(studNos.touched && !studNos.dirty)">
+                  <input type="number" class="form-control" id="numberOfStudents" formControlName="numberOfStudents">
+                  <div class="text-danger" *ngIf="(numberOfStudents.touched && !numberOfStudents.dirty)">
                     <p>Number of students required</p>
                   </div>
                 </div>
@@ -58,9 +63,9 @@
                 <div class="form-group">
                   <label class="control-label">Number of Teachers</label>
                   <div class="controls">
-                    <input type="number" class="form-control" id="noOfTeachers" formControlName="teachNos">
+                    <input type="number" class="form-control" id="numberOfTeachers" formControlName="numberOfTeachers">
                   </div>
-                  <div class="text-danger" *ngIf="(teachNos.touched && !teachNos.dirty)">
+                  <div class="text-danger" *ngIf="(numberOfTeachers.touched && !numberOfTeachers.dirty)">
                     <p>Number of teachers required</p>
                   </div>
                 </div>
@@ -152,7 +157,6 @@
                       <label class="control-label">District</label>
                       <select id="district" class="form-control" formControlName="district">
                         <option value="-1">Select District</option>
-                        <option value="asdf">asdf</option>
                         <option *ngFor='let district of districtsLD' [value]="district.key">{{district.value}}</option>
                       </select>
                       <div class="text-danger" *ngIf="(district.touched && district.value=='-1')">
@@ -165,7 +169,6 @@
                       <label class="control-label">State</label>
                       <select id="state" class="form-control" formControlName="state">
                         <option value="-1">Select State</option>
-                        <option value="asdf">asdf</option>
                         <option *ngFor='let state of statesLD' [value]="state.key">{{state.value}}</option>
                       </select>
                       <div class="text-danger" *ngIf="(state.touched && state.value=='-1')">
@@ -173,6 +176,13 @@
                       </div>
                     </div>
               
+                    <div class="form-group">
+                      <label class="control-label">PinCode</label>
+                      <input type="text" class="form-control" id="city" formControlName="pinCode">
+                      <div class="text-danger" *ngIf="(pinCode.touched  && !pinCode.dirty)">
+                        <p>PinCode is required</p>
+                      </div>
+                    </div>
               
                   </fieldset>
               
@@ -186,8 +196,6 @@
                       <label class="control-label">Type</label>
                       <select id="reqType" class="form-control" formControlName="state" formControlName="reqType">
                         <option value="-1">Select RequirementType</option>
-                        <option value="asdf">asdf</option>
-                        
                         <option *ngFor='let reqType of reqTypesLD' [value]="reqType.key">{{reqType.value}}</option>
                       </select>
                       <div class="text-danger" *ngIf="(reqType.touched && reqType.value=='-1')">
@@ -199,8 +207,6 @@
                       <label class="control-label">Asset Type</label>
                       <select id="assetType" class="form-control" formControlName="assetType">
                         <option value="-1">Select AssetType</option>
-                        <option value="asdf">asdf</option>
-                        
                         <option *ngFor='let assetType of assetTypesLD' [value]="assetType.key">{{assetType.value}}</option>
                       </select>
                       <div class="text-danger" *ngIf="(assetType.touched && assetType.value=='-1')">
@@ -212,8 +218,6 @@
                       <label class="control-label">Asset Name</label>
                       <select id="assetName" class="form-control" formControlName="assetName">
                         <option value="-1">Select AssetName</option>
-                        <option value="asdf">asdf</option>
-                        
                         <option *ngFor='let assetName of assetNamesLD' [value]="assetName.key">{{assetName.value}}</option>
                       </select>
                       <div class="text-danger" *ngIf="(assetName.touched && assetName.value=='-1')">

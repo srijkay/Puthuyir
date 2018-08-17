@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Http } from '@angular/http';
 import {FormGroup} from '@angular/forms';
-
 import { Observable, of } from 'rxjs';
+import { environment } from '../environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
-
 import { School } from './model/school';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,7 +28,7 @@ export class SchoolService {
 }*/
 
 registerSchool (school: any) {
-  return this.http.post('http://localhost:3000/schools', school.value);
+  return this.http.post(environment["school.register.url"], school.value);
 }
 
 

@@ -18,10 +18,11 @@ export class SchoolRegistrationComponent implements OnInit {
   requirements: FormArray;
   requirement: FormGroup;
 
-  name: FormControl;
-  type: FormControl;
-  studNos:FormControl;
-  teachNos:FormControl;
+  schoolName: FormControl;
+  schoolRegNo: FormControl;
+  schoolType: FormControl;
+  numberOfStudents:FormControl;
+  numberOfTeachers:FormControl;
 
   priName: FormControl;
   priNum: FormControl;
@@ -35,6 +36,7 @@ export class SchoolRegistrationComponent implements OnInit {
   city:  FormControl;
   state: FormControl;
   district: FormControl;
+  pinCode: FormControl;
 
   reqType: FormControl;
   assetType: FormControl;
@@ -84,7 +86,7 @@ export class SchoolRegistrationComponent implements OnInit {
   }
 
   getAssetNames() {
-    this.lookUpService.getAssetTypes().subscribe(data => {
+    this.lookUpService.getAssetNames().subscribe(data => {
       this.assetNamesLD = <LookUps>data;
     });
   }
@@ -102,10 +104,11 @@ export class SchoolRegistrationComponent implements OnInit {
   }
 
   createFormControls() {
-    this.name = new FormControl('',<any>Validators.required);
-    this.type = new FormControl('-1',Validators.required);
-    this.studNos = new FormControl('',Validators.required);
-    this.teachNos = new FormControl('',Validators.required);
+    this.schoolName = new FormControl('',<any>Validators.required);
+    this.schoolRegNo = new FormControl('',<any>Validators.required);
+    this.schoolType = new FormControl('-1',Validators.required);
+    this.numberOfStudents = new FormControl('',Validators.required);
+    this.numberOfTeachers = new FormControl('',Validators.required);
 
     this.priName = new FormControl('',Validators.required);
     this.priNum = new FormControl('',Validators.required);
@@ -124,6 +127,7 @@ export class SchoolRegistrationComponent implements OnInit {
     this.city = new FormControl('',Validators.required);
     this.district = new FormControl('-1',Validators.required);
     this.state = new FormControl('-1',Validators.required);
+    this.pinCode = new FormControl('',Validators.required);
 
     this.reqType =  new FormControl('-1',Validators.required);
     this.assetType = new FormControl('-1',Validators.required);
@@ -147,10 +151,11 @@ export class SchoolRegistrationComponent implements OnInit {
    // this.requirements = new FormArray([]);
     this.schoolRegForm = new FormGroup({
       schoolInfo: new FormGroup({
-        name: this.name,
-        type: this.type,
-        studNos: this.studNos,
-        teachNos: this.teachNos
+        schoolName: this.schoolName,
+        schoolRegNo: this.schoolRegNo,
+        schoolType: this.schoolType,
+        numberOfStudents: this.numberOfStudents,
+        numberOfTeachers: this.numberOfTeachers
       }),
       contacts: new FormGroup({
         priName: this.priName,
@@ -165,7 +170,8 @@ export class SchoolRegistrationComponent implements OnInit {
         addressLine2: this.addressLine2,
         city: this.city,
         district: this.district,
-        state: this.state 
+        state: this.state,
+        pinCode: this.pinCode 
       }),
       requirement: new FormGroup({
         reqType: this.reqType,
