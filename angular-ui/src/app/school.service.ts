@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Http } from '@angular/http';
+import { Http,Headers } from '@angular/http';
 import {FormGroup} from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { environment } from '../environments/environment';
@@ -28,7 +28,16 @@ export class SchoolService {
 }*/
 
 registerSchool (school: any) {
-  return this.http.post(environment["school.register.url"], school.value);
+ // let head = new Headers({ 'content-type': 'multipart/form-data;boundary=143PUTHUYIR'});
+  /*,
+  'Access-Control-Allow-Origin': 'http://localhost:4200',
+  'Access-Control-Allow-Methods': 'POST', 
+  'Access-Control-Allow-Headers': 'Content-Type' });
+  */
+
+  //return this.http.post(environment["school.register.url"], school.value);
+  return this.http.post(environment["school.register.url"], school);
+  
 }
 
 

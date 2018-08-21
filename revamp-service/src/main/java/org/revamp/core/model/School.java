@@ -1,7 +1,8 @@
 package org.revamp.core.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -18,12 +19,17 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Proxy;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "school")
 @Proxy(lazy = false)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class School implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8607633702511344481L;
@@ -45,23 +51,54 @@ public class School implements java.io.Serializable {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	@Column(name = "proof_of_identity_id")
-	private long proofOfIdentity;
-
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "school")
-	private List<Requirement> requirements;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "school", cascade = CascadeType.ALL)
+	private Set<Requirement> requirements;
 
 	@Column(name = "date_created")
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateAdded;
+	private Date dateCreated;
 
 	@Column(name = "status")
 	private String status = "REGISTERED";
 
+	@JsonProperty("proofOfId")
+	@Transient
+	private ProofOfId proofOfId;
+	
+	public ProofOfId getProofOfId() {
+		return proofOfId;
+	}
+
+	public void setProofOfId(ProofOfId proofOfId) {
+		this.proofOfId = proofOfId;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "school", cascade = CascadeType.ALL)
+	private Set<SchoolImage> schoolImages;
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public Set<SchoolImage> getSchoolImages() {
+		if(schoolImages == null) {
+			schoolImages = new HashSet<SchoolImage>();
+		}
+		return schoolImages;
+	}
+
+	public void setSchoolImages(Set<SchoolImage> schoolImages) {
+		this.schoolImages = schoolImages;
+	}
+
 	@PrePersist
 	protected void onCreate() {
-		dateAdded = new Date();
+		dateCreated = new Date();
 	}
 
 	public long getSchoolId() {
@@ -96,28 +133,20 @@ public class School implements java.io.Serializable {
 		this.address = address;
 	}
 
-	public long getProofOfIdentity() {
-		return proofOfIdentity;
-	}
-
-	public void setProofOfIdentity(long proofOfIdentity) {
-		this.proofOfIdentity = proofOfIdentity;
-	}
-
-	public List<Requirement> getRequirements() {
+	public Set<Requirement> getRequirements() {
 		return requirements;
 	}
 
-	public void setRequirements(List<Requirement> requirements) {
+	public void setRequirements(Set<Requirement> requirements) {
 		this.requirements = requirements;
 	}
 
 	public Date getDateAdded() {
-		return dateAdded;
+		return dateCreated;
 	}
 
-	public void setDateAdded(Date dateAdded) {
-		this.dateAdded = dateAdded;
+	public void setDateAdded(Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 
 	public String getStatus() {
@@ -130,11 +159,12 @@ public class School implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "School [schoolId=" + schoolId + ", schoolInfo=" + schoolInfo
-				+ ", contacts=" + contacts + ", address=" + address
-				+ ", proofOfIdentity=" + proofOfIdentity + ", requirements="
-				+ requirements + ", dateAdded=" + dateAdded + ", status="
-				+ status + "]";
+		return "School [schoolId=" + schoolId + ", schoolInfo=" + schoolInfo + ", contacts=" + contacts + ", address="
+				+ address + ", requirements=" + requirements + ", dateCreated=" + dateCreated + ", status=" + status
+				+ ", proofOfId=" + proofOfId + ", schoolImages=" + schoolImages + "]";
 	}
-
+	
+	
+	
+	
 }

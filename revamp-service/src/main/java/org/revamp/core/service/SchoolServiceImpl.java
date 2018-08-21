@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.revamp.core.dao.SchoolDAO;
 import org.revamp.core.model.School;
+import org.revamp.core.model.SchoolImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,14 @@ public class SchoolServiceImpl implements SchoolService {
 	private SchoolDAO schoolDAO;
 
 	@Transactional
-	public long save(School school) {
+	public long save(School school, List<byte[]> filesInBytes) {
+		filesInBytes.forEach(b -> {
+			SchoolImage si = new SchoolImage(b,school.getProofOfId().getComments());
+			si.setSchool(school);
+			school.getSchoolImages().add(si);
+		});
+		school.getRequirements().forEach(req -> req.setSchool(school));
+		
 		return schoolDAO.save(school);
 	}
 

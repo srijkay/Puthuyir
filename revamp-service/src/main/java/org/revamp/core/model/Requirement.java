@@ -33,7 +33,7 @@ public class Requirement implements java.io.Serializable {
 	@Column(name = "requirement_id", nullable = false)
 	private long requirementId;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id", nullable = false)
 	private School school;
 

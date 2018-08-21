@@ -29,14 +29,17 @@ CREATE TABLE IF NOT EXISTS revamp_db.address(
     The Address table, to hold contact info for entities
 ********************************************************/
 
-DROP TABLE IF EXISTS revamp_db.image;
+DROP TABLE IF EXISTS revamp_db.schoolimage;
 
-CREATE TABLE IF NOT EXISTS revamp_db.image(
+CREATE TABLE IF NOT EXISTS revamp_db.schoolimage(
 	`image_id` INT NOT NULL AUTO_INCREMENT,
 	`image` longblob,
+	`school_id` INT NOT NULL,
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`image_id`)	
+	PRIMARY KEY (`image_id`),
+	FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`) ON DELETE NO ACTION ON UPDATE CASCADE	
 );
+
 
 
 DROP TABLE IF EXISTS `revamp_db`.`schoolinfo`;
@@ -74,30 +77,21 @@ The School table, to collect school information
 ********************************************************/
 DROP TABLE IF EXISTS `revamp_db`.`school`;
 
-CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
-	`school_id`INT NOT NULL AUTO_INCREMENT,
-	`school_info_id`INT NOT NULL,
-    `contacts_id`INT NOT NULL,
-    `address_id`INT NOT NULL,
-	`proof_of_identity_id`INT,
-    `status`VARCHAR(45) DEFAULT 'REGISTERED',
-	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`school_id`),
-    CONSTRAINT `revamp_db`.`school`.`school_info_id`
-	FOREIGN KEY (`school_info_id`)
-	REFERENCES `revamp_db`.`schoolinfo` (`school_info_id`),
-    CONSTRAINT `revamp_db`.`school`.`contacts_id`
-	FOREIGN KEY (`contacts_id`)
-	REFERENCES `revamp_db`.`contacts` (`contacts_id`),
-	CONSTRAINT `revamp_db`.`school`.`address_id`
-	FOREIGN KEY (`address_id`)
-	REFERENCES `revamp_db`.`address` (`address_id`),
-    CONSTRAINT `revamp_db`.`school`.`proof_of_identity_id`
-	FOREIGN KEY (`proof_of_identity_id`)
-	REFERENCES `revamp_db`.`image` (`image_id`)
+CREATE TABLE IF NOT EXISTS revamp_db.school(
+	school_id INT NOT NULL AUTO_INCREMENT,
+	school_info_id INT NOT NULL,
+    contacts_id INT NOT NULL,
+    address_id INT NOT NULL,
+    school_status VARCHAR(45) DEFAULT 'REGISTERED',
+	date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (school_id),
+    FOREIGN KEY (school_info_id) REFERENCES schoolinfo (school_info_id),
+	FOREIGN KEY (contacts_id) REFERENCES contacts (contacts_id),
+	FOREIGN KEY (address_id) REFERENCES address (address_id)
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
 );
+
 
 
 DROP TABLE IF EXISTS `revamp_db`.`requirement`;
@@ -111,7 +105,6 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
     `quantity` INT NOT NULL,
     `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`requirement_id`),
-	CONSTRAINT `revamp_db`.`requirement`.`school_id`
 	FOREIGN KEY (`school_id`)
 	REFERENCES `revamp_db`.`school` (`school_id`)
 	ON DELETE NO ACTION
@@ -128,6 +121,7 @@ CREATE TABLE IF NOT EXISTS revamp_db.role(
 );
 
 DROP TABLE IF EXISTS `revamp_db`.`user`;
+
 CREATE TABLE IF NOT EXISTS revamp_db.user(
   `userid` bigint(20) NOT NULL AUTO_INCREMENT ,
   `firstname` varchar(45) NOT NULL,
@@ -135,7 +129,6 @@ CREATE TABLE IF NOT EXISTS revamp_db.user(
   `status` varchar(45) DEFAULT 'REGISTERED',
   `addressid`INT NOT NULL,
   `roleid` varchar(45) NOT NULL,
-  `identityproof` INT NOT NULL,
   `phonenumber` varchar(45) DEFAULT NULL,
   `emailaddress` varchar(45) DEFAULT NULL,
   `createdate` datetime(6) DEFAULT NULL,
@@ -143,17 +136,12 @@ CREATE TABLE IF NOT EXISTS revamp_db.user(
   `password` varchar(50) DEFAULT NULL,
   `passwordhint` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`userid`),
-  CONSTRAINT `revamp_db`.`user`.`addressid`
-  FOREIGN KEY (`addressid`)
-  REFERENCES `revamp_db`.`address` (`address_id`),
-  CONSTRAINT `revamp_db`.`user`.`identityproof`
-  FOREIGN KEY (`identityproof`)
-  REFERENCES `revamp_db`.`image` (`image_id`),
-  CONSTRAINT `revamp_db`.`user`.`roleid`
-  FOREIGN KEY (`roleid`)
-  REFERENCES `revamp_db`.`role` (`roleid`)
-  
+  FOREIGN KEY (`addressid`) REFERENCES `revamp_db`.`address` (`address_id`),
+  FOREIGN KEY (`roleid`) REFERENCES `revamp_db`.`role` (`roleid`)
+  ON DELETE NO ACTION
+ON UPDATE CASCADE
 );
+
 
 DROP TABLE IF EXISTS `revamp_db`.`audittrail`;
 CREATE TABLE IF NOT EXISTS revamp_db.audittrail(

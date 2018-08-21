@@ -38,6 +38,17 @@ public class Address implements java.io.Serializable {
 	
 	@Column(name = "pin_code")
 	private String pinCode;
+	
+	@Column(name = "state")
+	private String state;
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
 
 	public long getAddressId() {
 		return addressId;
@@ -97,10 +108,9 @@ public class Address implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Address [addressId=" + addressId + ", addressLine1="
-				+ addressLine1 + ", addressLine2=" + addressLine2
-				+ ", district=" + district + ", city=" + city + ", locality="
-				+ locality + ", pinCode=" + pinCode + "]";
+		return "Address [addressId=" + addressId + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2
+				+ ", district=" + district + ", city=" + city + ", locality=" + locality + ", pinCode=" + pinCode
+				+ ", state=" + state + "]";
 	}
 
 

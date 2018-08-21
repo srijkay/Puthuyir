@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormBuilder, FormArray} from '@angular/forms';
 import {LookUpService} from '../look-up.service';
 import {SchoolService} from '../school.service';
@@ -17,6 +17,7 @@ export class SchoolRegistrationComponent implements OnInit {
   address:FormGroup;
   requirements: FormArray;
   requirement: FormGroup;
+  proofOfId: FormGroup;
 
   schoolName: FormControl;
   schoolRegNo: FormControl;
@@ -42,9 +43,10 @@ export class SchoolRegistrationComponent implements OnInit {
   assetType: FormControl;
   assetName: FormControl;
   quantity: FormControl;
-  proofOfId: FormGroup;
-  comments: FormControl;
 
+  comments: FormControl;
+  //image: FormArray;
+  image: FormControl;
   districtsLD:LookUps;
   reqTypesLD:LookUps;
   assetTypesLD:LookUps;
@@ -52,7 +54,10 @@ export class SchoolRegistrationComponent implements OnInit {
   statesLD:LookUps;
   schoolTypesLD:LookUps;
 
-  
+  loading: boolean = false;
+
+  @ViewChild('fileInput') fileInput: ElementRef;
+
 
   constructor(private lookUpService: LookUpService, private schoolService: SchoolService, private formBuilder: FormBuilder) { }
 
@@ -104,15 +109,15 @@ export class SchoolRegistrationComponent implements OnInit {
   }
 
   createFormControls() {
-    this.schoolName = new FormControl('',<any>Validators.required);
-    this.schoolRegNo = new FormControl('',<any>Validators.required);
-    this.schoolType = new FormControl('-1',Validators.required);
-    this.numberOfStudents = new FormControl('',Validators.required);
-    this.numberOfTeachers = new FormControl('',Validators.required);
+    this.schoolName = new FormControl('asdf',<any>Validators.required);
+    this.schoolRegNo = new FormControl('123123',<any>Validators.required);
+    this.schoolType = new FormControl('primary',Validators.required);
+    this.numberOfStudents = new FormControl('123',Validators.required);
+    this.numberOfTeachers = new FormControl('123',Validators.required);
 
-    this.priName = new FormControl('',Validators.required);
-    this.priNum = new FormControl('',Validators.required);
-    this.priEmail = new FormControl('',[
+    this.priName = new FormControl('tms',Validators.required);
+    this.priNum = new FormControl('123123',Validators.required);
+    this.priEmail = new FormControl('tms@yahoo.com',[
           Validators.required,
           Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
         ]);
@@ -122,20 +127,21 @@ export class SchoolRegistrationComponent implements OnInit {
       Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
     ]) 
 
-    this.addressLine1 =  new FormControl('',Validators.required);
-    this.addressLine2 = new FormControl('',Validators.required);
-    this.city = new FormControl('',Validators.required);
-    this.district = new FormControl('-1',Validators.required);
-    this.state = new FormControl('-1',Validators.required);
-    this.pinCode = new FormControl('',Validators.required);
+    this.addressLine1 =  new FormControl('asdf',Validators.required);
+    this.addressLine2 = new FormControl('asdf',Validators.required);
+    this.city = new FormControl('trichy',Validators.required);
+    this.district = new FormControl('kanchipuram',Validators.required);
+    this.state = new FormControl('TN',Validators.required);
+    this.pinCode = new FormControl('213123',Validators.required);
 
-    this.reqType =  new FormControl('-1',Validators.required);
-    this.assetType = new FormControl('-1',Validators.required);
-    this.assetName = new FormControl('-1',Validators.required);
-    this.quantity = new FormControl('',Validators.required);
+    this.reqType =  new FormControl('maintenance',Validators.required);
+    this.assetType = new FormControl('infrastructure',Validators.required);
+    this.assetName = new FormControl('football',Validators.required);
+    this.quantity = new FormControl('1',Validators.required);
 
-    this.comments = new FormControl('',Validators.required);
-
+    this.comments = new FormControl('Hello...hru',Validators.required);
+    this.image = new FormControl('',Validators.required);
+  //this.image = new FormArray([]);
     this.requirements = new FormArray([]);
   }
 
@@ -148,7 +154,6 @@ export class SchoolRegistrationComponent implements OnInit {
   }
   
   createForm() {
-   // this.requirements = new FormArray([]);
     this.schoolRegForm = new FormGroup({
       schoolInfo: new FormGroup({
         schoolName: this.schoolName,
@@ -181,7 +186,9 @@ export class SchoolRegistrationComponent implements OnInit {
       }),
       requirements : new FormArray([]),
       proofOfId: new FormGroup({
-        comments: this.comments
+        comments: this.comments,
+        //image: new FormArray([])
+        image: this.image
        })     
     });
   }
@@ -200,6 +207,34 @@ export class SchoolRegistrationComponent implements OnInit {
         return true;
       }
   }
+  clearFile() {
+    this.schoolRegForm.controls.proofOfId.get('image').setValue(null);
+    this.schoolRegForm.controls.image.setValue(null);
+    this.fileInput.nativeElement.value = '';
+  }
+  onFileChange(event) {
+    console.log('..onFileChange..'+event.target.files.length);
+    if(event.target.files.length > 0) {
+      let file = event.target.files[0];
+      this.schoolRegForm.controls.proofOfId.get('image').setValue(file);
+    }
+  }
+
+
+/*clearFile() {
+  (<FormArray>this.schoolRegForm.controls.proofOfId.get('image')).reset();
+  this.fileInput.nativeElement.value = '';
+}
+onFileChange(event) {
+  console.log('..onFileChange..'+event.target.files.length);
+  for(let i=0; i < event.target.files.length; i++) {
+    let file = event.target.files[i];
+    (<FormArray>this.schoolRegForm.controls.proofOfId.get('image')).push(new FormGroup({image:new FormControl(file)}));
+    console.log((<FormArray>this.schoolRegForm.controls.proofOfId.get('image')).length);  
+  }
+  
+}*/
+
 
   addRequirement() {
     (<FormArray>this.schoolRegForm.controls.requirements).push(new FormGroup({
@@ -212,8 +247,17 @@ export class SchoolRegistrationComponent implements OnInit {
     this.schoolRegForm.controls.requirement.reset();
   }
 
+  private prepareSave(): any {
+    let input = new FormData();
+    input.append('payload', JSON.stringify(this.schoolRegForm.value));
+    input.append('files', this.schoolRegForm.controls.proofOfId.get('image').value);
+    return input;
+  }
+
   addSchoolRegForm() {
-    this.schoolService.registerSchool(this.schoolRegForm)
+    const formModel = this.prepareSave();
+    this.loading = true;
+    this.schoolService.registerSchool(formModel)
     .subscribe(
       (response) => console.log(response),
       (error) => console.log(error)

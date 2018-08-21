@@ -6,7 +6,7 @@ import org.revamp.core.model.School;
 
 public interface SchoolService {
 
-	long save(School school);
+	long save(School school, List<byte[]> filesInBytes);
 
 	School get(long id);
 	
