@@ -1,0 +1,5 @@
+1. Shall we start using some private Repositories instead of Public GIT?
+
+2. Shall we go for Spring Boot instead of traditional Spring?
+
+
