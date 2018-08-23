@@ -32,7 +32,8 @@ public class SchoolDAOImpl implements SchoolDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<School> getAll() {
-		return sessionFactory.getCurrentSession().createQuery("FROM School").list();
+		List<School> list = sessionFactory.getCurrentSession().createQuery("FROM School").list();
+		return list;
 	}
 	
 	public School get(long id) {

@@ -28,6 +28,7 @@ public class SchoolSerializer extends StdSerializer<School> {
 	@Override
 	public void serialize(School school, JsonGenerator jgen, SerializerProvider provider)
 			throws IOException, JsonProcessingException {
+		try {
 		jgen.writeStartObject();
 		jgen.writeNumberField("id", school.getSchoolId());
 		jgen.writeObjectField("schoolInfo", school.getSchoolInfo());
@@ -37,15 +38,16 @@ public class SchoolSerializer extends StdSerializer<School> {
 		jgen.writeObjectField("requirements", school.getRequirements());
 		jgen.writeObjectField("proofOfIds", this.convertImageWrapper(school.getSchoolImages()));
 		jgen.writeEndObject();
-
-		jgen.close();
-		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private SchoolImageWrapper convertImageWrapper(Set<SchoolImage> images) {
 		SchoolImageWrapper imageWrapper = new SchoolImageWrapper();
 		
 		images.forEach(image -> {
+			imageWrapper.setComments(image.getComments());
 			imageWrapper.getFiles().add(image.getFilePath());
 		});
 		

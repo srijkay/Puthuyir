@@ -63,7 +63,7 @@ public class School implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateCreated;
 
-	@Column(name = "status")
+	@Column(name = "school_status")
 	private String status = "REGISTERED";
 
 	@JsonProperty("proofOfId")
