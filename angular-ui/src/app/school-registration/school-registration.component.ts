@@ -4,6 +4,7 @@ import {LookUpService} from '../look-up.service';
 import {SchoolService} from '../school.service';
 import {LookUps} from '../model/lookUps';
 import {School} from '../model/school';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-school-registration',
@@ -59,7 +60,7 @@ export class SchoolRegistrationComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
 
 
-  constructor(private lookUpService: LookUpService, private schoolService: SchoolService, private formBuilder: FormBuilder) { }
+  constructor(private lookUpService: LookUpService, private schoolService: SchoolService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.createFormControls();
@@ -262,6 +263,7 @@ onFileChange(event) {
       (response) => {
         this.loading = false;
         console.log(response);
+        this.router.navigate(['schoollist']);
       },
       (error) => console.log(error)
     );

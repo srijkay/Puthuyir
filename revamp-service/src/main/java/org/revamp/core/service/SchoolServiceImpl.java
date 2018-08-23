@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,22 +27,23 @@ public class SchoolServiceImpl implements SchoolService {
 	
 	@Transactional
 	public long save(School school, Map<String, byte[]> files, String imgPath) {
-		
+		String dirPath = imgPath+"\\";
 		files.forEach((k,v) -> {
-			SchoolImage si = new SchoolImage(k,v,school.getProofOfId().getComments());
+			String filePath = DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now())+"\\"+school.getSchoolInfo().getSchoolName()+"_";
+			SchoolImage si = new SchoolImage(filePath+k,v,school.getProofOfId().getComments());
 			si.setSchool(school);
 			school.getSchoolImages().add(si);
 		});
 		
 		school.getRequirements().forEach(req -> req.setSchool(school));
 		long id = schoolDAO.save(school);
-		this.saveImgToFS(imgPath+"//"+id+"_"+school.getSchoolInfo().getSchoolName(),school.getSchoolImages());
+		this.saveImgToFS(dirPath,school.getSchoolImages());
 		return id;
 	}
 	
 	private void saveImgToFS(String dirPath, Set<SchoolImage> list) {
 		list.forEach(schoolImg -> {
-			Path path = Paths.get(dirPath+"_"+schoolImg.getName());
+			Path path = Paths.get(dirPath+schoolImg.getFilePath());
             try {
 				Files.write(path, schoolImg.getImage());
 			} catch (IOException e) {

@@ -32,8 +32,8 @@ public class SchoolImage implements java.io.Serializable {
 	
 	public SchoolImage() {}
 	
-	public SchoolImage(String name, byte[] image, String comments) {
-		this.name = name;
+	public SchoolImage(String filePath, byte[] image, String comments) {
+		this.filePath = filePath;
 		this.image = image;
 		this.comments = comments;
 	}
@@ -65,15 +65,15 @@ public class SchoolImage implements java.io.Serializable {
 	@Column(name = "comments")
 	private String comments;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "filepath")
+	private String filePath;
 	
-	public String getName() {
-		return name;
+	public String getFilePath() {
+		return filePath;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 
 	public String getComments() {

@@ -10,13 +10,15 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { SchoolService } from './school.service';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SchoolListComponent } from './school-list/school-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SchoolRegistrationComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SchoolListComponent
     ],
   imports: [
     BrowserModule,

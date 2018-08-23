@@ -46,9 +46,7 @@ public class SchoolSerializer extends StdSerializer<School> {
 		SchoolImageWrapper imageWrapper = new SchoolImageWrapper();
 		
 		images.forEach(image -> {
-			System.out.println(image.getImage().toString());
-			System.out.println(image.getImage().toString().length());
-			imageWrapper.getiByte().add(image.getImage().toString());
+			imageWrapper.getFiles().add(image.getFilePath());
 		});
 		
 		return imageWrapper;
@@ -58,7 +56,7 @@ public class SchoolSerializer extends StdSerializer<School> {
 	private class SchoolImageWrapper {
 		
 		private String comments;
-		private List<String> iByte;
+		private List<String> files;
 		
 		public String getComments() {
 			return comments;
@@ -66,11 +64,12 @@ public class SchoolSerializer extends StdSerializer<School> {
 		public void setComments(String comments) {
 			this.comments = comments;
 		}
-		public List<String> getiByte() {
-			if(iByte == null) {
-				iByte = new ArrayList<>();
+		
+		public List<String> getFiles() {
+			if(files == null) {
+				files = new ArrayList<>();
 			}
-			return iByte;
+			return files;
 		}
 		
 

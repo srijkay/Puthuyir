@@ -49,7 +49,9 @@ public class SchoolController {
 		try {
 			Map<String, byte[]> filesInBytes = WebUtilities.convertMultiPartToBytes(Arrays.asList(regFormModel.getFiles()));
 			School school = new ObjectMapper().readValue(regFormModel.getPayload(), School.class);
-			long id = schoolService.save(school, filesInBytes, request.getServletContext().getRealPath("//images"));
+			String fullPath = request.getServletContext().getRealPath("/");
+			String ctxPath = request.getContextPath();
+			long id = schoolService.save(school, filesInBytes, fullPath.substring(0,fullPath.indexOf(ctxPath.substring(1)))+"images");
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
@@ -67,7 +69,7 @@ public class SchoolController {
 
 	@GetMapping("/school")
 	@ResponseBody 
-	public ResponseEntity<List<School>> getAll(@RequestBody(required = false) School school) {
+	public ResponseEntity<List<School>> getAll(@RequestBody(required = false) School school, HttpServletRequest request) {
 		List<School> schools = schoolService.getAll();
 		
 		return ResponseEntity.ok().body(schools);
