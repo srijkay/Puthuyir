@@ -259,7 +259,10 @@ onFileChange(event) {
     this.loading = true;
     this.schoolService.registerSchool(formModel)
     .subscribe(
-      (response) => console.log(response),
+      (response) => {
+        this.loading = false;
+        console.log(response);
+      },
       (error) => console.log(error)
     );
   }

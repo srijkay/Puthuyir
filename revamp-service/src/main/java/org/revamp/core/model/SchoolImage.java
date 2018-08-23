@@ -26,14 +26,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "schoolimage")
 @Proxy(lazy = false)
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class SchoolImage implements java.io.Serializable {
 
 	private static final long serialVersionUID = -2136842348977561820L;
 	
 	public SchoolImage() {}
 	
-	public SchoolImage(byte[] image, String comments) {
+	public SchoolImage(String name, byte[] image, String comments) {
+		this.name = name;
 		this.image = image;
 		this.comments = comments;
 	}
@@ -65,6 +65,17 @@ public class SchoolImage implements java.io.Serializable {
 	@Column(name = "comments")
 	private String comments;
 	
+	@Column(name = "name")
+	private String name;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getComments() {
 		return comments;
 	}

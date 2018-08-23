@@ -3,6 +3,9 @@ package org.revamp.core.controller;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.revamp.core.model.School;
 import org.revamp.core.model.SchoolRegFormModel;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,21 +44,17 @@ public class SchoolController {
 	}
 */	
 	@PostMapping("/school")
-    public ResponseEntity<?> multiUploadFileModel(@ModelAttribute SchoolRegFormModel regFormModel) {
-		System.out.println(regFormModel);
-		try {
-			List<byte[]> filesInBytes = WebUtilities.convertMultiPartToBytes(Arrays.asList(regFormModel.getFiles()));
-			System.out.println("before Object Mapper");
-			School school = new ObjectMapper().readValue(regFormModel.getPayload(), School.class);
-			System.out.println("after Object Mapper");
-			System.out.println("...@...."+school);
-			long id = schoolService.save(school, filesInBytes);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+    public ResponseEntity<?> multiUploadFileModel(@ModelAttribute SchoolRegFormModel regFormModel, HttpServletRequest request) {
 		
-        return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
+		try {
+			Map<String, byte[]> filesInBytes = WebUtilities.convertMultiPartToBytes(Arrays.asList(regFormModel.getFiles()));
+			School school = new ObjectMapper().readValue(regFormModel.getPayload(), School.class);
+			long id = schoolService.save(school, filesInBytes, request.getServletContext().getRealPath("//images"));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
 
     }
 
@@ -65,8 +66,10 @@ public class SchoolController {
 	}
 
 	@GetMapping("/school")
-	public ResponseEntity<List<School>> getAll() {
+	@ResponseBody 
+	public ResponseEntity<List<School>> getAll(@RequestBody(required = false) School school) {
 		List<School> schools = schoolService.getAll();
+		
 		return ResponseEntity.ok().body(schools);
 	}
 

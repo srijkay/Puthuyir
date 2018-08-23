@@ -22,14 +22,18 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Proxy;
+import org.revamp.core.web.util.SchoolSerializer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "school")
 @Proxy(lazy = false)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonSerialize(using = SchoolSerializer.class)
 public class School implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8607633702511344481L;
@@ -75,6 +79,7 @@ public class School implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "school", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<SchoolImage> schoolImages;
 
 	public Date getDateCreated() {

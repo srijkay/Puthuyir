@@ -1,6 +1,12 @@
 package org.revamp.core.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.revamp.core.dao.SchoolDAO;
 import org.revamp.core.model.School;
@@ -16,16 +22,31 @@ public class SchoolServiceImpl implements SchoolService {
 	@Autowired
 	private SchoolDAO schoolDAO;
 
+	
 	@Transactional
-	public long save(School school, List<byte[]> filesInBytes) {
-		filesInBytes.forEach(b -> {
-			SchoolImage si = new SchoolImage(b,school.getProofOfId().getComments());
+	public long save(School school, Map<String, byte[]> files, String imgPath) {
+		
+		files.forEach((k,v) -> {
+			SchoolImage si = new SchoolImage(k,v,school.getProofOfId().getComments());
 			si.setSchool(school);
 			school.getSchoolImages().add(si);
 		});
-		school.getRequirements().forEach(req -> req.setSchool(school));
 		
-		return schoolDAO.save(school);
+		school.getRequirements().forEach(req -> req.setSchool(school));
+		long id = schoolDAO.save(school);
+		this.saveImgToFS(imgPath+"//"+id+"_"+school.getSchoolInfo().getSchoolName(),school.getSchoolImages());
+		return id;
+	}
+	
+	private void saveImgToFS(String dirPath, Set<SchoolImage> list) {
+		list.forEach(schoolImg -> {
+			Path path = Paths.get(dirPath+"_"+schoolImg.getName());
+            try {
+				Files.write(path, schoolImg.getImage());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
 	public School get(long id) {
