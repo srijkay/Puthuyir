@@ -9,7 +9,7 @@ const routes: Routes = [
     path: 'schoolregistration',
     component: SchoolRegistrationComponent
   },
-   {
+  {
     path: 'schoollist',
     component: SchoolListComponent
   },

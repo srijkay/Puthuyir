@@ -79,20 +79,3 @@ public class SchoolSerializer extends StdSerializer<School> {
 	}
 }
 
-/*
-jgen.writeStartObject();
-jgen.writeNumberField("id", school.getSchoolId());
-jgen.writeRaw(",");
-SchoolInfo schoolInfo = school.getSchoolInfo();
-jgen.writeRaw("\"schoolInfo\":{");
-jgen.writeRaw("");
-jgen.writeStringField("schoolName", schoolInfo.getSchoolName());
-jgen.writeStringField("schoolRegNo", schoolInfo.getSchoolRegNo());
-jgen.writeStringField("schoolType", schoolInfo.getSchoolType());
-jgen.writeNumberField("numberOfStudents", schoolInfo.getNumberOfStudents());
-jgen.writeNumberField("numberOfTeachers", schoolInfo.getNumberOfTeachers());
-jgen.writeRaw("}");
-jgen.writeEndObject();
-
-jgen.close();
-*/

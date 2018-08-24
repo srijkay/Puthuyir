@@ -7,5 +7,8 @@ export const environment = {
   'assettype.lookup.url':'revamp-service-1.0-SNAPSHOT/lookup/field/assettype',
   'assetname.lookup.url':'revamp-service-1.0-SNAPSHOT/lookup/field/asset',
   'schooltype.lookup.url':'revamp-service-1.0-SNAPSHOT/lookup/field/schooltype',
-  'school.register.url':'revamp-service-1.0-SNAPSHOT/school'
+  'school.register.url':'revamp-service-1.0-SNAPSHOT/school',
+  'school.list.url':'revamp-service-1.0-SNAPSHOT/school',
+  'school.image.dir':'http://localhost:8080/images/',
+  'image.server.url':'http://localshost:8080/images/'
 };

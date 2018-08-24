@@ -11,5 +11,9 @@ export const environment = {
   'assettype.lookup.url':'',
   'assetname.lookup.url':'',
   'schooltype.lookup.url':'',
-  'school.register.url':''
+  'school.register.url':'',
+  'school.list.url':'',
+  'school.image.dir':'',
+  'image.server.url':''
+  
 };

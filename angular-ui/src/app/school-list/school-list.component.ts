@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {SchoolService} from '../school.service';
+import {School} from '../model/school';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-school-list',
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SchoolListComponent implements OnInit {
 
-  constructor() { }
+  schoolList: School;
+  name:string;
+  imageUrl:string;
+  constructor( private schoolService: SchoolService ) { }
 
   ngOnInit() {
+    this.imageUrl = environment["image.server.url"];
+    this.getSchoolList();
+  }
+
+  getSchoolList() {
+    this.schoolService.getSchoolList()
+    .subscribe(
+      (response) => {
+       this.parseResponse(response);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  parseResponse(response:any) {
+    this.schoolList = JSON.parse(response.text());
+    console.log(this.schoolList[0].proofOfIds.files[0]);
   }
 
 }

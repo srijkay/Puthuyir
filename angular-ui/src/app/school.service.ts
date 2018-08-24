@@ -28,18 +28,12 @@ export class SchoolService {
 }*/
 
 registerSchool (school: any) {
- // let head = new Headers({ 'content-type': 'multipart/form-data;boundary=143PUTHUYIR'});
-  /*,
-  'Access-Control-Allow-Origin': 'http://localhost:4200',
-  'Access-Control-Allow-Methods': 'POST', 
-  'Access-Control-Allow-Headers': 'Content-Type' });
-  */
-
-  //return this.http.post(environment["school.register.url"], school.value);
   return this.http.post(environment["school.register.url"], school);
-  
 }
 
+getSchoolList () {
+  return this.http.get(environment["school.register.url"]);
+}
 
 /**
    * Handle Http operation that failed.

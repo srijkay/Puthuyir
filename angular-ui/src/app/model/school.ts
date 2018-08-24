@@ -1,42 +1,55 @@
-        export interface SchoolInfo {
-            name: string;
-            type: string;
-            studNos: string;
-            teachNos: string;
-        }
-    
-        export interface Contacts {
-            priName: string;
-            priNum: string;
-            priEmail: string;
-            secName: string;
-            secNum: string;
-            secEmail: string;
-        }
-    
-        export interface Address {
-            addressLine1: string;
-            addressLine2: string;
-            city: string;
-            district: string;
-            state: string;
-        }
-    
-        export interface Requirement {
-            reqType: string;
-            assetType: string;
-            assetName: string;
-            quantity: string;
-        }
-    
-        export interface ProofOfId {
-            comments: string;
-        }
-    
-        export interface School {
-            schoolInfo: SchoolInfo;
-            contacts: Contacts;
-            address: Address;
-            requirement: Requirement;
-            proofOfId: ProofOfId;
-        } 
+    export interface SchoolInfo {
+        schoolInfoId: number;
+        schoolRegNo: string;
+        schoolName: string;
+        schoolType: string;
+        numberOfStudents: number;
+        numberOfTeachers: number;
+    }
+
+    export interface Concats {
+        contactsId: number;
+        priName: string;
+        priNum: string;
+        priEmail: string;
+        secName?: any;
+        secNum?: any;
+        secEmail: string;
+    }
+
+    export interface Address {
+        addressId: number;
+        addressLine1: string;
+        addressLine2: string;
+        district: string;
+        city: string;
+        locality?: any;
+        pinCode: string;
+        state: string;
+    }
+
+    export interface Requirement {
+        requirementId: number;
+        reqType: string;
+        assetType: string;
+        assetName: string;
+        quantity: number;
+        dateAdded?: any;
+    }
+
+    export interface ProofOfIds {
+        comments: string;
+        files: string[];
+    }
+
+    export interface School {
+        id: number;
+        schoolInfo: SchoolInfo;
+        concats: Concats;
+        address: Address;
+        requirements: Requirement[];
+        proofOfIds: ProofOfIds;
+    }
+
+
+
