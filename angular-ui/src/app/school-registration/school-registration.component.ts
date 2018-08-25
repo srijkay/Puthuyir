@@ -146,13 +146,6 @@ export class SchoolRegistrationComponent implements OnInit {
     this.requirements = new FormArray([]);
   }
 
-  createItem(): FormGroup {
-    return this.formBuilder.group({
-      name: '',
-      description: '',
-      price: ''
-    });
-  }
   
   createForm() {
     this.schoolRegForm = new FormGroup({
@@ -198,21 +191,13 @@ export class SchoolRegistrationComponent implements OnInit {
     (<FormArray>this.schoolRegForm.controls.requirements).removeAt(index); 
   }
 
-  isReqBtnDisabled() {
-    if(this.reqType.dirty && 
-      this.assetType.dirty && 
-      this.assetName.dirty && 
-      this.quantity.dirty) {
-        return false;
-      } else {
-        return true;
-      }
-  }
+ 
   clearFile() {
     this.schoolRegForm.controls.proofOfId.get('image').setValue(null);
     this.schoolRegForm.controls.image.setValue(null);
     this.fileInput.nativeElement.value = '';
   }
+
   onFileChange(event) {
     console.log('..onFileChange..'+event.target.files.length);
     if(event.target.files.length > 0) {
@@ -268,4 +253,14 @@ onFileChange(event) {
       (error) => console.log(error)
     );
   }
+
+  
+disableSubmitBtn(){
+  if(!this.schoolRegForm.valid || this.loading) {
+    return true;
+  } else {
+    return
+  }
 }
+}
+

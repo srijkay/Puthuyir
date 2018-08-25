@@ -70,7 +70,6 @@ CREATE TABLE IF NOT EXISTS revamp_db.school(
     `school_info_id` INT NOT NULL,
     `school_status` VARCHAR(45) DEFAULT 'REGISTERED',
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-	`status` VARCHAR(255),
 	PRIMARY KEY (`school_id`),
 	FOREIGN KEY (`contacts_id`) REFERENCES contacts (`contacts_id`),
 	FOREIGN KEY (`address_id`) REFERENCES address (`address_id`),
@@ -91,6 +90,7 @@ CREATE TABLE IF NOT EXISTS revamp_db.schoolimage(
 	`image` longblob,
 	`school_id` INT NOT NULL,
 	`filepath` VARCHAR(200) NOT NULL,
+	`comments` varchar(500) DEFAULT NULL,
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`image_id`),
 	FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`) ON DELETE NO ACTION ON UPDATE CASCADE	

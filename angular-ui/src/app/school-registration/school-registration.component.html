@@ -288,11 +288,11 @@
         </ngb-tabset>   
 
 <div class="form-actions">
-  <button type="submit" class="btn btn-success" [disabled]="!schoolRegForm.valid || loading">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+  <button type="submit" class="btn btn-success" [disabled]="disableSubmitBtn()">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
   <button class="btn btn-success">Cancel</button>
 </div>
   </form>
 
 
-  <pre>{{schoolRegForm.value | json}}</pre>
+  <!--pre>{{schoolRegForm.value | json}}</pre-->
 </div>
