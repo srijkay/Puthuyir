@@ -14,8 +14,8 @@ public class UserServiceImpl implements UserService {
 	private UserDAO userDAO;
 
 	@Transactional
-	public long save(User school) {
-		return userDAO.save(school);
+	public long save(User user) {
+		return userDAO.save(user);
 	}
 
 	public User get(long id) {

@@ -18,12 +18,13 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Proxy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "requirement")
 @Proxy(lazy = false)
-@JsonIgnoreProperties(value= {"school"})
+@JsonIgnoreProperties(value = { "school" })
 public class Requirement implements java.io.Serializable {
 
 	private static final long serialVersionUID = -7230483495700936141L;
@@ -34,8 +35,9 @@ public class Requirement implements java.io.Serializable {
 	private long requirementId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "school_id", nullable = false)
-	private School school;
+	@JoinColumn(name = "project_id", nullable = false)
+	@JsonIgnore
+	private Project project;
 
 	@Column(name = "reqtype")
 	private String reqType;
@@ -67,12 +69,12 @@ public class Requirement implements java.io.Serializable {
 		this.requirementId = requirementId;
 	}
 
-	public School getSchool() {
-		return school;
+	public Project getProject() {
+		return project;
 	}
 
-	public void setSchool(School school) {
-		this.school = school;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	public String getReqType() {
@@ -117,9 +119,10 @@ public class Requirement implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Requirement [requirementId=" + requirementId + ", reqType=" + reqType + ", assetType=" + assetType
-				+ ", assetName=" + assetName + ", quantity=" + quantity
-				+ ", dateAdded=" + dateAdded + "]";
+		return "Requirement [requirementId=" + requirementId + ", reqType="
+				+ reqType + ", assetType=" + assetType + ", assetName="
+				+ assetName + ", quantity=" + quantity + ", dateAdded="
+				+ dateAdded + "]";
 	}
 
 }

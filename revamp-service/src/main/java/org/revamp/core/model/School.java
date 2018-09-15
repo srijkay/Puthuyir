@@ -49,7 +49,7 @@ public class School implements java.io.Serializable {
 	private long proofOfIdentity;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "school")
-	private List<Requirement> requirements;
+	private List<Project> projects;
 
 	@Column(name = "date_created")
 	@Basic
@@ -104,14 +104,6 @@ public class School implements java.io.Serializable {
 		this.proofOfIdentity = proofOfIdentity;
 	}
 
-	public List<Requirement> getRequirements() {
-		return requirements;
-	}
-
-	public void setRequirements(List<Requirement> requirements) {
-		this.requirements = requirements;
-	}
-
 	public Date getDateAdded() {
 		return dateAdded;
 	}
@@ -128,13 +120,21 @@ public class School implements java.io.Serializable {
 		this.status = status;
 	}
 
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
 	@Override
 	public String toString() {
 		return "School [schoolId=" + schoolId + ", schoolInfo=" + schoolInfo
 				+ ", contacts=" + contacts + ", address=" + address
-				+ ", proofOfIdentity=" + proofOfIdentity + ", requirements="
-				+ requirements + ", dateAdded=" + dateAdded + ", status="
-				+ status + "]";
+				+ ", proofOfIdentity=" + proofOfIdentity + ", projects="
+				+ projects + ", dateAdded=" + dateAdded + ", status=" + status
+				+ "]";
 	}
 
 }

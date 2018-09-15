@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.revamp.core.model.Project;
 import org.revamp.core.model.Requirement;
 import org.revamp.core.model.School;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +17,23 @@ public class SchoolDAOImpl implements SchoolDAO {
 	private SessionFactory sessionFactory;
 
 	public long save(School school) {
-		System.out.println(school);
 		sessionFactory.getCurrentSession().save(school);
-		for(Requirement requirement : school.getRequirements()) {
-			requirement.setSchool(school);
-			Date dateAdded = requirement.getDateAdded();
-			if(dateAdded == null) {
-				requirement.setDateAdded(new Date());
+		for(Project project : school.getProjects()) {
+			project.setSchool(school);
+			Date projectDateAdded = project.getDateAdded();
+			if(projectDateAdded == null) {
+				project.setDateAdded(new Date());
 			}
-			sessionFactory.getCurrentSession().save(requirement);
+			sessionFactory.getCurrentSession().save(project);
+			
+			for(Requirement requirement : project.getRequirements()) {
+				requirement.setProject(project);
+				Date reqDateAdded = requirement.getDateAdded();
+				if(reqDateAdded == null) {
+					requirement.setDateAdded(new Date());
+				}
+				sessionFactory.getCurrentSession().save(requirement);
+			}
 		}
 		
 		return school.getSchoolId();

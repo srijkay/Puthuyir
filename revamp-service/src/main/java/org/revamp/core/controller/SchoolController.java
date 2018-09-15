@@ -26,9 +26,11 @@ public class SchoolController {
 		school.setDateAdded(new Date());
 		long id = schoolService.save(school);
 		school.setSchoolId(id);
+		System.out.println("!!!1");
+		System.out.println(school);
 		return ResponseEntity.ok().body(school);
 	}
-
+	
 	/*---Get a school by id---*/
 	@GetMapping("/school/{id}")
 	public ResponseEntity<School> get(@PathVariable("id") long schoolId) {

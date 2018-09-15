@@ -54,7 +54,7 @@ public class User implements java.io.Serializable {
 	private String roleId;
 
 	@Column(name = "status")
-	private String status;
+	private String status = "REGISTERED";
 
 	@Column(name = "createdate")
 	@Basic

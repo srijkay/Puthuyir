@@ -99,21 +99,37 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
 	ON UPDATE CASCADE
 );
 
+DROP TABLE IF EXISTS `revamp_db`.`project`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`project`(
+	`project_id`INT NOT NULL AUTO_INCREMENT,
+    `school_id` INT NOT NULL,
+    `estimate` INT,
+    `collected_amount` INT,
+    `project_status`VARCHAR(45) NOT NULL,
+    `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`project_id`),
+    CONSTRAINT `revamp_db`.`project`.`school_id`
+    FOREIGN KEY (`school_id`)
+    REFERENCES `revamp_db`.`school` (`school_id`)
+   
+);
+
 
 DROP TABLE IF EXISTS `revamp_db`.`requirement`;
 
 CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
 	`requirement_id`INT NOT NULL AUTO_INCREMENT,
-	`school_id` INT NOT NULL,
+    `project_id` INT NOT NULL,
 	`reqtype` varchar(45) NOT NULL,
     `assettype` varchar(45) NOT NULL,
     `assetname` varchar(45) NOT NULL,    
     `quantity` INT NOT NULL,
     `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`requirement_id`),
-	CONSTRAINT `revamp_db`.`requirement`.`school_id`
-	FOREIGN KEY (`school_id`)
-	REFERENCES `revamp_db`.`school` (`school_id`)
+	CONSTRAINT `revamp_db`.`requirement`.`project_id`
+	FOREIGN KEY (`project_id`)
+	REFERENCES `revamp_db`.`project` (`project_id`)
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
 );
@@ -133,9 +149,9 @@ CREATE TABLE IF NOT EXISTS revamp_db.user(
   `firstname` varchar(45) NOT NULL,
   `lastname` varchar(45) NOT NULL,
   `status` varchar(45) DEFAULT 'REGISTERED',
-  `addressid`INT NOT NULL,
+  `addressid`INT,
   `roleid` varchar(45) NOT NULL,
-  `identityproof` INT NOT NULL,
+  `identityproof` INT,
   `phonenumber` varchar(45) DEFAULT NULL,
   `emailaddress` varchar(45) DEFAULT NULL,
   `createdate` datetime(6) DEFAULT NULL,
@@ -183,6 +199,31 @@ CREATE TABLE IF NOT EXISTS revamp_db.lookup(
     REFERENCES `revamp_db`.`lookup` (`field`,`key`)
     
 );
+
+
+
+
+
+DROP TABLE IF EXISTS `revamp_db`.`donation`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`donation`(
+	`donation_id`INT NOT NULL AUTO_INCREMENT,
+    `project_id` INT NOT NULL,
+    `donor_id` bigint(20) NOT NULL,
+	`payment_mode`VARCHAR(45) NOT NULL,
+    `amount` INT NOT NULL,
+    `payment_status`VARCHAR(45) NOT NULL,
+    `createdate` datetime(6) DEFAULT NULL,
+    PRIMARY KEY (`donation_id`),
+    CONSTRAINT `revamp_db`.`donation`.`school_id`
+    FOREIGN KEY (`project_id`)
+    REFERENCES `revamp_db`.`project` (`project_id`),
+    CONSTRAINT `revamp_db`.`donation`.`donor_id`
+    FOREIGN KEY (`donor_id`)
+    REFERENCES `revamp_db`.`user` (`userid`)
+	
+);
+
 
 
 /********************************************************
@@ -556,6 +597,34 @@ null,
 null);
 
 
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('paymentmode',
+'creditcard',
+'Credit Card',
+null,
+null);
+
+INSERT INTO `revamp_db`.`lookup`
+(`field`,
+`key`,
+`value`,
+`parent_field`,
+`parent_key`)
+VALUES
+('paymentmode',
+'debitcard',
+'Debit Card',
+null,
+null);
+
+
+
 
 
 
@@ -580,6 +649,11 @@ values ('beneficiary', 'Beneficiary', '');
 insert into revamp_db.role
 (roleid, rolename, accesslevel) 
 values ('approver','Approver','');
+
+insert into revamp_db.role
+(roleid, rolename, accesslevel) 
+values ('donor','Donor','');
+
 
 
 
