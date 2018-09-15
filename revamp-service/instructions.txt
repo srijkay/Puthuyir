@@ -4,3 +4,5 @@
 4. mvn clean compile install
 5. copy .war from /target folder to tomcat webapps
 6. start tomcat
+
+
