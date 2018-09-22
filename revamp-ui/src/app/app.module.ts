@@ -7,12 +7,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { RegisterSchoolComponent } from './register-school/register-school.component';
 import { SchoolService } from './services/school.service';
+import { UserService } from './services/user.service';
+import { CommonService } from './services/common.service';
 import { NewlyAddedSchoolsComponent } from './newly-added-schools/newly-added-schools.component';
+import { RegisterUserComponent } from './register-user/register-user.component';
 
 
 const appRoutes: Routes = [
   { path: 'home', component: AppComponent },
   { path: 'registerschool', component: RegisterSchoolComponent },
+  { path: 'registeruser', component: RegisterUserComponent },
   { path: 'newlyaddedschools', component: NewlyAddedSchoolsComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ]
@@ -20,7 +24,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     RegisterSchoolComponent,
-    NewlyAddedSchoolsComponent
+    NewlyAddedSchoolsComponent,
+    RegisterUserComponent
     
   ],
   imports: [
@@ -29,7 +34,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [SchoolService],
+  providers: [SchoolService,UserService,CommonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

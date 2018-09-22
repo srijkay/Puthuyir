@@ -1,7 +1,7 @@
 package org.revamp.core.service;
 
 import org.revamp.core.dao.ImageDAO;
-import org.revamp.core.model.Image;
+import org.revamp.core.model.SchoolImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,11 +14,11 @@ public class ImageServiceImpl implements ImageService {
 	private ImageDAO imageDAO;
 
 	@Transactional
-	public long save(Image image) {
+	public long save(SchoolImage image) {
 		return imageDAO.save(image);
 	}
 
-	public Image get(long id) {
+	public SchoolImage get(long id) {
 		return imageDAO.get(id);
 	}
 

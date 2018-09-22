@@ -1,11 +1,11 @@
 package org.revamp.core.service;
 
-import org.revamp.core.model.Image;
+import org.revamp.core.model.SchoolImage;
 
 public interface ImageService {
 
-	long save(Image image);
+	long save(SchoolImage image);
 
-	Image get(long id);
+	SchoolImage get(long id);
 	
 }

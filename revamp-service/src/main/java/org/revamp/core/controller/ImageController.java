@@ -2,7 +2,7 @@ package org.revamp.core.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.revamp.core.model.Image;
+import org.revamp.core.model.SchoolImage;
 import org.revamp.core.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +27,11 @@ public class ImageController {
 		if (fileUpload != null && fileUpload.length > 0) {
 			for (CommonsMultipartFile aFile : fileUpload) {
 
-				Image uploadFile = new Image();
-				uploadFile.setImage(aFile.getBytes());
+				SchoolImage uploadFile = new SchoolImage();
+				//uploadFile.setImage(aFile.getBytes());
 				long id = imageService.save(uploadFile);
 				uploadFile.setImageId(id);
-				uploadFile.setImage(null);
+				//uploadFile.setImage(null);
 				return ResponseEntity.ok().body(uploadFile);
 			}
 		}
@@ -41,8 +41,8 @@ public class ImageController {
 
 	/*---Get a image by id---*/
 	@GetMapping("/image/{id}")
-	public ResponseEntity<Image> get(@PathVariable("id") long imageId) {
-		Image image = imageService.get(imageId);
+	public ResponseEntity<SchoolImage> get(@PathVariable("id") long imageId) {
+		SchoolImage image = imageService.get(imageId);
 		return ResponseEntity.ok().body(image);
 	}
 

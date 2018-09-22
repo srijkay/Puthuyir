@@ -17,6 +17,58 @@
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".add-row").click(function(){
+            var projType = $("#projType").val();
+            var asstType = $("#asstType").val();
+            var asstName = $("#asstName").val();
+            var qty = $("#qty").val();
+            var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + projType + "</td><td>" + asstType + "</td><td>" + asstName + "</td><td>" + qty + "</td></tr>";
+            $("table tbody").append(markup);
+        });
+
+        // Find and remove selected table rows
+        $(".delete-row").click(function(){
+            $("table tbody").find('input[name="record"]').each(function(){
+            	if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+            });
+        });
+
+        $('#asstType').change(function(){
+          if($('#asstType').val() === 'Other')
+             {
+             $('#other').show();
+             }
+          else
+             {
+             $('#other').hide();
+             }
+          });
+
+          $('#asstName').change(function(){
+            if($('#asstName').val() === 'OtherName')
+               {
+               $('#otherName').show();
+               }
+            else
+               {
+               $('#otherName').hide();
+               }
+            });
+
+    });
+
+
+
+
+</script>
+
 </head>
 <body>
 	<!--header-->
@@ -72,151 +124,362 @@
 
 
                           <legend>Provide school details along with requirements</legend>
+
+                          <div class="tabbable" style="margin-bottom: 9px;">
+                                                    <ul class="nav nav-tabs">
+                                                      <li class="active">
+                                                      <li class="active"><a href="#1" data-toggle="tab">Add School</a></li>
+                                                      <li><a href="#2" data-toggle="tab">Add Contacts</a></li>
+                                                      <li><a href="#3" data-toggle="tab">Add Address</a></li>
+                                                      <li><a href="#4" data-toggle="tab">Add Requirements</a></li>
+                                                      <li><a href="#5" data-toggle="tab">Upload Pictures</a></li>
+                                                      <li><a href="#6" data-toggle="tab">Edit Requirements</a></li>
+                                                      </ul>
+
+                        <div class="tab-content">
+                        <div class="tab-pane active" id="1">
+
                           <div class="control-group">
-                            <label class="control-label" for="input01">School  Name</label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
+          <label class="control-label" for="input01">School  Name</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" id="input01">
+           </div>
 
-                          </div>
-						<div class="control-group">
-                            <label class="control-label" for="input01">Headmaster Name</label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01" placeholder="Get name from user id">
-                             </div>
+        </div>
+
+
+
+                <div class="control-group">
+                  <label class="control-label" for="multiSelect">Select School Type</label>
+                  <div class="controls">
+                    <select multiple="multiple" id="multiSelect">
+                      <option>Nursery</option>
+        <option>Primary</option>
+                      <option>Middle School</option>
+                      <option>Secondary School</option>
+                      <option>Higher Secondary School</option>
+
+        </select>
+                  </div>
+                </div>
+
+
+
+<div class="control-group">
+          <label class="control-label" for="input01">Number of Students</label>
+          <div class="controls">
+            <input type="text" class="input-small" id="input01">
+           </div>
+      </div>
+
+<div class="control-group">
+          <label class="control-label" for="input01">Number of Teachers</label>
+          <div class="controls">
+            <input type="text" class="input-small" id="input01">
+           </div>
+      </div>
+
+
+
                         </div>
+                        <div class="tab-pane" id="2">
+                        <div class="row">
 
-						<div class="control-group">
-                            <label class="control-label" for="input01">Headmaster Email </label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
-                        </div>
+  <div class="span10">
 
-							<div class="control-group">
-                            <label class="control-label" for="input01">Number of Students</label>
-                            <div class="controls">
-                              <input type="text" class="input-small" id="input01">
-                             </div>
-                        </div>
+    <div class="control-group">
+              <label class="control-label" for="input01">Primary Contact</label>
+              <div class="controls">
+                <input type="text" class="input-xlarge" id="input01" placeholder="Get name from user id">
+               </div>
+          </div>
 
-							<div class="control-group">
-                            <label class="control-label" for="input01">Number of Teachers</label>
-                            <div class="controls">
-                              <input type="text" class="input-small" id="input01">
-                             </div>
-                        </div>
+          <div class="control-group">
+                    <label class="control-label" for="input01">Primary Contact Number </label>
+                    <div class="controls">
+                      <input type="text" class="input-xlarge" id="input01" placeholder="Get Phone Number">
+                     </div>
+                </div>
+
+    <div class="control-group">
+              <label class="control-label" for="input01">Primary Contact Email </label>
+              <div class="controls">
+                <input type="text" class="input-xlarge" id="input01" placeholder="Get Email">
+               </div>
+          </div>
 
 
-						<div class="control-group">
-                            <label class="control-label" for="input01">School Address </label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
-                        </div>
-							<div class="control-group">
-                            <label class="control-label" for="input01">Street Name</label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
-                        </div>
+          <div class="control-group">
+                    <label class="control-label" for="input01">Secondary Contact</label>
+                    <div class="controls">
+                      <input type="text" class="input-xlarge" id="input01" placeholder="Enter name">
+                     </div>
+                </div>
 
-							<div class="control-group">
-                            <label class="control-label" for="input01">Town/City</label>
-                            <div class="controls">
-                              <input type="text" class="input-xlarge" id="input01">
-                             </div>
-                        </div>
+          <div class="control-group">
+                    <label class="control-label" for="input01">Secondary Contact Email </label>
+                    <div class="controls">
+                      <input type="text" class="input-xlarge" id="input01">
+                     </div>
+                </div>
 
-                         <!-- <div class="control-group">
-                            <label class="control-label" for="optionsCheckbox">Checkbox</label>
-                            <div class="controls">
-                              <label class="checkbox">
-                                <input type="checkbox" id="optionsCheckbox" value="option1">
-                                Option one is this and that&mdash;be sure to include why it's great
-                              </label>
+                <div class="control-group">
+                          <label class="control-label" for="input01">Secondary Contact Phone Number </label>
+                          <div class="controls">
+                            <input type="text" class="input-xlarge" id="input01">
+                           </div>
+                      </div>
+
+  </div>
+  </div>
+  </div>
+
+  <div class="tab-pane" id="3">
+  <div class="row">
+
+<div class="span10">
+
+  <div class="control-group">
+            <label class="control-label" for="input01">School Address </label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" id="input01">
+             </div>
+        </div>
+  <div class="control-group">
+            <label class="control-label" for="input01">Street Name</label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" id="input01">
+             </div>
+        </div>
+
+  <div class="control-group">
+            <label class="control-label" for="input01">Town/City</label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" id="input01">
+             </div>
+        </div>
+
+         <!-- <div class="control-group">
+            <label class="control-label" for="optionsCheckbox">Checkbox</label>
+            <div class="controls">
+              <label class="checkbox">
+                <input type="checkbox" id="optionsCheckbox" value="option1">
+                Option one is this and that&mdash;be sure to include why it's great
+              </label>
+            </div>
+          </div> -->
+          <div class="control-group">
+            <label class="control-label" for="select01">Select District</label>
+            <div class="controls">
+              <select id="select01">
+                <option>Cuddalore</option>
+                <option>Kanchipuram</option>
+                <option>Chengalpattu</option>
+                <option>Thiruvanamalai</option>
+                <option>Villupuram</option>
+              </select>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="select01">Select State</label>
+            <div class="controls">
+              <select id="select01">
+                <option>Tamilnadu</option>
+                </select>
+            </div>
+          </div>
+
+</div>
+</div>
+</div>
+
+<div class="tab-pane" id="4">
+<div class="row">
+
+<div class="span10">
+
+
+
+<form>
+
+		 <div class="control-group">
+            <label class="control-label" for="select01">Requirement Type</label>
+            <div class="controls">
+              <select id="projType">
+                <option>Select</option>
+                <option>New</option>
+                <option>Maintainence </option>
+              </select>
+            </div>
+          </div>
+
+		  <div class="control-group">
+            <label class="control-label" for="select01">Asset Type</label>
+            <div class="controls">
+              <select id="asstType">
+                <option selected>Select</option>
+                <option>Sports</option>
+                <option>Infrastructure</option>
+                <option value="Other">Others</option>
+              </select>
+            </div>
+        </div>
+
+            <div class="control-group">
+                  <div class="controls">
+                    <input type="text" name="other" class="input-xlarge" placeholder="Enter Asset Type here" id="other" style="display: none;"/>
+                   </div>
+              </div>
+
+		  <div class="control-group">
+            <label class="control-label" for="select01">Asset Name</label>
+            <div class="controls">
+              <select id="asstName">
+                <option>Select</option>
+                <option>Football</option>
+                <option>Bathroom</option>
+                <option value="OtherName">Others</option>
+              </select>
+            </div>
+            </div>
+            <div class="control-group">
+                  <div class="controls">
+                    <input type="text" name="other" class="input-xlarge" placeholder="Enter Asset Name here" id="otherName" style="display: none;"/>
+                   </div>
+              </div>
+
+
+		  <div class="control-group">
+            <label class="control-label" for="input01">Quantity</label>
+            <div class="controls">
+              <input type="text" class="input-small" id="qty">
+             </div>
+        </div>
+		<div class="control-group">
+    	<input type="button" class="add-row" value="Add Requirement">
+		</div>
+    </form>
+
+ <div class="tab-content">
+	<table class="table table-bordered table-striped">
+                                                      <thead>
+                                                          <tr>
+                                                            <th>Select</th>
+                                                            <th>Requirement Type</th>
+                                                            <th>Asset Type</th>
+                                                            <th>Asset Name</th>
+                                                            <th>Quantity</th>
+
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+
+
+
+                                                        </tbody>
+</table>
+		</div>
+    <div class="control-group">
+<button type="button" class="delete-row">Delete Requirement</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="tab-pane" id="5">
+<div class="row">
+<div class="span10">
+  <div class="control-group">
+        <label class="control-label" for="fileInput">Upload proof of identity of the school </label>
+        <div class="controls">
+          <input class="input-file" id="fileInput" type="file">
+        </div>
+  </div>
+  <div class="control-group">
+      <label class="control-label" for="textarea">Comments / Message to Trust</label>
+      <div class="controls">
+        <textarea class="input-xlarge" id="textarea" rows="3"></textarea>
+      </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<div class="tab-pane" id="6">
+<div class="row">
+
+<div class="span10">
+
+  <div class="control-group">
+         <label class="control-label" for="select01">Requirement Type</label>
+         <div class="controls">
+           <select id="projType" disabled>
+             <option>New</option>
+             </select>
+         </div>
+       </div>
+
+  <div class="control-group">
+
+
+                  <table class="table table-bordered table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                      <th>S.No</th>
+                                                                      <th>Project Type</th>
+                                                                      <th>Asset Type</th>
+                                                                      <th>Asset Name</th>
+                                                                      <th>Quantity</th>
+
+                                                                    </tr>
+                                                                  </thead>
+                                                                  <tbody>
+                                                                    <tr>
+                                                                     <td><button type="button" class="dark_btn">Edit</button>
+                                                                     </td>
+                                                                      <td>New</td>
+                                                                      <td>Sports</td>
+                                                                      <td>Football</td>
+          															                              <td>10</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                     <td><button type="button" class="dark_btn">Edit</button>
+                                                                     </td>
+                                                                      <td>New</td>
+                                                                      <td>Infrastructure</td>
+                                                                      <td>Chairs</td>
+                                                                      <td>10</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                     <td><button type="button" class="dark_btn">Edit</button>
+                                                                     </td>
+                                                                      <td>New</td>
+                                                                      <td>Infrastructure</td>
+                                                                      <td>Bathroom</td>
+                                                                      <td>5</td>
+                                                                    </tr>
+
+
+                                                                  </tbody>
+                </table>
+
                             </div>
-                          </div> -->
-                          <div class="control-group">
-                            <label class="control-label" for="select01">Select District</label>
-                            <div class="controls">
-                              <select id="select01">
-                                <option>Cuddalore</option>
-                                <option>Kanchipuram</option>
-                                <option>Chengalpattu</option>
-                                <option>Thiruvanamalai</option>
-                                <option>Villupuram</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="control-group">
-                            <label class="control-label" for="multiSelect">Select School Type</label>
-                            <div class="controls">
-                              <select multiple="multiple" id="multiSelect">
-                                <option>Nursery</option>
-								<option>Primary</option>
-                                <option>Middle School</option>
-                                <option>Secondary School</option>
-                                <option>Higher Secondary School</option>
-
-								</select>
-                            </div>
-                          </div>
-
-                          <div class="control-group">
-                            <label class="control-label" for="select01">Select Requirement Type</label>
-                            <div class="controls">
-                              <select id="select01">
-                                <option>Select Type</option>
-                                <option>New Requirement</option>
-                                <option>Maintainence</option>
-                              </select>
-                            </div>
-                          </div>
+</div>
+</div>
+</div>
 
 
-                          <div class="control-group">
-                            <label class="control-label" for="fileInput">Upload proof of identity of the school </label>
-                            <div class="controls">
-                              <input class="input-file" id="fileInput" type="file">
-                            </div>
-                          </div>
 
-                          <div class="control-group">
-                                        <label class="control-label" for="input01">1st requirement</label>
-                                        <div class="controls">
-                                          <input type="text" class="input-xlarge" id="input01">
-                                         </div>
-                                    </div>
-                                    <div class="control-group">
-                                                  <label class="control-label" for="input01">2nd Requirement</label>
-                                                  <div class="controls">
-                                                    <input type="text" class="input-xlarge" id="input01">
-                                                   </div>
-                                              </div>
-                                              <div class="control-group">
-                                                            <label class="control-label" for="input01">3rd Requirement</label>
-                                                            <div class="controls">
-                                                              <input type="text" class="input-xlarge" id="input01">
-                                                             </div>
-                                                        </div>
                           <div class="form-actions">
                             <button type="submit" class="btn send_btn">Submit</button>
                             <button class="btn dark_btn">Cancel</button>
                           </div>
                         </fieldset>
                       </form>
-
-                    </div>
-                    <div class="span4">
-                      <h3>What we do</h3>
-                      <p>On successful registration, we will validate the details provided through a volunteer assigned to your school</p>
-                      <ul>
-                        <li>We will send you the details of volunteer through email/post. Please provide access to Volunteer with valid identity</li>
-                        </ul>
-                      <hr>
-                      <h3>What's Next</h3>
-                      <p>After submission of your information, email will be sent to your with School Registraion details within 7-10 working days</p>
                     </div>
                   </div>
                 </section>

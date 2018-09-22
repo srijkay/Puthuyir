@@ -2,16 +2,14 @@ package org.revamp.core.dao;
 
 import java.util.List;
 
-import org.revamp.core.model.City;
-import org.revamp.core.model.District;
-import org.revamp.core.model.State;
+import org.revamp.core.model.Lookup;
+import org.revamp.core.model.Role;
 
 public interface LookupDAO {
 
-	List<State> getStates();
+	List<Role> getRoles();
 	
-	List<District> getDistricts(String stateId);
+	List<Lookup> lookup(String field);
 	
-	List<City> getCities(String districtId);
-	
+	List<Lookup> lookupByParent(String field, String parentField, String parentKey);
 }

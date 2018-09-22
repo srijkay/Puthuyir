@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SchoolService } from '../services/school.service';
+import { CommonService } from '../services/common.service';
 import { State } from '../models/state';
 import { District } from '../models/district';
 import { Image } from '../models/image';
@@ -12,7 +13,7 @@ import { City } from '../models/city';
   selector: 'app-register-school',
   templateUrl: './register-school.component.html',
   styleUrls: ['./register-school.component.css'],
-  providers: [SchoolService]
+  providers: [SchoolService,CommonService]
 })
 export class RegisterSchoolComponent implements OnInit {
 
@@ -24,7 +25,7 @@ export class RegisterSchoolComponent implements OnInit {
 
 
   constructor(
-    private schoolService: SchoolService
+    private schoolService: SchoolService,private commonService: CommonService
   ) {
   }
 
@@ -36,7 +37,7 @@ export class RegisterSchoolComponent implements OnInit {
    
 
 
-    this.schoolService
+    this.commonService
       .getAllStates()
       .subscribe(
         (states) => {
@@ -49,7 +50,7 @@ export class RegisterSchoolComponent implements OnInit {
 
   onStateChange(stateValue) {
     console.log(stateValue);
-    this.schoolService
+    this.commonService
       .getDistrictsByState(stateValue)
       .subscribe(
         (districts) => {
@@ -69,7 +70,7 @@ export class RegisterSchoolComponent implements OnInit {
 
       console.log(file);
 
-      this.schoolService
+      this.commonService
         .saveImage(file)
         .subscribe(
           (image) => {

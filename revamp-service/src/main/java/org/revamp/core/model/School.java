@@ -1,12 +1,39 @@
 package org.revamp.core.model;
 
-import org.hibernate.annotations.Proxy;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Proxy;
+import org.revamp.core.web.util.SchoolSerializer;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "school")
 @Proxy(lazy = false)
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonSerialize(using = SchoolSerializer.class)
 public class School implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8607633702511344481L;
@@ -16,33 +43,68 @@ public class School implements java.io.Serializable {
 	@Column(name = "school_id", nullable = false)
 	private long schoolId;
 
-	@Column(name = "school_name")
-	private String schoolName;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "school_info_id")
+	private SchoolInfo schoolInfo;
 
-	@Column(name = "school_type")
-	private String schoolType;
-
-	@Column(name = "head_master_name")
-	private String headMasterName;
-
-	@Column(name = "head_master_email")
-	private String headMasterEmail;
-
-	@Column(name = "number_of_students")
-	private int numberOfStudents;
-
-	@Column(name = "number_of_teachers")
-	private int numberOfTeachers;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "contacts_id")
+	private Contacts contacts;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	@Column(name = "proof_of_identity_id")
-	private long proofOfIdentity;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "school", cascade = CascadeType.ALL)
+	private Set<Requirement> requirements;
 
-	@Column(name = "requirements")
-	private String requirements;
+	@Column(name = "date_created")
+	@Basic
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateCreated;
+
+	@Column(name = "school_status")
+	private String status = "REGISTERED";
+
+	@JsonProperty("proofOfId")
+	@Transient
+	private ProofOfId proofOfId;
+	
+	public ProofOfId getProofOfId() {
+		return proofOfId;
+	}
+
+	public void setProofOfId(ProofOfId proofOfId) {
+		this.proofOfId = proofOfId;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "school", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Set<SchoolImage> schoolImages;
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public Set<SchoolImage> getSchoolImages() {
+		if(schoolImages == null) {
+			schoolImages = new HashSet<SchoolImage>();
+		}
+		return schoolImages;
+	}
+
+	public void setSchoolImages(Set<SchoolImage> schoolImages) {
+		this.schoolImages = schoolImages;
+	}
+
+	@PrePersist
+	protected void onCreate() {
+		dateCreated = new Date();
+	}
 
 	public long getSchoolId() {
 		return schoolId;
@@ -52,52 +114,20 @@ public class School implements java.io.Serializable {
 		this.schoolId = schoolId;
 	}
 
-	public String getSchoolName() {
-		return schoolName;
+	public SchoolInfo getSchoolInfo() {
+		return schoolInfo;
 	}
 
-	public void setSchoolName(String schoolName) {
-		this.schoolName = schoolName;
+	public void setSchoolInfo(SchoolInfo schoolInfo) {
+		this.schoolInfo = schoolInfo;
 	}
 
-	public String getSchoolType() {
-		return schoolType;
+	public Contacts getContacts() {
+		return contacts;
 	}
 
-	public void setSchoolType(String schoolType) {
-		this.schoolType = schoolType;
-	}
-
-	public String getHeadMasterName() {
-		return headMasterName;
-	}
-
-	public void setHeadMasterName(String headMasterName) {
-		this.headMasterName = headMasterName;
-	}
-
-	public String getHeadMasterEmail() {
-		return headMasterEmail;
-	}
-
-	public void setHeadMasterEmail(String headMasterEmail) {
-		this.headMasterEmail = headMasterEmail;
-	}
-
-	public int getNumberOfStudents() {
-		return numberOfStudents;
-	}
-
-	public void setNumberOfStudents(int numberOfStudents) {
-		this.numberOfStudents = numberOfStudents;
-	}
-
-	public int getNumberOfTeachers() {
-		return numberOfTeachers;
-	}
-
-	public void setNumberOfTeachers(int numberOfTeachers) {
-		this.numberOfTeachers = numberOfTeachers;
+	public void setContacts(Contacts contacts) {
+		this.contacts = contacts;
 	}
 
 	public Address getAddress() {
@@ -108,31 +138,38 @@ public class School implements java.io.Serializable {
 		this.address = address;
 	}
 
-	public long getProofOfIdentity() {
-		return proofOfIdentity;
-	}
-
-	public void setProofOfIdentity(long proofOfIdentity) {
-		this.proofOfIdentity = proofOfIdentity;
-	}
-
-	public String getRequirements() {
+	public Set<Requirement> getRequirements() {
 		return requirements;
 	}
 
-	public void setRequirements(String requirements) {
+	public void setRequirements(Set<Requirement> requirements) {
 		this.requirements = requirements;
+	}
+
+	public Date getDateAdded() {
+		return dateCreated;
+	}
+
+	public void setDateAdded(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
-		return "School [schoolId=" + schoolId + ", schoolName=" + schoolName
-				+ ", schoolType=" + schoolType + ", headMasterName="
-				+ headMasterName + ", headMasterEmail=" + headMasterEmail
-				+ ", numberOfStudents=" + numberOfStudents
-				+ ", numberOfTeachers=" + numberOfTeachers + ", address="
-				+ address + ", proofOfIdentity=" + proofOfIdentity
-				+ ", requirements=" + requirements + "]";
+		return "School [schoolId=" + schoolId + ", schoolInfo=" + schoolInfo + ", contacts=" + contacts + ", address="
+				+ address + ", requirements=" + requirements + ", dateCreated=" + dateCreated + ", status=" + status
+				+ ", proofOfId=" + proofOfId + ", schoolImages=" + schoolImages + "]";
 	}
-
+	
+	
+	
+	
 }
