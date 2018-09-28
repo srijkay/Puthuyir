@@ -20,7 +20,7 @@
   </div>
 
   <div class="container">
-  <form [formGroup]="schoolRegForm" enctype="multipart/form-data" novalidate (ngSubmit)="addSchoolRegForm()">
+  <form [formGroup]="schoolRegForm" enctype="multipart/form-data" novalidate (ngSubmit)="showSchoolRegViewPage()">
       <ngb-tabset class="tabset1">
           <ngb-tab title="School Information">
             <ng-template ngbTabContent>
@@ -242,7 +242,7 @@
                       <button  type="button" class="btn btn-primary btn-sm">Delete Requirement</button>
                     </div>
               
-                    <table border="1" *ngIf="(schoolRegForm.get('requirements').length > 0)">
+                    <table class="table table-bordered" *ngIf="(schoolRegForm.get('requirements').length > 0)">
                       <tr>
                         <th>Select</th>
                         <th>Requirement Type</th>
@@ -270,7 +270,6 @@
               <ng-template ngbTabContent>
           
                 <fieldset formGroupName="proofOfId">
-                  
                       <div class="form-group">
                         <label class="control-label">Upload proof of identity of the school</label>
                         <input type="file" class="btn btn-sm btn-default" id="image" (change)="onFileChange($event)" #fileInput multiple>
