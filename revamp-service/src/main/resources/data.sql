@@ -1,3 +1,11 @@
+/*Address*/
+INSERT INTO `revamp_db`.`address` (`address_id`, `address_line_1`, `address_line_2`, `city_id`, `pin_code`) 
+VALUES ('1', 'test', 'test', 'india', '767698'),
+('2', 'test2', 'test2', 'USA', '767698'),
+('3', 'test3', 'test3', 'England', '767698');
+
+
+
 /*Role*/
 insert into revamp_db.role
 (roleid, rolename, accesslevel) 
