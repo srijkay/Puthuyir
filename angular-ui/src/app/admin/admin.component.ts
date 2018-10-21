@@ -12,6 +12,5 @@ export class AdminComponent  {
 
   constructor(private appDataService: AppDataService) {
   }
-
   
 }
