@@ -1,3 +1,12 @@
+/*Role*/
+insert into revamp_db.role
+(roleid, rolename, accesslevel) 
+values ('admin','Admin /Super user', ''),
+ ('sponsor','Sponsor', ''),
+ ('volunteer', 'Volunteer',''),
+ ('beneficiary', 'Beneficiary', ''),
+ ('approver','Approver','');
+
 /* User */
 INSERT INTO `revamp_db`.`user` (`userid`, `firstname`, `lastname`, `addressid`, `roleid`, `emailaddress`, `password`)
 VALUES ('1', 'Kamalkanth', 'Durairaj', '1', 'admin', 'dkamalkanth@gmail.com', 'admin'),
@@ -255,22 +264,4 @@ null);
 
 
 
-insert into revamp_db.role
-(roleid, rolename, accesslevel) 
-values ('admin','Admin /Super user', '');
 
-insert into revamp_db.role
-(roleid, rolename, accesslevel) 
-values ('sponsor','Sponsor', '');
-
-insert into revamp_db.role
-(roleid, rolename, accesslevel) 
-values ('volunteer', 'Volunteer','');
-
-insert into revamp_db.role
-(roleid, rolename, accesslevel) 
-values ('beneficiary', 'Beneficiary', '');
-
-insert into revamp_db.role
-(roleid, rolename, accesslevel) 
-values ('approver','Approver','');
