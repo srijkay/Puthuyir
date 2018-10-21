@@ -8,8 +8,6 @@ import {AppDataService} from '../services/app-data.service';
   //styleUrls: ['./admin.component.css']
 })
 export class AdminComponent  {
-
-
   constructor(private appDataService: AppDataService) {
   }
   
