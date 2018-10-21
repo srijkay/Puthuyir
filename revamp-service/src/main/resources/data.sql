@@ -1,9 +1,8 @@
 /* User */
-insert into `revamp_db`.`user` (password, first_name, last_name, email, company, phone, address1, address2, country, postal, role, is_active, is_blocked, security_provider_id, default_customer_id, secret_question, secret_answer, enable_beta_testing, enable_renewal) values
-( 'kanth'     , 'Kamalkanth'  , 'Durairaj', 'dkamalkanth@gmail.com'    , 'Abshire Inc', '7-(740)701-4547', '80429 Garrison Crossing', '4967'               , 'USA'        , '64890', 'USER' , 1, 0, 10001, 20000, 'Diverse'       , 'Yellow' , 0, 0),
-('king'    , 'Muthusamy'  , 'Ganapathy' , 'mathth@gmail.com'     , 'Glover, Adams and Bins', '383-(779)851-3208', '30874 Graceland Terrace', '99152' , 'USA'        , '51065', 'ADMIN', 1, 0, 10001, 20000, 'knowledge base', 'Mauv'   , 1, 0),
-('uk'     , 'Jagan' , 'UK', 'testjagan@gmail.com', 'Rippin, Osinski and Beatty', '84-(228)809-9998', '0118 Burrows Plaza', '496'     , 'USA'        , '94086', 'ADMIN' , 1, 0, 10001, 20000, 'Innovative'    , 'Turquoise', 1, 1),
-('us'  , 'Ramji'     , 'USA'   , 'ramji123@gmail.com'         , 'Altenwerth, Fisher and Heidenreich', '30-(772)268-8227', '98 Loeprich Way', '447', 'Greece'     , null   , 'BENEFICIARY' , 0, 0, 10001, 20001, 'capacity'      , 'Fuscia' , 1, 1);
+INSERT INTO `revamp_db`.`user` (`userid`, `firstname`, `lastname`, `addressid`, `roleid`, `emailaddress`, `password`)
+VALUES ('1', 'Kamalkanth', 'Durairaj', '1', 'admin', 'dkamalkanth@gmail.com', 'admin'),
+('2', 'Jagan', 'Lastname', '2', 'beneficiary', 'jagan@gmail.com', 'jagan'),
+('3', 'MuthySamy', 'Ganapathy', '1', 'admin', 'mapmuthu@gmail.com', 'muthu');
 
 
 /********************************************************
