@@ -11,6 +11,7 @@ import { SchoolService } from './school.service';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SchoolListComponent } from './school-list/school-list.component';
+import { ViewShoolRegistrationComponent } from './view-shool-registration/view-shool-registration.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SchoolListComponent } from './school-list/school-list.component';
     AppComponent,
     SchoolRegistrationComponent,
     PageNotFoundComponent,
-    SchoolListComponent
+    SchoolListComponent,
+    ViewShoolRegistrationComponent
     ],
   imports: [
     BrowserModule,

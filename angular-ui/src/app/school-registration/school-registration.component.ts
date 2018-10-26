@@ -1,10 +1,10 @@
-import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
-import {FormGroup, FormControl, Validators, FormBuilder, FormArray} from '@angular/forms';
-import {LookUpService} from '../look-up.service';
-import {SchoolService} from '../school.service';
-import {LookUps} from '../model/lookUps';
-import {School} from '../model/school';
-import {Router} from "@angular/router";
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { LookUpService } from '../look-up.service';
+import { SchoolService } from '../school.service';
+import { LookUps } from '../model/lookUps';
+import { School } from '../model/school';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-school-registration',
@@ -12,30 +12,31 @@ import {Router} from "@angular/router";
   styleUrls: ['./school-registration.component.css']
 })
 export class SchoolRegistrationComponent implements OnInit {
-  schoolRegForm:FormGroup;
-  schoolInfo:FormGroup;
-  contacts:FormGroup;
-  address:FormGroup;
+  schoolRegForm: FormGroup;
+  schoolInfo: FormGroup;
+  contacts: FormGroup;
+  address: FormGroup;
   requirements: FormArray;
+  tmpRequirements: FormArray;
   requirement: FormGroup;
   proofOfId: FormGroup;
 
   schoolName: FormControl;
   schoolRegNo: FormControl;
   schoolType: FormControl;
-  numberOfStudents:FormControl;
-  numberOfTeachers:FormControl;
+  numberOfStudents: FormControl;
+  numberOfTeachers: FormControl;
 
   priName: FormControl;
   priNum: FormControl;
-  priEmail:FormControl;
+  priEmail: FormControl;
   secName: FormControl;
   secNum: FormControl;
   secEmail: FormControl;
 
-  addressLine1:  FormControl;
-  addressLine2:  FormControl;
-  city:  FormControl;
+  addressLine1: FormControl;
+  addressLine2: FormControl;
+  city: FormControl;
   state: FormControl;
   district: FormControl;
   pinCode: FormControl;
@@ -48,21 +49,23 @@ export class SchoolRegistrationComponent implements OnInit {
   comments: FormControl;
   //image: FormArray;
   image: FormControl;
-  districtsLD:LookUps;
-  reqTypesLD:LookUps;
-  assetTypesLD:LookUps;
-  assetNamesLD:LookUps;
-  statesLD:LookUps;
-  schoolTypesLD:LookUps;
+  districtsLD: LookUps;
+  reqTypesLD: LookUps;
+  assetTypesLD: LookUps;
+  assetNamesLD: LookUps;
+  statesLD: LookUps;
+  schoolTypesLD: LookUps;
 
   loading: boolean = false;
-
-  @ViewChild('fileInput') fileInput: ElementRef;
+  //url = '';
+  //@ViewChild('fileInput') fileInput: ElementRef;
 
 
   constructor(private lookUpService: LookUpService, private schoolService: SchoolService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    this.schoolService.currentSchoolRegForm.subscribe(schoolRegForm => this.schoolRegForm = schoolRegForm);
+
     this.createFormControls();
     this.createForm();
     this.getDistricts();
@@ -110,44 +113,83 @@ export class SchoolRegistrationComponent implements OnInit {
   }
 
   createFormControls() {
-    this.schoolName = new FormControl('asdf',<any>Validators.required);
-    this.schoolRegNo = new FormControl('123123',<any>Validators.required);
-    this.schoolType = new FormControl('primary',Validators.required);
-    this.numberOfStudents = new FormControl('123',Validators.required);
-    this.numberOfTeachers = new FormControl('123',Validators.required);
+    if (!(typeof this.schoolRegForm === 'object')) {
+      this.schoolName = new FormControl('', <any>Validators.required);
+      this.schoolRegNo = new FormControl('', <any>Validators.required);
+      this.schoolType = new FormControl('', Validators.required);
+      this.numberOfStudents = new FormControl('', Validators.required);
+      this.numberOfTeachers = new FormControl('', Validators.required);
 
-    this.priName = new FormControl('tms',Validators.required);
-    this.priNum = new FormControl('123123',Validators.required);
-    this.priEmail = new FormControl('tms@yahoo.com',[
-          Validators.required,
-          Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
-        ]);
-    this.secName = new FormControl();
-    this.secNum =  new FormControl();
-    this.secEmail = new FormControl('',[
-      Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
-    ]) 
+      this.priName = new FormControl('', Validators.required);
+      this.priNum = new FormControl('', Validators.required);
+      this.priEmail = new FormControl('', [
+        Validators.required,
+        Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
+      ]);
+      this.secName = new FormControl();
+      this.secNum = new FormControl();
+      this.secEmail = new FormControl('', [
+        Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
+      ])
 
-    this.addressLine1 =  new FormControl('asdf',Validators.required);
-    this.addressLine2 = new FormControl('asdf',Validators.required);
-    this.city = new FormControl('trichy',Validators.required);
-    this.district = new FormControl('kanchipuram',Validators.required);
-    this.state = new FormControl('TN',Validators.required);
-    this.pinCode = new FormControl('213123',Validators.required);
+      this.addressLine1 = new FormControl('', Validators.required);
+      this.addressLine2 = new FormControl('', Validators.required);
+      this.city = new FormControl('', Validators.required);
+      this.district = new FormControl('', Validators.required);
+      this.state = new FormControl('', Validators.required);
+      this.pinCode = new FormControl('', Validators.required);
 
-    this.reqType =  new FormControl('maintenance',Validators.required);
-    this.assetType = new FormControl('infrastructure',Validators.required);
-    this.assetName = new FormControl('football',Validators.required);
-    this.quantity = new FormControl('1',Validators.required);
+      this.reqType = new FormControl('', Validators.required);
+      this.assetType = new FormControl('', Validators.required);
+      this.assetName = new FormControl('', Validators.required);
+      this.quantity = new FormControl('', Validators.required);
 
-    this.comments = new FormControl('Hello...hru',Validators.required);
-    this.image = new FormControl('',Validators.required);
-  //this.image = new FormArray([]);
-    this.requirements = new FormArray([]);
+      this.comments = new FormControl('', Validators.required);
+      this.image = new FormControl('', Validators.required);
+      //this.image = new FormArray([]);
+      this.requirements = new FormArray([]);
+    } else {
+      this.schoolName = new FormControl(this.schoolRegForm.controls.schoolInfo.value.schoolName, <any>Validators.required);
+      this.schoolRegNo = new FormControl(this.schoolRegForm.controls.schoolInfo.value.schoolRegNo, <any>Validators.required);
+      this.schoolType = new FormControl(this.schoolRegForm.controls.schoolInfo.value.schoolType, Validators.required);
+      this.numberOfStudents = new FormControl(this.schoolRegForm.controls.schoolInfo.value.numberOfStudents, Validators.required);
+      this.numberOfTeachers = new FormControl(this.schoolRegForm.controls.schoolInfo.value.numberOfTeachers, Validators.required);
+
+      this.priName = new FormControl(this.schoolRegForm.controls.contacts.value.priName, Validators.required);
+      this.priNum = new FormControl(this.schoolRegForm.controls.contacts.value.priNum, Validators.required);
+      this.priEmail = new FormControl(this.schoolRegForm.controls.contacts.value.priEmail, [
+        Validators.required,
+        Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
+      ]);
+      this.secName = new FormControl(this.schoolRegForm.controls.contacts.value.secName);
+      this.secNum = new FormControl(this.schoolRegForm.controls.contacts.value.secNum);
+      this.secEmail = new FormControl(this.schoolRegForm.controls.contacts.value.secEmail, [
+        Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
+      ])
+
+      this.addressLine1 = new FormControl(this.schoolRegForm.controls.address.value.addressLine1, Validators.required);
+      this.addressLine2 = new FormControl(this.schoolRegForm.controls.address.value.addressLine2, Validators.required);
+      this.city = new FormControl(this.schoolRegForm.controls.address.value.city, Validators.required);
+      this.district = new FormControl(this.schoolRegForm.controls.address.value.district, Validators.required);
+      this.state = new FormControl(this.schoolRegForm.controls.address.value.state, Validators.required);
+      this.pinCode = new FormControl(this.schoolRegForm.controls.address.value.pinCode, Validators.required);
+
+      this.reqType = new FormControl('', Validators.required);
+      this.assetType = new FormControl('', Validators.required);
+      this.assetName = new FormControl('', Validators.required);
+      this.quantity = new FormControl('', Validators.required);
+
+      this.comments = new FormControl(this.schoolRegForm.controls.proofOfId.value.comments, Validators.required);
+      this.image = new FormControl('', Validators.required);
+      this.requirements = this.schoolRegForm.controls.requirements as FormArray;
+
+    }
+
   }
 
-  
+
   createForm() {
+
     this.schoolRegForm = new FormGroup({
       schoolInfo: new FormGroup({
         schoolName: this.schoolName,
@@ -159,10 +201,10 @@ export class SchoolRegistrationComponent implements OnInit {
       contacts: new FormGroup({
         priName: this.priName,
         priNum: this.priNum,
-        priEmail:this.priEmail,
-        secName:this.secName,
+        priEmail: this.priEmail,
+        secName: this.secName,
         secNum: this.secNum,
-        secEmail: this.secEmail 
+        secEmail: this.secEmail
       }),
       address: new FormGroup({
         addressLine1: this.addressLine1,
@@ -170,56 +212,60 @@ export class SchoolRegistrationComponent implements OnInit {
         city: this.city,
         district: this.district,
         state: this.state,
-        pinCode: this.pinCode 
+        pinCode: this.pinCode
       }),
       requirement: new FormGroup({
         reqType: this.reqType,
         assetType: this.assetType,
-        assetName:this.assetName,
-        quantity:this.quantity 
+        assetName: this.assetName,
+        quantity: this.quantity
       }),
-      requirements : new FormArray([]),
+      requirements: this.requirements,
       proofOfId: new FormGroup({
         comments: this.comments,
-        //image: new FormArray([])
         image: this.image
-       })     
+      })
     });
+
   }
 
   deleteReq(index) {
-    (<FormArray>this.schoolRegForm.controls.requirements).removeAt(index); 
+    (<FormArray>this.schoolRegForm.controls.requirements).removeAt(index);
   }
 
- 
+
   clearFile() {
     this.schoolRegForm.controls.proofOfId.get('image').setValue(null);
     this.schoolRegForm.controls.image.setValue(null);
-    this.fileInput.nativeElement.value = '';
+    //this.fileInput.nativeElement.value = '';
   }
 
   onFileChange(event) {
-    console.log('..onFileChange..'+event.target.files.length);
-    if(event.target.files.length > 0) {
+    if (event.target.files.length > 0) {
       let file = event.target.files[0];
       this.schoolRegForm.controls.proofOfId.get('image').setValue(file);
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); 
+      reader.onload = (event: any) => { 
+        this.schoolService.enterImageUrl(event.target.result);
+      }
     }
   }
 
 
-/*clearFile() {
-  (<FormArray>this.schoolRegForm.controls.proofOfId.get('image')).reset();
-  this.fileInput.nativeElement.value = '';
-}
-onFileChange(event) {
-  console.log('..onFileChange..'+event.target.files.length);
-  for(let i=0; i < event.target.files.length; i++) {
-    let file = event.target.files[i];
-    (<FormArray>this.schoolRegForm.controls.proofOfId.get('image')).push(new FormGroup({image:new FormControl(file)}));
-    console.log((<FormArray>this.schoolRegForm.controls.proofOfId.get('image')).length);  
+  /*clearFile() {
+    (<FormArray>this.schoolRegForm.controls.proofOfId.get('image')).reset();
+    this.fileInput.nativeElement.value = '';
   }
-  
-}*/
+  onFileChange(event) {
+    console.log('..onFileChange..'+event.target.files.length);
+    for(let i=0; i < event.target.files.length; i++) {
+      let file = event.target.files[i];
+      (<FormArray>this.schoolRegForm.controls.proofOfId.get('image')).push(new FormGroup({image:new FormControl(file)}));
+      console.log((<FormArray>this.schoolRegForm.controls.proofOfId.get('image')).length);  
+    }
+    
+  }*/
 
 
   addRequirement() {
@@ -227,10 +273,14 @@ onFileChange(event) {
       reqType: new FormControl(this.schoolRegForm.controls.requirement.value.reqType),
       assetType: new FormControl(this.schoolRegForm.controls.requirement.value.assetType),
       assetName: new FormControl(this.schoolRegForm.controls.requirement.value.assetName),
-      quantity:new FormControl(this.schoolRegForm.controls.requirement.value.quantity) 
+      quantity: new FormControl(this.schoolRegForm.controls.requirement.value.quantity)
     }));
-    console.log(this.schoolRegForm.controls.requirements);
     this.schoolRegForm.controls.requirement.reset();
+  }
+
+  showSchoolRegViewPage() {
+    this.schoolService.enterSchoolRegister(this.schoolRegForm);
+    this.router.navigate(['viewSchoolReg']);
   }
 
   private prepareSave(): any {
@@ -244,23 +294,23 @@ onFileChange(event) {
     const formModel = this.prepareSave();
     this.loading = true;
     this.schoolService.registerSchool(formModel)
-    .subscribe(
-      (response) => {
-        this.loading = false;
-        console.log(response);
-        this.router.navigate(['schoollist']);
-      },
-      (error) => console.log(error)
-    );
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          console.log(response);
+          this.router.navigate(['schoollist']);
+        },
+        (error) => console.log(error)
+      );
   }
 
-  
-disableSubmitBtn(){
-  if(!this.schoolRegForm.valid || this.loading) {
-    return true;
-  } else {
-    return
+
+  disableSubmitBtn() {
+    if (!this.schoolRegForm.valid || this.loading) {
+      return true;
+    } else {
+      return
+    }
   }
-}
 }
 
