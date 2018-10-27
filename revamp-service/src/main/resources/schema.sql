@@ -1,8 +1,3 @@
-/**
- Author: PUTHUIR DEV TEAM
- Model : PUTHUIR
-**/
-
 /********************************************************
 	The revamp_db database
 ********************************************************/
@@ -10,7 +5,6 @@ DROP DATABASE IF EXISTS `revamp_db`;
 
 CREATE DATABASE IF NOT EXISTS `revamp_db`;
 USE `revamp_db`;
-
 
 
 /********************************************************
@@ -75,7 +69,6 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
     `school_info_id` INT NOT NULL,
     `school_status` VARCHAR(45) DEFAULT 'REGISTERED',
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-	`status` VARCHAR(255),
 	PRIMARY KEY (`school_id`),
 	FOREIGN KEY (`contacts_id`) REFERENCES contacts (`contacts_id`),
 	FOREIGN KEY (`address_id`) REFERENCES address (`address_id`),
@@ -84,18 +77,27 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
 	ON UPDATE CASCADE
 );
 
+DROP TABLE IF EXISTS `revamp_db`.`project`;
 
-/********************************************************
-    The Address table, to hold contact info for entities
-********************************************************/
+CREATE TABLE IF NOT EXISTS `revamp_db`.`project`(
+	`project_id` INT NOT NULL AUTO_INCREMENT,
+    `school_id` INT NOT NULL,
+    `estimate` INT,
+    `collected_amount` INT,
+    `project_status` VARCHAR(45) NOT NULL,
+    `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`project_id`),
+    CONSTRAINT `school_id` FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`)
+);
 
-DROP TABLE IF EXISTS `revamp_db`.`schoolimage`;
+DROP TABLE IF EXISTS revamp_db.schoolimage;
 
-CREATE TABLE IF NOT EXISTS `revamp_db`.`schoolimage`(
+CREATE TABLE IF NOT EXISTS revamp_db.schoolimage(
 	`image_id` INT NOT NULL AUTO_INCREMENT,
 	`image` longblob,
 	`school_id` INT NOT NULL,
 	`filepath` VARCHAR(200) NOT NULL,
+	`comments` varchar(500) DEFAULT NULL,
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`image_id`),
 	FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`) ON DELETE NO ACTION ON UPDATE CASCADE	
@@ -104,16 +106,17 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`schoolimage`(
 DROP TABLE IF EXISTS `revamp_db`.`requirement`;
 
 CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
-	`requirement_id`INT NOT NULL AUTO_INCREMENT,
-	`school_id` INT NOT NULL,
+	`requirement_id` INT NOT NULL AUTO_INCREMENT,
+    `project_id` INT NOT NULL,
 	`reqtype` varchar(45) NOT NULL,
     `assettype` varchar(45) NOT NULL,
     `assetname` varchar(45) NOT NULL,    
     `quantity` INT NOT NULL,
     `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`requirement_id`),
-	FOREIGN KEY (`school_id`)
-	REFERENCES `revamp_db`.`school` (`school_id`)
+	CONSTRAINT `project_id`
+	FOREIGN KEY (`project_id`)
+	REFERENCES `revamp_db`.`project` (`project_id`)
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
 );
@@ -148,6 +151,7 @@ CREATE TABLE IF NOT EXISTS revamp_db.user(
 ON UPDATE CASCADE
 );
 
+
 DROP TABLE IF EXISTS `revamp_db`.`audittrail`;
 CREATE TABLE IF NOT EXISTS revamp_db.audittrail(
   `userid` bigint(20) NOT NULL,
@@ -161,50 +165,37 @@ CREATE TABLE IF NOT EXISTS revamp_db.audittrail(
   CONSTRAINT `audittrail_user_userid` FOREIGN KEY (`userid`) REFERENCES `revamp_db`.`user` (`userid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ); 
 
-DROP TABLE IF EXISTS `revamp_db`.`lookup`;
+DROP TABLE IF EXISTS revamp_db.lookup;
  
-CREATE TABLE IF NOT EXISTS `revamp_db`.`lookup`(
+CREATE TABLE IF NOT EXISTS revamp_db.lookup(
+	
 	`field` VARCHAR(45),
     `key` VARCHAR(45),
     `value` VARCHAR(100),
     `parent_field` VARCHAR(45),
     `parent_key` VARCHAR(45),
 	PRIMARY KEY (`field`,`key`),
-    CONSTRAINT `lookup_parent_field_key` FOREIGN KEY (`parent_field`, `parent_key`) REFERENCES `revamp_db`.`lookup` (`field`,`key`)
-   
+    FOREIGN KEY (`parent_field`, `parent_key`)
+    REFERENCES `revamp_db`.`lookup` (`field`,`key`)
+    
 );
+
 
 DROP TABLE IF EXISTS `revamp_db`.`donation`;
 
 CREATE TABLE IF NOT EXISTS `revamp_db`.`donation`(
-	`donation_id`INT NOT NULL AUTO_INCREMENT,
+	`donation_id` INT NOT NULL AUTO_INCREMENT,
     `project_id` INT NOT NULL,
+    `school_id` INT NOT NULL,
     `donor_id` bigint(20) NOT NULL,
 	`payment_mode`VARCHAR(45) NOT NULL,
     `amount` INT NOT NULL,
     `payment_status`VARCHAR(45) NOT NULL,
     `createdate` datetime(6) DEFAULT NULL,
     PRIMARY KEY (`donation_id`),
-    CONSTRAINT `revamp_db`.`donation`.`school_id`
+    CONSTRAINT `school_id`
     FOREIGN KEY (`project_id`)
     REFERENCES `revamp_db`.`project` (`project_id`),
-    CONSTRAINT `revamp_db`.`donation`.`donor_id`
-    FOREIGN KEY (`donor_id`)
-    REFERENCES `revamp_db`.`user` (`userid`)
-	
+    CONSTRAINT `donor_id` FOREIGN KEY (`donor_id`) REFERENCES `revamp_db`.`user` (`userid`)
+    
 );
-
-DROP TABLE IF EXISTS `revamp_db`.`project`;
-
-CREATE TABLE IF NOT EXISTS `revamp_db`.`project`(
-	`project_id`INT NOT NULL AUTO_INCREMENT,
-    `school_id` INT NOT NULL,
-    `estimate` INT,
-    `collected_amount` INT,
-    `project_status`VARCHAR(45) NOT NULL,
-    `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`project_id`),
-    CONSTRAINT `revamp_db`.`project`.`school_id`
-    FOREIGN KEY (`school_id`)
-    REFERENCES `revamp_db`.`school` (`school_id`)
-   
