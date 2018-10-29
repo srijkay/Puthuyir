@@ -35,7 +35,7 @@
                 
                 <div class="form-group">
                   <label class="control-label">School Type</label>
-                  <select id="schoolType" class="form-control" formControlName="schoolType" ng-required="required">
+                  <select id="schoolType" class="form-control" formControlName="schoolType">
                     <option value="-1">Select School Type</option>
                     <option *ngFor='let schoolType of schoolTypesLD' [value]="schoolType.key">{{schoolType.value}}</option>
                   </select>

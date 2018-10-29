@@ -47,7 +47,6 @@ export class SchoolRegistrationComponent implements OnInit {
   quantity: FormControl;
 
   comments: FormControl;
-  //image: FormArray;
   image: FormControl;
   districtsLD: LookUps;
   reqTypesLD: LookUps;
@@ -57,6 +56,7 @@ export class SchoolRegistrationComponent implements OnInit {
   schoolTypesLD: LookUps;
 
   loading: boolean = false;
+  required: boolean = true;
   //url = '';
   //@ViewChild('fileInput') fileInput: ElementRef;
 
@@ -146,7 +146,6 @@ export class SchoolRegistrationComponent implements OnInit {
 
       this.comments = new FormControl('', Validators.required);
       this.image = new FormControl('', Validators.required);
-      //this.image = new FormArray([]);
       this.requirements = new FormArray([]);
     } else {
       this.schoolName = new FormControl(this.schoolRegForm.controls.schoolInfo.value.schoolName, <any>Validators.required);
@@ -306,10 +305,24 @@ export class SchoolRegistrationComponent implements OnInit {
 
 
   disableSubmitBtn() {
-    if (!this.schoolRegForm.valid || this.loading) {
+    console.log(this.schoolRegForm.controls.errors)
+    if (!this.schoolRegForm.valid) {
+      if((<FormArray>this.schoolRegForm.controls.requirements).length > 0 && 
+      (this.schoolRegForm.controls.requirement.get('reqType').value == '') &&
+      (this.schoolRegForm.controls.requirement.get('assetType').value == '') &&
+      (this.schoolRegForm.controls.requirement.get('assetName').value == '') &&
+      (this.schoolRegForm.controls.requirement.get('quantity').value == '') ) {
+        return false;
+      } else {
+        return true;
+      }
+    } else if(this.loading) {
       return true;
-    } else {
-      return
+    } 
+    else {
+      
+      
+      return false;
     }
   }
 }
