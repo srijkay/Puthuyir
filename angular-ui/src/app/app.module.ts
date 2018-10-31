@@ -7,11 +7,16 @@ import { UiModule } from './ui/ui.module';
 import { AppRoutingModule } from './app-routing.module';
 import { SchoolRegistrationComponent } from './school-registration/school-registration.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { SchoolService } from './school.service';
+
+import { SchoolService } from './services/school.service';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SchoolListComponent } from './school-list/school-list.component';
-import { ViewShoolRegistrationComponent } from './view-shool-registration/view-shool-registration.component';
+import {LoginComponent} from './login/login.component';
+import {AdminComponent} from './admin/admin.component';
+import {HomeComponent} from './home/home.component';
+import {LogoutComponent} from './logout/logout.component';
+import {ViewSchoolRegistrationComponent} from './view-school-registration/view-school-registration.component';
 
 
 @NgModule({
@@ -20,13 +25,19 @@ import { ViewShoolRegistrationComponent } from './view-shool-registration/view-s
     SchoolRegistrationComponent,
     PageNotFoundComponent,
     SchoolListComponent,
-    ViewShoolRegistrationComponent
+    LoginComponent,
+    AdminComponent,
+    HomeComponent,
+    LogoutComponent,
+    ViewSchoolRegistrationComponent
+
     ],
   imports: [
     BrowserModule,
     HttpClientModule,
     HttpModule,
     UiModule,
+    FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     NgbModule.forRoot()

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import {SchoolService} from '../school.service';
+=======
+import {SchoolService} from '../services/school.service';
+>>>>>>> feature_Kamalkanth
 import {School} from '../model/school';
 import { environment } from '../../environments/environment';
 

@@ -4,3 +4,17 @@
 4. mvn clean compile install
 5. copy .war from /target folder to tomcat webapps
 6. start tomcat
+
+
+To setup the revamp service  in SpringBoot
+--------------------------------------------
+Download Spring Tool Suite (Version 3.9.6.Release) and install (Mac or Windows)
+Download Mysql ( Server) and client (Workbench) and install
+Download project in below path from github.
+Open STS Tools and right click
+Click import and select "Existing Maven Projects"
+After imported the springboot project.You will find the [boot]
+Import sql query (Manually)
+Update src\main\resources\application.properties with mysql credentials
+Right click the project and Run as "Spring Boot App"
+Check in console to make sure tomcat server started with port 6060 with no errors.
