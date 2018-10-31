@@ -184,18 +184,19 @@ CREATE TABLE IF NOT EXISTS revamp_db.lookup(
 DROP TABLE IF EXISTS `revamp_db`.`donation`;
 
 CREATE TABLE IF NOT EXISTS `revamp_db`.`donation`(
-	`donation_id` INT NOT NULL AUTO_INCREMENT,
+	`donation_id`INT NOT NULL AUTO_INCREMENT,
     `project_id` INT NOT NULL,
-    `school_id` INT NOT NULL,
     `donor_id` bigint(20) NOT NULL,
 	`payment_mode`VARCHAR(45) NOT NULL,
     `amount` INT NOT NULL,
     `payment_status`VARCHAR(45) NOT NULL,
     `createdate` datetime(6) DEFAULT NULL,
     PRIMARY KEY (`donation_id`),
-    CONSTRAINT `school_id`
+    CONSTRAINT `project_id`
     FOREIGN KEY (`project_id`)
     REFERENCES `revamp_db`.`project` (`project_id`),
-    CONSTRAINT `donor_id` FOREIGN KEY (`donor_id`) REFERENCES `revamp_db`.`user` (`userid`)
-    
+    CONSTRAINT `donor_id`
+    FOREIGN KEY (`donor_id`)
+    REFERENCES `revamp_db`.`user` (`userid`)
 );
+
