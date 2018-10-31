@@ -3,10 +3,6 @@ package com.revamp.core.dao;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
-<<<<<<< HEAD:revamp-service/src/main/java/org/revamp/core/dao/SchoolDAOImpl.java
-import org.revamp.core.model.School;
-=======
->>>>>>> feature_Kamalkanth:revamp-service/src/main/java/com/revamp/core/dao/SchoolDAOImpl.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
