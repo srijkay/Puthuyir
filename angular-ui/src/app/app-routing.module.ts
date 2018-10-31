@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import {SchoolRegistrationComponent} from './school-registration/school-registration.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {SchoolListComponent} from './school-list/school-list.component';
-
 import {LoginComponent} from './login/login.component';
 import {AdminComponent} from './admin/admin.component';
 import {HomeComponent} from './home/home.component';

@@ -1,10 +1,5 @@
 package com.revamp.core.service;
 
-<<<<<<< HEAD:revamp-service/src/main/java/org/revamp/core/service/ImageServiceImpl.java
-import org.revamp.core.dao.ImageDAO;
-import org.revamp.core.model.SchoolImage;
-=======
->>>>>>> feature_Kamalkanth:revamp-service/src/main/java/com/revamp/core/service/ImageServiceImpl.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

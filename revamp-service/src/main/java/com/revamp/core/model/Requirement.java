@@ -34,16 +34,10 @@ public class Requirement implements java.io.Serializable {
 	@Column(name = "requirement_id", nullable = false)
 	private long requirementId;
 
-<<<<<<< HEAD:revamp-service/src/main/java/org/revamp/core/model/Requirement.java
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "school_id", nullable = false)
-	private School school;
-=======
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "project_id", nullable = false)
 	@JsonIgnore
 	private Project project;
->>>>>>> feature_Kamalkanth:revamp-service/src/main/java/com/revamp/core/model/Requirement.java
 
 	@Column(name = "reqtype")
 	private String reqType;

@@ -1,12 +1,12 @@
-package org.revamp.core.web.util;
+package com.revamp.core.web.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.revamp.core.model.School;
-import org.revamp.core.model.SchoolImage;
+import com.revamp.core.model.School;
+import com.revamp.core.model.SchoolImage;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -35,7 +35,7 @@ public class SchoolSerializer extends StdSerializer<School> {
 		jgen.writeObjectField("concats", school.getContacts());
 		jgen.writeObjectField("address", school.getAddress());
 		
-		jgen.writeObjectField("requirements", school.getRequirements());
+		jgen.writeObjectField("projects", school.getProjects());
 		jgen.writeObjectField("proofOfIds", this.convertImageWrapper(school.getSchoolImages()));
 		jgen.writeEndObject();
 		}catch(Exception e) {

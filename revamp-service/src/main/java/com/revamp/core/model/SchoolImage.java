@@ -1,4 +1,4 @@
-package org.revamp.core.model;
+package com.revamp.core.model;
 
 import java.util.Arrays;
 import java.util.Date;
