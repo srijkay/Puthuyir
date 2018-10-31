@@ -1,12 +1,12 @@
-package org.revamp.core.web.util;
+package com.revamp.core.web.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.revamp.core.model.School;
-import org.revamp.core.model.SchoolImage;
+import com.revamp.core.model.School;
+import com.revamp.core.model.SchoolImage;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
