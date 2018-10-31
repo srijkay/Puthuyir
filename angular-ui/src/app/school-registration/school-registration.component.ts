@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { LookUpService } from '../look-up.service';
@@ -5,6 +6,15 @@ import { SchoolService } from '../school.service';
 import { LookUps } from '../model/lookUps';
 import { School } from '../model/school';
 import { Router } from "@angular/router";
+=======
+import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
+import {FormGroup, FormControl, Validators, FormBuilder, FormArray} from '@angular/forms';
+import {LookUpService} from '../services/look-up.service';
+import {SchoolService} from '../services/school.service';
+import {LookUps} from '../model/lookUps';
+import {School} from '../model/school';
+import {Router} from "@angular/router";
+>>>>>>> feature_Kamalkanth
 
 @Component({
   selector: 'app-school-registration',
