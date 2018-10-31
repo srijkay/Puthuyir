@@ -1,4 +1,4 @@
-package org.revamp.core.web.util;
+package com.revamp.core.web.util;
 
 import java.io.IOException;
 import java.util.Collections;
