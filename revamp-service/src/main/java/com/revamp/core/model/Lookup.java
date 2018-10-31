@@ -1,4 +1,4 @@
-package org.revamp.core.model;
+package com.revamp.core.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
