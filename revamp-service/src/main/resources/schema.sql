@@ -82,11 +82,13 @@ DROP TABLE IF EXISTS `revamp_db`.`project`;
 CREATE TABLE IF NOT EXISTS `revamp_db`.`project`(
 	`project_id` INT NOT NULL AUTO_INCREMENT,
     `school_id` INT NOT NULL,
+   `requirement_id` INT NOT NULL,
     `estimate` INT,
     `collected_amount` INT,
     `project_status` VARCHAR(45) NOT NULL,
     `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`project_id`),
+   FOREIGN KEY (`requirement_id`) REFERENCES `revamp_db`.`requirement` (`requirement_id`),
     CONSTRAINT `school_id` FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`)
 );
 
@@ -108,6 +110,7 @@ DROP TABLE IF EXISTS `revamp_db`.`requirement`;
 CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
 	`requirement_id` INT NOT NULL AUTO_INCREMENT,
     `project_id` INT NOT NULL,
+	`userid` bigint(20) NOT NULL,
 	`reqtype` varchar(45) NOT NULL,
     `assettype` varchar(45) NOT NULL,
     `assetname` varchar(45) NOT NULL,    
@@ -116,7 +119,8 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
 	PRIMARY KEY (`requirement_id`),
 	CONSTRAINT `project_id`
 	FOREIGN KEY (`project_id`)
-	REFERENCES `revamp_db`.`project` (`project_id`)
+	REFERENCES `revamp_db`.`project` (`project_id`),
+	FOREIGN KEY (`userid`) REFERENCES `revamp_db`.`user` (`userid`)
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
 );
