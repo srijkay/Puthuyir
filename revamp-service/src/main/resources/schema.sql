@@ -77,20 +77,7 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
 	ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS `revamp_db`.`project`;
 
-CREATE TABLE IF NOT EXISTS `revamp_db`.`project`(
-	`project_id` INT NOT NULL AUTO_INCREMENT,
-    `school_id` INT NOT NULL,
-   `requirement_id` INT NOT NULL,
-    `estimate` INT,
-    `collected_amount` INT,
-    `project_status` VARCHAR(45) NOT NULL,
-    `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`project_id`),
-   FOREIGN KEY (`requirement_id`) REFERENCES `revamp_db`.`requirement` (`requirement_id`),
-    CONSTRAINT `school_id` FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`)
-);
 
 DROP TABLE IF EXISTS revamp_db.schoolimage;
 
@@ -125,6 +112,20 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
 	ON UPDATE CASCADE
 );
 
+DROP TABLE IF EXISTS `revamp_db`.`project`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`project`(
+	`project_id` INT NOT NULL AUTO_INCREMENT,
+    `school_id` INT NOT NULL,
+   `requirement_id` INT NOT NULL,
+    `estimate` INT,
+    `collected_amount` INT,
+    `project_status` VARCHAR(45) NOT NULL,
+    `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`project_id`),
+   FOREIGN KEY (`requirement_id`) REFERENCES `revamp_db`.`requirement` (`requirement_id`),
+    CONSTRAINT `school_id` FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`)
+);
 DROP TABLE IF EXISTS `revamp_db`.`role`;
 
 CREATE TABLE IF NOT EXISTS revamp_db.role(
