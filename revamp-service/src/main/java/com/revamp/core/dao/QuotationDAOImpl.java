@@ -1,0 +1,33 @@
+package com.revamp.core.dao;
+
+import java.util.List;
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.revamp.core.model.Quotation;
+
+@Repository
+public class QuotationDAOImpl implements QuotationDAO {
+
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Quotation> getQuotations() {
+		return sessionFactory.getCurrentSession().createQuery(" FROM Quotation ").list();
+	}
+
+	@Override
+	public Quotation save(Quotation quotation) {				
+		return (Quotation) sessionFactory.getCurrentSession().save(quotation);
+	}
+
+	@Override
+	public Quotation getQuotation(long quotationId) {
+		return sessionFactory.getCurrentSession().get(Quotation.class, quotationId);
+	}
+
+}
