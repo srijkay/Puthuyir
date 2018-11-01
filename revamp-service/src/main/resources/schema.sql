@@ -204,3 +204,20 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`donation`(
     FOREIGN KEY (`donor_id`)
     REFERENCES `revamp_db`.`user` (`userid`)
 );
+
+DROP TABLE IF EXISTS `revamp_db`.`quotation`;
+
+CREATE TABLE `quotation` (
+  `quotation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `image_id` int(11) DEFAULT NULL,
+  `quotated_amount` int(11) DEFAULT NULL,
+  `warranty` varchar(100) DEFAULT NULL,
+  `trader_name` varchar(100) DEFAULT NULL,
+  `location` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `phone` varchar(100) DEFAULT NULL,
+  `collected_by` varchar(100) DEFAULT NULL,
+  `verified_by` varchar(100) DEFAULT NULL,
+  `reviewer` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`quotation_id`)
+);
