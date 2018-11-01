@@ -6,7 +6,7 @@ import com.revamp.core.model.Quotation;
 
 public interface QuotationDAO {
 	
-	Quotation save(Quotation quotation);
+	long save(Quotation quotation);
 	
 	Quotation getQuotation(long id);
 	

@@ -31,7 +31,9 @@ public class QuotationController {
 	
 	@PostMapping("/quotation")
 	public ResponseEntity<Quotation> setQuotation(@RequestBody Quotation quotation){
-		return ResponseEntity.ok().body(quotationService.save(quotation));		
+		long id = quotationService.save(quotation);
+		quotation.setQuotationId(id);
+		return ResponseEntity.ok().body(quotation);		
 	}	
 
 }
