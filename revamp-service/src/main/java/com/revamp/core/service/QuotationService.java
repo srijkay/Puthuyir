@@ -6,7 +6,7 @@ import com.revamp.core.model.Quotation;
 
 public interface QuotationService {
 	
-	Quotation save(Quotation quotation);
+	long save(Quotation quotation);
 
 	Quotation getQuotation(long id);
 

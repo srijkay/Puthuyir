@@ -21,8 +21,9 @@ public class QuotationDAOImpl implements QuotationDAO {
 	}
 
 	@Override
-	public Quotation save(Quotation quotation) {				
-		return (Quotation) sessionFactory.getCurrentSession().save(quotation);
+	public long save(Quotation quotation) {				
+		sessionFactory.getCurrentSession().save(quotation);
+		return quotation.getQuotationId();
 	}
 
 	@Override

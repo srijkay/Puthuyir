@@ -31,8 +31,8 @@ public class QuotationServiceImpl implements QuotationService {
 	}
 
 	@Override
-	public Quotation save(Quotation quotation) {		
-		return quotationDAO.save(quotation);
+	public long save(Quotation quotation) {		
+		 return quotationDAO.save(quotation);
 	}
 
 }
