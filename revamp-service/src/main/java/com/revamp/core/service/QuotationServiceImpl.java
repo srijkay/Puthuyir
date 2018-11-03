@@ -35,4 +35,9 @@ public class QuotationServiceImpl implements QuotationService {
 		 return quotationDAO.save(quotation);
 	}
 
+	@Override
+	public void deleteQuotation(long id) {
+		quotationDAO.delete(id);		
+	}
+
 }

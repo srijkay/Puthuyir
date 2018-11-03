@@ -11,4 +11,6 @@ public interface QuotationService {
 	Quotation getQuotation(long id);
 
 	List<Quotation> getQuotations();
+	
+	void deleteQuotation(long id);
 }
