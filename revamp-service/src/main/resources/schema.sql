@@ -219,7 +219,13 @@ CREATE TABLE `quotation` (
   `collected_by` varchar(100) DEFAULT NULL,
   `verified_by` varchar(100) DEFAULT NULL,
   `reviewer` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`quotation_id`)
+  `quotation_status` varchar(100) DEFAULT NULL,
+  `quotation_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `quotation_validity_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `requirement_id` int(11) NOT NULL,
+  PRIMARY KEY (`quotation_id`),
+  KEY `requirement_id` (`requirement_id`),
+  CONSTRAINT `quotation_requirement_id` FOREIGN KEY (`requirement_id`) REFERENCES `requirement` (`requirement_id`)
 );
 
 DROP TABLE IF EXISTS `revamp_db`.`fundallotment`;

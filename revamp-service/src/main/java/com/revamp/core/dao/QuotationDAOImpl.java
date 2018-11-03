@@ -17,11 +17,11 @@ public class QuotationDAOImpl implements QuotationDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Quotation> getQuotations() {
-		return sessionFactory.getCurrentSession().createQuery(" FROM Quotation ").list();
+		return sessionFactory.getCurrentSession().createQuery(" from Quotation ").list();
 	}
 
 	@Override
-	public long save(Quotation quotation) {				
+	public long save(Quotation quotation) {
 		sessionFactory.getCurrentSession().save(quotation);
 		return quotation.getQuotationId();
 	}
@@ -29,6 +29,12 @@ public class QuotationDAOImpl implements QuotationDAO {
 	@Override
 	public Quotation getQuotation(long quotationId) {
 		return sessionFactory.getCurrentSession().get(Quotation.class, quotationId);
+	}
+
+	@Override
+	public void delete(long quotationId) {
+		sessionFactory.getCurrentSession().createQuery("delete from Quotation where id = :id").setParameter("id", quotationId)
+				.executeUpdate();
 	}
 
 }

@@ -11,5 +11,7 @@ public interface QuotationDAO {
 	Quotation getQuotation(long id);
 	
 	List<Quotation> getQuotations();
+	
+	void delete(long id);
 
 }
