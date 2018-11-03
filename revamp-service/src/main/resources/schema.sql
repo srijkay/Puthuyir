@@ -193,9 +193,29 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`donation`(
     `payment_status`VARCHAR(45) NOT NULL,
     `createdate` datetime(6) DEFAULT NULL,
     PRIMARY KEY (`donation_id`),
-    CONSTRAINT `school_id`
-    FOREIGN KEY (`project_id`)
+    FOREIGN KEY (`school_id`)
     REFERENCES `revamp_db`.`project` (`project_id`),
     CONSTRAINT `donor_id` FOREIGN KEY (`donor_id`) REFERENCES `revamp_db`.`user` (`userid`)
-    
 );
+
+
+DROP TABLE IF EXISTS `revamp_db`.`fundallotment`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`fundallotment`(
+	`fundallotment_id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` BIGINT NOT NULL,
+	`requirement_id` INT NOT NULL,
+    `collected_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `totalamount` INT NOT NULL,    
+    `interest` INT,
+    `allocated_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `updated_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`fundallotment_id`),
+	FOREIGN KEY (`requirement_id`)
+	REFERENCES `revamp_db`.`requirement` (`requirement_id`),
+	FOREIGN KEY (`user_id`)
+	REFERENCES `revamp_db`.`user` (`userid`)
+	ON DELETE NO ACTION
+	ON UPDATE CASCADE
+);
+
