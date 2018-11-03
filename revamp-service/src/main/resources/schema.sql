@@ -221,3 +221,23 @@ CREATE TABLE `quotation` (
   `reviewer` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`quotation_id`)
 );
+
+DROP TABLE IF EXISTS `revamp_db`.`fundallotment`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`fundallotment`(
+	`fundallotment_id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` BIGINT NOT NULL,
+	`requirement_id` INT NOT NULL,
+    `collected_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `totalamount` INT NOT NULL,    
+    `interest` INT,
+    `allocated_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `updated_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`fundallotment_id`),
+	FOREIGN KEY (`requirement_id`)
+	REFERENCES `revamp_db`.`requirement` (`requirement_id`),
+	FOREIGN KEY (`user_id`)
+	REFERENCES `revamp_db`.`user` (`userid`)
+	ON DELETE NO ACTION
+	ON UPDATE CASCADE
+);
