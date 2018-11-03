@@ -1,0 +1,102 @@
+
+<div class="page_container">
+    
+  <div class="container" *ngFor='let school of schoolList'>
+      <div class="card">
+          <div class="card-header display-5">
+              {{school.schoolInfo.schoolName}} - {{school.schoolInfo.schoolRegNo}}
+
+          </div>
+          <div class="card-body">
+              <table class="floatRight">
+                <tr><td><img [src]="imageUrl+school.proofOfIds.files[0]" class="img-thumbnail"></td></tr>
+                </table>
+            <table class="floatLeft">
+                <tbody>
+                <tr><td colspan="3"><h6 class="card-title">School Information</h6></td></tr>  
+                <tr>
+                  <td>School Type</td><td class="px-5">:</td>
+                  <td class="px-5">{{school.schoolInfo.schoolType}}</td>
+                </tr>
+                <tr>
+                  <td>Number of Students</td><td class="px-5">:</td>
+                  <td class="px-5">{{school.schoolInfo.numberOfStudents}}</td>
+                </tr>
+                <tr>
+                  <td>Number of Teachers</td><td class="px-5">:</td>
+                  <td class="px-5">{{school.schoolInfo.numberOfTeachers}}</td>
+                </tr>
+              
+                <tr><td colspan="3"><h6 class="card-title">Contacts</h6></td></tr>  
+                <tr>
+                    <td>Primary Contact</td><td class="px-5">:</td>
+                    <td class="px-5">{{school.concats.priName}}</td>
+                  </tr>
+                  <tr>
+                    <td>Primary Contact Number</td><td class="px-5">:</td>
+                    <td class="px-5">{{school.concats.priNum}}</td>
+                  </tr>
+                  <tr>
+                    <td>Primary Contact Email</td><td class="px-5">:</td>
+                    <td class="px-5">{{school.concats.priEmail}}</td>
+                  </tr>
+                  <tr>
+                    <td>Secondary Contact</td><td class="px-5">:</td>
+                    <td class="px-5">{{school.concats.secName}}</td>
+                  </tr>
+                  <tr>
+                    <td>Secondary Contact Number</td><td class="px-5">:</td>
+                    <td class="px-5">{{school.concats.secNum}}</td>
+                  </tr>
+                  <tr>
+                      <td>Secondary Contact Email</td><td class="px-5">:</td>
+                      <td class="px-5">{{school.concats.secEmail}}</td>
+                  </tr>
+                  <tr><td colspan="3"><h6 class="card-title">Address</h6></td></tr>  
+                  <tr>
+                      <td>Address</td><td class="px-5">:</td>
+                      <td class="px-5">{{school.address.addressLine1}}</td>
+                    </tr>
+                    <tr>
+                      <td>Street Name</td><td class="px-5">:</td>
+                      <td class="px-5">{{school.address.addressLine2}}</td>
+                    </tr>
+                    <tr>
+                      <td>Town/City</td><td class="px-5">:</td>
+                      <td class="px-5">{{school.address.city}}</td>
+                    </tr>
+                    <tr>
+                      <td>District</td><td class="px-5">:</td>
+                      <td class="px-5">{{school.address.district}}</td>
+                    </tr>
+                    <tr>
+                      <td>State</td><td class="px-5">:</td>
+                      <td class="px-5">{{school.address.state}}</td>
+                    </tr>
+                    <tr>
+                        <td>Pincode</td><td class="px-5">:</td>
+                        <td class="px-5">{{school.address.pinCode}}</td>
+                    </tr>
+                    <tr><td colspan="3"><h6 class="card-title">Requirements</h6></td></tr>  
+                    <tr class="ml-5">
+                        <table border="1" class="ml-5">
+                            <tr>
+                              <th>Requirement Type</th>
+                              <th>Asset Type</th>
+                              <th>Asset Name</th>
+                              <th>Quantity</th>
+                            </tr>
+                            <tr *ngFor='let requirement of school.requirements'>
+                              <td>{{requirement.reqType}}</td>
+                              <td>{{requirement.assetType}}</td>
+                              <td>{{requirement.assetName}}</td>
+                              <td>{{requirement.quantity}}</td>
+                            </tr>
+                          </table>
+                    </tr>
+              </table>          
+          </div>
+        </div>
+      </div>
+
+</div>

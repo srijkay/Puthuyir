@@ -1,0 +1,4 @@
+08/21/2018:-
+1. Angular supports single image uploading.
+2. Spring Backend supports multiple image uploading.
+3. Modified startup sql script.
