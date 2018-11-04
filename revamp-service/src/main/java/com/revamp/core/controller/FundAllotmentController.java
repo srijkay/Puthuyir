@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revamp.core.model.FundAllocation;
-import com.revamp.core.service.FundAllocationService;
+import com.revamp.core.model.FundAllotment;
+import com.revamp.core.service.FundAllotmentService;
 
 /**
  * 
@@ -21,16 +21,16 @@ import com.revamp.core.service.FundAllocationService;
  *
  */
 @RestController
-public class FundAllocationController {
+public class FundAllotmentController {
 
 	@Autowired
-	FundAllocationService fundAllotService;
+	FundAllotmentService fundAllotService;
     /**
      * 
      * @return List
      */
 	@GetMapping("/fundallocations")
-	public List<FundAllocation> getFundAllocations() {
+	public List<FundAllotment> getFundAllocations() {
 		return fundAllotService.getFundAllocations();
 	}
     /**
@@ -39,7 +39,7 @@ public class FundAllocationController {
      * @return
      */
 	@GetMapping("/fundallocation/{id}")
-	public FundAllocation getFundAllocation(@PathVariable("id") long fundAllocationId) {
+	public FundAllotment getFundAllocation(@PathVariable("id") long fundAllocationId) {
 		return fundAllotService.getFundAllocations(fundAllocationId);
 	}
     /**
@@ -48,7 +48,7 @@ public class FundAllocationController {
      * @return
      */
 	@PostMapping("/fundallocation")
-	public ResponseEntity<FundAllocation> saveFundAllocation(@RequestBody FundAllocation fundAllocation) {
+	public ResponseEntity<FundAllotment> saveFundAllocation(@RequestBody FundAllotment fundAllocation) {
 		long id = fundAllotService.save(fundAllocation);
 		fundAllocation.setFundallotmentId(id);
 		return ResponseEntity.ok().body(fundAllocation);

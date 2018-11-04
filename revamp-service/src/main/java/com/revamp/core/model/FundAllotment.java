@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "fundallotment")
-public class FundAllocation implements Serializable {
+public class FundAllotment implements Serializable {
 	/**
 	 * 
 	 */

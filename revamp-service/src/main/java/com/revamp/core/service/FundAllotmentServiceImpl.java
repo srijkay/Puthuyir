@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revamp.core.dao.FundAllocationDAO;
-import com.revamp.core.model.FundAllocation;
+import com.revamp.core.dao.FundAllotmentDAO;
+import com.revamp.core.model.FundAllotment;
 
 /**
  * 
@@ -16,23 +16,23 @@ import com.revamp.core.model.FundAllocation;
  */
 @Service
 @Transactional
-public class FundAllocationServiceImpl implements FundAllocationService {
+public class FundAllotmentServiceImpl implements FundAllotmentService {
 
 	@Autowired
-	private FundAllocationDAO fundAllotDAO;
+	private FundAllotmentDAO fundAllotDAO;
 
 	@Override
-	public long save(FundAllocation fundAllocation) {
+	public long save(FundAllotment fundAllocation) {
 		return fundAllotDAO.save(fundAllocation);
 	}
 
 	@Override
-	public FundAllocation getFundAllocations(long id) {
+	public FundAllotment getFundAllocations(long id) {
 		return fundAllotDAO.getFundAllocations(id);
 	}
 
 	@Override
-	public List<FundAllocation> getFundAllocations() {
+	public List<FundAllotment> getFundAllocations() {
 		return fundAllotDAO.getFundAllocations();
 	}
 
