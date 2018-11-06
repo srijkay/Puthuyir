@@ -33,8 +33,16 @@ public class QuotationDAOImpl implements QuotationDAO {
 
 	@Override
 	public void delete(long quotationId) {
-		sessionFactory.getCurrentSession().createQuery("delete from Quotation where id = :id").setParameter("id", quotationId)
-				.executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("delete from Quotation where id = :id")
+				.setParameter("id", quotationId).executeUpdate();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Quotation> getQuotationByStatus(String quotationStatus) {
+		return sessionFactory.getCurrentSession()
+				.createQuery(" from Quotation where quotationStatus = :quotationStatus")
+				.setParameter("quotationStatus", quotationStatus).list();
 	}
 
 }

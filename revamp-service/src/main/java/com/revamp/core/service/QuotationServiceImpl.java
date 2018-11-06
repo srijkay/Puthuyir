@@ -40,4 +40,9 @@ public class QuotationServiceImpl implements QuotationService {
 		quotationDAO.delete(id);		
 	}
 
+	@Override
+	public List<Quotation> getQuotationByStatus(String quotationStatus) {		
+		return quotationDAO.getQuotationByStatus(quotationStatus);
+	}
+
 }

@@ -13,5 +13,7 @@ public interface QuotationDAO {
 	List<Quotation> getQuotations();
 	
 	void delete(long id);
+	
+	List<Quotation> getQuotationByStatus(String quotationStatus);
 
 }

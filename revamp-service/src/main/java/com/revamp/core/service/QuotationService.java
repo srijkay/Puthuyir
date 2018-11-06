@@ -13,4 +13,6 @@ public interface QuotationService {
 	List<Quotation> getQuotations();
 	
 	void deleteQuotation(long id);
+	
+	List<Quotation> getQuotationByStatus(String quotationStatus);
 }
