@@ -55,6 +55,9 @@ public class Requirement implements java.io.Serializable {
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateAdded;
+	
+	@Column(name = "priority")
+	private String priority;
 
 	@PrePersist
 	protected void onCreate() {
@@ -115,6 +118,14 @@ public class Requirement implements java.io.Serializable {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getPriority() {
+		return priority;
+	}
+
+	public void setPriority(String priority) {
+		this.priority = priority;
 	}
 
 	@Override

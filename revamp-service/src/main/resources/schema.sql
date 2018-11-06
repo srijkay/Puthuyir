@@ -166,24 +166,21 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`project`(
 
 DROP TABLE IF EXISTS `revamp_db`.`requirement`;
 
-CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
-	`requirement_id` INT NOT NULL AUTO_INCREMENT,
-    `project_id` INT NOT NULL,
-    `user_id` BIGINT NOT NULL,
-	`reqtype` varchar(45) NOT NULL,
-    `assettype` varchar(45) NOT NULL,
-    `assetname` varchar(45) NOT NULL,    
-    `quantity` INT NOT NULL,
-    `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`requirement_id`),
-    CONSTRAINT `user_id`
-    FOREIGN KEY (`user_id`)
-	REFERENCES `revamp_db`.`user` (`userid`),
-    CONSTRAINT `project_id`
-	FOREIGN KEY (`project_id`)
-	REFERENCES `revamp_db`.`project` (`project_id`)
-	ON DELETE NO ACTION
-	ON UPDATE CASCADE
+CREATE TABLE `requirement` (
+  `requirement_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `reqtype` varchar(45) NOT NULL,
+  `assettype` varchar(45) NOT NULL,
+  `assetname` varchar(45) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `priority` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`requirement_id`),
+  KEY `user_id` (`user_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`userid`)
 );
 
 
