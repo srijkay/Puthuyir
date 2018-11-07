@@ -15,5 +15,5 @@ export const environment = {
   'school.list.url':'',
   'school.image.dir':'',
   'image.server.url':''
-  
+
 };

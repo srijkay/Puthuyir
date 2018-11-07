@@ -4,8 +4,7 @@ import { UserService} from '../services/user.service';
 
 @Component({
 	selector   : 's-logout-pg',
-	templateUrl: './logout.component.html',
-    styleUrls  : [ './logout.scss'],
+	templateUrl: './logout.component.html'
 })
 
 export class LogoutComponent {

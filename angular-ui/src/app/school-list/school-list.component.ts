@@ -16,7 +16,8 @@ export class SchoolListComponent implements OnInit {
   constructor( private schoolService: SchoolService ) { }
 
   ngOnInit() {
-    this.imageUrl = environment["image.server.url"];
+    this.imageUrl = environment["school.image.dir"];
+    console.log('imageUrl..'+this.imageUrl);
     this.getSchoolList();
   }
 
