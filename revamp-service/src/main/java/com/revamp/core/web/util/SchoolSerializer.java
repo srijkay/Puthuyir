@@ -4,14 +4,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import com.revamp.core.model.School;
-import com.revamp.core.model.SchoolImage;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import com.revamp.core.model.Project;
+import com.revamp.core.model.Requirement;
+import com.revamp.core.model.School;
+import com.revamp.core.model.SchoolImage;
 
 public class SchoolSerializer extends StdSerializer<School> {
 
@@ -34,13 +37,21 @@ public class SchoolSerializer extends StdSerializer<School> {
 		jgen.writeObjectField("schoolInfo", school.getSchoolInfo());
 		jgen.writeObjectField("concats", school.getContacts());
 		jgen.writeObjectField("address", school.getAddress());
-		
-		jgen.writeObjectField("projects", school.getProjects());
+		jgen.writeObjectField("requirements", this.getRequirements(school));
+		//jgen.writeObjectField("projects", school.getProjects());
 		jgen.writeObjectField("proofOfIds", this.convertImageWrapper(school.getSchoolImages()));
 		jgen.writeEndObject();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private Set<Requirement> getRequirements(School school) {
+		return school.getProjects()
+			.stream()
+			.filter(project -> project.getProjectStatus().equals("ACTIVE"))
+			.flatMap(project -> project.getRequirements().stream())
+			.collect(Collectors.toSet());
 	}
 	
 	private SchoolImageWrapper convertImageWrapper(Set<SchoolImage> images) {

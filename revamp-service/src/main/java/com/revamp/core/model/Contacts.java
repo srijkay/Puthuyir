@@ -20,7 +20,7 @@ public class Contacts implements java.io.Serializable {
 	private static final long serialVersionUID = 1769915147037089195L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "contacts_id", nullable = false)
 	private long contactsId;
 

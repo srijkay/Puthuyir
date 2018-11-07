@@ -1,9 +1,10 @@
 package com.revamp.core.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +30,7 @@ public class Project implements java.io.Serializable {
 	private static final long serialVersionUID = -5416628745442805358L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "project_id", nullable = false)
 	private long projectId;
 
@@ -45,10 +46,10 @@ public class Project implements java.io.Serializable {
 	private int collectedAmount;
 
 	@Column(name = "project_status")
-	private String projectStatus = "SUBMITTED";
+	private String projectStatus = "ACTIVE";
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
-	private List<Requirement> requirements;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
+	private Set<Requirement> requirements;
 
 	@Column(name = "date_created")
 	@Basic
@@ -95,11 +96,12 @@ public class Project implements java.io.Serializable {
 		this.projectStatus = projectStatus;
 	}
 
-	public List<Requirement> getRequirements() {
+
+	public Set<Requirement> getRequirements() {
 		return requirements;
 	}
 
-	public void setRequirements(List<Requirement> requirements) {
+	public void setRequirements(Set<Requirement> requirements) {
 		this.requirements = requirements;
 	}
 

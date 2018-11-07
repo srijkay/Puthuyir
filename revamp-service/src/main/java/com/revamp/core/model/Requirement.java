@@ -16,21 +16,20 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Proxy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "requirement")
 @Proxy(lazy = false)
-@JsonIgnoreProperties(value = { "school" })
 public class Requirement implements java.io.Serializable {
 
 	private static final long serialVersionUID = -7230483495700936141L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "requirement_id", nullable = false)
 	private long requirementId;
 

@@ -17,7 +17,7 @@ public class Address implements java.io.Serializable {
 	private static final long serialVersionUID = 1956522127988632591L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "address_id")
 	private long addressId;
 

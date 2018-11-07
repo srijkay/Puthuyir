@@ -6,16 +6,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.revamp.core.dao.SchoolDAO;
-import com.revamp.core.model.School;
-import com.revamp.core.model.SchoolImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.revamp.core.dao.SchoolDAO;
+import com.revamp.core.model.Project;
+import com.revamp.core.model.Requirement;
+import com.revamp.core.model.School;
+import com.revamp.core.model.SchoolImage;
 
 @Service
 @Transactional(readOnly = true)
@@ -27,23 +32,49 @@ public class SchoolServiceImpl implements SchoolService {
 	
 	@Transactional
 	public long save(School school, Map<String, byte[]> files, String imgPath) {
-		String dirPath = imgPath+"\\";
+		String fileSubPath = DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now())+"\\";
+		
 		files.forEach((k,v) -> {
-			String filePath = DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now())+"\\"+school.getSchoolInfo().getSchoolName()+"_";
+			String filePath = fileSubPath+school.getSchoolInfo().getSchoolName()+"_";
 			SchoolImage si = new SchoolImage(filePath+k,v,school.getProofOfId().getComments());
 			si.setSchool(school);
 			school.getSchoolImages().add(si);
 		});
 		
-		school.getProjects().forEach(req -> req.setSchool(school));
+		Set<Project> project = new HashSet<Project>();
+		project.add(this.createDefaultProject(school));
+		school.setProjects(project);
+		
 		long id = schoolDAO.save(school);
-		this.saveImgToFS(dirPath,school.getSchoolImages());
+		this.saveImgToFS(imgPath,fileSubPath,school.getSchoolImages());
 		return id;
 	}
 	
-	private void saveImgToFS(String dirPath, Set<SchoolImage> list) {
+	private Project createDefaultProject(School school) {
+		Project project = new Project();
+		project.setEstimate(10000);
+		project.setProjectStatus("ACTIVE");
+		school.getRequirements().forEach(req -> req.setProject(project));
+		project.setRequirements(new HashSet<Requirement>(school.getRequirements()));
+		project.setSchool(school);
+		return project;
+	}
+	
+	private void saveImgToFS(String dirPath, String fileSubPath, Set<SchoolImage> list) {
 		list.forEach(schoolImg -> {
-			Path path = Paths.get(dirPath+schoolImg.getFilePath());
+			String tmpDirPath = dirPath+"\\"+fileSubPath;
+			if(!Files.isDirectory(Paths.get(tmpDirPath))) {
+				try {
+					Files.createDirectories(Paths.get(tmpDirPath));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			Path path = Paths.get(dirPath+"\\"+schoolImg.getFilePath());
+			
+			
             try {
 				Files.write(path, schoolImg.getImage());
 			} catch (IOException e) {

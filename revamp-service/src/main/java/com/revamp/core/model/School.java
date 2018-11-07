@@ -40,7 +40,7 @@ public class School implements java.io.Serializable {
 	private static final long serialVersionUID = 8607633702511344481L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "school_id", nullable = false)
 	private long schoolId;
 
@@ -56,8 +56,8 @@ public class School implements java.io.Serializable {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "school")
-	private List<Project> projects;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "school")
+	private Set<Project> projects;
 
 	@Column(name = "date_created")
 	@Basic
@@ -71,6 +71,17 @@ public class School implements java.io.Serializable {
 	@Transient
 	private ProofOfId proofOfId;
 	
+	@Transient
+	private List<Requirement> requirements;
+	
+	public List<Requirement> getRequirements() {
+		return requirements;
+	}
+
+	public void setRequirements(List<Requirement> requirements) {
+		this.requirements = requirements;
+	}
+
 	public ProofOfId getProofOfId() {
 		return proofOfId;
 	}
@@ -156,14 +167,14 @@ public class School implements java.io.Serializable {
 		this.status = status;
 	}
 
-	public List<Project> getProjects() {
+	public Set<Project> getProjects() {
 		return projects;
 	}
 
-	public void setProjects(List<Project> projects) {
+	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "School [schoolId=" + schoolId + ", schoolInfo=" + schoolInfo

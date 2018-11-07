@@ -152,36 +152,32 @@ CREATE TABLE IF NOT EXISTS revamp_db.lookup(
 
 DROP TABLE IF EXISTS `revamp_db`.`project`;
 
-CREATE TABLE IF NOT EXISTS `revamp_db`.`project`(
-	`project_id` INT NOT NULL AUTO_INCREMENT,
-    `school_id` INT NOT NULL,
-    `requirement_id` INT NOT NULL,
-    `estimate` INT,
-    `collected_amount` INT,
-    `project_status` VARCHAR(45) NOT NULL,
-    `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`project_id`),
-    CONSTRAINT `school_id` FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`)
+CREATE TABLE IF NOT EXISTS revamp_db.project(
+	project_id INT NOT NULL AUTO_INCREMENT,
+    school_id INT NOT NULL,
+    estimate INT,
+    collected_amount INT,
+    project_status VARCHAR(45) NOT NULL,
+    v_project_status BIT AS (CASE WHEN project_status  = 'ACTIVE' THEN b'1' ELSE NULL END) VIRTUAL,
+    date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (project_id),
+    CONSTRAINT school_id FOREIGN KEY (school_id) REFERENCES revamp_db.school (school_id),
+    CONSTRAINT UNIQUE project(project_id,school_id,v_project_status)
 );
+
 
 DROP TABLE IF EXISTS `revamp_db`.`requirement`;
 
 CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
 	`requirement_id` INT NOT NULL AUTO_INCREMENT,
-    `project_id` INT NOT NULL,
-    `user_id` BIGINT NOT NULL,
+	`project_id` INT NOT NULL,
 	`reqtype` varchar(45) NOT NULL,
-    `assettype` varchar(45) NOT NULL,
-    `assetname` varchar(45) NOT NULL,    
-    `quantity` INT NOT NULL,
-    `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	`assettype` varchar(45) NOT NULL,
+	`assetname` varchar(45) NOT NULL,    
+	`quantity` INT NOT NULL,
+	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`requirement_id`),
-    CONSTRAINT `user_id`
-    FOREIGN KEY (`user_id`)
-	REFERENCES `revamp_db`.`user` (`userid`),
-    CONSTRAINT `project_id`
-	FOREIGN KEY (`project_id`)
-	REFERENCES `revamp_db`.`project` (`project_id`)
+	CONSTRAINT `project_id` FOREIGN KEY (`project_id`) REFERENCES `revamp_db`.`project` (`project_id`)
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
 );
