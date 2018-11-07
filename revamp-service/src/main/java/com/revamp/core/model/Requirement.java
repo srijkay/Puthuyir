@@ -3,6 +3,7 @@ package com.revamp.core.model;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -57,6 +59,18 @@ public class Requirement implements java.io.Serializable {
 	
 	@Column(name = "priority")
 	private String priority;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@PrePersist
 	protected void onCreate() {
@@ -129,10 +143,10 @@ public class Requirement implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Requirement [requirementId=" + requirementId + ", reqType="
-				+ reqType + ", assetType=" + assetType + ", assetName="
-				+ assetName + ", quantity=" + quantity + ", dateAdded="
-				+ dateAdded + "]";
+		return "Requirement [requirementId=" + requirementId + ", reqType=" + reqType
+				+ ", assetType=" + assetType + ", assetName=" + assetName + ", quantity=" + quantity + ", dateAdded="
+				+ dateAdded + ", priority=" + priority +  "]";
 	}
 
+	
 }

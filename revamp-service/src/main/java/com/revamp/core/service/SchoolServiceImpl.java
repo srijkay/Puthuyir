@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +16,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revamp.core.dao.SchoolDAO;
+import com.revamp.core.dao.UserDAO;
 import com.revamp.core.model.Project;
 import com.revamp.core.model.Requirement;
 import com.revamp.core.model.School;
 import com.revamp.core.model.SchoolImage;
+import com.revamp.core.model.User;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,6 +29,9 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Autowired
 	private SchoolDAO schoolDAO;
+	
+	@Autowired
+	private UserDAO userDAO;
 
 	
 	@Transactional
@@ -45,9 +49,18 @@ public class SchoolServiceImpl implements SchoolService {
 		project.add(this.createDefaultProject(school));
 		school.setProjects(project);
 		
+		//set user to the Requirement.
+		this.setUserToRequirements(school);
+		
 		long id = schoolDAO.save(school);
 		this.saveImgToFS(imgPath,fileSubPath,school.getSchoolImages());
 		return id;
+	}
+	
+	private void setUserToRequirements(School school) {
+		//TODO: currently cd it is hard coded to User ID 2.
+		User beneUser = this.userDAO.get(2);
+		school.getRequirements().forEach(req -> req.setUser(beneUser));
 	}
 	
 	private Project createDefaultProject(School school) {
