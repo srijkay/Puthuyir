@@ -57,6 +57,9 @@ public class AppConfig {
     @Value("${hibernate.c3p0.max_statements}")
     private String HIBERNATE_C3P0_MAX_STATEMENTS;
     
+    @Value("${hibernate.id.new_generator_mappings}")
+    private String HIBERNATE_ID_NEW_GENERATOR_MAPPINGS;
+    
     
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
@@ -72,6 +75,7 @@ public class AppConfig {
         hibernateProperties.put("hibernate.c3p0.timeout", HIBERNATE_C3P0_TIMEOUT);
         hibernateProperties.put("hibernate.c3p0.max_statements", HIBERNATE_C3P0_MAX_STATEMENTS);
         hibernateProperties.put("hibernate.ddl-auto", HIBERNATE_HBM2DDL_AUTO);
+        hibernateProperties.put("hibernate.id.new_generator_mappings", HIBERNATE_ID_NEW_GENERATOR_MAPPINGS);
         sessionFactory.setHibernateProperties(hibernateProperties);
         return sessionFactory;
     }

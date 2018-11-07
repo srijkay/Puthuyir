@@ -169,17 +169,20 @@ CREATE TABLE IF NOT EXISTS revamp_db.project(
 DROP TABLE IF EXISTS `revamp_db`.`requirement`;
 
 CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
-	`requirement_id` INT NOT NULL AUTO_INCREMENT,
-	`project_id` INT NOT NULL,
-	`reqtype` varchar(45) NOT NULL,
-	`assettype` varchar(45) NOT NULL,
-	`assetname` varchar(45) NOT NULL,    
-	`quantity` INT NOT NULL,
-	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`requirement_id`),
-	CONSTRAINT `project_id` FOREIGN KEY (`project_id`) REFERENCES `revamp_db`.`project` (`project_id`)
-	ON DELETE NO ACTION
-	ON UPDATE CASCADE
+  `requirement_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `reqtype` varchar(45) NOT NULL,
+  `assettype` varchar(45) NOT NULL,
+  `assetname` varchar(45) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `priority` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`requirement_id`),
+  KEY `user_id` (`user_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`userid`)
 );
 
 
@@ -199,4 +202,47 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`donation`(
     CONSTRAINT `donor_id`
     FOREIGN KEY (`donor_id`)
     REFERENCES `revamp_db`.`user` (`userid`)
+);
+
+DROP TABLE IF EXISTS `revamp_db`.`quotation`;
+
+CREATE TABLE `quotation` (
+  `quotation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `image_id` int(11) DEFAULT NULL,
+  `quotated_amount` int(11) DEFAULT NULL,
+  `warranty` varchar(100) DEFAULT NULL,
+  `trader_name` varchar(100) DEFAULT NULL,
+  `location` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `phone` varchar(100) DEFAULT NULL,
+  `collected_by` varchar(100) DEFAULT NULL,
+  `verified_by` varchar(100) DEFAULT NULL,
+  `reviewer` varchar(100) DEFAULT NULL,
+  `quotation_status` varchar(100) DEFAULT NULL,
+  `quotation_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `quotation_validity_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `requirement_id` int(11) NOT NULL,
+  PRIMARY KEY (`quotation_id`),
+  KEY `requirement_id` (`requirement_id`),
+  CONSTRAINT `quotation_requirement_id` FOREIGN KEY (`requirement_id`) REFERENCES `requirement` (`requirement_id`)
+);
+
+DROP TABLE IF EXISTS `revamp_db`.`fundallotment`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`fundallotment`(
+	`fundallotment_id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` BIGINT NOT NULL,
+	`requirement_id` INT NOT NULL,
+    `collected_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `totalamount` INT NOT NULL,    
+    `interest` INT,
+    `allocated_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `updated_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`fundallotment_id`),
+	FOREIGN KEY (`requirement_id`)
+	REFERENCES `revamp_db`.`requirement` (`requirement_id`),
+	FOREIGN KEY (`user_id`)
+	REFERENCES `revamp_db`.`user` (`userid`)
+	ON DELETE NO ACTION
+	ON UPDATE CASCADE
 );
