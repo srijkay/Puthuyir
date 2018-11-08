@@ -6,6 +6,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,10 +20,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Proxy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.revamp.core.lookup.PuthuyirLookUp;
 
 @Entity
 @Table(name = "requirement")
@@ -51,6 +53,10 @@ public class Requirement implements java.io.Serializable {
 
 	@Column(name = "quantity")
 	private int quantity;
+	
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
+	private PuthuyirLookUp status;
 
 	@Column(name = "date_created")
 	@Basic
@@ -140,12 +146,20 @@ public class Requirement implements java.io.Serializable {
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
+	
+	public PuthuyirLookUp getStatus() {
+		return status;
+	}
+
+	public void setStatus(PuthuyirLookUp status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
 		return "Requirement [requirementId=" + requirementId + ", reqType=" + reqType
 				+ ", assetType=" + assetType + ", assetName=" + assetName + ", quantity=" + quantity + ", dateAdded="
-				+ dateAdded + ", priority=" + priority +  "]";
+				+ dateAdded + ", priority=" + priority +", status=" + status +  "]";
 	}
 
 	

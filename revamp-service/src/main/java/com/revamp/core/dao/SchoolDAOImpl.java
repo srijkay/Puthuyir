@@ -17,16 +17,6 @@ public class SchoolDAOImpl implements SchoolDAO {
 	public long save(School school) {
 		System.out.println(school);
 		sessionFactory.getCurrentSession().save(school);
-		
-		/*for(Requirement requirement : school.getRequirements()) {
-			requirement.setSchool(school);
-			Date dateAdded = requirement.getDateAdded();
-			if(dateAdded == null) {
-				requirement.setDateAdded(new Date());
-			}
-			sessionFactory.getCurrentSession().save(requirement);
-		}*/
-		
 		return school.getSchoolId();
 	}
 

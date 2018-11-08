@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.revamp.core.dao.SchoolDAO;
 import com.revamp.core.dao.UserDAO;
+import com.revamp.core.lookup.PuthuyirLookUp;
 import com.revamp.core.model.Project;
 import com.revamp.core.model.Requirement;
 import com.revamp.core.model.School;
@@ -37,7 +38,7 @@ public class SchoolServiceImpl implements SchoolService {
 	@Transactional
 	public long save(School school, Map<String, byte[]> files, String imgPath) {
 		String fileSubPath = DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now())+"\\";
-		
+		school.setStatus(PuthuyirLookUp.SCHOOL_REGISTERED);
 		files.forEach((k,v) -> {
 			String filePath = fileSubPath+school.getSchoolInfo().getSchoolName()+"_";
 			SchoolImage si = new SchoolImage(filePath+k,v,school.getProofOfId().getComments());
@@ -60,13 +61,16 @@ public class SchoolServiceImpl implements SchoolService {
 	private void setUserToRequirements(School school) {
 		//TODO: currently cd it is hard coded to User ID 2.
 		User beneUser = this.userDAO.get(2);
-		school.getRequirements().forEach(req -> req.setUser(beneUser));
+		school.getRequirements().forEach(req -> {
+			req.setUser(beneUser);
+			req.setStatus(PuthuyirLookUp.REQ_ADDED);
+		});
 	}
 	
 	private Project createDefaultProject(School school) {
 		Project project = new Project();
 		project.setEstimate(10000);
-		project.setProjectStatus("ACTIVE");
+		project.setStatus(PuthuyirLookUp.PROJECT_CREATED);
 		school.getRequirements().forEach(req -> req.setProject(project));
 		project.setRequirements(new HashSet<Requirement>(school.getRequirements()));
 		project.setSchool(school);

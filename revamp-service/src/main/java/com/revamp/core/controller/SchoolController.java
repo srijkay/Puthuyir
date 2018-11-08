@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revamp.core.lookup.PuthuyirLookUp;
 import com.revamp.core.model.School;
 import com.revamp.core.model.SchoolRegFormModel;
 import com.revamp.core.service.SchoolService;

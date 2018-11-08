@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
     `contacts_id` INT NOT NULL,
     `address_id` INT NOT NULL,
     `school_info_id` INT NOT NULL,
-    `school_status` VARCHAR(45) DEFAULT 'REGISTERED',
+    `status` VARCHAR(45) NOT NULL,
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`school_id`),
 	FOREIGN KEY (`contacts_id`) REFERENCES contacts (`contacts_id`),
@@ -157,12 +157,12 @@ CREATE TABLE IF NOT EXISTS revamp_db.project(
     school_id INT NOT NULL,
     estimate INT,
     collected_amount INT,
-    project_status VARCHAR(45) NOT NULL,
-    v_project_status BIT AS (CASE WHEN project_status  = 'ACTIVE' THEN b'1' ELSE NULL END) VIRTUAL,
+    status VARCHAR(45) NOT NULL,
+    v_status BIT AS (CASE WHEN status = 'ProjectCreated' THEN b'1' ELSE NULL END) VIRTUAL,
     date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (project_id),
     CONSTRAINT school_id FOREIGN KEY (school_id) REFERENCES revamp_db.school (school_id),
-    CONSTRAINT UNIQUE project(project_id,school_id,v_project_status)
+    CONSTRAINT UNIQUE project(project_id,school_id,v_status)
 );
 
 
@@ -176,6 +176,7 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
   `assettype` varchar(45) NOT NULL,
   `assetname` varchar(45) NOT NULL,
   `quantity` int(11) NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
   `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
   `priority` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`requirement_id`),

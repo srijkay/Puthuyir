@@ -3,18 +3,7 @@
   <div class="breadcrumb">
     <div class="wrap">
       <div class="container">
-        Welcome Message. Register your school here
-      </div>
-    </div>
-  </div>
-
-  <div class="span 12">
-    <div> If Beneficiary already added a school, show this link to view current status
-      <div>
-        <div>Beneficiary Link -
-          <a href="Track_School_Status.html">Click here to view School Status</a>
-        </div>
-        <h3>Otherwise, enter below details</h3>
+        Register/View your school here
       </div>
     </div>
   </div>
@@ -26,13 +15,13 @@
             <ng-template ngbTabContent>
               <fieldset formGroupName="schoolInfo">
                 <div class="form-group">
-                  <label class="control-label">School Name</label><span class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">School name is required</span> 
+                  <label class="control-label">School Name</label><span class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">School name is required</span>
                   <input type="text" class="form-control" id="schoolName" formControlName="schoolName">
                   <div class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">
                     <p>School name is required</p>
                   </div>
                 </div>
-                
+
                 <div class="form-group">
                   <label class="control-label">School Type</label>
                   <select id="schoolType" class="form-control" formControlName="schoolType" ng-required="required">
@@ -51,7 +40,7 @@
                     <p>School RegNo is required</p>
                   </div>
                 </div>
-          
+
                 <div class="form-group">
                   <label class="control-label">Number of Students</label>
                   <input type="number" class="form-control" id="numberOfStudents" formControlName="numberOfStudents">
@@ -59,7 +48,7 @@
                     <p>Number of students required</p>
                   </div>
                 </div>
-          
+
                 <div class="form-group">
                   <label class="control-label">Number of Teachers</label>
                   <div class="controls">
@@ -69,9 +58,9 @@
                     <p>Number of teachers required</p>
                   </div>
                 </div>
-          
+
               </fieldset>
-          
+
             </ng-template>
           </ngb-tab>
           <ngb-tab title="Contacts">
@@ -84,7 +73,7 @@
                         <p>Primary Contact name is required</p>
                       </div>
                     </div>
-              
+
                     <div class="form-group">
                       <label >Primary Contact Number</label>
                       <input type="text" class="form-control" id="priNum" formControlName="priNum">
@@ -92,7 +81,7 @@
                         <p>Contact number is required</p>
                       </div>
                     </div>
-              
+
                     <div class="form-group" [ngClass]="{
                       'has-success':priEmail.valid && (priEmail.dirty || priEmail.touched),
                       'has-danger':priEmail.invalid && (priEmail.dirty || priEmail.touched)
@@ -104,17 +93,17 @@
                         <p *ngIf="priEmail.errors.pattern">Wrong Email pattern</p>
                       </div>
                     </div>
-              
+
                     <div class="form-group">
                       <label class="control-label">Secondary Contact</label>
                       <input type="text" class="form-control" id="secName" size="30" maxlength="30" formControlName="secName">
                     </div>
-              
+
                     <div class="form-group">
                       <label class="control-label">Secondary Contact Number</label>
                       <input type="text" class="form-control" id="secNum" size="30" maxlength="30" formControlName="secNum">
                     </div>
-              
+
                     <div class="form-group">
                       <label class="control-label">Secondary Contact Email</label>
                       <input type="text" class="form-control" id="secEmail" size="30" maxlength="30" formControlName="secEmail">
@@ -136,7 +125,7 @@
                         <p>School Address is required</p>
                       </div>
                     </div>
-              
+
                     <div class="form-group">
                       <label class="control-label">Street Name</label>
                       <input type="text" class="form-control" id="addressLine2" formControlName="addressLine2">
@@ -144,7 +133,7 @@
                         <p>School Address is required</p>
                       </div>
                     </div>
-              
+
                     <div class="form-group">
                       <label class="control-label">Town/City</label>
                       <input type="text" class="form-control" id="city" formControlName="city">
@@ -152,7 +141,7 @@
                         <p>City is required</p>
                       </div>
                     </div>
-              
+
                     <div class="form-group">
                       <label class="control-label">District</label>
                       <select id="district" class="form-control" formControlName="district">
@@ -163,8 +152,8 @@
                         <p>District is required</p>
                       </div>
                     </div>
-              
-              
+
+
                     <div class="form-group">
                       <label class="control-label">State</label>
                       <select id="state" class="form-control" formControlName="state">
@@ -175,7 +164,7 @@
                         <p>State is required</p>
                       </div>
                     </div>
-              
+
                     <div class="form-group">
                       <label class="control-label">PinCode</label>
                       <input type="text" class="form-control" id="city" formControlName="pinCode">
@@ -183,9 +172,9 @@
                         <p>PinCode is required</p>
                       </div>
                     </div>
-              
+
                   </fieldset>
-              
+
             </ng-template>
           </ngb-tab>
           <ngb-tab>
@@ -202,7 +191,7 @@
                         <p>Requirement Type is required</p>
                       </div>
                     </div>
-              
+
                     <div class="form-group">
                       <label class="control-label">Asset Type</label>
                       <select id="assetType" class="form-control" formControlName="assetType">
@@ -213,7 +202,7 @@
                         <p>Asset Type is required</p>
                       </div>
                     </div>
-              
+
                     <div class="form-group">
                       <label class="control-label">Asset Name</label>
                       <select id="assetName" class="form-control" formControlName="assetName">
@@ -224,8 +213,8 @@
                         <p>Asset Name is required</p>
                       </div>
                     </div>
-              
-              
+
+
                     <div class="form-group">
                       <label class="control-label">Quantity</label>
                       <input type="number" class="form-control" id="quantity" formControlName="quantity">
@@ -233,15 +222,15 @@
                         <p>Quantity is required</p>
                       </div>
                     </div>
-              
+
                     <div class="form-group">
                       <button type="button" class="btn btn-primary btn-sm"  (click)="addRequirement()">Add Requirement</button>
                     </div>
-              
+
                     <div class="form-group" *ngIf="(requirements.length > 0)">
                       <button  type="button" class="btn btn-primary btn-sm">Delete Requirement</button>
                     </div>
-              
+
                     <table class="table table-bordered" *ngIf="(schoolRegForm.get('requirements').length > 0)">
                       <tr>
                         <th>Select</th>
@@ -258,33 +247,33 @@
                         <td>{{requirement.controls.quantity.value}}</td>
                       </tr>
                     </table>
-              
-              
+
+
                   </fieldset>
-                
+
             </ng-template>
           </ngb-tab>
-          
+
           <ngb-tab>
               <ng-template ngbTabTitle>Proof Of Identity</ng-template>
               <ng-template ngbTabContent>
-          
+
                 <fieldset formGroupName="proofOfId">
                       <div class="form-group">
                         <label class="control-label">Upload proof of identity of the school</label>
                         <input type="file" class="btn btn-sm btn-default" id="image" (change)="onFileChange($event)" #fileInput multiple>
                         <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
                       </div>
-                      
+
                       <div class="form-group">
                         <label class="control-label">Comments / Message to Trust</label>
                         <textarea class="form-control" id="comments" rows="3" formControlName="comments"></textarea>
                       </div>
                     </fieldset>
-                
+
               </ng-template>
-          </ngb-tab>    
-        </ngb-tabset>   
+          </ngb-tab>
+        </ngb-tabset>
 
 <div class="form-actions">
   <button type="submit" class="btn btn-success" [disabled]="disableSubmitBtn()">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
@@ -295,4 +284,3 @@
 
   <!--pre>{{schoolRegForm.value | json}}</pre-->
 </div>
-

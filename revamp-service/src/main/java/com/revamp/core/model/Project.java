@@ -7,6 +7,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +23,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Proxy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.revamp.core.lookup.PuthuyirLookUp;
 
 @Entity
 @Table(name = "project")
@@ -45,8 +48,9 @@ public class Project implements java.io.Serializable {
 	@Column(name = "collected_amount")
 	private int collectedAmount;
 
-	@Column(name = "project_status")
-	private String projectStatus = "ACTIVE";
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
+	private PuthuyirLookUp status;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
 	private Set<Requirement> requirements;
@@ -88,12 +92,12 @@ public class Project implements java.io.Serializable {
 		this.collectedAmount = collectedAmount;
 	}
 
-	public String getProjectStatus() {
-		return projectStatus;
+	public PuthuyirLookUp getStatus() {
+		return status;
 	}
 
-	public void setProjectStatus(String projectStatus) {
-		this.projectStatus = projectStatus;
+	public void setStatus(PuthuyirLookUp status) {
+		this.status = status;
 	}
 
 
@@ -116,8 +120,8 @@ public class Project implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Project [projectId=" + projectId + ", estimate=" + estimate
-				+ ", collectedAmount=" + collectedAmount + ", projectStatus="
-				+ projectStatus + ", requirements=" + requirements
+				+ ", collectedAmount=" + collectedAmount + ", Status="
+				+ status + ", requirements=" + requirements
 				+ ", dateAdded=" + dateAdded + "]";
 	}
 

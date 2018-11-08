@@ -49,7 +49,7 @@ public class SchoolSerializer extends StdSerializer<School> {
 	private Set<Requirement> getRequirements(School school) {
 		return school.getProjects()
 			.stream()
-			.filter(project -> project.getProjectStatus().equals("ACTIVE"))
+			//.filter(project -> project.getStatus().equals("ACTIVE"))
 			.flatMap(project -> project.getRequirements().stream())
 			.collect(Collectors.toSet());
 	}

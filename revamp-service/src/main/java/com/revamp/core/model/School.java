@@ -9,6 +9,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +25,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Proxy;
+
+import com.revamp.core.lookup.PuthuyirLookUp;
 import com.revamp.core.web.util.SchoolSerializer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -64,8 +68,9 @@ public class School implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateCreated;
 
-	@Column(name = "school_status")
-	private String status = "REGISTERED";
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
+	private PuthuyirLookUp status;
 
 	@JsonProperty("proofOfId")
 	@Transient
@@ -159,11 +164,11 @@ public class School implements java.io.Serializable {
 		this.dateCreated = dateCreated;
 	}
 
-	public String getStatus() {
+	public PuthuyirLookUp getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(PuthuyirLookUp status) {
 		this.status = status;
 	}
 
