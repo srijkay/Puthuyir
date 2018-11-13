@@ -207,14 +207,13 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`donation`(
 
 DROP TABLE IF EXISTS `revamp_db`.`quotation`;
 
-CREATE TABLE `quotation` (
+CREATE TABLE IF NOT EXISTS `revamp_db`.`quotation` (
   `quotation_id` int(11) NOT NULL AUTO_INCREMENT,
   `image_id` int(11) DEFAULT NULL,
   `quotated_amount` int(11) DEFAULT NULL,
   `warranty` varchar(100) DEFAULT NULL,
-  `trader_name` varchar(100) DEFAULT NULL,
-  `location` varchar(100) DEFAULT NULL,
-  `address` varchar(100) DEFAULT NULL,
+  `trader_name` varchar(100) DEFAULT NULL,  
+  `address_id` int(11) NOT NULL,
   `phone` varchar(100) DEFAULT NULL,
   `collected_by` varchar(100) DEFAULT NULL,
   `verified_by` varchar(100) DEFAULT NULL,
@@ -222,11 +221,15 @@ CREATE TABLE `quotation` (
   `quotation_status` varchar(100) DEFAULT NULL,
   `quotation_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `quotation_validity_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `school_id` int(11) NOT NULL,
   `requirement_id` int(11) NOT NULL,
-  PRIMARY KEY (`quotation_id`),
+  `is_quotation_active` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`quotation_id`),  
   KEY `requirement_id` (`requirement_id`),
+  CONSTRAINT `quotation_address_id` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`),
+  CONSTRAINT `quotation_school_id` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`),
   CONSTRAINT `quotation_requirement_id` FOREIGN KEY (`requirement_id`) REFERENCES `requirement` (`requirement_id`)
-);
+) ;
 
 DROP TABLE IF EXISTS `revamp_db`.`fundallotment`;
 

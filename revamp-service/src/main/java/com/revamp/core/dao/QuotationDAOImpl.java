@@ -45,4 +45,12 @@ public class QuotationDAOImpl implements QuotationDAO {
 				.setParameter("quotationStatus", quotationStatus).list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Quotation> getQuotationsBySchool(long schoolId) {
+		return sessionFactory.getCurrentSession()
+				.createQuery(" from Quotation where schoolId = :schoolId")
+				.setParameter("schoolId", schoolId).list();
+	}
+
 }
