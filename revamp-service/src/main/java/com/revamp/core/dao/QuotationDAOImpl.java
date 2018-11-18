@@ -17,7 +17,7 @@ public class QuotationDAOImpl implements QuotationDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Quotation> getQuotations() {
-		return sessionFactory.getCurrentSession().createQuery(" from Quotation ").list();
+		return sessionFactory.getCurrentSession().createQuery(" from Quotation where isQuotationActive = 'Y'").list();
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class QuotationDAOImpl implements QuotationDAO {
 
 	@Override
 	public void delete(long quotationId) {
-		sessionFactory.getCurrentSession().createQuery("delete from Quotation where id = :id")
+		sessionFactory.getCurrentSession().createQuery("update Quotation set isQuotationActive = 'N' where id = :id")
 				.setParameter("id", quotationId).executeUpdate();
 	}
 
@@ -48,8 +48,7 @@ public class QuotationDAOImpl implements QuotationDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Quotation> getQuotationsBySchool(long schoolId) {
-		return sessionFactory.getCurrentSession()
-				.createQuery(" from Quotation where schoolId = :schoolId")
+		return sessionFactory.getCurrentSession().createQuery(" from Quotation where schoolId = :schoolId")
 				.setParameter("schoolId", schoolId).list();
 	}
 
