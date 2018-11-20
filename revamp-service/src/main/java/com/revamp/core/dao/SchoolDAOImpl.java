@@ -57,6 +57,14 @@ public class SchoolDAOImpl implements SchoolDAO {
 	
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<School> getByUserId(long userId) {
+		return sessionFactory.getCurrentSession()
+				.createQuery("FROM School s where s.user.userid = :userId ")
+				.setParameter("userId", userId).list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<School> getAllByName(String contains) {
 		return sessionFactory.getCurrentSession()
 				.createQuery("FROM School s where lower(s.schoolName) like concat('%',:contains,'%')")

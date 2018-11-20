@@ -9,7 +9,7 @@ import {AdminComponent} from './admin/admin.component';
 import {HomeComponent} from './home/home.component';
 import {LogoutComponent} from './logout/logout.component';
 import {ViewSchoolRegistrationComponent} from './view-school-registration/view-school-registration.component'
-
+import { SchollregconfirmComponent } from './schollregconfirm/schollregconfirm.component';
 const routes: Routes = [
   {
     path: 'schoolregistration',
@@ -42,6 +42,11 @@ const routes: Routes = [
 
   },
   {
+    path: 'schoolRegConfirm',
+    component: SchollregconfirmComponent
+  },
+
+  {
     path: '**',
     component: PageNotFoundComponent
   },
@@ -57,5 +62,3 @@ const routes: Routes = [
 
 })
 export class AppRoutingModule { }
-
-

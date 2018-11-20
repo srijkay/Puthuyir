@@ -247,28 +247,12 @@ export class SchoolRegistrationComponent implements OnInit {
       let file = event.target.files[0];
       this.schoolRegForm.controls.proofOfId.get('image').setValue(file);
       var reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]); 
-      reader.onload = (event: any) => { 
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
         this.schoolService.enterImageUrl(event.target.result);
       }
     }
   }
-
-
-  /*clearFile() {
-    (<FormArray>this.schoolRegForm.controls.proofOfId.get('image')).reset();
-    this.fileInput.nativeElement.value = '';
-  }
-  onFileChange(event) {
-    console.log('..onFileChange..'+event.target.files.length);
-    for(let i=0; i < event.target.files.length; i++) {
-      let file = event.target.files[i];
-      (<FormArray>this.schoolRegForm.controls.proofOfId.get('image')).push(new FormGroup({image:new FormControl(file)}));
-      console.log((<FormArray>this.schoolRegForm.controls.proofOfId.get('image')).length);  
-    }
-    
-  }*/
-
 
   addRequirement() {
     (<FormArray>this.schoolRegForm.controls.requirements).push(new FormGroup({
@@ -292,7 +276,7 @@ export class SchoolRegistrationComponent implements OnInit {
     return input;
   }
 
-  addSchoolRegForm() {
+  /*addSchoolRegForm() {
     const formModel = this.prepareSave();
     this.loading = true;
     this.schoolService.registerSchool(formModel)
@@ -304,7 +288,7 @@ export class SchoolRegistrationComponent implements OnInit {
         },
         (error) => console.log(error)
       );
-  }
+  }*/
 
 
   disableSubmitBtn() {
@@ -315,4 +299,3 @@ export class SchoolRegistrationComponent implements OnInit {
     }
   }
 }
-

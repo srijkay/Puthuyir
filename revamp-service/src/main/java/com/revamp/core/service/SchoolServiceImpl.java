@@ -51,16 +51,17 @@ public class SchoolServiceImpl implements SchoolService {
 		school.setProjects(project);
 		
 		//set user to the Requirement.
-		this.setUserToRequirements(school);
+		this.setUser(school);
 		
 		long id = schoolDAO.save(school);
 		this.saveImgToFS(imgPath,fileSubPath,school.getSchoolImages());
 		return id;
 	}
 	
-	private void setUserToRequirements(School school) {
+	private void setUser(School school) {
 		//TODO: currently cd it is hard coded to User ID 2.
 		User beneUser = this.userDAO.get(2);
+		school.setUser(beneUser);
 		school.getRequirements().forEach(req -> {
 			req.setUser(beneUser);
 			req.setStatus(PuthuyirLookUp.REQ_ADDED);
@@ -127,6 +128,11 @@ public class SchoolServiceImpl implements SchoolService {
 	@Override
 	public List<School> getAllByLocality(String localityId) {
 		return schoolDAO.getAllByLocality(localityId);
+	}
+	
+	@Override
+	public List<School> getByUserId(long userId) {
+		return schoolDAO.getByUserId(userId);
 	}
 
 }

@@ -81,6 +81,19 @@ public class SchoolController {
 		return ResponseEntity.ok().body(school);
 	}
 
+	
+	/**
+	 * 
+	 * @param schoolId
+	 * @return
+	 */
+	@GetMapping("/school/user/{id}")
+	public ResponseEntity<List<School>> getSchoolByUserId(@PathVariable("id") long userId) {
+		List<School> list = schoolService.getByUserId(userId);
+		return ResponseEntity.ok().body(list);
+	}
+
+	
 	/**
 	 * 
 	 * @param school

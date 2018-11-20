@@ -76,6 +76,11 @@ public class School implements java.io.Serializable {
 	@Transient
 	private ProofOfId proofOfId;
 	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	
 	@Transient
 	private List<Requirement> requirements;
 	
@@ -86,6 +91,15 @@ public class School implements java.io.Serializable {
 	public void setRequirements(List<Requirement> requirements) {
 		this.requirements = requirements;
 	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 
 	public ProofOfId getProofOfId() {
 		return proofOfId;

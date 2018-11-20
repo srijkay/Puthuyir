@@ -50,43 +50,8 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`schoolinfo`(
 	`school_type` VARCHAR(45) NOT NULL,
 	`number_of_students` INT NOT NULL,
 	`number_of_teachers` INT NOT NULL,
-	PRIMARY KEY (`school_info_id`)
-	
-);
-
-/********************************************************
-The School table, to collect school information
-********************************************************/
-DROP TABLE IF EXISTS `revamp_db`.`school`;
-
-CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
-	`school_id` INT NOT NULL AUTO_INCREMENT,
-    `contacts_id` INT NOT NULL,
-    `address_id` INT NOT NULL,
-    `school_info_id` INT NOT NULL,
-    `status` VARCHAR(45) NOT NULL,
-	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`school_id`),
-	FOREIGN KEY (`contacts_id`) REFERENCES contacts (`contacts_id`),
-	FOREIGN KEY (`address_id`) REFERENCES address (`address_id`),
-	FOREIGN KEY (`school_info_id`) REFERENCES schoolinfo (`school_info_id`)
-	ON DELETE NO ACTION
-	ON UPDATE CASCADE
-);
-
-
-
-DROP TABLE IF EXISTS revamp_db.schoolimage;
-
-CREATE TABLE IF NOT EXISTS revamp_db.schoolimage(
-	`image_id` INT NOT NULL AUTO_INCREMENT,
-	`image` longblob,
-	`school_id` INT NOT NULL,
-	`filepath` VARCHAR(200) NOT NULL,
-	`comments` varchar(500) DEFAULT NULL,
-	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`image_id`),
-	FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`) ON DELETE NO ACTION ON UPDATE CASCADE	
+	PRIMARY KEY (`school_info_id`),
+    CONSTRAINT UNIQUE schoolinfo(school_reg_number)
 );
 
 
@@ -99,6 +64,9 @@ CREATE TABLE IF NOT EXISTS revamp_db.role(
   `accesslevel` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`roleid`)
 );
+
+
+
 
 DROP TABLE IF EXISTS `revamp_db`.`user`;
 CREATE TABLE IF NOT EXISTS revamp_db.user(
@@ -120,6 +88,45 @@ CREATE TABLE IF NOT EXISTS revamp_db.user(
   ON DELETE NO ACTION
 ON UPDATE CASCADE
 );
+
+
+/********************************************************
+The School table, to collect school information
+********************************************************/
+DROP TABLE IF EXISTS `revamp_db`.`school`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
+	`school_id` INT NOT NULL AUTO_INCREMENT,
+    `contacts_id` INT NOT NULL,
+    `address_id` INT NOT NULL,
+    `school_info_id` INT NOT NULL,
+    `status` VARCHAR(45) NOT NULL,
+    `user_id` bigint(20) NOT NULL,
+	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`school_id`),
+	FOREIGN KEY (`contacts_id`) REFERENCES contacts (`contacts_id`),
+	FOREIGN KEY (`address_id`) REFERENCES address (`address_id`),
+	FOREIGN KEY (`school_info_id`) REFERENCES schoolinfo (`school_info_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`userid`)
+	ON DELETE NO ACTION
+	ON UPDATE CASCADE
+);
+
+
+
+DROP TABLE IF EXISTS revamp_db.schoolimage;
+
+CREATE TABLE IF NOT EXISTS revamp_db.schoolimage(
+	`image_id` INT NOT NULL AUTO_INCREMENT,
+	`image` longblob,
+	`school_id` INT NOT NULL,
+	`filepath` VARCHAR(200) NOT NULL,
+	`comments` varchar(500) DEFAULT NULL,
+	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`image_id`),
+	FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`) ON DELETE NO ACTION ON UPDATE CASCADE	
+);
+
 
 
 DROP TABLE IF EXISTS `revamp_db`.`audittrail`;

@@ -19,4 +19,6 @@ public interface SchoolDAO {
 	List<School> getAllByDistrict(String districtId);
 	
 	List<School> getAllByLocality(String localityId);
+	
+	List<School> getByUserId(long userId);
 }

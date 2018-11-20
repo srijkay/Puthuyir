@@ -22,6 +22,10 @@ export class SchoolService {
   private schoolRegFormBS = new BehaviorSubject(this.schoolRegForm);
   currentSchoolRegForm = this.schoolRegFormBS.asObservable();
 
+  schoolInfo:string;
+  private schoolInfoBS = new BehaviorSubject(this.schoolInfo);
+  currentSchoolInfo = this.schoolInfoBS.asObservable();
+
   url:string;
   private imageUrlBS = new BehaviorSubject(this.url);
   currentImageUrlBS = this.imageUrlBS.asObservable();
@@ -30,6 +34,10 @@ export class SchoolService {
 
   enterSchoolRegister(schoolRegForm: FormGroup) {
     this.schoolRegFormBS.next(schoolRegForm);
+    let schoolInfo = schoolRegForm.controls.schoolInfo.value.schoolName+" # "+schoolRegForm.controls.schoolInfo.value.schoolRegNo;
+    this.schoolInfoBS.next(schoolInfo);
+    console.log('...service...'+schoolRegForm.controls.schoolInfo.get('schoolName').value);
+
   }
 
   enterImageUrl(url: string) {

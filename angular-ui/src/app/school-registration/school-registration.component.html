@@ -9,278 +9,279 @@
   </div>
 
   <div class="container">
-  <form [formGroup]="schoolRegForm" enctype="multipart/form-data" novalidate (ngSubmit)="showSchoolRegViewPage()">
-      <ngb-tabset class="tabset1">
-          <ngb-tab title="School Information">
-            <ng-template ngbTabContent>
-              <fieldset formGroupName="schoolInfo">
+<form [formGroup]="schoolRegForm" enctype="multipart/form-data" novalidate (ngSubmit)="showSchoolRegViewPage()">
+  <ngb-tabset class="tabset1">
+      <ngb-tab title="School Information">
+        <ng-template ngbTabContent>
+          <fieldset formGroupName="schoolInfo">
+            <div class="form-group">
+              <label class="control-label">School Name</label><span class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">School name is required</span>
+              <input type="text" class="form-control" id="schoolName" formControlName="schoolName">
+              <div class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">
+                <p>School name is required</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">School Type</label>
+              <select id="schoolType" class="form-control" formControlName="schoolType" ng-required="required">
+                <option value="-1">Select School Type</option>
+                <option *ngFor='let schoolType of schoolTypesLD' [value]="schoolType.key">{{schoolType.value}}</option>
+              </select>
+              <div class="text-danger" *ngIf="(schoolType.touched && schoolType.value=='-1')">
+                <p>School type is required</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">School RegNo</label>
+              <input type="text" class="form-control" id="schoolRegNo" formControlName="schoolRegNo">
+              <div class="text-danger" *ngIf="(schoolRegNo.touched && !schoolRegNo.dirty)">
+                <p>School RegNo is required</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Number of Students</label>
+              <input type="number" class="form-control" id="numberOfStudents" formControlName="numberOfStudents">
+              <div class="text-danger" *ngIf="(numberOfStudents.touched && !numberOfStudents.dirty)">
+                <p>Number of students required</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Number of Teachers</label>
+              <div class="controls">
+                <input type="number" class="form-control" id="numberOfTeachers" formControlName="numberOfTeachers">
+              </div>
+              <div class="text-danger" *ngIf="(numberOfTeachers.touched && !numberOfTeachers.dirty)">
+                <p>Number of teachers required</p>
+              </div>
+            </div>
+
+          </fieldset>
+
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Contacts">
+        <ng-template ngbTabContent>
+            <fieldset formGroupName="contacts">
                 <div class="form-group">
-                  <label class="control-label">School Name</label><span class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">School name is required</span>
-                  <input type="text" class="form-control" id="schoolName" formControlName="schoolName">
-                  <div class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">
-                    <p>School name is required</p>
+                  <label class="control-label">Primary Contact</label>
+                  <input type="text" class="form-control" id="priName" formControlName="priName">
+                  <div class="text-danger" *ngIf="(priName.touched && !priName.dirty)">
+                    <p>Primary Contact name is required</p>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label">School Type</label>
-                  <select id="schoolType" class="form-control" formControlName="schoolType" ng-required="required">
-                    <option value="-1">Select School Type</option>
-                    <option *ngFor='let schoolType of schoolTypesLD' [value]="schoolType.key">{{schoolType.value}}</option>
+                  <label >Primary Contact Number</label>
+                  <input type="text" class="form-control" id="priNum" formControlName="priNum">
+                  <div class="text-danger" *ngIf="(priNum.touched && !priNum.dirty)">
+                    <p>Contact number is required</p>
+                  </div>
+                </div>
+
+                <div class="form-group" [ngClass]="{
+                  'has-success':priEmail.valid && (priEmail.dirty || priEmail.touched),
+                  'has-danger':priEmail.invalid && (priEmail.dirty || priEmail.touched)
+                }">
+                  <label class="control-label">Primary Contact Email</label>
+                  <input type="text" class="form-control" id="priEmail" formControlName="priEmail">
+                  <div class="text-danger" *ngIf="priEmail.invalid && (priEmail.dirty || priEmail.touched)">
+                    <p *ngIf="priEmail.errors.required">Email is required</p>
+                    <p *ngIf="priEmail.errors.pattern">Wrong Email pattern</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label">Secondary Contact</label>
+                  <input type="text" class="form-control" id="secName" size="30" maxlength="30" formControlName="secName">
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label">Secondary Contact Number</label>
+                  <input type="text" class="form-control" id="secNum" size="30" maxlength="30" formControlName="secNum">
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label">Secondary Contact Email</label>
+                  <input type="text" class="form-control" id="secEmail" size="30" maxlength="30" formControlName="secEmail">
+                  <div class="text-danger" *ngIf="secEmail.invalid && (secEmail.dirty || secEmail.touched)">
+                    <p *ngIf="secEmail.errors.pattern">Wrong Email pattern</p>
+                  </div>
+                </div>
+              </fieldset>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle><span class="title1">Address</span></ng-template>
+        <ng-template ngbTabContent>
+            <fieldset formGroupName="address">
+                <div class="form-group">
+                  <label class="control-label">Address</label>
+                  <input type="text" class="form-control" id="addressLine1" formControlName="addressLine1">
+                  <div class="text-danger" *ngIf="(addressLine1.touched && !addressLine1.dirty)">
+                    <p>School Address is required</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label">Street Name</label>
+                  <input type="text" class="form-control" id="addressLine2" formControlName="addressLine2">
+                  <div class="text-danger" *ngIf="(addressLine2.touched && !addressLine2.dirty)">
+                    <p>School Address is required</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label">Town/City</label>
+                  <input type="text" class="form-control" id="city" formControlName="city">
+                  <div class="text-danger" *ngIf="(city.touched  && !city.dirty)">
+                    <p>City is required</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label">District</label>
+                  <select id="district" class="form-control" formControlName="district">
+                    <option value="-1">Select District</option>
+                    <option *ngFor='let district of districtsLD' [value]="district.key">{{district.value}}</option>
                   </select>
-                  <div class="text-danger" *ngIf="(schoolType.touched && schoolType.value=='-1')">
-                    <p>School type is required</p>
+                  <div class="text-danger" *ngIf="(district.touched && district.value=='-1')">
+                    <p>District is required</p>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label class="control-label">State</label>
+                  <select id="state" class="form-control" formControlName="state">
+                    <option value="-1">Select State</option>
+                    <option *ngFor='let state of statesLD' [value]="state.key">{{state.value}}</option>
+                  </select>
+                  <div class="text-danger" *ngIf="(state.touched && state.value=='-1')">
+                    <p>State is required</p>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label">School RegNo</label>
-                  <input type="text" class="form-control" id="schoolRegNo" formControlName="schoolRegNo">
-                  <div class="text-danger" *ngIf="(schoolRegNo.touched && !schoolRegNo.dirty)">
-                    <p>School RegNo is required</p>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="control-label">Number of Students</label>
-                  <input type="number" class="form-control" id="numberOfStudents" formControlName="numberOfStudents">
-                  <div class="text-danger" *ngIf="(numberOfStudents.touched && !numberOfStudents.dirty)">
-                    <p>Number of students required</p>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="control-label">Number of Teachers</label>
-                  <div class="controls">
-                    <input type="number" class="form-control" id="numberOfTeachers" formControlName="numberOfTeachers">
-                  </div>
-                  <div class="text-danger" *ngIf="(numberOfTeachers.touched && !numberOfTeachers.dirty)">
-                    <p>Number of teachers required</p>
+                  <label class="control-label">PinCode</label>
+                  <input type="text" class="form-control" id="city" formControlName="pinCode">
+                  <div class="text-danger" *ngIf="(pinCode.touched  && !pinCode.dirty)">
+                    <p>PinCode is required</p>
                   </div>
                 </div>
 
               </fieldset>
 
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Contacts">
-            <ng-template ngbTabContent>
-                <fieldset formGroupName="contacts">
-                    <div class="form-group">
-                      <label class="control-label">Primary Contact</label>
-                      <input type="text" class="form-control" id="priName" formControlName="priName">
-                      <div class="text-danger" *ngIf="(priName.touched && !priName.dirty)">
-                        <p>Primary Contact name is required</p>
-                      </div>
-                    </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle>Requirement</ng-template>
+        <ng-template ngbTabContent>
+            <fieldset formGroupName="requirement">
+                <div class="form-group">
+                  <label class="control-label">Type</label>
+                  <select id="reqType" class="form-control" formControlName="state" formControlName="reqType">
+                    <option value="-1">Select RequirementType</option>
+                    <option *ngFor='let reqType of reqTypesLD' [value]="reqType.key">{{reqType.value}}</option>
+                  </select>
+                  <div class="text-danger" *ngIf="(reqType.touched && reqType.value=='-1')">
+                    <p>Requirement Type is required</p>
+                  </div>
+                </div>
 
-                    <div class="form-group">
-                      <label >Primary Contact Number</label>
-                      <input type="text" class="form-control" id="priNum" formControlName="priNum">
-                      <div class="text-danger" *ngIf="(priNum.touched && !priNum.dirty)">
-                        <p>Contact number is required</p>
-                      </div>
-                    </div>
+                <div class="form-group">
+                  <label class="control-label">Asset Type</label>
+                  <select id="assetType" class="form-control" formControlName="assetType">
+                    <option value="-1">Select AssetType</option>
+                    <option *ngFor='let assetType of assetTypesLD' [value]="assetType.key">{{assetType.value}}</option>
+                  </select>
+                  <div class="text-danger" *ngIf="(assetType.touched && assetType.value=='-1')">
+                    <p>Asset Type is required</p>
+                  </div>
+                </div>
 
-                    <div class="form-group" [ngClass]="{
-                      'has-success':priEmail.valid && (priEmail.dirty || priEmail.touched),
-                      'has-danger':priEmail.invalid && (priEmail.dirty || priEmail.touched)
-                    }">
-                      <label class="control-label">Primary Contact Email</label>
-                      <input type="text" class="form-control" id="priEmail" formControlName="priEmail">
-                      <div class="text-danger" *ngIf="priEmail.invalid && (priEmail.dirty || priEmail.touched)">
-                        <p *ngIf="priEmail.errors.required">Email is required</p>
-                        <p *ngIf="priEmail.errors.pattern">Wrong Email pattern</p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label">Secondary Contact</label>
-                      <input type="text" class="form-control" id="secName" size="30" maxlength="30" formControlName="secName">
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label">Secondary Contact Number</label>
-                      <input type="text" class="form-control" id="secNum" size="30" maxlength="30" formControlName="secNum">
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label">Secondary Contact Email</label>
-                      <input type="text" class="form-control" id="secEmail" size="30" maxlength="30" formControlName="secEmail">
-                      <div class="text-danger" *ngIf="secEmail.invalid && (secEmail.dirty || secEmail.touched)">
-                        <p *ngIf="secEmail.errors.pattern">Wrong Email pattern</p>
-                      </div>
-                    </div>
-                  </fieldset>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab>
-            <ng-template ngbTabTitle><span class="title1">Address</span></ng-template>
-            <ng-template ngbTabContent>
-                <fieldset formGroupName="address">
-                    <div class="form-group">
-                      <label class="control-label">Address</label>
-                      <input type="text" class="form-control" id="addressLine1" formControlName="addressLine1">
-                      <div class="text-danger" *ngIf="(addressLine1.touched && !addressLine1.dirty)">
-                        <p>School Address is required</p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label">Street Name</label>
-                      <input type="text" class="form-control" id="addressLine2" formControlName="addressLine2">
-                      <div class="text-danger" *ngIf="(addressLine2.touched && !addressLine2.dirty)">
-                        <p>School Address is required</p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label">Town/City</label>
-                      <input type="text" class="form-control" id="city" formControlName="city">
-                      <div class="text-danger" *ngIf="(city.touched  && !city.dirty)">
-                        <p>City is required</p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label">District</label>
-                      <select id="district" class="form-control" formControlName="district">
-                        <option value="-1">Select District</option>
-                        <option *ngFor='let district of districtsLD' [value]="district.key">{{district.value}}</option>
-                      </select>
-                      <div class="text-danger" *ngIf="(district.touched && district.value=='-1')">
-                        <p>District is required</p>
-                      </div>
-                    </div>
+                <div class="form-group">
+                  <label class="control-label">Asset Name</label>
+                  <select id="assetName" class="form-control" formControlName="assetName">
+                    <option value="-1">Select AssetName</option>
+                    <option *ngFor='let assetName of assetNamesLD' [value]="assetName.key">{{assetName.value}}</option>
+                  </select>
+                  <div class="text-danger" *ngIf="(assetName.touched && assetName.value=='-1')">
+                    <p>Asset Name is required</p>
+                  </div>
+                </div>
 
 
-                    <div class="form-group">
-                      <label class="control-label">State</label>
-                      <select id="state" class="form-control" formControlName="state">
-                        <option value="-1">Select State</option>
-                        <option *ngFor='let state of statesLD' [value]="state.key">{{state.value}}</option>
-                      </select>
-                      <div class="text-danger" *ngIf="(state.touched && state.value=='-1')">
-                        <p>State is required</p>
-                      </div>
-                    </div>
+                <div class="form-group">
+                  <label class="control-label">Quantity</label>
+                  <input type="number" class="form-control" id="quantity" formControlName="quantity">
+                  <div class="text-danger" *ngIf="(quantity.touched  && !quantity.dirty)">
+                    <p>Quantity is required</p>
+                  </div>
+                </div>
 
-                    <div class="form-group">
-                      <label class="control-label">PinCode</label>
-                      <input type="text" class="form-control" id="city" formControlName="pinCode">
-                      <div class="text-danger" *ngIf="(pinCode.touched  && !pinCode.dirty)">
-                        <p>PinCode is required</p>
-                      </div>
-                    </div>
+                <div class="form-group">
+                  <button type="button" class="btn btn-primary btn-sm"  (click)="addRequirement()">Add Requirement</button>
+                </div>
 
-                  </fieldset>
+                <div class="form-group" *ngIf="(requirements.length > 0)">
+                  <button  type="button" class="btn btn-primary btn-sm">Delete Requirement</button>
+                </div>
 
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab>
-            <ng-template ngbTabTitle>Requirement</ng-template>
-            <ng-template ngbTabContent>
-                <fieldset formGroupName="requirement">
-                    <div class="form-group">
-                      <label class="control-label">Type</label>
-                      <select id="reqType" class="form-control" formControlName="state" formControlName="reqType">
-                        <option value="-1">Select RequirementType</option>
-                        <option *ngFor='let reqType of reqTypesLD' [value]="reqType.key">{{reqType.value}}</option>
-                      </select>
-                      <div class="text-danger" *ngIf="(reqType.touched && reqType.value=='-1')">
-                        <p>Requirement Type is required</p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label">Asset Type</label>
-                      <select id="assetType" class="form-control" formControlName="assetType">
-                        <option value="-1">Select AssetType</option>
-                        <option *ngFor='let assetType of assetTypesLD' [value]="assetType.key">{{assetType.value}}</option>
-                      </select>
-                      <div class="text-danger" *ngIf="(assetType.touched && assetType.value=='-1')">
-                        <p>Asset Type is required</p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label">Asset Name</label>
-                      <select id="assetName" class="form-control" formControlName="assetName">
-                        <option value="-1">Select AssetName</option>
-                        <option *ngFor='let assetName of assetNamesLD' [value]="assetName.key">{{assetName.value}}</option>
-                      </select>
-                      <div class="text-danger" *ngIf="(assetName.touched && assetName.value=='-1')">
-                        <p>Asset Name is required</p>
-                      </div>
-                    </div>
+                <table class="table table-bordered" *ngIf="(schoolRegForm.get('requirements').length > 0)">
+                  <tr>
+                    <th>Select</th>
+                    <th>Requirement Type</th>
+                    <th>Asset Type</th>
+                    <th>Asset Name</th>
+                    <th>Quantity</th>
+                  </tr>
+                  <tr *ngFor="let requirement of schoolRegForm.get('requirements').controls; let idx = index">
+                    <td><input type="checkbox" value="{{idx}}"  (click)="deleteReq(idx)"></td>
+                    <td>{{requirement.controls.reqType.value}}</td>
+                    <td>{{requirement.controls.assetType.value}}</td>
+                    <td>{{requirement.controls.assetName.value}}</td>
+                    <td>{{requirement.controls.quantity.value}}</td>
+                  </tr>
+                </table>
 
 
-                    <div class="form-group">
-                      <label class="control-label">Quantity</label>
-                      <input type="number" class="form-control" id="quantity" formControlName="quantity">
-                      <div class="text-danger" *ngIf="(quantity.touched  && !quantity.dirty)">
-                        <p>Quantity is required</p>
-                      </div>
-                    </div>
+              </fieldset>
 
-                    <div class="form-group">
-                      <button type="button" class="btn btn-primary btn-sm"  (click)="addRequirement()">Add Requirement</button>
-                    </div>
+        </ng-template>
+      </ngb-tab>
 
-                    <div class="form-group" *ngIf="(requirements.length > 0)">
-                      <button  type="button" class="btn btn-primary btn-sm">Delete Requirement</button>
-                    </div>
+      <ngb-tab>
+          <ng-template ngbTabTitle>Proof Of Identity</ng-template>
+          <ng-template ngbTabContent>
 
-                    <table class="table table-bordered" *ngIf="(schoolRegForm.get('requirements').length > 0)">
-                      <tr>
-                        <th>Select</th>
-                        <th>Requirement Type</th>
-                        <th>Asset Type</th>
-                        <th>Asset Name</th>
-                        <th>Quantity</th>
-                      </tr>
-                      <tr *ngFor="let requirement of schoolRegForm.get('requirements').controls; let idx = index">
-                        <td><input type="checkbox" value="{{idx}}"  (click)="deleteReq(idx)"></td>
-                        <td>{{requirement.controls.reqType.value}}</td>
-                        <td>{{requirement.controls.assetType.value}}</td>
-                        <td>{{requirement.controls.assetName.value}}</td>
-                        <td>{{requirement.controls.quantity.value}}</td>
-                      </tr>
-                    </table>
+            <fieldset formGroupName="proofOfId">
+                  <div class="form-group">
+                    <label class="control-label">Upload proof of identity of the school</label>
+                    <input type="file" class="btn btn-sm btn-default" id="image" (change)="onFileChange($event)" #fileInput multiple>
+                    <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+                  </div>
 
+                  <div class="form-group">
+                    <label class="control-label">Comments / Message to Trust</label>
+                    <textarea class="form-control" id="comments" rows="3" formControlName="comments"></textarea>
+                  </div>
+                </fieldset>
 
-                  </fieldset>
-
-            </ng-template>
-          </ngb-tab>
-
-          <ngb-tab>
-              <ng-template ngbTabTitle>Proof Of Identity</ng-template>
-              <ng-template ngbTabContent>
-
-                <fieldset formGroupName="proofOfId">
-                      <div class="form-group">
-                        <label class="control-label">Upload proof of identity of the school</label>
-                        <input type="file" class="btn btn-sm btn-default" id="image" (change)="onFileChange($event)" #fileInput multiple>
-                        <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label">Comments / Message to Trust</label>
-                        <textarea class="form-control" id="comments" rows="3" formControlName="comments"></textarea>
-                      </div>
-                    </fieldset>
-
-              </ng-template>
-          </ngb-tab>
-        </ngb-tabset>
+          </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
 
 <div class="form-actions">
-  <button type="submit" class="btn btn-success" [disabled]="disableSubmitBtn()">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
-  <button class="btn btn-success">Cancel</button>
+<button type="submit" class="btn btn-success" [disabled]="disableSubmitBtn()">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+<button class="btn btn-success">Cancel</button>
 </div>
-  </form>
+</form>
 
 
-  <!--pre>{{schoolRegForm.value | json}}</pre-->
+<!--pre>{{schoolRegForm.value | json}}</pre-->
+
 </div>
