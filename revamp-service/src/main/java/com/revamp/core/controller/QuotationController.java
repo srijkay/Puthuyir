@@ -44,10 +44,15 @@ public class QuotationController {
 		quotationService.deleteQuotation(quotationId);
 		return new ResponseEntity<>("DELETE Response", HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/quotation")
 	public List<Quotation> getQuotationByStatus(@RequestParam("quotationStatus") String quotationStatus) {
 		return quotationService.getQuotationByStatus(quotationStatus);
+	}
+
+	@GetMapping("/{schoolId}/quotations")
+	public List<Quotation> getQuotationsBySchool(@PathVariable("schoolId") long schoolId) {
+		return quotationService.getQuotationsBySchool(schoolId);
 	}
 
 }
