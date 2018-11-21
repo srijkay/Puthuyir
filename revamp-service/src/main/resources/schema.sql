@@ -50,43 +50,8 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`schoolinfo`(
 	`school_type` VARCHAR(45) NOT NULL,
 	`number_of_students` INT NOT NULL,
 	`number_of_teachers` INT NOT NULL,
-	PRIMARY KEY (`school_info_id`)
-	
-);
-
-/********************************************************
-The School table, to collect school information
-********************************************************/
-DROP TABLE IF EXISTS `revamp_db`.`school`;
-
-CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
-	`school_id` INT NOT NULL AUTO_INCREMENT,
-    `contacts_id` INT NOT NULL,
-    `address_id` INT NOT NULL,
-    `school_info_id` INT NOT NULL,
-    `school_status` VARCHAR(45) DEFAULT 'REGISTERED',
-	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`school_id`),
-	FOREIGN KEY (`contacts_id`) REFERENCES contacts (`contacts_id`),
-	FOREIGN KEY (`address_id`) REFERENCES address (`address_id`),
-	FOREIGN KEY (`school_info_id`) REFERENCES schoolinfo (`school_info_id`)
-	ON DELETE NO ACTION
-	ON UPDATE CASCADE
-);
-
-
-
-DROP TABLE IF EXISTS revamp_db.schoolimage;
-
-CREATE TABLE IF NOT EXISTS revamp_db.schoolimage(
-	`image_id` INT NOT NULL AUTO_INCREMENT,
-	`image` longblob,
-	`school_id` INT NOT NULL,
-	`filepath` VARCHAR(200) NOT NULL,
-	`comments` varchar(500) DEFAULT NULL,
-	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`image_id`),
-	FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`) ON DELETE NO ACTION ON UPDATE CASCADE	
+	PRIMARY KEY (`school_info_id`),
+    CONSTRAINT UNIQUE schoolinfo(school_reg_number)
 );
 
 
@@ -99,6 +64,9 @@ CREATE TABLE IF NOT EXISTS revamp_db.role(
   `accesslevel` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`roleid`)
 );
+
+
+
 
 DROP TABLE IF EXISTS `revamp_db`.`user`;
 CREATE TABLE IF NOT EXISTS revamp_db.user(
@@ -120,6 +88,45 @@ CREATE TABLE IF NOT EXISTS revamp_db.user(
   ON DELETE NO ACTION
 ON UPDATE CASCADE
 );
+
+
+/********************************************************
+The School table, to collect school information
+********************************************************/
+DROP TABLE IF EXISTS `revamp_db`.`school`;
+
+CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
+	`school_id` INT NOT NULL AUTO_INCREMENT,
+    `contacts_id` INT NOT NULL,
+    `address_id` INT NOT NULL,
+    `school_info_id` INT NOT NULL,
+    `status` VARCHAR(45) NOT NULL,
+    `user_id` bigint(20) NOT NULL,
+	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`school_id`),
+	FOREIGN KEY (`contacts_id`) REFERENCES contacts (`contacts_id`),
+	FOREIGN KEY (`address_id`) REFERENCES address (`address_id`),
+	FOREIGN KEY (`school_info_id`) REFERENCES schoolinfo (`school_info_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`userid`)
+	ON DELETE NO ACTION
+	ON UPDATE CASCADE
+);
+
+
+
+DROP TABLE IF EXISTS revamp_db.schoolimage;
+
+CREATE TABLE IF NOT EXISTS revamp_db.schoolimage(
+	`image_id` INT NOT NULL AUTO_INCREMENT,
+	`image` longblob,
+	`school_id` INT NOT NULL,
+	`filepath` VARCHAR(200) NOT NULL,
+	`comments` varchar(500) DEFAULT NULL,
+	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`image_id`),
+	FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`) ON DELETE NO ACTION ON UPDATE CASCADE	
+);
+
 
 
 DROP TABLE IF EXISTS `revamp_db`.`audittrail`;
@@ -152,38 +159,38 @@ CREATE TABLE IF NOT EXISTS revamp_db.lookup(
 
 DROP TABLE IF EXISTS `revamp_db`.`project`;
 
-CREATE TABLE IF NOT EXISTS `revamp_db`.`project`(
-	`project_id` INT NOT NULL AUTO_INCREMENT,
-    `school_id` INT NOT NULL,
-    `requirement_id` INT NOT NULL,
-    `estimate` INT,
-    `collected_amount` INT,
-    `project_status` VARCHAR(45) NOT NULL,
-    `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`project_id`),
-    CONSTRAINT `school_id` FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`)
+CREATE TABLE IF NOT EXISTS revamp_db.project(
+	project_id INT NOT NULL AUTO_INCREMENT,
+    school_id INT NOT NULL,
+    estimate INT,
+    collected_amount INT,
+    status VARCHAR(45) NOT NULL,
+    v_status BIT AS (CASE WHEN status = 'ProjectCreated' THEN b'1' ELSE NULL END) VIRTUAL,
+    date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (project_id),
+    CONSTRAINT school_id FOREIGN KEY (school_id) REFERENCES revamp_db.school (school_id),
+    CONSTRAINT UNIQUE project(project_id,school_id,v_status)
 );
+
 
 DROP TABLE IF EXISTS `revamp_db`.`requirement`;
 
 CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
-	`requirement_id` INT NOT NULL AUTO_INCREMENT,
-    `project_id` INT NOT NULL,
-    `user_id` BIGINT NOT NULL,
-	`reqtype` varchar(45) NOT NULL,
-    `assettype` varchar(45) NOT NULL,
-    `assetname` varchar(45) NOT NULL,    
-    `quantity` INT NOT NULL,
-    `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`requirement_id`),
-    CONSTRAINT `user_id`
-    FOREIGN KEY (`user_id`)
-	REFERENCES `revamp_db`.`user` (`userid`),
-    CONSTRAINT `project_id`
-	FOREIGN KEY (`project_id`)
-	REFERENCES `revamp_db`.`project` (`project_id`)
-	ON DELETE NO ACTION
-	ON UPDATE CASCADE
+  `requirement_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `reqtype` varchar(45) NOT NULL,
+  `assettype` varchar(45) NOT NULL,
+  `assetname` varchar(45) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
+  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `priority` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`requirement_id`),
+  KEY `user_id` (`user_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`userid`)
 );
 
 
@@ -207,20 +214,29 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`donation`(
 
 DROP TABLE IF EXISTS `revamp_db`.`quotation`;
 
-CREATE TABLE `quotation` (
+CREATE TABLE IF NOT EXISTS `revamp_db`.`quotation` (
   `quotation_id` int(11) NOT NULL AUTO_INCREMENT,
   `image_id` int(11) DEFAULT NULL,
   `quotated_amount` int(11) DEFAULT NULL,
   `warranty` varchar(100) DEFAULT NULL,
-  `trader_name` varchar(100) DEFAULT NULL,
-  `location` varchar(100) DEFAULT NULL,
-  `address` varchar(100) DEFAULT NULL,
+  `trader_name` varchar(100) DEFAULT NULL,  
+  `address_id` int(11) NOT NULL,
   `phone` varchar(100) DEFAULT NULL,
   `collected_by` varchar(100) DEFAULT NULL,
   `verified_by` varchar(100) DEFAULT NULL,
   `reviewer` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`quotation_id`)
-);
+  `quotation_status` varchar(100) DEFAULT NULL,
+  `quotation_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `quotation_validity_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `school_id` int(11) NOT NULL,
+  `requirement_id` int(11) NOT NULL,
+  `is_quotation_active` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`quotation_id`),  
+  KEY `requirement_id` (`requirement_id`),
+  CONSTRAINT `quotation_address_id` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`),
+  CONSTRAINT `quotation_school_id` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`),
+  CONSTRAINT `quotation_requirement_id` FOREIGN KEY (`requirement_id`) REFERENCES `requirement` (`requirement_id`)
+) ;
 
 DROP TABLE IF EXISTS `revamp_db`.`fundallotment`;
 

@@ -18,7 +18,7 @@ public class ProjectServiceImpl implements ProjectService {
 		if(project.getSchool() == null) {
 			Project projectBeforeUpdate =  projectDAO.get(project.getProjectId());
 			projectBeforeUpdate.setEstimate(project.getEstimate());
-			projectBeforeUpdate.setProjectStatus(project.getProjectStatus());
+			projectBeforeUpdate.setStatus(project.getStatus());
 			projectBeforeUpdate.setCollectedAmount(project.getCollectedAmount());
 			project = projectBeforeUpdate;
 		}

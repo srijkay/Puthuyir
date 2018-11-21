@@ -7,14 +7,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.revamp.core.model.School;
-import com.revamp.core.model.SchoolRegFormModel;
-import com.revamp.core.service.SchoolService;
-import com.revamp.core.service.SchoolServiceImpl;
-import com.revamp.core.web.util.WebUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revamp.core.lookup.PuthuyirLookUp;
+import com.revamp.core.model.School;
+import com.revamp.core.model.SchoolRegFormModel;
+import com.revamp.core.service.SchoolService;
+import com.revamp.core.web.util.WebUtilities;
 
 /**
  * 
@@ -33,22 +35,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  */
 @RestController
+@PropertySource(value= {"classpath:application.properties"})
 public class SchoolController {
 	private final static Logger logger = LoggerFactory.getLogger(SchoolController.class);
 
 	@Autowired
 	private SchoolService schoolService;
+	
+	 @Value("${image.path}")
+     private String imgPath;
 
-	/*---Add new school---*/
-	/*
-	 * @PostMapping("/school") public ResponseEntity<School> save(@RequestBody
-	 * School school) { school.setDateAdded(new Date());
-	 * System.out.println("***********************************************");
-	 * System.out.println("...........SCHOOL.........."+school);
-	 * System.out.println("***********************************************"); long
-	 * id = schoolService.save(school); school.setSchoolId(id); return
-	 * ResponseEntity.ok().body(school); }
-	 */
+
 	/**
 	 * 
 	 * @param regFormModel
@@ -63,10 +60,7 @@ public class SchoolController {
 			Map<String, byte[]> filesInBytes = WebUtilities
 					.convertMultiPartToBytes(Arrays.asList(regFormModel.getFiles()));
 			School school = new ObjectMapper().readValue(regFormModel.getPayload(), School.class);
-			String fullPath = request.getServletContext().getRealPath("/");
-			String ctxPath = request.getContextPath();
-			long id = schoolService.save(school, filesInBytes,
-					fullPath.substring(0, fullPath.indexOf(ctxPath.substring(1))) + "images");
+			long id = schoolService.save(school, filesInBytes,imgPath);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
@@ -87,6 +81,19 @@ public class SchoolController {
 		return ResponseEntity.ok().body(school);
 	}
 
+	
+	/**
+	 * 
+	 * @param schoolId
+	 * @return
+	 */
+	@GetMapping("/school/user/{id}")
+	public ResponseEntity<List<School>> getSchoolByUserId(@PathVariable("id") long userId) {
+		List<School> list = schoolService.getByUserId(userId);
+		return ResponseEntity.ok().body(list);
+	}
+
+	
 	/**
 	 * 
 	 * @param school

@@ -25,7 +25,7 @@ public class Donation implements java.io.Serializable {
 	private static final long serialVersionUID = -1748436992625970292L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "donation_id", nullable = false)
 	private long donationId;
 

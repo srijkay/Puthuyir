@@ -11,12 +11,11 @@ import { environment } from '../../environments/environment';
 export class SchoolListComponent implements OnInit {
 
   schoolList: School;
-  name:string;
   imageUrl:string;
   constructor( private schoolService: SchoolService ) { }
 
   ngOnInit() {
-    this.imageUrl = environment["image.server.url"];
+    this.imageUrl = environment["school.image.dir"];
     this.getSchoolList();
   }
 

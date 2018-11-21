@@ -31,8 +31,23 @@ public class QuotationServiceImpl implements QuotationService {
 	}
 
 	@Override
-	public long save(Quotation quotation) {		
-		 return quotationDAO.save(quotation);
+	public long save(Quotation quotation) {
+		return quotationDAO.save(quotation);
+	}
+
+	@Override
+	public void deleteQuotation(long id) {
+		quotationDAO.delete(id);
+	}
+
+	@Override
+	public List<Quotation> getQuotationByStatus(String quotationStatus) {
+		return quotationDAO.getQuotationByStatus(quotationStatus);
+	}
+
+	@Override
+	public List<Quotation> getQuotationsBySchool(long schoolId) {
+		return quotationDAO.getQuotationsBySchool(schoolId);
 	}
 
 }

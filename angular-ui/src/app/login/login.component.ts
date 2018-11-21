@@ -6,8 +6,7 @@ import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent {
   model: any = {};

@@ -9,6 +9,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +25,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Proxy;
+
+import com.revamp.core.lookup.PuthuyirLookUp;
 import com.revamp.core.web.util.SchoolSerializer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,7 +44,7 @@ public class School implements java.io.Serializable {
 	private static final long serialVersionUID = 8607633702511344481L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "school_id", nullable = false)
 	private long schoolId;
 
@@ -56,21 +60,47 @@ public class School implements java.io.Serializable {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "school")
-	private List<Project> projects;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "school")
+	private Set<Project> projects;
 
 	@Column(name = "date_created")
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateCreated;
 
-	@Column(name = "school_status")
-	private String status = "REGISTERED";
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
+	private PuthuyirLookUp status;
 
 	@JsonProperty("proofOfId")
 	@Transient
 	private ProofOfId proofOfId;
 	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	
+	@Transient
+	private List<Requirement> requirements;
+	
+	public List<Requirement> getRequirements() {
+		return requirements;
+	}
+
+	public void setRequirements(List<Requirement> requirements) {
+		this.requirements = requirements;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
 	public ProofOfId getProofOfId() {
 		return proofOfId;
 	}
@@ -148,22 +178,22 @@ public class School implements java.io.Serializable {
 		this.dateCreated = dateCreated;
 	}
 
-	public String getStatus() {
+	public PuthuyirLookUp getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(PuthuyirLookUp status) {
 		this.status = status;
 	}
 
-	public List<Project> getProjects() {
+	public Set<Project> getProjects() {
 		return projects;
 	}
 
-	public void setProjects(List<Project> projects) {
+	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "School [schoolId=" + schoolId + ", schoolInfo=" + schoolInfo

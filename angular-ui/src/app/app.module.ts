@@ -16,6 +16,7 @@ import {AdminComponent} from './admin/admin.component';
 import {HomeComponent} from './home/home.component';
 import {LogoutComponent} from './logout/logout.component';
 import {ViewSchoolRegistrationComponent} from './view-school-registration/view-school-registration.component';
+import { SchollregconfirmComponent } from './schollregconfirm/schollregconfirm.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {ViewSchoolRegistrationComponent} from './view-school-registration/view-s
     AdminComponent,
     HomeComponent,
     LogoutComponent,
-    ViewSchoolRegistrationComponent
+    ViewSchoolRegistrationComponent,
+    SchollregconfirmComponent
 
     ],
   imports: [

@@ -17,11 +17,11 @@ public class QuotationDAOImpl implements QuotationDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Quotation> getQuotations() {
-		return sessionFactory.getCurrentSession().createQuery(" FROM Quotation ").list();
+		return sessionFactory.getCurrentSession().createQuery(" from Quotation where isQuotationActive = 'Y'").list();
 	}
 
 	@Override
-	public long save(Quotation quotation) {				
+	public long save(Quotation quotation) {
 		sessionFactory.getCurrentSession().save(quotation);
 		return quotation.getQuotationId();
 	}
@@ -29,6 +29,27 @@ public class QuotationDAOImpl implements QuotationDAO {
 	@Override
 	public Quotation getQuotation(long quotationId) {
 		return sessionFactory.getCurrentSession().get(Quotation.class, quotationId);
+	}
+
+	@Override
+	public void delete(long quotationId) {
+		sessionFactory.getCurrentSession().createQuery("update Quotation set isQuotationActive = 'N' where id = :id")
+				.setParameter("id", quotationId).executeUpdate();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Quotation> getQuotationByStatus(String quotationStatus) {
+		return sessionFactory.getCurrentSession()
+				.createQuery(" from Quotation where quotationStatus = :quotationStatus")
+				.setParameter("quotationStatus", quotationStatus).list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Quotation> getQuotationsBySchool(long schoolId) {
+		return sessionFactory.getCurrentSession().createQuery(" from Quotation where schoolId = :schoolId")
+				.setParameter("schoolId", schoolId).list();
 	}
 
 }

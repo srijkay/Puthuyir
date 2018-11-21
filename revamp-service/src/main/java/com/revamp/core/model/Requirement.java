@@ -3,14 +3,18 @@ package com.revamp.core.model;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,18 +23,17 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Proxy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.revamp.core.lookup.PuthuyirLookUp;
 
 @Entity
 @Table(name = "requirement")
 @Proxy(lazy = false)
-@JsonIgnoreProperties(value = { "school" })
 public class Requirement implements java.io.Serializable {
 
 	private static final long serialVersionUID = -7230483495700936141L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "requirement_id", nullable = false)
 	private long requirementId;
 
@@ -50,11 +53,30 @@ public class Requirement implements java.io.Serializable {
 
 	@Column(name = "quantity")
 	private int quantity;
+	
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
+	private PuthuyirLookUp status;
 
 	@Column(name = "date_created")
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateAdded;
+	
+	@Column(name = "priority")
+	private String priority;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@PrePersist
 	protected void onCreate() {
@@ -117,12 +139,28 @@ public class Requirement implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
-	@Override
-	public String toString() {
-		return "Requirement [requirementId=" + requirementId + ", reqType="
-				+ reqType + ", assetType=" + assetType + ", assetName="
-				+ assetName + ", quantity=" + quantity + ", dateAdded="
-				+ dateAdded + "]";
+	public String getPriority() {
+		return priority;
 	}
 
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
+	
+	public PuthuyirLookUp getStatus() {
+		return status;
+	}
+
+	public void setStatus(PuthuyirLookUp status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "Requirement [requirementId=" + requirementId + ", reqType=" + reqType
+				+ ", assetType=" + assetType + ", assetName=" + assetName + ", quantity=" + quantity + ", dateAdded="
+				+ dateAdded + ", priority=" + priority +", status=" + status +  "]";
+	}
+
+	
 }

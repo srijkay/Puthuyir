@@ -1,6 +1,7 @@
 package com.revamp.core.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the quotation database table.
@@ -23,20 +26,30 @@ public class Quotation implements Serializable {
 	@Column(name = "quotation_id")
 	private long quotationId;
 
-	private String address;
-
 	@Column(name = "collected_by")
 	private String collectedBy;
 
 	@Column(name = "image_id")
 	private long imageId;
 
-	private String location;
+	@Column(name = "is_quotation_active")
+	private String isQuotationActive;
 
 	private String phone;
 
 	@Column(name = "quotated_amount")
 	private long quotatedAmount;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "quotation_date")
+	private Date quotationDate;
+
+	@Column(name = "quotation_status")
+	private String quotationStatus;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "quotation_validity_date")
+	private Date quotationValidityDate;
 
 	private String reviewer;
 
@@ -48,6 +61,15 @@ public class Quotation implements Serializable {
 
 	private String warranty;
 
+	@Column(name = "address_id")
+	private long addressId;
+
+	@Column(name = "requirement_id")
+	private long requirementId;
+
+	@Column(name = "school_id")
+	private long schoolId;
+
 	public Quotation() {
 	}
 
@@ -57,14 +79,6 @@ public class Quotation implements Serializable {
 
 	public void setQuotationId(long quotationId) {
 		this.quotationId = quotationId;
-	}
-
-	public String getAddress() {
-		return this.address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public String getCollectedBy() {
@@ -83,12 +97,12 @@ public class Quotation implements Serializable {
 		this.imageId = imageId;
 	}
 
-	public String getLocation() {
-		return this.location;
+	public String getIsQuotationActive() {
+		return this.isQuotationActive;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setIsQuotationActive(String isQuotationActive) {
+		this.isQuotationActive = isQuotationActive;
 	}
 
 	public String getPhone() {
@@ -105,6 +119,30 @@ public class Quotation implements Serializable {
 
 	public void setQuotatedAmount(long quotatedAmount) {
 		this.quotatedAmount = quotatedAmount;
+	}
+
+	public Date getQuotationDate() {
+		return this.quotationDate;
+	}
+
+	public void setQuotationDate(Date quotationDate) {
+		this.quotationDate = quotationDate;
+	}
+
+	public String getQuotationStatus() {
+		return this.quotationStatus;
+	}
+
+	public void setQuotationStatus(String quotationStatus) {
+		this.quotationStatus = quotationStatus;
+	}
+
+	public Date getQuotationValidityDate() {
+		return this.quotationValidityDate;
+	}
+
+	public void setQuotationValidityDate(Date quotationValidityDate) {
+		this.quotationValidityDate = quotationValidityDate;
 	}
 
 	public String getReviewer() {
@@ -137,6 +175,30 @@ public class Quotation implements Serializable {
 
 	public void setWarranty(String warranty) {
 		this.warranty = warranty;
+	}
+	
+	public long getSchoolId() {
+		return schoolId;
+	}
+
+	public long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(long addressId) {
+		this.addressId = addressId;
+	}
+
+	public long getRequirementId() {
+		return requirementId;
+	}
+
+	public void setRequirementId(long requirementId) {
+		this.requirementId = requirementId;
+	}
+
+	public void setSchoolId(long schoolId) {
+		this.schoolId = schoolId;
 	}
 
 }

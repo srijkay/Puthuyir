@@ -11,35 +11,22 @@ import {Router} from "@angular/router";
 export class ViewSchoolRegistrationComponent implements OnInit {
   schoolRegForm:FormGroup;
   url = '';
-  
+
   loading: boolean = false;
-  
+
   constructor( private schoolService: SchoolService,private router: Router) { }
 
   ngOnInit() {
     this.schoolService.currentSchoolRegForm.subscribe(schoolRegForm => this.schoolRegForm = schoolRegForm);
     this.schoolService.currentImageUrlBS.subscribe(url => this.url = url);
-
-        console.log('AAAAAAAAAAAAA'+((<FormArray>this.schoolRegForm.controls.requirements).length));
-/*
-    for (i = num; i < this.tmpRequirements.length; i++) {
-      var requirement = this.tmpRequirements.at(i);
-      console.log(requirement.value.reqType);
-      (<FormArray>this.schoolRegForm.controls.requirements).push(new FormGroup({
-        reqType: new FormControl(requirement.value.reqType),
-        assetType: new FormControl(requirement.value.assetType),
-        assetName: new FormControl(requirement.value.assetName),
-        quantity: new FormControl(requirement.value.quantity)
-      }));
-    }*/
+    //console.log('AAAAAAAAAAAAA'+((<FormArray>this.schoolRegForm.controls.requirements).length));
   }
 
   gotoSchoolRegPage() {
-    console.log('asdf');
     this.router.navigate(['schoolregistration']);
   }
 
-  
+
   private prepareSave(): any {
     let input = new FormData();
     input.append('payload', JSON.stringify(this.schoolRegForm.value));
@@ -55,7 +42,7 @@ export class ViewSchoolRegistrationComponent implements OnInit {
         (response) => {
           this.loading = false;
           console.log(response);
-          this.router.navigate(['schoollist']);
+          this.router.navigate(['schoolRegConfirm']);
         },
         (error) => console.log(error)
       );

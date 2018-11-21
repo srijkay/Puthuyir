@@ -17,7 +17,7 @@ public class SchoolInfo implements java.io.Serializable {
 	private static final long serialVersionUID = 6787703655405276366L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "school_info_id", nullable = false)
 	private long schoolInfoId;
 
