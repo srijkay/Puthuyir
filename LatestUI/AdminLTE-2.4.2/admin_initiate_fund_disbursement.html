@@ -367,79 +367,115 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Payment Processing Updates</h3>
-
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
+              <h3 class="box-title">Initiate Payment Screen</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
-                <tr>
-                  <th>School Name</th>
-                  <th>Vendor Name</th>
-                  <th>Invoice Date</th>
-                  <th>Invoice Number</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-				          <th>Vendor Address</th>
-                  <th>Details</th>
-                </tr>
-                <tr>
-                  <td>Cuddalore High School</td>
-                  <td>Balaji Industries</td>
-                  <td>11-7-2018</td>
-				          <td>1388989</td>
-				          <td>Rs.100,000</td>
-                  <td><span class="label label-warning">Payment Processing in Progress</span></td>
-           <td>135 Raja St, Cuddalore</td>
-					<td><a href="#">More Details</a></td>
-                </tr>
-                <tr>
-                  <td>Cuddalore High School</td>
-                  <td>Palani Traders</td>
-                  <td>11-7-2018</td>
-				          <td>788877</td>
-				          <td>Rs.200,000</td>
-                  <td><span class="label label-warning">Payment Processing in Progress</span></td>
-           <td>98,Vishnu Nagar Cuddalore</td>
-					<td><a href="#">More Details</a></td>
-                </tr>
-                <tr>
-                  <td>Chidambaram High School</td>
-                  <td>Chidambaram Traders</td>
-                  <td>11-7-2018</td>
-                  <td>7883877</td>
-                  <td>Rs.200,000</td>
-                  <td><span class="label label-success">Initiate Payment</span></td>
-                <td>Check the process</td>
-                <td><a href="admin_initiate_fund_disbursement.html">Morea Details</a></td>
-                </tr>
+            <div class="row">
+              <!-- left column -->
+              <div class="col-md-5">
 
-                <tr>
-                  <td>Cuddalore High School</td>
-                  <td>Chidambaram Agencies</td>
-                  <td>11-7-2018</td>
-				          <td>985555</td>
-				          <td>Rs.50,000</td>
-                  <td><span class="label label-success">Payment Completed</span></td>
-           <td>45,Anna Nagar, Cuddalore</td>
-					<td><a href="#">More Details</a></td>
-                </tr>
-              </table>
+                <!-- general form elements -->
+                <div class="box box-primary">
+                  <form role="form">
+                    <div class="box-body">
+                <div class="form-group">
+                  <label>Select From Account</label>
+                  <select class="form-control">
+                    <option>Select From Account</option>
+                    <option>option 1</option>
+                    <option>option 2</option>
+                    <option>option 3</option>
+                    <option>option 4</option>
+                    <option>option 5</option>
+                  </select>
+                </div>
+                      <div class="form-group">
+                          <label>Allotted Amount</label>
+                        <input type="text" class="form-control"  placeholder="20000" disabled>
+                      </div>
+                      <div class="form-group">
+                          <label>Finalized Quotation Amount</label>
+                        <input type="text" class="form-control"  placeholder="30000" disabled>
+                      </div>
+                      <div class="form-group">
+                        <label>Payment Reference</label>
+                        <input type="text" class="form-control"  placeholder="INVREF2018CUDD ">
+                      </div>
+                      <div class="form-group">
+                        <label>Payment Mode</label>
+                        <input type="text" class="form-control"  placeholder="IMPS ">
+                      </div>
+
+
+
+                    </div>
+
+                  </form>
+
+                </div>
+
+              </div>
+              <!--/.col (left) -->
+              <!-- right column -->
+              <div class="col-md-5">
+                <!-- Horizontal Form -->
+                <div class="box box-info">
+                  <form class="form-horizontal">
+                    <div class="box-body">
+                      <div class="form-group">
+                        <label>Select To Account</label>
+                        <select class="form-control">
+                          <option>Select To Account</option>
+                          <option>option 1</option>
+                          <option>option 2</option>
+                          <option>option 3</option>
+                          <option>option 4</option>
+                          <option>option 5</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                          <label>Invoice No</label>
+                        <input type="text" class="form-control"  placeholder="INV001ABC" disabled>
+                      </div>
+                      <div class="form-group">
+                          <label>Invoice Amount</label>
+                        <input type="text" class="form-control"  placeholder="20000" disabled>
+                      </div>
+                      <div class="form-group">
+                        <label>Amount to be disbursed</label>
+                        <input type="text" class="form-control"  placeholder="20000 ">
+                      </div>
+                      <div class="form-group">
+                        <label>Comments</label>
+                        <input type="text" class="form-control"  placeholder="5% Discount applied ">
+                      </div>
+
+                    </div>
+
+                  </form>
+
+
+                </div>
+
+                <!-- /.box -->
+                <!-- general form elements disabled -->
+
+
+              </div>
+
+
+              <!--/.col (right) -->
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
       </div>
+
+      <div class="timeline-footer">
+              <a href="trustee_Main_Screen.html" class="btn btn-warning btn-flat btn">Submit For Approval</a>
+        <a class="btn btn-warning btn-flat btn">Cancel</a>
+            </div>
     </section>
     <!-- /.content -->
   </div>
