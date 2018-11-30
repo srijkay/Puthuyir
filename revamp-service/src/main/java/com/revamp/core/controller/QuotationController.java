@@ -1,6 +1,7 @@
 package com.revamp.core.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class QuotationController {
 	}
 
 	@GetMapping("/quotation/{id}")
-	public Quotation getQuotation(@PathVariable("id") long quotationId) {
+	public Optional<Quotation> getQuotation(@PathVariable("id") long quotationId) {
 		return quotationService.getQuotation(quotationId);
 	}
 

@@ -1,6 +1,7 @@
 package com.revamp.core.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.revamp.core.model.Quotation;
 
@@ -8,7 +9,7 @@ public interface QuotationService {
 
 	long save(Quotation quotation);
 
-	Quotation getQuotation(long id);
+	Optional<Quotation> getQuotation(long id);
 
 	List<Quotation> getQuotations();
 
