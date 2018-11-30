@@ -2,6 +2,9 @@ package com.revamp.core.controller;
 
 import com.revamp.core.model.Project;
 import com.revamp.core.service.ProjectService;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +40,8 @@ public class ProjectController {
      * @return
      */
 	@GetMapping("/project/{id}")
-	public ResponseEntity<Project> get(@PathVariable("id") long projectId) {
-		Project project = projectService.get(projectId);
+	public ResponseEntity<Optional<Project>> get(@PathVariable("id") long projectId) {
+		Optional<Project> project = projectService.get(projectId);
 		return ResponseEntity.ok().body(project);
 	}
 

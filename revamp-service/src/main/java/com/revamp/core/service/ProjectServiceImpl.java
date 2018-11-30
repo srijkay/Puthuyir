@@ -1,32 +1,37 @@
 package com.revamp.core.service;
 
-import com.revamp.core.dao.ProjectDAO;
-import com.revamp.core.model.Project;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.revamp.core.dao.ProjectRepository;
+import com.revamp.core.model.Project;
 
 @Service
 @Transactional(readOnly = true)
 public class ProjectServiceImpl implements ProjectService {
 
 	@Autowired
-	private ProjectDAO projectDAO;
+	private ProjectRepository projectRepository;
 
 	@Transactional
 	public long saveOrUpdate(Project project) {
 		if(project.getSchool() == null) {
-			Project projectBeforeUpdate =  projectDAO.get(project.getProjectId());
-			projectBeforeUpdate.setEstimate(project.getEstimate());
-			projectBeforeUpdate.setStatus(project.getStatus());
-			projectBeforeUpdate.setCollectedAmount(project.getCollectedAmount());
-			project = projectBeforeUpdate;
+			Optional<Project> projectBeforeUpdate =  projectRepository.findById(project.getProjectId());
+			if (projectBeforeUpdate.isPresent()) {				
+				projectBeforeUpdate.get().setEstimate(project.getEstimate());
+				projectBeforeUpdate.get().setStatus(project.getStatus());
+				projectBeforeUpdate.get().setCollectedAmount(project.getCollectedAmount());
+				project = projectBeforeUpdate.get();
+			}
 		}
-		return projectDAO.saveOrUpdate(project);
+		return projectRepository.save(project).getProjectId();
 	}
 
-	public Project get(long id) {
-		return projectDAO.get(id);
+	public Optional<Project> get(long id) {
+		return projectRepository.findById(id);
 	}
 
 }

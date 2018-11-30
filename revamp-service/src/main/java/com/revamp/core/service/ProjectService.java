@@ -1,11 +1,13 @@
 package com.revamp.core.service;
 
+import java.util.Optional;
+
 import com.revamp.core.model.Project;
 
 public interface ProjectService {
 
 	long saveOrUpdate(Project project);
 
-	Project get(long id);
+	Optional<Project> get(long id);
 	
 }
