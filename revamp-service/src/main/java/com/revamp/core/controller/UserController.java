@@ -1,6 +1,7 @@
-/*package com.revamp.core.controller;
+package com.revamp.core.controller;
 
 import java.util.Date;
+import java.util.Optional;
 
 import javax.servlet.ServletException;
 
@@ -33,12 +34,12 @@ public class UserController {
 	private UserService userService;
 	private UserResponse userResponse;
 
-	---Register user---
-	*//**
+	//---Register user---
+	/**
 	 * 
 	 * @param user
 	 * @return
-	 *//*
+	 */
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public ResponseEntity<User> save(@RequestBody User user) {
 		user.setDateCreated(new Date());
@@ -47,19 +48,19 @@ public class UserController {
 		return ResponseEntity.ok().body(user);
 	}
 
-	---Get a user by id---
+	//---Get a user by id---
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-	public ResponseEntity<User> get(@PathVariable("id") long userId) {
-		User user = userService.get(userId);
+	public ResponseEntity<Optional<User>> get(@PathVariable("id") long userId) {
+		Optional<User> user = userService.get(userId);
 		return ResponseEntity.ok().body(user);
 	}
 
-	*//**
+	/**
 	 * 
 	 * @param login
 	 * @return
 	 * @throws ServletException
-	 *//*
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<UserResponse> login(@RequestBody User login) throws ServletException {
 
@@ -106,4 +107,4 @@ public class UserController {
 
 	}
 
-}*/
+}
