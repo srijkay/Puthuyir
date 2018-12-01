@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.revamp.core.model.SchoolImage;
 
-@Repository
+//@Repository
 public class ImageDAOImpl implements ImageDAO {
 
 	@Autowired

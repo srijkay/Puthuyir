@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.revamp.core.model.School;
 
-@Repository
+//@Repository
 public class SchoolDAOImpl implements SchoolDAO {
 
 	@Autowired

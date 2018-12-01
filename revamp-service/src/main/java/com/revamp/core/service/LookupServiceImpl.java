@@ -10,8 +10,8 @@ import com.revamp.core.dao.LookupDAO;
 import com.revamp.core.model.Lookup;
 import com.revamp.core.model.Role;
 
-@Service
-@Transactional(readOnly = true)
+/*@Service
+@Transactional(readOnly = true)*/
 public class LookupServiceImpl implements LookupService {
 
 	@Autowired

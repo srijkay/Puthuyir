@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.revamp.core.dao.UserDAO;
 import com.revamp.core.model.User;
 
-@Service
-@Transactional(readOnly = true)
+/*@Service
+@Transactional(readOnly = true)*/
 public class UserServiceImpl implements UserService {
 
 	@Autowired

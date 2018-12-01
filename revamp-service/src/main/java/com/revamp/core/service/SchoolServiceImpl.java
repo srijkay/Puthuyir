@@ -1,4 +1,4 @@
-package com.revamp.core.service;
+/*package com.revamp.core.service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,8 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revamp.core.dao.SchoolDAO;
-import com.revamp.core.dao.UserDAO;
+import com.revamp.core.dao.SchoolRepository;
 import com.revamp.core.lookup.PuthuyirLookUp;
 import com.revamp.core.model.Project;
 import com.revamp.core.model.Requirement;
@@ -29,7 +28,7 @@ import com.revamp.core.model.User;
 public class SchoolServiceImpl implements SchoolService {
 
 	@Autowired
-	private SchoolDAO schoolDAO;
+	private SchoolRepository schoolRepository;
 	
 	@Autowired
 	private UserDAO userDAO;
@@ -53,9 +52,9 @@ public class SchoolServiceImpl implements SchoolService {
 		//set user to the Requirement.
 		this.setUser(school);
 		
-		long id = schoolDAO.save(school);
+		school = schoolRepository.save(school);
 		this.saveImgToFS(imgPath,fileSubPath,school.getSchoolImages());
-		return id;
+		return school.getSchoolId();
 	}
 	
 	private void setUser(School school) {
@@ -136,3 +135,4 @@ public class SchoolServiceImpl implements SchoolService {
 	}
 
 }
+*/

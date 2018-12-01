@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.revamp.core.dao.ImageDAO;
 import com.revamp.core.model.SchoolImage;
 
-@Service
-@Transactional(readOnly = true)
+/*@Service
+@Transactional(readOnly = true)*/
 public class ImageServiceImpl implements ImageService {
 
 	@Autowired

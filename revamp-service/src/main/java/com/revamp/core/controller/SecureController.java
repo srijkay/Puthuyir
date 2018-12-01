@@ -1,4 +1,4 @@
-package com.revamp.core.controller;
+/*package com.revamp.core.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,11 +12,11 @@ import com.revamp.core.model.User;
 import com.revamp.core.service.UserService;
 
 
-/**
+*//**
  * 
  * @author PuthyirDevTeam
  *
- */
+ *//*
 @RestController
 @RequestMapping("/secure")
 public class SecureController {
@@ -24,19 +24,19 @@ public class SecureController {
 	@Autowired
 	private UserService userService;
 	
-    /**
+    *//**
      * 
      * @return
-     */
+     *//*
 	@RequestMapping("/user/users")
 	public String loginSuccess() {
 		return "Login Successful!";
 	}
-  /**
+  *//**
    * 
    * @param email
    * @return
-   */
+   *//*
 	@RequestMapping(value = "/user/email", method = RequestMethod.POST)
 	public User findByEmail(@RequestBody String email) {
 		return userService.findByEmail(email);
@@ -44,3 +44,4 @@ public class SecureController {
 
 	
 }
+*/

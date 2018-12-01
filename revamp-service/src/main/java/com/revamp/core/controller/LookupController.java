@@ -1,4 +1,4 @@
-package com.revamp.core.controller;
+/*package com.revamp.core.controller;
 
 import java.util.List;
 
@@ -13,33 +13,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-/**
+*//**
  * 
  * @author PuthyirDevTeam
  *
- */
+ *//*
 @RestController
 public class LookupController {
 	private final static Logger logger = LoggerFactory.getLogger(LookupController.class);
 	@Autowired
 private LookupService lookupService;
 
-	/**
+	*//**
 	 * 
 	 * @return
-	 */
+	 *//*
 	@GetMapping("/roles")
 	public ResponseEntity<List<Role>> getRoles() 
 	{		List<Role> roles = lookupService.getRoles();
 		return ResponseEntity.ok().body(roles);
 	}
-    /**
+    *//**
      * 
      * @param field
      * @param parentField
      * @param parentKey
      * @return
-     */
+     *//*
 	@GetMapping("/lookup/field/{field}")
 	public ResponseEntity<List<Lookup>> lookup(
 			@PathVariable("field") String field,
@@ -57,4 +57,4 @@ private LookupService lookupService;
 		return ResponseEntity.ok().body(lookupList);
 }
 
-}
+}*/

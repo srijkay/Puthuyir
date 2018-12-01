@@ -1,21 +1,24 @@
-package com.revamp.core.service;
+/*package com.revamp.core.service;
 
-import com.revamp.core.dao.DonationDAO;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.revamp.core.dao.DonationDAOImpl;
 import com.revamp.core.dao.ProjectDAO;
 import com.revamp.core.dao.UserDAO;
 import com.revamp.core.model.Donation;
 import com.revamp.core.model.Project;
 import com.revamp.core.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(readOnly = true)
 public class DonationServiceImpl implements DonationService {
 
 	@Autowired
-	private DonationDAO donationDAO;
+	private DonationDAOImpl donationDAO;
 	
 	@Autowired
 	private ProjectDAO projectDAO;
@@ -26,7 +29,7 @@ public class DonationServiceImpl implements DonationService {
 
 	@Transactional
 	@Override
-	public Donation donate(Donation donation) {
+	public Donation donate(Optional<Donation> donation) {
 		System.out.println("1");
 		System.out.println(donation);
 		User donor = donation.getDonor();
@@ -44,7 +47,8 @@ public class DonationServiceImpl implements DonationService {
 			
 		}
 		
-		long donationId = donationDAO.donate(donation);
+		Donation donation2 = ((DonationServiceImpl) donationDAO).donate(donation);
+		long donationId = donation2.getDonationId();
 		
 		System.out.println("2");
 		System.out.println(donationId);
@@ -63,7 +67,7 @@ public class DonationServiceImpl implements DonationService {
 				project.setCollectedAmount(collectedAmount);
 				projectDAO.saveOrUpdate(project);
 				
-				donation = donationDAO.get(donationId);
+				donation = donationDAO.findById(donationId);
 				
 				donation.setProject(project);
 				
@@ -85,3 +89,4 @@ public class DonationServiceImpl implements DonationService {
 	}
 
 }
+*/

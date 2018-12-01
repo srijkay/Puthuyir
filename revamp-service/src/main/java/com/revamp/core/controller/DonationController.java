@@ -1,4 +1,4 @@
-package com.revamp.core.controller;
+/*package com.revamp.core.controller;
 
 import java.util.Date;
 
@@ -9,22 +9,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-/**
+*//**
  * 
  * @author PuthirDevTeam
  *
- */
+ *//*
 @RestController
 public class DonationController {
 
 	@Autowired
 	private DonationService donationService;
 
-   /**
+   *//**
     * 
     * @param donation
     * @return
-    */
+    *//*
 	@PostMapping("/donate")
 	public ResponseEntity<Donation> save(@RequestBody Donation donation) {
 		Date today = new Date();
@@ -34,4 +34,4 @@ public class DonationController {
 		return ResponseEntity.ok().body(donation);
 	}
 
-}
+}*/

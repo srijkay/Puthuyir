@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.revamp.core.model.Lookup;
 import com.revamp.core.model.Role;
 
-@Repository
+//@Repository
 public class LookupDAOImpl implements LookupDAO {
 
 	@Autowired

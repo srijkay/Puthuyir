@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.revamp.core.model.User;
 
-@Repository
+//@Repository
 public class UserDAOImpl implements UserDAO {
 
 	@Autowired
