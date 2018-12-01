@@ -1,6 +1,7 @@
 package com.revamp.core.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,7 @@ public class FundAllotmentController {
      * @return
      */
 	@GetMapping("/fundallocation/{id}")
-	public FundAllotment getFundAllocation(@PathVariable("id") long fundAllocationId) {
+	public Optional<FundAllotment> getFundAllocation(@PathVariable("id") long fundAllocationId) {
 		return fundAllotService.getFundAllocations(fundAllocationId);
 	}
     /**
