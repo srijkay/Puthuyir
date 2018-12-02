@@ -3,6 +3,7 @@ package com.revamp.core.model;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -99,7 +100,6 @@ public class School implements java.io.Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 
 	public ProofOfId getProofOfId() {
 		return proofOfId;

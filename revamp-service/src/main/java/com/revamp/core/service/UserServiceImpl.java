@@ -1,7 +1,5 @@
 package com.revamp.core.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +20,8 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(school).getUserid();
 	}
 
-	public Optional<User> get(long id) {
-		return userRepository.findById(id);
+	public User get(long id) {
+		return userRepository.findById(id).orElse(null);
 	}
 
 	

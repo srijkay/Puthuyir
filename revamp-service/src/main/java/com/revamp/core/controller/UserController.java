@@ -50,8 +50,8 @@ public class UserController {
 
 	//---Get a user by id---
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Optional<User>> get(@PathVariable("id") long userId) {
-		Optional<User> user = userService.get(userId);
+	public ResponseEntity<User> get(@PathVariable("id") long userId) {
+		User user = userService.get(userId);
 		return ResponseEntity.ok().body(user);
 	}
 

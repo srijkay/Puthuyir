@@ -1,4 +1,4 @@
-/*package com.revamp.core.service;
+package com.revamp.core.service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revamp.core.dao.SchoolRepository;
+import com.revamp.core.dao.UserRepository;
 import com.revamp.core.lookup.PuthuyirLookUp;
 import com.revamp.core.model.Project;
 import com.revamp.core.model.Requirement;
@@ -31,15 +33,14 @@ public class SchoolServiceImpl implements SchoolService {
 	private SchoolRepository schoolRepository;
 	
 	@Autowired
-	private UserDAO userDAO;
+	private UserRepository userRepository;
 
-	
 	@Transactional
 	public long save(School school, Map<String, byte[]> files, String imgPath) {
 		String fileSubPath = DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now())+"\\";
 		school.setStatus(PuthuyirLookUp.SCHOOL_REGISTERED);
 		files.forEach((k,v) -> {
-			String filePath = fileSubPath+school.getSchoolInfo().getSchoolName()+"_";
+			String filePath = fileSubPath+ school.getSchoolInfo().getSchoolName()+"_";
 			SchoolImage si = new SchoolImage(filePath+k,v,school.getProofOfId().getComments());
 			si.setSchool(school);
 			school.getSchoolImages().add(si);
@@ -52,14 +53,16 @@ public class SchoolServiceImpl implements SchoolService {
 		//set user to the Requirement.
 		this.setUser(school);
 		
-		school = schoolRepository.save(school);
+		//school = schoolRepository.save(school);
+		
 		this.saveImgToFS(imgPath,fileSubPath,school.getSchoolImages());
 		return school.getSchoolId();
 	}
 	
 	private void setUser(School school) {
 		//TODO: currently cd it is hard coded to User ID 2.
-		User beneUser = this.userDAO.get(2);
+		User beneUser = this.userRepository.findById((long) 2).orElse(null);
+	
 		school.setUser(beneUser);
 		school.getRequirements().forEach(req -> {
 			req.setUser(beneUser);
@@ -100,39 +103,43 @@ public class SchoolServiceImpl implements SchoolService {
 		});
 	}
 
-	public School get(long id) {
-		return schoolDAO.get(id);
-	}
+
 
 	@Override
 	public List<School> getAll() {
-		return schoolDAO.getAll();
+		return (List<School>) schoolRepository.findAll();
 	}
 
 	@Override
 	public List<School> getAllByCity(String cityId) {
-		return schoolDAO.getAllByCity(cityId);
+		return schoolRepository.getAllByCity(cityId);
 	}
 
 	@Override
 	public List<School> getAllByDistrict(String districtId) {
-		return schoolDAO.getAllByDistrict(districtId);
+		return schoolRepository.getAllByDistrict(districtId);
 	}
 
-	@Override
-	public List<School> getAllByName(String contains) {
-		return schoolDAO.getAllByName(contains);
-	}
+//	@Override
+//	public List<School> getAllByName(String contains) {
+//		return schoolRepository.getAllByName(contains);
+//	}
 
 	@Override
 	public List<School> getAllByLocality(String localityId) {
-		return schoolDAO.getAllByLocality(localityId);
+		return schoolRepository.getAllByLocality(localityId);
 	}
 	
 	@Override
 	public List<School> getByUserId(long userId) {
-		return schoolDAO.getByUserId(userId);
+		return schoolRepository.getByUserId(userId);
 	}
 
+	@Override
+	public School get(long id) {
+		return schoolRepository.findById(id).orElse(null);
+	}
+
+	
+
 }
-*/

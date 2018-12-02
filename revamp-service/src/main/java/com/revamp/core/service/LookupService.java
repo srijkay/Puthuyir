@@ -7,8 +7,7 @@ import com.revamp.core.model.Role;
 
 public interface LookupService {
 
-	List<Role> getRoles();
-
+	
 	List<Lookup> lookup(String field);
 
 	List<Lookup> lookupByParent(String field, String parentField,

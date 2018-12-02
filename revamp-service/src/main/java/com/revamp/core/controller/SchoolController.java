@@ -1,4 +1,4 @@
-/*package com.revamp.core.controller;
+package com.revamp.core.controller;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -29,11 +29,11 @@ import com.revamp.core.model.SchoolRegFormModel;
 import com.revamp.core.service.SchoolService;
 import com.revamp.core.web.util.WebUtilities;
 
-*//**
+/**
  * 
  * @author PuthyirDevTeam
  *
- *//*
+ */
 @RestController
 @PropertySource(value= {"classpath:application.properties"})
 public class SchoolController {
@@ -46,12 +46,12 @@ public class SchoolController {
      private String imgPath;
 
 
-	*//**
+	/**
 	 * 
 	 * @param regFormModel
 	 * @param request
 	 * @return
-	 *//*
+	 */
 	@PostMapping("/school")
 	public ResponseEntity<?> multiUploadFileModel(@ModelAttribute SchoolRegFormModel regFormModel,
 			HttpServletRequest request) {
@@ -69,12 +69,12 @@ public class SchoolController {
 
 	}
 
-	---Get a school by id---
-	*//**
+
+	/**
 	 * 
 	 * @param schoolId
 	 * @return
-	 *//*
+	 */
 	@GetMapping("/school/{id}")
 	public ResponseEntity<School> get(@PathVariable("id") long schoolId) {
 		School school = schoolService.get(schoolId);
@@ -82,11 +82,11 @@ public class SchoolController {
 	}
 
 	
-	*//**
+	/**
 	 * 
 	 * @param schoolId
 	 * @return
-	 *//*
+	 */
 	@GetMapping("/school/user/{id}")
 	public ResponseEntity<List<School>> getSchoolByUserId(@PathVariable("id") long userId) {
 		List<School> list = schoolService.getByUserId(userId);
@@ -94,12 +94,12 @@ public class SchoolController {
 	}
 
 	
-	*//**
+	/**
 	 * 
 	 * @param school
 	 * @param request
 	 * @return
-	 *//*
+	 */
 	@GetMapping("/school")
 	@ResponseBody
 	public ResponseEntity<List<School>> getAll(@RequestBody(required = false) School school,
@@ -109,48 +109,48 @@ public class SchoolController {
 		return ResponseEntity.ok().body(schools);
 	}
 
-	*//**
-	 * 
-	 * @param contains
-	 * @return
-	 *//*
-	@GetMapping("/school/name/{contains}")
-	public ResponseEntity<List<School>> getAllByName(@PathVariable("contains") String contains) {
-		List<School> schools = schoolService.getAllByName(contains);
-		return ResponseEntity.ok().body(schools);
-	}
+//	/**
+//	 * 
+//	 * @param contains
+//	 * @return
+//	 */
+//	@GetMapping("/school/name/{contains}")
+//	public ResponseEntity<List<School>> getAllByName(@PathVariable("contains") String contains) {
+//		List<School> schools = schoolService.getAllByName(contains);
+//		return ResponseEntity.ok().body(schools);
+//	}
 
-	*//**
+	/**
 	 * 
 	 * @param cityId
 	 * @return
-	 *//*
+	 */
 	@GetMapping("/school/city/{cityid}")
 	public ResponseEntity<List<School>> getAllByCity(@PathVariable("cityid") String cityId) {
 		List<School> schools = schoolService.getAllByCity(cityId);
 		return ResponseEntity.ok().body(schools);
 	}
 
-	*//**
+	/**
 	 * 
 	 * @param districtId
 	 * @return
-	 *//*
+	 */
 	@GetMapping("/school/district/{districtid}")
 	public ResponseEntity<List<School>> getAllByDistrict(@PathVariable("districtid") String districtId) {
 		List<School> schools = schoolService.getAllByDistrict(districtId);
 		return ResponseEntity.ok().body(schools);
 	}
 
-	*//**
+	/**
 	 * 
 	 * @param localityId
 	 * @return
-	 *//*
+	 */
 	@GetMapping("/school/locality/{localityid}")
 	public ResponseEntity<List<School>> getAllByLocality(@PathVariable("localityid") String localityId) {
 		List<School> schools = schoolService.getAllByLocality(localityId);
 		return ResponseEntity.ok().body(schools);
 	}
 
-}*/
+}

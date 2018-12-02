@@ -18,7 +18,7 @@ public class Lookup implements java.io.Serializable {
 	@Column(name = "field")
 	private String field;
 
-	@Id
+	
 	@Column(name = "key")
 	private String key;
 

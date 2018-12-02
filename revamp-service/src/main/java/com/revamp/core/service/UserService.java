@@ -8,7 +8,7 @@ public interface UserService {
 
 	long save(User user);
 
-	Optional<User> get(long id);
+	User get(long id);
 	
 	User findByEmail(String email);
 
