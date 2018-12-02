@@ -7,6 +7,5 @@ public interface DonationService {
 	Donation donate(Donation donation);
 
 	Donation get(long id);
-	
 
 }
