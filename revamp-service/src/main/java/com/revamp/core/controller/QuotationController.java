@@ -47,13 +47,13 @@ public class QuotationController {
 	}
 
 	@GetMapping("/quotation")
-	public List<Quotation> getQuotationByStatus(@RequestParam("quotationStatus") String quotationStatus) {
-		return quotationService.getQuotationByStatus(quotationStatus);
+	public List<Quotation> findByQuotationStatus(@RequestParam("quotationStatus") String quotationStatus) {
+		return quotationService.findByQuotationStatus(quotationStatus);
 	}
 
 	@GetMapping("/{schoolId}/quotations")
-	public List<Quotation> getQuotationsBySchool(@PathVariable("schoolId") long schoolId) {
-		return quotationService.getQuotationsBySchool(schoolId);
+	public List<Quotation> findBySchoolId(@PathVariable("schoolId") long schoolId) {
+		return quotationService.findBySchoolId(schoolId);
 	}
 
 }

@@ -15,8 +15,8 @@ public interface QuotationService {
 
 	void deleteQuotation(long id);
 
-	List<Quotation> getQuotationByStatus(String quotationStatus);
+	List<Quotation> findByQuotationStatus(String quotationStatus);
 	
-	List<Quotation> getQuotationsBySchool(long schoolId);
+	List<Quotation> findBySchoolId(long schoolId);
 
 }

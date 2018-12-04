@@ -43,13 +43,13 @@ public class QuotationServiceImpl implements QuotationService {
 	}
 
 	@Override
-	public List<Quotation> getQuotationByStatus(String quotationStatus) {
-		return quotationRepository.getQuotationByStatus(quotationStatus);
+	public List<Quotation> findByQuotationStatus(String quotationStatus) {
+		return quotationRepository.findByQuotationStatus(quotationStatus);
 	}
 
 	@Override
-	public List<Quotation> getQuotationsBySchool(long schoolId) {
-		return quotationRepository.getQuotationsBySchool(schoolId);
+	public List<Quotation> findBySchoolId(long schoolId) {
+		return quotationRepository.findBySchoolId(schoolId);
 	}
 
 }
