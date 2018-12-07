@@ -3,7 +3,8 @@ import {JwtHelper} from 'angular2-jwt';
 
 import {TOKEN_NAME} from '../constant/auth-constant';
 import {ROLE} from '../constant/auth-constant';
-
+import { User } from '../model/user';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,17 +13,14 @@ export class UserService {
   accessToken: string;
   isAdmin: boolean;
   role: string;
-
-  constructor() {
-  }
+  constructor(private http: HttpClient) { }
+  
 
   login(accessToken: string) {
     const decodedToken = this.jwtHelper.decodeToken(accessToken);
-    let jwtToken = accessToken.split('.')[1];
-    let decodeJWTJSONData = window.atob(jwtToken);
-    let decodedJWTData = JSON.parse(decodeJWTJSONData);
-    let role = decodedJWTData.roles;
-
+    console.log("decodedToken" ,decodedToken);
+    let role = decodedToken.roles;
+     console.log("kamalkath" ,role);
     
     if(role === "ADMIN"){
       this.isAdmin = true;

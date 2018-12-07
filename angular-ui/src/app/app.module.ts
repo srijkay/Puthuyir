@@ -8,16 +8,41 @@ import { AppRoutingModule } from './app-routing.module';
 import { SchoolRegistrationComponent } from './school-registration/school-registration.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SchoolService } from './services/school.service';
+import { RegisterService} from './services/register-service';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SchoolListComponent } from './school-list/school-list.component';
 import {LoginComponent} from './login/login.component';
 import {AdminComponent} from './admin/admin.component';
 import {HomeComponent} from './home/home.component';
+import {RegisterComponent} from './register/register.component';
 import {LogoutComponent} from './logout/logout.component';
 import {ViewSchoolRegistrationComponent} from './view-school-registration/view-school-registration.component';
+import { SocialLoginModule } from 'angularx-social-login';
+import { AuthServiceConfig, GoogleLoginProvider ,FacebookLoginProvider} from 'angularx-social-login';
+
 import { SchollregconfirmComponent } from './schollregconfirm/schollregconfirm.component';
 
+console.log("Goog",GoogleLoginProvider.PROVIDER_ID);
+const config = new AuthServiceConfig([
+  {
+    
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('624796833023-clhjgupm0pu6vgga7k5i5bsfp6qp6egh.apps.googleusercontent.com')
+    
+  },
+  {
+    
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('258341691532711')
+  }
+  
+]);
+
+
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -30,7 +55,8 @@ import { SchollregconfirmComponent } from './schollregconfirm/schollregconfirm.c
     HomeComponent,
     LogoutComponent,
     ViewSchoolRegistrationComponent,
-    SchollregconfirmComponent
+    SchollregconfirmComponent,
+    RegisterComponent
 
     ],
   imports: [
@@ -41,9 +67,20 @@ import { SchollregconfirmComponent } from './schollregconfirm/schollregconfirm.c
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    SocialLoginModule,
     NgbModule.forRoot()
   ],
-  providers: [SchoolService],
+  
+  providers: [
+   
+     {
+     provide: AuthServiceConfig,
+     useFactory: provideConfig
+  }, {
+    provide: SchoolService,
+   useFactory: provideConfig
+ }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

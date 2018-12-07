@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {SchoolRegistrationComponent} from './school-registration/school-registration.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {SchoolListComponent} from './school-list/school-list.component';
+import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
 import {AdminComponent} from './admin/admin.component';
 import {HomeComponent} from './home/home.component';
@@ -40,6 +41,10 @@ const routes: Routes = [
     path: 'viewSchoolReg',
     component: ViewSchoolRegistrationComponent
 
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'schoolRegConfirm',

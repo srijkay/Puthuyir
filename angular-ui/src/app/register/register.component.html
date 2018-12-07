@@ -1,0 +1,148 @@
+﻿<head>
+    <meta charset="utf-8">
+    <title>>Revamp | Register User
+      <</title>
+  </head>
+  
+  <!--page_container-->
+  
+  
+  <div class="page_container">
+    <div class="breadcrumb">
+      <div class="wrap">
+        <div class="container">
+          Login / Register here for your Specific Access
+        </div>
+      </div>
+    </div>
+  
+    <div class="container">
+  
+      <div class="wrap" id="multibn">
+        <div class="container">
+          <section>
+            <div class="row">
+              <div class="span8">
+                <form class="form-horizontal" name="form" (ngSubmit)="register()" #f="ngForm">
+                  <fieldset>
+                    <h2> New User? Register below: </h2>
+                    <legend>Provide details and select appropriate role, for details refer to the side</legend>
+                    <div class="control-group">
+                      <label class="control-label" for="input01">First Name</label>
+                      <div class="controls">
+                        <input type="text" name="firstName" [(ngModel)]="user.firstName" #firstName="ngModel" class="input-xlarge">
+                      </div>
+  
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label" for="input01">Sur Name</label>
+                      <div class="controls">
+                        <input type="text" name="lastName" [(ngModel)]="user.lastName" #lastName="ngModel" class="input-xlarge">
+                      </div>
+                    </div>
+  
+                    
+  
+                    <div class="control-group">
+                      <label class="control-label" for="input01">Address / House number</label>
+                      <div class="controls">
+                        <input type="text" class="input-xlarge" name="addressLine1" [(ngModel)]="user.address.addressLine1" #addressLine1="ngModel">
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label" for="input01">Street Name</label>
+                      <div class="controls">
+                        <input type="text" class="input-xlarge" name="addressLine2" [(ngModel)]="user.address.addressLine2" #addressLine2="ngModel">
+                      </div>
+                    </div>
+                    
+
+                    <div class="control-group">
+                      <label class="control-label" for="input01">Town/City</label>
+                      <div class="controls">
+                        <input type="text" class="input-xlarge" name="city" [(ngModel)]="user.address.city" #city="ngModel">
+                      </div>
+                    </div>
+  
+                    <!-- <div class="control-group">
+                              <label class="control-label" for="optionsCheckbox">Checkbox</label>
+                              <div class="controls">
+                                <label class="checkbox">
+                                  <input type="checkbox" id="optionsCheckbox" value="option1">
+                                  Option one is this and that&mdash;be sure to include why it's great
+                                </label>
+                              </div>
+                            </div> -->
+                    <!-- <div class="control-group">
+                      <label class="control-label" for="select01">Select State</label>
+                      <div class="controls">
+                        <select id="select01" (change)="onStateChange($event.target.value)" name="state">
+                          <option value="" disabled selected>Select your option</option>
+                          <option *ngFor="let state of states" [value]="state.stateId">{{state.stateName}}</option>
+                        </select>
+                      </div>
+                    </div> -->
+  
+  
+                    <!-- <div class="control-group ">
+                      <label class="control-label " for="select01 ">Select District</label>
+                      <div class="controls ">
+                        <select id="select01 " name="district " [(ngModel)]="user.address.district" #district="ngModel">
+                          <option *ngFor="let district of districts " [value]="district.districtId ">{{district.districtName}}</option>
+                        </select>
+                      </div>
+                    </div> -->
+  
+                    <!--<div class="control-group">
+                      <label class="control-label" for="multiSelect">Select Your Role </label>
+                      <div class="controls">
+                        <select id="select01" name="role" [(ngModel)]="user.roleId">
+                          <option value="" disabled selected>Select your option</option>
+                          <option *ngFor="let role of roles" [value]="role.roleId">{{role.roleName}}</option>
+                        </select>
+                      </div>
+                    </div>-->
+  
+                    <div class="control-group">
+                      <label class="control-label" for="input01">Phone Number</label>
+                      <div class="controls">
+                        <input type="text" class="input-xlarge" id="input01" name="phoneNumber" [(ngModel)]="user.phoneNumber" #phoneNumber="ngModel">
+                      </div>
+                    </div>
+  
+                    <!-- <div class="control-group">
+                      <label class="control-label" for="input01">Email</label>
+                      <div class="controls">
+                        <input type="text" class="input-xlarge" id="input01" name="emailAddress" [(ngModel)]="user.emailAddress" #emailAddress="ngModel">
+                      </div>
+                    </div>
+  
+                    <div class="control-group">
+                      <label class="control-label" for="fileInput">Upload proof of identity </label>
+                      <div class="controls">
+                        <input class="input-file" id="fileInput" type="file" (change)="saveImage($event)" accept=".jpg,.jpeg,.png">
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label" for="textarea">Comments</label>
+                      <div class="controls">
+                        <textarea class="input-xlarge" id="textarea" rows="3"></textarea>
+                      </div>
+                    </div> -->
+
+                    <div class="form-actions">
+                      <button type="submit" class="btn send_btn">Register</button>
+                      <button class="btn dark_btn">Cancel</button>
+                    </div>
+                  </fieldset>
+                </form>
+  
+              </div>
+  
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <!--//page_container-->
+  

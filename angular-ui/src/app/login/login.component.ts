@@ -3,18 +3,23 @@ import {Router, ActivatedRoute} from '@angular/router';
 
 import {AuthenticationService} from '../services/authentication.service';
 import {UserService} from '../services/user.service';
+import { AuthService } from 'angularx-social-login';
+import { SocialUser } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
 
 @Component({
   selector: 'login',
   templateUrl: './login.component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  user: SocialUser;
   model: any = {};
   loading = false;
   error = '';
   redirectUrl: string;
 
   constructor(private router: Router,
+    private authService: AuthService,
               private activatedRoute: ActivatedRoute,
               private authenticationService: AuthenticationService,
               private userService: UserService) {
@@ -22,19 +27,42 @@ export class LoginComponent {
   }
 
   
+  ngOnInit() {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      if(user){
+        localStorage.setItem("USER_SOCIAL_ATTR", JSON.stringify(user));
+        this.login(this.user.email);
+      }  
+    });
+  }
 
-  login() {
+  signInWithGoogle(): void {
+    console.log("Entering into google");
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+  
+  signOut(): void {
+    this.authService.signOut();
+  }
+  login(emailId: string) {
     this.loading = true;
 
-    this.authenticationService.login(this.model.username, this.model.password)
+    this.authenticationService.login(emailId)
       .subscribe(
         result => {
           this.loading = false;
 
           if (result) {
+            console.log("this.userService.log" ,result);
             this.userService.login(result);
+           // console.log("this.userService.log" ,result);
             this.navigateAfterSuccess(localStorage.getItem("role"));
-          } else {
+           } else {
             this.error = 'Username or password is incorrect';
           }
         },
@@ -51,10 +79,11 @@ export class LoginComponent {
         this.router.navigate(['admin']);
       }else if(role === "beneficiary"){
         this.router.navigate(['schoolregistration']);
+      } else{
+        this.router.navigate(['/register']);
       }
       
-    } else {
-      this.router.navigate(['/']);
-    }
+    } 
+   
   }
 }

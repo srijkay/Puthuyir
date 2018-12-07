@@ -14,6 +14,7 @@ export const environment = {
   'school.register.url':'',
   'school.list.url':'',
   'school.image.dir':'',
-  'image.server.url':''
+  'image.server.url':'',
+  'user.login.url':'',
 
 };
