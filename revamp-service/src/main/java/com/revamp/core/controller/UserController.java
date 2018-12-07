@@ -70,29 +70,19 @@ public class UserController {
 
 		String jwtToken = "";
 
-		if (login.getEmailAddress() == null || login.getPassword() == null) {
+		if (login.getEmailAddress() == null) {
 			throw new ServletException("Please fill in username and password");
 		}
 
 		String email = login.getEmailAddress();
-		String password = login.getPassword();
-
+		
 		User user = userService.findByEmail(email);
-
-		if (user == null) {
-			throw new UserNotFoundException("User email not found.");
-		}
-
-		String pwd = user.getPassword();
-
-		if (!password.equals(pwd)) {
-			throw new PasswordInvalidException("Invalid Password. Please check your name and password.");
-		}
-
+		if(user!= null) {
 		jwtToken = Jwts.builder().setSubject(email).claim("roles", user.getRoleId()).setIssuedAt(new Date())
 				.signWith(SignatureAlgorithm.HS256, "secretkey").compact();
+		}
 		logger.info("JWT token in SpringBoot" + jwtToken);
-		if (jwtToken != null) {
+		if (jwtToken != null && jwtToken.length() > 0) {
 			userResponse = new UserResponse();
 			userResponse.setEmail(user.getEmailAddress());
 			userResponse.setFirstName(user.getFirstName());
@@ -101,10 +91,16 @@ public class UserController {
 			userResponse.setRole(user.getRoleId());
 			return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
 
+		}else {
+			userResponse = new UserResponse();
+			
+			jwtToken = Jwts.builder().setSubject(email).claim("roles", "NoRole").setIssuedAt(new Date())
+					.signWith(SignatureAlgorithm.HS256, "secretkey").compact();
+			userResponse.setToken(jwtToken);
+		
+		return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
 		}
-
-		return new ResponseEntity<UserResponse>(userResponse, HttpStatus.NOT_FOUND);
-
+		
 	}
 
 }
