@@ -1,4 +1,4 @@
-/*package com.revamp.core.controller;
+package com.revamp.core.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,25 +15,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-*//**
+/**
  * 
  * @author PuthirDevTeam
  *
- *//*
+ */
 @RestController
 public class ImageController {
 	private final static Logger logger = LoggerFactory.getLogger(ImageController.class);
 	@Autowired
 	private ImageService imageService;
 
-	*//**
+	/**
 	 * 
 	 * @param request
 	 * @param fileUpload
 	 * @return
 	 * @throws Exception
-	 *//*
-	---Add new image---
+	 */
+	//---Add new image---
 	@RequestMapping(value = "/image", method = RequestMethod.POST)
 	public ResponseEntity<?> save(HttpServletRequest request, @RequestParam CommonsMultipartFile[] fileUpload)
 			throws Exception {
@@ -53,16 +53,16 @@ public class ImageController {
 		return ResponseEntity.badRequest().body(null);
 	}
 
-	---Get a image by id---
-	*//**
+	//---Get a image by id---
+	/**
 	 * 
 	 * @param imageId
 	 * @return
-	 *//*
+	 */
 	@RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
 	public ResponseEntity<SchoolImage> get(@PathVariable("id") long imageId) {
 		SchoolImage image = imageService.get(imageId);
 		return ResponseEntity.ok().body(image);
 	}
 
-}*/
+}
