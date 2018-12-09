@@ -55,6 +55,13 @@
                         <input type="text" class="input-xlarge" name="addressLine2" [(ngModel)]="user.address.addressLine2" #addressLine2="ngModel">
                       </div>
                     </div>
+
+                    <div class="control-group">
+                      <label class="control-label" for="input01">District</label>
+                      <div class="controls">
+                        <input type="text" class="input-xlarge" name="district" [(ngModel)]="user.address.district" #district="ngModel">
+                      </div>
+                    </div>
                     
 
                     <div class="control-group">
@@ -93,15 +100,16 @@
                       </div>
                     </div> -->
   
-                    <!--<div class="control-group">
-                      <label class="control-label" for="multiSelect">Select Your Role </label>
+                    <div class="control-group">
+                      <label class="control-label" for="singleSelect">Select Your Role </label>
                       <div class="controls">
-                        <select id="select01" name="role" [(ngModel)]="user.roleId">
+                        <select id="roles" name="role" [(ngModel)]="user.roleId" required>
                           <option value="" disabled selected>Select your option</option>
-                          <option *ngFor="let role of roles" [value]="role.roleId">{{role.roleName}}</option>
+                          <option value="beneficiary" >Beneficiary</option>
+                          <option value="donar" >Donar</option>
                         </select>
-                      </div>
-                    </div>-->
+                      </div>  
+                    </div>
   
                     <div class="control-group">
                       <label class="control-label" for="input01">Phone Number</label>
@@ -109,6 +117,8 @@
                         <input type="text" class="input-xlarge" id="input01" name="phoneNumber" [(ngModel)]="user.phoneNumber" #phoneNumber="ngModel">
                       </div>
                     </div>
+
+                    
   
                     <!-- <div class="control-group">
                       <label class="control-label" for="input01">Email</label>

@@ -23,7 +23,7 @@ export class RegisterService {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:6060/user', payload, { headers })
+    return this.http.post('http://localhost:6060/puthuyir/user', payload, { headers })
       .subscribe(data => {
        if(data){
         let response = data; 

@@ -9,5 +9,6 @@ export const environment = {
   'schooltype.lookup.url':'http://localhost:6060/puthuyir/lookup/field/schooltype',
   'school.register.url':'http://localhost:6060/puthuyir/school',
   'school.list.url':'http://localhost:6060/puthuyir/school',
-  'school.image.dir':'http://localhost:6060/puthuyir/'
+  'school.image.dir':'http://localhost:6060/puthuyir/',
+  'user.login.url':'http://localhost:6060/puthuyir/login',
 };

@@ -17,7 +17,7 @@ import {RegisterService} from '../services/register-service';
 export class RegisterComponent implements OnInit {
   user: User;
   address: Address;
-  
+ 
   constructor(
     private registerService: RegisterService
   ) {
@@ -28,7 +28,6 @@ export class RegisterComponent implements OnInit {
     let address: Address = new Address();
     let socialEmail = JSON.parse(localStorage.getItem("USER_SOCIAL_ATTR"));
     this.user.emailAddress=socialEmail.email;
-    this.user.roleId="beneficiary";
     this.user.address = address;
   }
 

@@ -5,6 +5,7 @@ export class Address {
     phoneNumber:string;
     district: string;
     city: string;
+    role: string;
    
     constructor(values: Object = {}) {
         Object.assign(this, values);
