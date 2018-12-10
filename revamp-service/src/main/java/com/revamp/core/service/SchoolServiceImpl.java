@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,12 +111,12 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Override
 	public List<School> getAllByCity(String cityId) {
-		return schoolRepository.getAllByCity(cityId);
+		return schoolRepository.findByAddressCity(cityId);
 	}
 
 	@Override
 	public List<School> getAllByDistrict(String districtId) {
-		return schoolRepository.getAllByDistrict(districtId);
+		return schoolRepository.findByAddressDistrict(districtId);
 	}
 
 //	@Override
@@ -127,7 +126,7 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Override
 	public List<School> getAllByLocality(String localityId) {
-		return schoolRepository.getAllByLocality(localityId);
+		return schoolRepository.findByAddressLocality(localityId);
 	}
 	
 	@Override

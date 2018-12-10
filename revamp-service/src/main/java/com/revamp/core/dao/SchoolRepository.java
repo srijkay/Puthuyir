@@ -9,23 +9,19 @@ import org.springframework.data.repository.query.Param;
 import com.revamp.core.model.School;
 
 public interface SchoolRepository extends CrudRepository<School, Long> {
-	
-	
-	@Query("FROM School s where s.address.city = :cityId")
-	public List<School> getAllByCity(@Param("cityId") String cityId);
 
-	@Query("FROM School s where s.address.district = :districtId")
-	public List<School> getAllByDistrict(@Param("districtId") String districtId);
-	
-	
-	@Query("FROM School s where s.address.locality = :localityId")
-	public List<School> getAllByLocality(@Param("localityId") String localityId);
-	
-	
+	public List<School> findByAddressCity(@Param("city") String city);
+
+	public List<School> findByAddressDistrict(@Param("district") String district);
+
+	public List<School> findByAddressLocality(@Param("locality") String locality);
+
 	@Query("FROM School s where s.user.userid = :userId")
 	public List<School> getByUserId(@Param("userId") long userId);
-	
-//	@Query("FROM School s where lower(s.schoolName) like concat('%',:contains,'%')")
-//	public List<School> getAllByName(@Param("contains") String contains);
+
+	/*
+	 * @Query("FROM School s where lower(s.schoolName) like concat('%',:contains,'%')"
+	 * ) public List<School> getAllByName(@Param("contains") String contains);
+	 */
 
 }
