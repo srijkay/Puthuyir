@@ -13,10 +13,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
@@ -26,7 +22,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "quotation")
-public class Quotation implements Serializable {
+public class Quotation extends AuditableEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -77,22 +73,6 @@ public class Quotation implements Serializable {
 
 	@Column(name = "school_id")
 	private long schoolId;
-
-	@Column(name = "created_date", nullable = false, updatable = false)
-	@CreatedDate
-	private Date createdDate;
-
-	@Column(name = "modified_date")
-	@LastModifiedDate
-	private Date modifiedDate;
-
-	@Column(name = "created_by")
-	@CreatedBy
-	private String createdBy;
-
-	@Column(name = "modified_by")
-	@LastModifiedBy
-	private String modifiedBy;
 
 	public Quotation() {
 	}
@@ -223,38 +203,6 @@ public class Quotation implements Serializable {
 
 	public void setSchoolId(long schoolId) {
 		this.schoolId = schoolId;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public String getModifiedBy() {
-		return modifiedBy;
-	}
-
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
 	}
 
 }
