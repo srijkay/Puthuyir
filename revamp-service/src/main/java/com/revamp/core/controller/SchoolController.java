@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revamp.core.lookup.PuthuyirLookUp;
 import com.revamp.core.model.School;
 import com.revamp.core.model.SchoolRegFormModel;
 import com.revamp.core.service.SchoolService;
@@ -108,17 +107,6 @@ public class SchoolController {
 
 		return ResponseEntity.ok().body(schools);
 	}
-
-//	/**
-//	 * 
-//	 * @param contains
-//	 * @return
-//	 */
-//	@GetMapping("/school/name/{contains}")
-//	public ResponseEntity<List<School>> getAllByName(@PathVariable("contains") String contains) {
-//		List<School> schools = schoolService.getAllByName(contains);
-//		return ResponseEntity.ok().body(schools);
-//	}
 
 	/**
 	 * 

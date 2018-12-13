@@ -59,9 +59,6 @@ export class SchoolRegistrationComponent implements OnInit {
   schoolTypesLD: LookUps;
 
   loading: boolean = false;
-  //url = '';
-  //@ViewChild('fileInput') fileInput: ElementRef;
-
 
   constructor(private lookUpService: LookUpService, private schoolService: SchoolService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -275,21 +272,6 @@ export class SchoolRegistrationComponent implements OnInit {
     input.append('files', this.schoolRegForm.controls.proofOfId.get('image').value);
     return input;
   }
-
-  /*addSchoolRegForm() {
-    const formModel = this.prepareSave();
-    this.loading = true;
-    this.schoolService.registerSchool(formModel)
-      .subscribe(
-        (response) => {
-          this.loading = false;
-          console.log(response);
-          this.router.navigate(['schoollist']);
-        },
-        (error) => console.log(error)
-      );
-  }*/
-
 
   disableSubmitBtn() {
     if (!this.schoolRegForm.valid || this.loading) {

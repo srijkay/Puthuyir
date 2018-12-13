@@ -1,0 +1,33 @@
+  <div class="container-fluid" style="width: 100%; margin: 0 auto;">
+    <div class="card">
+      <div class="card-header display-12">
+        {{donationSchoolInfo.schoolInfo.schoolName}} -
+        {{donationSchoolInfo.schoolInfo.schoolRegNo}}
+      </div>
+      <div class="card-body">
+        <table class="floatLeft">
+            <tr>
+              <td><img [src]="imageUrl+donationSchoolInfo.proofOfIds.files[0]" class="img-fluid w-100" alt="Responsive image" ></td>
+            </tr>
+          </table>
+          <table border="1" class="table table-bordered floatRight">
+            <tr>
+              <th>Requirement Type</th>
+              <th>Asset Type</th>
+              <th>Asset Name</th>
+              <th>Quantity</th>
+            </tr>
+            <tr *ngFor='let requirement of donationSchoolInfo.requirements'>
+              <td>{{requirement.reqType}}</td>
+              <td>{{requirement.assetType}}</td>
+              <td>{{requirement.assetName}}</td>
+              <td>{{requirement.quantity}}</td>
+            </tr>
+          </table>
+          </div>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-primary btn-sm"  (click)="goToSearchResult()">Back To Search Result</button>
+            <button type="button" class="btn btn-primary btn-sm"  (click)="goToDonatePage()">Donate Now</button>
+          </div>
+          </div>

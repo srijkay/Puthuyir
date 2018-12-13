@@ -30,27 +30,51 @@ export class SchoolService {
   private imageUrlBS = new BehaviorSubject(this.url);
   currentImageUrlBS = this.imageUrlBS.asObservable();
 
+  schoolList: School[];
+  private schoolListBS = new BehaviorSubject(this.schoolList);
+  currentSchoolListBS = this.schoolListBS.asObservable();
+
+donationSchoolInfo: School;
+private donationSchoolInfoBS = new BehaviorSubject(this.donationSchoolInfo);
+currentDonationSchoolInfo = this.donationSchoolInfoBS.asObservable();
+
   constructor(private http: Http) { }
 
-  enterSchoolRegister(schoolRegForm: FormGroup) {
+  public enterSchoolRegister(schoolRegForm: FormGroup) {
     this.schoolRegFormBS.next(schoolRegForm);
     let schoolInfo = schoolRegForm.controls.schoolInfo.value.schoolName+" # "+schoolRegForm.controls.schoolInfo.value.schoolRegNo;
     this.schoolInfoBS.next(schoolInfo);
-    console.log('...service...'+schoolRegForm.controls.schoolInfo.get('schoolName').value);
-
   }
 
-  enterImageUrl(url: string) {
+  public enterImageUrl(url: string) {
     this.imageUrlBS.next(url);
   }
 
-  registerSchool(school: any) {
+  public registerSchool(school: any) {
     return this.http.post(environment["school.register.url"], school);
   }
 
-  getSchoolList() {
+  public getSchoolList() {
     return this.http.get(environment["school.register.url"]);
   }
+
+  public saveSchoolList(schoolList: School[]) {
+    this.schoolListBS.next(schoolList);
+  }
+
+  filterSchoolInfoFromSchoolList(schoolRegNo: string,schoolName:string) {
+    this.currentSchoolListBS.subscribe(schoolList => this.schoolList = schoolList);
+    let donationSchoolInfo;
+    for (let school of this.schoolList) {
+        if(school.schoolInfo.schoolName == schoolName &&
+            school.schoolInfo.schoolRegNo == schoolRegNo) {
+              donationSchoolInfo = school;
+              break;
+            }
+    }
+    this.donationSchoolInfoBS.next(donationSchoolInfo);
+  }
+
 
   /**
      * Handle Http operation that failed.

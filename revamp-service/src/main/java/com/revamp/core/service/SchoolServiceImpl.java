@@ -35,8 +35,10 @@ public class SchoolServiceImpl implements SchoolService {
 	private UserRepository userRepository;
 
 	@Transactional
-	public long save(School school, Map<String, byte[]> files, String imgPath) {
+	public long save(final School school, Map<String, byte[]> files, String imgPath) {
+		System.out.println("..SchoolServiceImpl.."+imgPath);
 		String fileSubPath = DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now())+"\\";
+		System.out.println("..SchoolServiceImpl.."+fileSubPath);
 		school.setStatus(PuthuyirLookUp.SCHOOL_REGISTERED);
 		files.forEach((k,v) -> {
 			String filePath = fileSubPath+ school.getSchoolInfo().getSchoolName()+"_";
@@ -52,7 +54,7 @@ public class SchoolServiceImpl implements SchoolService {
 		//set user to the Requirement.
 		this.setUser(school);
 		
-		//school = schoolRepository.save(school);
+		schoolRepository.save(school);
 		
 		this.saveImgToFS(imgPath,fileSubPath,school.getSchoolImages());
 		return school.getSchoolId();
@@ -86,7 +88,6 @@ public class SchoolServiceImpl implements SchoolService {
 				try {
 					Files.createDirectories(Paths.get(tmpDirPath));
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

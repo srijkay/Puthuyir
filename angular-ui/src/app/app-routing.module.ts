@@ -10,7 +10,11 @@ import {AdminComponent} from './admin/admin.component';
 import {HomeComponent} from './home/home.component';
 import {LogoutComponent} from './logout/logout.component';
 import {ViewSchoolRegistrationComponent} from './view-school-registration/view-school-registration.component'
-import { SchollregconfirmComponent } from './schollregconfirm/schollregconfirm.component';
+import {SchollregconfirmComponent } from './schollregconfirm/schollregconfirm.component';
+import {SchoolsForDonationsComponent } from './schools-for-donations/schools-for-donations.component';
+import {DonationSchoolInfoComponent} from './donation-school-info/donation-school-info.component';
+import {DonateScreenComponent} from './donate-screen/donate-screen.component';
+import {} from './schools-for-donations/schools-for-donations.component';
 const routes: Routes = [
   {
     path: 'schoolregistration',
@@ -49,8 +53,18 @@ const routes: Routes = [
   {
     path: 'schoolRegConfirm',
     component: SchollregconfirmComponent
+  },{
+    path: 'schoolsForDonations',
+    component: SchoolsForDonationsComponent
   },
-
+  {
+    path: 'donationSchoolInfo',
+    component: DonationSchoolInfoComponent
+  },
+  {
+    path: 'donateScreen',
+    component: DonateScreenComponent
+  }
   {
     path: '**',
     component: PageNotFoundComponent

@@ -26,18 +26,22 @@ export class LookUpService {
   }
 
   public getAssetTypes() {
-    return this._httpClient.get(environment["assettype.lookup.url"]);    
+    return this._httpClient.get(environment["assettype.lookup.url"]);
   }
 
   public getAssetNames() {
-    return this._httpClient.get(environment["assetname.lookup.url"]);    
+    return this._httpClient.get(environment["assetname.lookup.url"]);
   }
 
   public getStates() {
-    return this._httpClient.get(environment["state.lookup.url"]);    
+    return this._httpClient.get(environment["state.lookup.url"]);
   }
 
   public getSchoolTypes() {
-    return this._httpClient.get(environment["schooltype.lookup.url"]);    
+    return this._httpClient.get(environment["schooltype.lookup.url"]);
+  }
+
+  public calldummy() {
+    console.log('calldummy');
   }
 }

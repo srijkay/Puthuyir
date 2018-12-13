@@ -19,9 +19,6 @@ public interface SchoolRepository extends CrudRepository<School, Long> {
 	@Query("FROM School s where s.user.userid = :userId")
 	public List<School> getByUserId(@Param("userId") long userId);
 
-	/*
-	 * @Query("FROM School s where lower(s.schoolName) like concat('%',:contains,'%')"
-	 * ) public List<School> getAllByName(@Param("contains") String contains);
-	 */
-
+	@Query("FROM School s where s.user.userid = :userId")
+	public List<School> getByStatus(@Param("userId") long userId);
 }
