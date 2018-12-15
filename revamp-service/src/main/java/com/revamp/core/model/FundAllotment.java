@@ -6,12 +6,15 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * 
@@ -20,7 +23,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "fundallotment")
-public class FundAllotment implements Serializable {
+@EntityListeners(AuditingEntityListener.class)
+public class FundAllotment extends AuditableEntity implements Serializable {
 	/**
 	 * 
 	 */

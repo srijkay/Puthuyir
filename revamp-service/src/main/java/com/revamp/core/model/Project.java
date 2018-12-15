@@ -7,6 +7,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -21,14 +22,16 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Proxy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.revamp.core.lookup.PuthuyirLookUp;
 
 @Entity
 @Table(name = "project")
+@EntityListeners(AuditingEntityListener.class)
 @Proxy(lazy = false)
-public class Project implements java.io.Serializable {
+public class Project extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = -5416628745442805358L;
 

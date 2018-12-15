@@ -6,6 +6,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,11 +19,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Proxy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "user")
+@EntityListeners(AuditingEntityListener.class)
 @Proxy(lazy = false)
-public class User implements java.io.Serializable {
+public class User extends AuditableEntity<Object> implements java.io.Serializable {
 
 	private static final long serialVersionUID = 5710411561549227521L;
 
