@@ -13,8 +13,7 @@ public class JpaAuditingConfiguration {
 	
 	 @Bean
 	    public AuditorAware<String> auditorAware() {
-		 System.out.println("Entering into AuditorAware config");
-	        return new AuditorAwareImpl();
+		      return new AuditorAwareImpl();
 	    }
 	
 }
