@@ -25,7 +25,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "user")
 @EntityListeners(AuditingEntityListener.class)
 @Proxy(lazy = false)
-public class User extends AuditableEntity<Object> implements java.io.Serializable {
+public class User extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 5710411561549227521L;
 
@@ -45,7 +45,7 @@ public class User extends AuditableEntity<Object> implements java.io.Serializabl
 
 	@Column(name = "emailaddress")
 	private String emailAddress;
-	
+
 	public String getEmailAddress() {
 		return emailAddress;
 	}
@@ -53,23 +53,22 @@ public class User extends AuditableEntity<Object> implements java.io.Serializabl
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "addressid")
 	private Address address;
 
-//	@Column(name = "identityproof")
-//	private long identityProof;
+	// @Column(name = "identityproof")
+	// private long identityProof;
 
 	@Column(name = "roleid")
 	private String roleId;
 
 	@Column(name = "status")
 	private String status;
-	
+
 	@Column(name = "password")
 	private String password;
-	
 
 	public String getPassword() {
 		return password;
@@ -79,8 +78,6 @@ public class User extends AuditableEntity<Object> implements java.io.Serializabl
 		this.password = password;
 	}
 
-	
-	
 	@Column(name = "createdate")
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
@@ -123,8 +120,6 @@ public class User extends AuditableEntity<Object> implements java.io.Serializabl
 		this.phoneNumber = phoneNumber;
 	}
 
-	
-
 	public Address getAddress() {
 		return address;
 	}
@@ -133,13 +128,13 @@ public class User extends AuditableEntity<Object> implements java.io.Serializabl
 		this.address = address;
 	}
 
-//	public long getIdentityProof() {
-//		return identityProof;
-//	}
-//
-//	public void setIdentityProof(long identityProof) {
-//		this.identityProof = identityProof;
-//	}
+	// public long getIdentityProof() {
+	// return identityProof;
+	// }
+	//
+	// public void setIdentityProof(long identityProof) {
+	// this.identityProof = identityProof;
+	// }
 
 	public String getRoleId() {
 		return roleId;
@@ -167,10 +162,8 @@ public class User extends AuditableEntity<Object> implements java.io.Serializabl
 
 	@Override
 	public String toString() {
-		return "User [userid=" + userid + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", phoneNumber=" + phoneNumber
-				+ ", emailAddress=" + emailAddress + ", address=" + address
-				+ " roleId=" + roleId
+		return "User [userid=" + userid + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
+				+ phoneNumber + ", emailAddress=" + emailAddress + ", address=" + address + " roleId=" + roleId
 				+ ", status=" + status + ", dateCreated=" + dateCreated + "]";
 	}
 

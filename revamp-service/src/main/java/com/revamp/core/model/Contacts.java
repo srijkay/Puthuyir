@@ -3,12 +3,9 @@ package com.revamp.core.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
@@ -18,7 +15,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "contacts")
 @EntityListeners(AuditingEntityListener.class)
 @Proxy(lazy = false)
-public class Contacts extends AuditableEntity<Object> implements java.io.Serializable {
+public class Contacts extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1769915147037089195L;
 
@@ -44,7 +41,6 @@ public class Contacts extends AuditableEntity<Object> implements java.io.Seriali
 
 	@Column(name = "sec_email")
 	private String secEmail;
-
 
 	public long getContactsId() {
 		return contactsId;
@@ -104,10 +100,8 @@ public class Contacts extends AuditableEntity<Object> implements java.io.Seriali
 
 	@Override
 	public String toString() {
-		return "Contacts [contactsId=" + contactsId + ", priName=" + priName
-				+ ", priNum=" + priNum + ", priEmail=" + priEmail
-				+ ", secName=" + secName + ", secNum=" + secNum + ", secEmail="
-				+ secEmail + "]";
+		return "Contacts [contactsId=" + contactsId + ", priName=" + priName + ", priNum=" + priNum + ", priEmail="
+				+ priEmail + ", secName=" + secName + ", secNum=" + secNum + ", secEmail=" + secEmail + "]";
 	}
 
 }
