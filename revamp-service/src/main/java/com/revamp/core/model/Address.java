@@ -15,7 +15,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "address")
 @EntityListeners(AuditingEntityListener.class)
 @Proxy(lazy = false)
-public class Address extends AuditableEntity<Object> implements java.io.Serializable {
+public class Address extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1956522127988632591L;
 
@@ -38,10 +38,10 @@ public class Address extends AuditableEntity<Object> implements java.io.Serializ
 
 	@Column(name = "locality_id")
 	private String locality;
-	
+
 	@Column(name = "pin_code")
 	private String pinCode;
-	
+
 	@Column(name = "state")
 	private String state;
 
@@ -115,7 +115,5 @@ public class Address extends AuditableEntity<Object> implements java.io.Serializ
 				+ ", district=" + district + ", city=" + city + ", locality=" + locality + ", pinCode=" + pinCode
 				+ ", state=" + state + "]";
 	}
-
-
 
 }
