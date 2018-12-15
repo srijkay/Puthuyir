@@ -50,6 +50,10 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`schoolinfo`(
 	`school_type` VARCHAR(45) NOT NULL,
 	`number_of_students` INT NOT NULL,
 	`number_of_teachers` INT NOT NULL,
+	`created_date` datetime DEFAULT NULL,
+  	`created_by` varchar(45) DEFAULT NULL,
+  	`modified_by` varchar(45) DEFAULT NULL,
+  	`modified_date` datetime DEFAULT NULL,
 	PRIMARY KEY (`school_info_id`),
     CONSTRAINT UNIQUE schoolinfo(school_reg_number)
 );
@@ -103,6 +107,10 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`school`(
     `status` VARCHAR(45) NOT NULL,
     `user_id` bigint(20) NOT NULL,
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	`created_date` datetime DEFAULT NULL,
+  	`created_by` varchar(45) DEFAULT NULL,
+  	`modified_by` varchar(45) DEFAULT NULL,
+  	`modified_date` datetime DEFAULT NULL,
 	PRIMARY KEY (`school_id`),
 	FOREIGN KEY (`contacts_id`) REFERENCES contacts (`contacts_id`),
 	FOREIGN KEY (`address_id`) REFERENCES address (`address_id`),
@@ -123,6 +131,10 @@ CREATE TABLE IF NOT EXISTS revamp_db.schoolimage(
 	`filepath` VARCHAR(200) NOT NULL,
 	`comments` varchar(500) DEFAULT NULL,
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	`created_date` datetime DEFAULT NULL,
+  	`created_by` varchar(45) DEFAULT NULL,
+  	`modified_by` varchar(45) DEFAULT NULL,
+  	`modified_date` datetime DEFAULT NULL,	
 	PRIMARY KEY (`image_id`),
 	FOREIGN KEY (`school_id`) REFERENCES `revamp_db`.`school` (`school_id`) ON DELETE NO ACTION ON UPDATE CASCADE	
 );

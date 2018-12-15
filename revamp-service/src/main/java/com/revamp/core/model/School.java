@@ -3,13 +3,13 @@ package com.revamp.core.model;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -26,21 +26,22 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Proxy;
-
-import com.revamp.core.lookup.PuthuyirLookUp;
-import com.revamp.core.web.util.SchoolSerializer;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.revamp.core.lookup.PuthuyirLookUp;
+import com.revamp.core.web.util.SchoolSerializer;
 
 @Entity
 @Table(name = "school")
 @Proxy(lazy = false)
+@EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonSerialize(using = SchoolSerializer.class)
-public class School implements java.io.Serializable {
+public class School extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8607633702511344481L;
 

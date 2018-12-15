@@ -2,17 +2,21 @@ package com.revamp.core.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "schoolinfo")
 @Proxy(lazy = false)
-public class SchoolInfo implements java.io.Serializable {
+@EntityListeners(AuditingEntityListener.class)
+
+public class SchoolInfo extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 6787703655405276366L;
 

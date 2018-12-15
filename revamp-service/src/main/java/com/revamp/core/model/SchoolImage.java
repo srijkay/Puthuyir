@@ -1,11 +1,11 @@
 package com.revamp.core.model;
 
-import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,14 +19,16 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Proxy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "schoolimage")
 @Proxy(lazy = false)
-public class SchoolImage implements java.io.Serializable {
+@EntityListeners(AuditingEntityListener.class)
+
+public class SchoolImage extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = -2136842348977561820L;
 	
