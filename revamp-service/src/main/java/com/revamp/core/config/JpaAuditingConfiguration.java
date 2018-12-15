@@ -11,7 +11,7 @@ import com.revamp.core.service.AuditorAwareImpl;
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class JpaAuditingConfiguration {
 	
-	 @Bean
+	    @Bean
 	    public AuditorAware<String> auditorAware() {
 		      return new AuditorAwareImpl();
 	    }
