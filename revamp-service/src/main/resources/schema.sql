@@ -23,6 +23,10 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`address`(
     `pin_code` VARCHAR(10),
     `state` VARCHAR(10),
 	`date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `created_date` datetime DEFAULT NULL,
+  	`created_by` varchar(45) DEFAULT NULL,
+  	`modified_by` varchar(45) DEFAULT NULL,
+  	`modified_date` datetime DEFAULT NULL,
 	PRIMARY KEY (`address_id`)
 );
 
@@ -37,7 +41,11 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`contacts`(
     `sec_name` VARCHAR(45),
     `sec_num` VARCHAR(45),
 	`sec_email` VARCHAR(90),
-    PRIMARY KEY (`contacts_id`)
+    `created_date` datetime DEFAULT NULL,
+  	`created_by` varchar(45) DEFAULT NULL,
+  	`modified_by` varchar(45) DEFAULT NULL,
+  	`modified_date` datetime DEFAULT NULL,
+	PRIMARY KEY (`contacts_id`)
 	
 );
 
@@ -86,6 +94,10 @@ CREATE TABLE IF NOT EXISTS revamp_db.user(
   `updateddate` datetime(6) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `passwordhint` varchar(500) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  	`created_by` varchar(45) DEFAULT NULL,
+  	`modified_by` varchar(45) DEFAULT NULL,
+  	`modified_date` datetime DEFAULT NULL,
   PRIMARY KEY (`userid`),
   FOREIGN KEY (`addressid`) REFERENCES `revamp_db`.`address` (`address_id`),
   FOREIGN KEY (`roleid`) REFERENCES `revamp_db`.`role` (`roleid`)
@@ -179,6 +191,10 @@ CREATE TABLE IF NOT EXISTS revamp_db.project(
     status VARCHAR(45) NOT NULL,
     v_status BIT AS (CASE WHEN status = 'ProjectCreated' THEN b'1' ELSE NULL END) VIRTUAL,
     date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `created_date` datetime DEFAULT NULL,
+  	`created_by` varchar(45) DEFAULT NULL,
+  	`modified_by` varchar(45) DEFAULT NULL,
+  	`modified_date` datetime DEFAULT NULL,
     PRIMARY KEY (project_id),
     CONSTRAINT school_id FOREIGN KEY (school_id) REFERENCES revamp_db.school (school_id),
     CONSTRAINT UNIQUE project(project_id,school_id,v_status)
@@ -198,6 +214,10 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`requirement`(
   `status` VARCHAR(45) NOT NULL,
   `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
   `priority` varchar(45) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  	`created_by` varchar(45) DEFAULT NULL,
+  	`modified_by` varchar(45) DEFAULT NULL,
+  	`modified_date` datetime DEFAULT NULL,
   PRIMARY KEY (`requirement_id`),
   KEY `user_id` (`user_id`),
   KEY `project_id` (`project_id`),
@@ -216,7 +236,11 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`donation`(
     `amount` INT NOT NULL,
     `payment_status`VARCHAR(45) NOT NULL,
     `createdate` datetime(6) DEFAULT NULL,
-    PRIMARY KEY (`donation_id`),
+    `created_date` datetime DEFAULT NULL,
+  	`created_by` varchar(45) DEFAULT NULL,
+  	`modified_by` varchar(45) DEFAULT NULL,
+  	`modified_date` datetime DEFAULT NULL,
+	PRIMARY KEY (`donation_id`),
     FOREIGN KEY (`project_id`)
     REFERENCES `revamp_db`.`project` (`project_id`),
     CONSTRAINT `donor_id`
@@ -267,6 +291,10 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`fundallotment`(
     `interest` INT,
     `allocated_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `updated_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `created_date` datetime DEFAULT NULL,
+  	`created_by` varchar(45) DEFAULT NULL,
+  	`modified_by` varchar(45) DEFAULT NULL,
+  	`modified_date` datetime DEFAULT NULL,
 	PRIMARY KEY (`fundallotment_id`),
 	FOREIGN KEY (`requirement_id`)
 	REFERENCES `revamp_db`.`requirement` (`requirement_id`),
