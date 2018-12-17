@@ -33,7 +33,6 @@ public class DonationController {
 	public ResponseEntity<Donation> save(@RequestBody Donation donation) {
 		Date today = new Date();
 		donation.setCreateDate(today);
-		donation.getDonor().setDateCreated(today);
 		donation = donationService.donate(donation);
 		return ResponseEntity.ok().body(donation);
 	}

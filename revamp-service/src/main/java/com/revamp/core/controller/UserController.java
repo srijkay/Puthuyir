@@ -1,7 +1,6 @@
 package com.revamp.core.controller;
 
 import java.util.Date;
-import java.util.Optional;
 
 import javax.servlet.ServletException;
 
@@ -20,8 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revamp.core.model.User;
 import com.revamp.core.response.UserResponse;
 import com.revamp.core.service.UserService;
-import com.revamp.exception.PasswordInvalidException;
-import com.revamp.exception.UserNotFoundException;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -42,7 +39,6 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public ResponseEntity<User> save(@RequestBody User user) {
-		user.setDateCreated(new Date());
 		long id = userService.save(user);
 		user.setUserid(id);
 		return ResponseEntity.ok().body(user);

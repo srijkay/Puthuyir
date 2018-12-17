@@ -1,8 +1,5 @@
 package com.revamp.core.model;
 
-import java.util.Date;
-
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,10 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Proxy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -76,16 +70,6 @@ public class User extends AuditableEntity implements java.io.Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	@Column(name = "createdate")
-	@Basic
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateCreated;
-
-	@PrePersist
-	protected void onCreate() {
-		dateCreated = new Date();
 	}
 
 	public long getUserid() {
@@ -152,19 +136,12 @@ public class User extends AuditableEntity implements java.io.Serializable {
 		this.status = status;
 	}
 
-	public Date getDateCreated() {
-		return dateCreated;
-	}
-
-	public void setDateCreated(Date dateCreated) {
-		this.dateCreated = dateCreated;
-	}
 
 	@Override
 	public String toString() {
 		return "User [userid=" + userid + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
 				+ phoneNumber + ", emailAddress=" + emailAddress + ", address=" + address + " roleId=" + roleId
-				+ ", status=" + status + ", dateCreated=" + dateCreated + "]";
+				+ ", status=" + status + "]";
 	}
 
 }
