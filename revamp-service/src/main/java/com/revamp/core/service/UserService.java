@@ -1,6 +1,6 @@
 package com.revamp.core.service;
 
-import java.util.Optional;
+import java.util.List;
 
 import com.revamp.core.model.User;
 
@@ -10,6 +10,12 @@ public interface UserService {
 
 	User get(long id);
 	
-	User findByEmail(String email);
+	User findByEmailAddress(String email);
+	
+	List<User> findAllUsers();
+	
+	void deleteUser(long id);
+	
+	List<User> findByStatus(String status);
 
 }

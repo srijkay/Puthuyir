@@ -1,6 +1,7 @@
 package com.revamp.core.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 
@@ -10,10 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revamp.core.model.User;
@@ -26,7 +28,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @CrossOrigin(origins = "http://localhost", maxAge = 3600)
 @RestController
 public class UserController {
-	private final static Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private UserService userService;
 	private UserResponse userResponse;
@@ -37,7 +39,7 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@PostMapping("/user")
 	public ResponseEntity<User> save(@RequestBody User user) {
 		long id = userService.save(user);
 		user.setUserid(id);
@@ -45,7 +47,7 @@ public class UserController {
 	}
 
 	//---Get a user by id---
-	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+	@GetMapping("/user/{id}")
 	public ResponseEntity<User> get(@PathVariable("id") long userId) {
 		User user = userService.get(userId);
 		return ResponseEntity.ok().body(user);
@@ -57,7 +59,7 @@ public class UserController {
 	 * @return
 	 * @throws ServletException
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@PostMapping("/login")
 	public ResponseEntity<UserResponse> login(@RequestBody User login) throws ServletException {
 
 		logger.info("Entering into Login Method");
@@ -72,7 +74,7 @@ public class UserController {
 
 		String email = login.getEmailAddress();
 		
-		User user = userService.findByEmail(email);
+		User user = userService.findByEmailAddress(email);
 		if(user!= null) {
 		jwtToken = Jwts.builder().setSubject(email).claim("roles", user.getRoleId()).setIssuedAt(new Date())
 				.signWith(SignatureAlgorithm.HS256, "secretkey").compact();
@@ -97,6 +99,18 @@ public class UserController {
 		return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
 		}
 		
+	}
+		
+	@GetMapping("/user")
+	public List<User> findAllUsers() {
+		return userService.findAllUsers();
+	}
+	
+		
+	@DeleteMapping("/user/{id}")
+	public ResponseEntity<String> deleteUser(@PathVariable("id") long id) {
+		userService.deleteUser(id);
+		return new ResponseEntity<>("DELETE Response", HttpStatus.OK);
 	}
 
 }
