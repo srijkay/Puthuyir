@@ -17,5 +17,7 @@ public interface UserService {
 	void deleteUser(long id);
 	
 	List<User> findByStatus(String status);
+	
+	User updateUserStatus(long id, String status);
 
 }

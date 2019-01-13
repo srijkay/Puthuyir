@@ -2,6 +2,8 @@ package com.revamp.core.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -15,5 +17,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	public User findByEmailAddress(@Param("emailAddress") String emailAddress);
 
 	public List<User> findByStatus(String status);
+	
+	@Modifying
+	@Query("UPDATE User u set u.status = :status where u.id = :id")
+	public void updateUserStatus(@Param("id") long id, @Param("status") String status);
 
 }

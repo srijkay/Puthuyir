@@ -3,6 +3,7 @@ package com.revamp.core.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,20 +19,24 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional
 	public long save(User school) {
-	
 		return userRepository.save(school).getUserid();
+	}
+
+	@Transactional
+	@Modifying
+	public User updateUserStatus(long id, String status) {
+		userRepository.updateUserStatus(id, status);
+		return userRepository.findById(id).orElse(null);
 	}
 
 	public User get(long id) {
 		return userRepository.findById(id).orElse(null);
 	}
 
-	
-	public User findByEmailAddress(String email) {	
+	public User findByEmailAddress(String email) {
 		return userRepository.findByEmailAddress(email);
 	}
-    
-	
+
 	public List<User> findAllUsers() {
 		return (List<User>) userRepository.findAll();
 	}
@@ -40,13 +45,12 @@ public class UserServiceImpl implements UserService {
 	public void deleteUser(long id) {
 		User user = userRepository.findById(id).orElse(null);
 		if (user != null)
-			userRepository.delete(user);	
+			userRepository.delete(user);
 	}
 
 	@Override
 	public List<User> findByStatus(String status) {
 		return userRepository.findByStatus(status);
 	}
-	
 
 }
