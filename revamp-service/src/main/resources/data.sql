@@ -268,6 +268,33 @@ null,
 null);
 
 
+/* quotation insert */
+INSERT INTO `revamp_db`.`quotation`
+(`quotation_id`,
+`image_id`,
+`quotated_amount`,
+`warranty`,
+`trader_name`,
+`address_id`,
+`phone`,
+`collected_by`,
+`verified_by`,
+`reviewer`,
+`quotation_status`,
+`quotation_date`,
+`quotation_validity_date`,
+`school_id`,
+`requirement_id`,
+`is_quotation_active`,
+`created_date`,
+`created_by`,
+`modified_by`,
+`modified_date`)
+VALUES
+(
+'1', '1', '100', '1', 'test', '1', NULL, NULL, NULL, NULL, NULL, '2018-12-26 23:13:34', '2018-12-26 23:13:34', '1', '1', NULL, NULL, NULL, NULL, NULL);
+
+
 
 
 

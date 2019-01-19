@@ -19,7 +19,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	public List<User> findByStatus(String status);
 	
 	@Modifying
-	@Query("UPDATE User u set u.status = :status where u.id = :id")
+	@Query("UPDATE User u set u.status = :status, modifiedDate = now() where u.id = :id")
 	public void updateUserStatus(@Param("id") long id, @Param("status") String status);
 
 }
