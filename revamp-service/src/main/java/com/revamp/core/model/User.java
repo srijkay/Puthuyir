@@ -15,9 +15,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Proxy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "user")
 @EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Proxy(lazy = false)
 public class User extends AuditableEntity implements java.io.Serializable {
 

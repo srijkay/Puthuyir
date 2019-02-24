@@ -38,6 +38,10 @@ donationSchoolInfo: School;
 private donationSchoolInfoBS = new BehaviorSubject(this.donationSchoolInfo);
 currentDonationSchoolInfo = this.donationSchoolInfoBS.asObservable();
 
+donateScreenForm:FormGroup;
+private donateScreenFormBS = new BehaviorSubject(this.donateScreenForm);
+currentDonateScreenForm = this.donateScreenFormBS.asObservable();
+
   constructor(private http: Http) { }
 
   public enterSchoolRegister(schoolRegForm: FormGroup) {
@@ -46,12 +50,22 @@ currentDonationSchoolInfo = this.donationSchoolInfoBS.asObservable();
     this.schoolInfoBS.next(schoolInfo);
   }
 
+  public enterDonateInfo(donateScreenForm: FormGroup) {
+    this.donateScreenFormBS.next(donateScreenForm);
+  }
+
   public enterImageUrl(url: string) {
     this.imageUrlBS.next(url);
   }
 
   public registerSchool(school: any) {
     return this.http.post(environment["school.register.url"], school);
+  }
+
+  public makePayment(paymentSummary: any) {
+    let headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+    return this.http.put(environment["make.payment.url"], paymentSummary,{headers: headers});
   }
 
   public getSchoolList() {

@@ -19,7 +19,6 @@ export class ViewSchoolRegistrationComponent implements OnInit {
   ngOnInit() {
     this.schoolService.currentSchoolRegForm.subscribe(schoolRegForm => this.schoolRegForm = schoolRegForm);
     this.schoolService.currentImageUrlBS.subscribe(url => this.url = url);
-    //console.log('AAAAAAAAAAAAA'+((<FormArray>this.schoolRegForm.controls.requirements).length));
   }
 
   gotoSchoolRegPage() {

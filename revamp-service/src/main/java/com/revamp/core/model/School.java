@@ -82,10 +82,12 @@ public class School extends AuditableEntity implements java.io.Serializable {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+
 	
 	@Transient
 	private List<Requirement> requirements;
 	
+
 	public List<Requirement> getRequirements() {
 		return requirements;
 	}

@@ -23,6 +23,7 @@ import { SchoolsForDonationsComponent } from './schools-for-donations/schools-fo
 import { DonationSchoolInfoComponent } from './donation-school-info/donation-school-info.component';
 import { DonateScreenComponent } from './donate-screen/donate-screen.component';
 import { PaymentSummaryComponent } from './payment-summary/payment-summary.component';
+import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 
 const config = new AuthServiceConfig([
   {
@@ -60,7 +61,8 @@ export function provideConfig() {
     SchoolsForDonationsComponent,
     DonationSchoolInfoComponent,
     DonateScreenComponent,
-    PaymentSummaryComponent
+    PaymentSummaryComponent,
+    PaymentConfirmationComponent
 
     ],
   imports: [
