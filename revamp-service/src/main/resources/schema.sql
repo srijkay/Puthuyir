@@ -301,3 +301,55 @@ CREATE TABLE IF NOT EXISTS `revamp_db`.`fundallotment`(
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
 );
+
+CREATE TABLE `invoice` (
+  `invoice_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `file` longblob,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `modified_by` varchar(255) DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `mime_type` varchar(255) DEFAULT NULL,
+  `invoice_details_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`invoice_id`),
+  KEY `invoice_ibfk_1` (`project_id`),
+  CONSTRAINT `invoice_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON UPDATE CASCADE
+) ;
+
+CREATE TABLE `invoice_details` (
+  `invoice_details_id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_address` varchar(45) DEFAULT NULL,
+  `to_address` varchar(45) DEFAULT NULL,
+  `invoice_number` varchar(45) DEFAULT NULL,
+  `invoice_date` varchar(45) DEFAULT NULL,
+  `invoice_duedate` varchar(45) DEFAULT NULL,
+  `bankname` varchar(45) DEFAULT NULL,
+  `emailId` varchar(45) DEFAULT NULL,
+  `phoneNumber` varchar(45) DEFAULT NULL,
+  `accountNumber` varchar(45) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` varchar(255) DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `account_number` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `email_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`invoice_details_id`)
+);
+CREATE TABLE `invoice_requirements` (
+  `requirement_id` int(11) NOT NULL AUTO_INCREMENT,
+  `qty` varchar(45) DEFAULT NULL,
+  `descriptions` varchar(45) DEFAULT NULL,
+  `price` varchar(45) DEFAULT NULL,
+  `subTotal` varchar(45) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` varchar(255) DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `invoice_details` bigint(20) DEFAULT NULL,
+  `sub_total` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`requirement_id`)
+);
