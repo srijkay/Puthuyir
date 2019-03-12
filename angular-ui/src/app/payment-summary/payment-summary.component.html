@@ -7,44 +7,47 @@
 </p>
 
 </div>
-<div>
+
+
+
+<div class="container">
+  <form [formGroup]="paymentSummaryForm">
   <table>
     <tr>
-      <td><label class="control-label">Donor First Name</label></td>
-      <td><label class="control-label">asdf</label></td>
+      <td>Donor First Name</td>
+      <td>{{this.paymentSummaryForm.controls.donarFirtName.value}}</td>
     </tr>
     <tr>
-      <td><label class="control-label">Donor Last Name</label></td>
-      <td><label class="control-label">asdf</label></td>
+      <td>Donor Last Name</td>
+      <td>{{this.paymentSummaryForm.controls.donarLastName.value}}</td>
     </tr>
     <tr>
-      <td><label class="control-label">Donor Email Id</label></td>
-      <td><label class="control-label">asdf</label></td>
+      <td>Donor Email Id</td>
+      <td>{{this.paymentSummaryForm.controls.donarEmailId.value}}</td>
     </tr>
     <tr>
-      <td><label class="control-label">Donor Phone Number</label></td>
-      <td><label class="control-label">asdf</label></td>
+      <td>Donor Phone no</td>
+      <td>{{this.paymentSummaryForm.controls.donarPhoneNo.value}}</td>
     </tr>
     <tr>
-      <td><label class="control-label">School Name</label></td>
-      <td><label class="control-label">asdf</label></td>
+      <td>School Name</td>
+      <td>{{this.paymentSummaryForm.controls.schoolName.value}}</td>
     </tr>
     <tr>
-      <td><label class="control-label">Donated Amount</label></td>
-      <td><label class="control-label">asdf</label></td>
+      <td>Donated Amt</td>
+      <td>{{this.paymentSummaryForm.controls.amount.value}}</td>
     </tr>
     <tr>
-      <td><label class="control-label">Requirement Description</label></td>
-      <td><label class="control-label">asdf</label></td>
+      <td>Requirement Description</td>
+      <td>{{this.paymentSummaryForm.controls.requirementDesc.value}}</td>
     </tr>
     <tr>
-      <td><label class="control-label">Mode of Payment</label></td>
-      <td><label class="control-label">asdf</label></td>
+      <td>Mode of Pay</td>
+      <td>{{this.paymentSummaryForm.controls.paymentMode.value}}</td>
     </tr>
-
   </table>
   <div>
-    <p> Link to Payment Gateway </p>
+    <a href="" (click)="makePayment($event)"> Link to Payment Gateway </a>
   </div>
-
+</form>
 </div>

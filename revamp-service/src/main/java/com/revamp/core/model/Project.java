@@ -25,11 +25,13 @@ import org.hibernate.annotations.Proxy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.revamp.core.lookup.PuthuyirLookUp;
 
 @Entity
 @Table(name = "project")
 @EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Proxy(lazy = false)
 public class Project extends AuditableEntity implements java.io.Serializable {
 

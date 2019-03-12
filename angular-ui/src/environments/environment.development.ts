@@ -11,4 +11,5 @@ export const environment = {
   'school.list.url':'http://localhost:6060/puthuyir/school',
   'school.image.dir':'http://localhost:6060/puthuyir/',
   'user.login.url':'http://localhost:6060/puthuyir/login',
+  'make.payment.url':'http://localhost:6060/puthuyir/donate'
 };

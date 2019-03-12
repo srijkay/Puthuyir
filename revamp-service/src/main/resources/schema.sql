@@ -90,8 +90,6 @@ CREATE TABLE IF NOT EXISTS revamp_db.user(
   `roleid` varchar(45) NOT NULL,
   `phonenumber` varchar(45) DEFAULT NULL,
   `emailaddress` varchar(45) DEFAULT NULL,
-  `createdate` datetime(6) DEFAULT NULL,
-  `updateddate` datetime(6) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `passwordhint` varchar(500) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,

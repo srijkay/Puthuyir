@@ -1,17 +1,17 @@
 package com.revamp.core.controller;
 
-import com.revamp.core.model.Project;
-import com.revamp.core.service.ProjectService;
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.revamp.core.model.Project;
+import com.revamp.core.service.ProjectService;
 /**
  * 
  * @author PuthyirDevTeam
@@ -27,7 +27,7 @@ public class ProjectController {
      * @param project
      * @return
      */
-	@PutMapping("/project")
+	@PostMapping("/project")
 	public ResponseEntity<Project> saveOrUpdate(@RequestBody Project project) {
 		long id = projectService.saveOrUpdate(project);
 		project.setProjectId(id);

@@ -3,29 +3,33 @@
   Appreciate your interest in Donating fund for development of the school. Please use the payment gateway to pay the fund
 </p>
 </div>
-<div>
+
+
+<div class="container">
+  <form [formGroup]="donateScreenForm">
   <table>
     <tr>
       <td><label class="control-label">School Name</label></td>
-      <td><input type="text" name="schoolName"></td>
+      <td><input type="text" readonly class="form-control" id="schoolName" formControlName="schoolName"></td>
     </tr>
     <tr>
       <td><label class="control-label">Estimated Total Amount</label></td>
-      <td><input type="text" name="schoolName"></td>
+      <td><input type="text" readonly class="form-control" id="estTotAmt" formControlName="estTotAmt"></td>
     </tr>
     <tr>
       <td><label class="control-label">Collected Amount</label></td>
-      <td><input type="text" name="schoolName"></td>
+      <td><input type="text" readonly class="form-control" id="collectedAmt" formControlName="collectedAmt"></td>
     </tr>
     <tr>
       <td><label class="control-label">You can contribute Upto</label></td>
-      <td><input type="text" name="schoolName"></td>
+      <td><input type="text" readonly class="form-control" id="contributeUptoAmt" formControlName="contributeUptoAmt"></td>
     </tr>
     <tr>
       <td><label class="control-label">Your contribution in Rs.</label></td>
-      <td><input type="text" name="schoolName"></td>
+      <td><input type="text"   class="form-control" id="contributeAmt" formControlName="contributeAmt"></td>
     </tr>
   </table>
+  </form>
   <div>
     <p> Already Registered Donor?? </p>
     <p> <input type="radio" name=""> Yes <input type="radio" name=""> No  </p>
@@ -41,10 +45,8 @@
         <td><input type="password" name="userPassword"></td>
       </tr>
       <tr>
-        <td colspan="2"><button type="button" class="btn btn-primary btn-sm"  (click)="goToSearchResult()">Login</button>
+        <td colspan="2"><button type="button" class="btn btn-primary btn-sm" (click)="goToPaymentSummary()">Login</button>
         <button type="button" class="btn btn-primary btn-sm"  (click)="goToDonatePage()">Cancel</button></td>
-
       </tr>
       </table>
-    </div>
-</div>
+    </div></div>

@@ -14,6 +14,8 @@ import {SchollregconfirmComponent } from './schollregconfirm/schollregconfirm.co
 import {SchoolsForDonationsComponent } from './schools-for-donations/schools-for-donations.component';
 import {DonationSchoolInfoComponent} from './donation-school-info/donation-school-info.component';
 import {DonateScreenComponent} from './donate-screen/donate-screen.component';
+import {PaymentSummaryComponent} from './payment-summary/payment-summary.component';
+import {PaymentConfirmationComponent} from './payment-confirmation/payment-confirmation.component';
 import {} from './schools-for-donations/schools-for-donations.component';
 const routes: Routes = [
   {
@@ -64,7 +66,15 @@ const routes: Routes = [
   {
     path: 'donateScreen',
     component: DonateScreenComponent
-  }
+  },
+  {
+    path: 'paymentSummary',
+    component: PaymentSummaryComponent
+  },
+  {
+    path: 'paymentConfirmation',
+    component: PaymentConfirmationComponent
+  },
   {
     path: '**',
     component: PageNotFoundComponent

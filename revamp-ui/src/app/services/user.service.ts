@@ -1,42 +1,44 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'environments/environment';
-import { Http, Response, RequestOptions, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { Role } from '../models/role';
-import { User } from '../models/user';
+import {Injectable} from '@angular/core';
+import {JwtHelper} from 'angular2-jwt';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw'
-
-
-const API_URL = environment.apiUrl;
-
-@Injectable()
+import {TOKEN_NAME} from '../constant/auth-constant';
+import {ROLE} from '../constant/auth-constant';
+import { User } from '../model/user';
+import { HttpClient } from '@angular/common/http';
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
+  jwtHelper: JwtHelper = new JwtHelper();
+  accessToken: string;
+  isAdmin: boolean;
+  role: string;
+  constructor(private http: HttpClient) { }
+  
 
-  constructor(
-    private http: Http
-  ) {
+  login(accessToken: string) {
+    const decodedToken = this.jwtHelper.decodeToken(accessToken);
+    console.log("decodedToken" ,decodedToken);
+    let role = decodedToken.roles;
+     console.log("kamalkath" ,role);
+    
+    if(role === "ADMIN"){
+      this.isAdmin = true;
+
+    }
+
+    this.accessToken = accessToken;
+
+    localStorage.setItem(TOKEN_NAME, accessToken);
+    localStorage.setItem(ROLE, role);
   }
 
-  public getAllRoles(): Observable<Role[]> {
-    return this.http
-      .get(API_URL + '/roles')
-      .map(response => {
-        const states = response.json();
-        return states.map((role) => new Role(role));
-      })
 
+  isAdminUser(): boolean {
+    return this.isAdmin;
   }
 
-  public register(user: User) {
-    return this.http.post(API_URL + '/user', user)
-      .map(response => {
-        console.log(response.headers);
-      })
+  isUser(): boolean {
+    return this.accessToken && !this.isAdmin;
   }
-
-
-
 }

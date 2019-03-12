@@ -10,5 +10,6 @@ export const environment = {
   'school.register.url':'revamp-service-1.0-SNAPSHOT/school',
   'school.list.url':'revamp-service-1.0-SNAPSHOT/school',
   'school.image.dir':'http://localhost:8080/images/',
-  'image.server.url':'http://localshost:8080/images/'
+  'user.login.url':'http://localhost:6060/puthuyir/login',
+  'make.payment.url':'http://localhost:6060/puthuyir/donate'
 };

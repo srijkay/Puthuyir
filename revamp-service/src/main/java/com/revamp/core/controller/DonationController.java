@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,12 +29,12 @@ public class DonationController {
 	 * @param donation
 	 * @return
 	 */
-	@PostMapping("/donate")
+	@PutMapping("/donate")
 	public ResponseEntity<Donation> save(@RequestBody Donation donation) {
 		Date today = new Date();
 		donation.setCreateDate(today);
-		donation.getDonor().setDateCreated(today);
 		donation = donationService.donate(donation);
+		System.out.println(donation);
 		return ResponseEntity.ok().body(donation);
 	}
 

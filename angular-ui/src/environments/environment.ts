@@ -16,5 +16,5 @@ export const environment = {
   'school.image.dir':'',
   'image.server.url':'',
   'user.login.url':'',
-
+  'make.payment.url':''
 };

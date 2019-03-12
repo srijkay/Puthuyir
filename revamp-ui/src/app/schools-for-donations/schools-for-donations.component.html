@@ -1,0 +1,11 @@
+  <span  *ngFor='let school of schoolList'>
+
+            <a  (click)="gotoShoolInfo(school.schoolInfo.schoolRegNo,school.schoolInfo.schoolName)" href="#">
+              <figure>
+                <img [src]="imageUrl+school.proofOfIds.files[0]" alt="">
+                <figcaption>
+                  {{school.proofOfIds.comments}}
+                </figcaption>
+              </figure>
+            </a>
+</span>
