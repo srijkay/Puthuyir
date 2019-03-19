@@ -166,17 +166,14 @@ CREATE TABLE IF NOT EXISTS revamp_db.audittrail(
 
 DROP TABLE IF EXISTS revamp_db.lookup;
  
-CREATE TABLE IF NOT EXISTS revamp_db.lookup(
-	
-	`field` VARCHAR(45),
-    `key` VARCHAR(45),
-    `value` VARCHAR(100),
-    `parent_field` VARCHAR(45),
-    `parent_key` VARCHAR(45),
-	PRIMARY KEY (`field`,`key`),
-    FOREIGN KEY (`parent_field`, `parent_key`)
-    REFERENCES `revamp_db`.`lookup` (`field`,`key`)
-    
+CREATE TABLE IF NOT EXISTS `revamp_db`.`lookup` (
+  `lookup_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `field` varchar(45) DEFAULT NULL,
+  `key` varchar(45) DEFAULT NULL,
+  `value` varchar(100) DEFAULT NULL,
+  `parent_field` varchar(45) DEFAULT NULL,
+  `parent_key` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`lookup_id`)
 );
 
 DROP TABLE IF EXISTS `revamp_db`.`project`;

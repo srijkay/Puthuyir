@@ -2,6 +2,8 @@ package com.revamp.core.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,6 +17,11 @@ public class Lookup implements java.io.Serializable {
 	private static final long serialVersionUID = -5981979079568808949L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "lookup_id")
+	private Long lookup_id;
+	
+	
 	@Column(name = "field")
 	private String field;
 
