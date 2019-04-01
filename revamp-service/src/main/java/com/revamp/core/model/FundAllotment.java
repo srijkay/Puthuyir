@@ -16,6 +16,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Data;
+
 /**
  * 
  * @author Puthyir Dev Team
@@ -24,6 +26,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "fundallotment")
 @EntityListeners(AuditingEntityListener.class)
+@Data
 public class FundAllotment extends AuditableEntity implements Serializable {
 	/**
 	 * 
@@ -58,74 +61,5 @@ public class FundAllotment extends AuditableEntity implements Serializable {
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updated_date;
-
-	
-	public long getFundallotmentId() {
-		return fundallotmentId;
-	}
-
-	public void setFundallotmentId(long fundallotmentId) {
-		this.fundallotmentId = fundallotmentId;
-	}
-
-	public long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
-
-	public long getRequirementId() {
-		return requirementId;
-	}
-
-	public void setRequirementId(long requirementId) {
-		this.requirementId = requirementId;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public Date getCollected_date() {
-		return collected_date;
-	}
-
-	public void setCollected_date(Date collected_date) {
-		this.collected_date = collected_date;
-	}
-
-	public long getTotalamount() {
-		return totalamount;
-	}
-
-	public void setTotalamount(long totalamount) {
-		this.totalamount = totalamount;
-	}
-
-	public long getInterest() {
-		return interest;
-	}
-
-	public void setInterest(long interest) {
-		this.interest = interest;
-	}
-
-	public Date getAllocated_date() {
-		return allocated_date;
-	}
-
-	public void setAllocated_date(Date allocated_date) {
-		this.allocated_date = allocated_date;
-	}
-
-	public Date getUpdated_date() {
-		return updated_date;
-	}
-
-	public void setUpdated_date(Date updated_date) {
-		this.updated_date = updated_date;
-	}
 	
 }

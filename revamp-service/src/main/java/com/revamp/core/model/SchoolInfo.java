@@ -11,11 +11,14 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Proxy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 @Entity
 @Table(name = "schoolinfo")
 @Proxy(lazy = false)
 @EntityListeners(AuditingEntityListener.class)
-
+@Data
 public class SchoolInfo extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 6787703655405276366L;
@@ -39,61 +42,5 @@ public class SchoolInfo extends AuditableEntity implements java.io.Serializable 
 
 	@Column(name = "number_of_teachers")
 	private int numberOfTeachers;
-
-	public long getSchoolInfoId() {
-		return schoolInfoId;
-	}
-
-	public void setSchoolInfoId(long schoolInfoId) {
-		this.schoolInfoId = schoolInfoId;
-	}
-
-	public String getSchoolRegNo() {
-		return schoolRegNo;
-	}
-
-	public void setSchoolRegNo(String schoolRegNo) {
-		this.schoolRegNo = schoolRegNo;
-	}
-
-	public String getSchoolName() {
-		return schoolName;
-	}
-
-	public void setSchoolName(String schoolName) {
-		this.schoolName = schoolName;
-	}
-
-	public String getSchoolType() {
-		return schoolType;
-	}
-
-	public void setSchoolType(String schoolType) {
-		this.schoolType = schoolType;
-	}
-
-	public int getNumberOfStudents() {
-		return numberOfStudents;
-	}
-
-	public void setNumberOfStudents(int numberOfStudents) {
-		this.numberOfStudents = numberOfStudents;
-	}
-
-	public int getNumberOfTeachers() {
-		return numberOfTeachers;
-	}
-
-	public void setNumberOfTeachers(int numberOfTeachers) {
-		this.numberOfTeachers = numberOfTeachers;
-	}
-
-	@Override
-	public String toString() {
-		return "SchoolInfo [schoolInfoId=" + schoolInfoId + ", schoolRegNo="
-				+ schoolRegNo + ", schoolName=" + schoolName + ", schoolType="
-				+ schoolType + ", numberOfStudents=" + numberOfStudents
-				+ ", numberOfTeachers=" + numberOfTeachers + "]";
-	}
 
 }

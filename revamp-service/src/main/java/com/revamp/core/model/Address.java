@@ -1,5 +1,9 @@
 package com.revamp.core.model;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -11,10 +15,21 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Proxy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.revamp.core.lookup.PuthuyirLookUp;
+
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
 @Table(name = "address")
 @EntityListeners(AuditingEntityListener.class)
 @Proxy(lazy = false)
+@Getter
+@Setter
+@ToString
 public class Address extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1956522127988632591L;
@@ -22,7 +37,7 @@ public class Address extends AuditableEntity implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "address_id")
-	private long addressId;
+	@Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)private long addressId;
 
 	@Column(name = "address_line_1")
 	private String addressLine1;
@@ -45,75 +60,5 @@ public class Address extends AuditableEntity implements java.io.Serializable {
 	@Column(name = "state")
 	private String state;
 
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public long getAddressId() {
-		return addressId;
-	}
-
-	public void setAddressId(long addressId) {
-		this.addressId = addressId;
-	}
-
-	public String getAddressLine1() {
-		return addressLine1;
-	}
-
-	public void setAddressLine1(String addressLine1) {
-		this.addressLine1 = addressLine1;
-	}
-
-	public String getAddressLine2() {
-		return addressLine2;
-	}
-
-	public void setAddressLine2(String addressLine2) {
-		this.addressLine2 = addressLine2;
-	}
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getLocality() {
-		return locality;
-	}
-
-	public void setLocality(String locality) {
-		this.locality = locality;
-	}
-
-	public String getPinCode() {
-		return pinCode;
-	}
-
-	public void setPinCode(String pinCode) {
-		this.pinCode = pinCode;
-	}
-
-	@Override
-	public String toString() {
-		return "Address [addressId=" + addressId + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2
-				+ ", district=" + district + ", city=" + city + ", locality=" + locality + ", pinCode=" + pinCode
-				+ ", state=" + state + "]";
-	}
-
+	
 }

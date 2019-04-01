@@ -28,11 +28,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.revamp.core.lookup.PuthuyirLookUp;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
 @Table(name = "project")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Proxy(lazy = false)
+@Getter
+@Setter
+@ToString
 public class Project extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = -5416628745442805358L;
@@ -65,70 +74,5 @@ public class Project extends AuditableEntity implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateAdded;
 
-	public long getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(long projectId) {
-		this.projectId = projectId;
-	}
-
-	public School getSchool() {
-		return school;
-	}
-
-	public void setSchool(School school) {
-		this.school = school;
-	}
-
-	public int getEstimate() {
-		return estimate;
-	}
-
-	public void setEstimate(int estimate) {
-		this.estimate = estimate;
-	}
-
-	public int getCollectedAmount() {
-		return collectedAmount;
-	}
-
-	public void setCollectedAmount(int collectedAmount) {
-		this.collectedAmount = collectedAmount;
-	}
-
-	public PuthuyirLookUp getStatus() {
-		return status;
-	}
-
-	public void setStatus(PuthuyirLookUp status) {
-		this.status = status;
-	}
-
-
-	public Set<Requirement> getRequirements() {
-		return requirements;
-	}
-
-	public void setRequirements(Set<Requirement> requirements) {
-		this.requirements = requirements;
-	}
-
-	public Date getDateAdded() {
-		return dateAdded;
-	}
-
-	public void setDateAdded(Date dateAdded) {
-		this.dateAdded = dateAdded;
-	}
-
-	@Override
-	public String toString() {
-		return "Project [projectId=" + projectId + ", estimate=" + estimate
-				+ ", collectedAmount=" + collectedAmount + ", Status="
-				+ status + ", requirements=" + requirements
-				+ ", dateAdded=" + dateAdded + "]";
-	}
-
-
+	
 }

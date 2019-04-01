@@ -11,11 +11,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Proxy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "invoice_requirements")
 @EntityListeners(AuditingEntityListener.class)
 @Proxy(lazy = false)
-
+@Data
 public class InvoiceRequirements extends AuditableEntity implements java.io.Serializable {
 	
 	/**
@@ -34,37 +36,4 @@ public class InvoiceRequirements extends AuditableEntity implements java.io.Seri
 	private String price;
 	@Column(name = "descriptions")
 	private String descriptions;
-	public String getDescriptions() {
-		return descriptions;
 	}
-	public void setDescriptions(String descriptions) {
-		this.descriptions = descriptions;
-	}
-	public long getRequirement_id() {
-		return requirement_id;
-	}
-	public void setRequirement_id(long requirement_id) {
-		this.requirement_id = requirement_id;
-	}
-	public String getQty() {
-		return qty;
-	}
-	public void setQty(String qty) {
-		this.qty = qty;
-	}
-	public String getSubTotal() {
-		return subTotal;
-	}
-	public void setSubTotal(String subTotal) {
-		this.subTotal = subTotal;
-	}
-	public String getPrice() {
-		return price;
-	}
-	public void setPrice(String price) {
-		this.price = price;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-}

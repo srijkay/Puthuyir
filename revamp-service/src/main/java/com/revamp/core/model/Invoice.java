@@ -13,9 +13,12 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "invoice")
 @EntityListeners(AuditingEntityListener.class)
+@Data
 public class Invoice extends AuditableEntity {
 	/**
 	 * 
@@ -35,67 +38,15 @@ public class Invoice extends AuditableEntity {
 	@Column(name="project_id")
 	private Long projectId;
 
-	public Long getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
-	}
-
-	public Invoice() {
-
-	}
-
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "invoice_details_id")
+	private InvoiceDetails invoiceDetails;
 	public Invoice(String name, String mimeType, byte[] file) {
 		this.name = name;
 		this.mimeType = mimeType;
 		this.file = file;
 
 	}
-
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "invoice_details_id")
-	private InvoiceDetails invoiceDetails;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getMimeType() {
-		return mimeType;
-	}
-
-	public void setMimeType(String mimeType) {
-		this.mimeType = mimeType;
-	}
-
-	public byte[] getFile() {
-		return file;
-	}
-
-	public void setFile(byte[] file) {
-		this.file = file;
-	}
-
-	public InvoiceDetails getInvoiceDetails() {
-		return invoiceDetails;
-	}
-
-	public void setInvoiceDetails(InvoiceDetails invoiceDetails) {
-		this.invoiceDetails = invoiceDetails;
-	}
-
+	
 }

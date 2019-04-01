@@ -1,6 +1,8 @@
 package com.revamp.core.model;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -21,12 +23,21 @@ import org.hibernate.annotations.Proxy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.revamp.core.lookup.PuthuyirLookUp;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "donation")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Proxy(lazy = false)
+@Getter
+@Setter
+@ToString
 public class Donation extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = -1748436992625970292L;
@@ -57,69 +68,5 @@ public class Donation extends AuditableEntity implements java.io.Serializable {
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createDate;
-
-	public long getDonationId() {
-		return donationId;
-	}
-
-	public void setDonationId(long donationId) {
-		this.donationId = donationId;
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
-	public User getDonor() {
-		return donor;
-	}
-
-	public void setDonor(User donor) {
-		this.donor = donor;
-	}
-
-	public String getPaymentMode() {
-		return paymentMode;
-	}
-
-	public void setPaymentMode(String paymentMode) {
-		this.paymentMode = paymentMode;
-	}
-
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-
-	public String getPaymentStatus() {
-		return paymentStatus;
-	}
-
-	public void setPaymentStatus(String paymentStatus) {
-		this.paymentStatus = paymentStatus;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	@Override
-	public String toString() {
-		return "Donation [donationId=" + donationId + ", project=" + project
-				+ ", donor=" + donor + ", paymentMode=" + paymentMode
-				+ ", amount=" + amount + ", paymentStatus=" + paymentStatus
-				+ ", createDate=" + createDate + "]";
-	}
 
 }

@@ -11,10 +11,16 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Proxy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "contacts")
 @EntityListeners(AuditingEntityListener.class)
 @Proxy(lazy = false)
+@Data 
 public class Contacts extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1769915147037089195L;
@@ -42,66 +48,5 @@ public class Contacts extends AuditableEntity implements java.io.Serializable {
 	@Column(name = "sec_email")
 	private String secEmail;
 
-	public long getContactsId() {
-		return contactsId;
-	}
-
-	public void setContactsId(long contactsId) {
-		this.contactsId = contactsId;
-	}
-
-	public String getPriName() {
-		return priName;
-	}
-
-	public void setPriName(String priName) {
-		this.priName = priName;
-	}
-
-	public String getPriNum() {
-		return priNum;
-	}
-
-	public void setPriNum(String priNum) {
-		this.priNum = priNum;
-	}
-
-	public String getPriEmail() {
-		return priEmail;
-	}
-
-	public void setPriEmail(String priEmail) {
-		this.priEmail = priEmail;
-	}
-
-	public String getSecName() {
-		return secName;
-	}
-
-	public void setSecName(String secName) {
-		this.secName = secName;
-	}
-
-	public String getSecNum() {
-		return secNum;
-	}
-
-	public void setSecNum(String secNum) {
-		this.secNum = secNum;
-	}
-
-	public String getSecEmail() {
-		return secEmail;
-	}
-
-	public void setSecEmail(String secEmail) {
-		this.secEmail = secEmail;
-	}
-
-	@Override
-	public String toString() {
-		return "Contacts [contactsId=" + contactsId + ", priName=" + priName + ", priNum=" + priNum + ", priEmail="
-				+ priEmail + ", secName=" + secName + ", secNum=" + secNum + ", secEmail=" + secEmail + "]";
-	}
-
+	
 }
