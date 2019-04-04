@@ -1,10 +1,14 @@
 package com.revamp.email.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import lombok.Data;
+
 @Component
+@Data
 public class EmailUser {
 	
 	 private String from;
@@ -20,63 +24,7 @@ public class EmailUser {
 	 private String fromEmailAddress;
 	 
 	 private String toEmailAddress;
+	 private Map<String, Object> model;
 
-	public String getFromEmailAddress() {
-		return fromEmailAddress;
-	}
-
-	public void setFromEmailAddress(String fromEmailAddress) {
-		this.fromEmailAddress = fromEmailAddress;
-	}
-
-	public String getToEmailAddress() {
-		return toEmailAddress;
-	}
-
-	public void setToEmailAddress(String toEmailAddress) {
-		this.toEmailAddress = toEmailAddress;
-	}
-
-	public String getFrom() {
-		return from;
-	}
-
-	public void setFrom(String from) {
-		this.from = from;
-	}
-
-	public List<String> getTo() {
-		return to;
-	}
-
-	public void setTo(List<String> to) {
-		this.to = to;
-	}
-
-	public List<String> getCc() {
-		return cc;
-	}
-
-	public void setCc(List<String> cc) {
-		this.cc = cc;
-	}
-
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	 
 	
-
 }

@@ -2,6 +2,7 @@ package com.revamp.email.service;
 
 import javax.mail.MessagingException;
 
+import com.revamp.email.model.School;
 import com.revamp.email.exception.SendMailException;
 import com.revamp.email.model.EmailUser;
 /**
@@ -25,6 +26,9 @@ public interface EmailService {
 	 * @throws MessagingException
 	 */
 	String sendEmailWithAttachment(EmailUser user) throws MessagingException;
+	
+	
+	School get(long id);
 	
 	
 

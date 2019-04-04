@@ -1,5 +1,8 @@
 package com.revamp.email.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -11,12 +14,18 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
-import com.revamp.email.controller.EmailController;
+import com.revamp.email.dao.EmailRepository;
 import com.revamp.email.exception.SendMailAttachmentException;
 import com.revamp.email.exception.SendMailException;
 import com.revamp.email.model.EmailUser;
+import com.revamp.email.model.School;
 import com.revamp.email.util.EmailConstants;
+
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+
 
 /**
  * 
@@ -27,6 +36,9 @@ import com.revamp.email.util.EmailConstants;
 @Component
 public class EmailServiceImpl implements EmailService {
 	private static final Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
+	
+	@Autowired
+	private EmailRepository emailRepo;
 
 	/*
 	 * The Spring Framework provides an easy abstraction for sending email by using
@@ -35,6 +47,10 @@ public class EmailServiceImpl implements EmailService {
 	 */
 	@Autowired
 	private JavaMailSender javaMailSender;
+	
+	
+	  @Autowired
+	  private Configuration freemarkerConfig;
 
 	/**
 	 * sendMail
@@ -48,10 +64,22 @@ public class EmailServiceImpl implements EmailService {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 		MimeMessageHelper mail = new MimeMessageHelper(message);
+		
+		Map model = new HashMap();
+		model.put("schoolName", this.get(1).getSchoolInfo().getSchoolName());
+		model.put("schoolType",this.get(1).getSchoolInfo().getSchoolType());
+        model.put("name", "User");
+        model.put("location", "Chennai");
+        model.put("signature", "Puthuyir");
+        user.setModel(model);
+		
+	    
 		/*
 		 * This send() contains an Object of MIME Message as an Parameter
 		 */
 		try {
+			 Template t = freemarkerConfig.getTemplate("email-template.ftl");
+			 
 			// TODO
 			if (user.getTo() != null && user.getTo().size() > 0) {
 				mail.setTo(user.getTo().toArray(new String[user.getTo().size()]));
@@ -60,7 +88,15 @@ public class EmailServiceImpl implements EmailService {
 			}
 			mail.setFrom(user.getFrom());
 			mail.setSubject(user.getSubject());
-			mail.setText(user.getMessage());
+			   String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, user.getModel());
+
+			   
+//			School schoolInfo = this.get(1);
+//			if(schoolInfo !=null) {
+//			mail.setText(schoolInfo.getSchoolInfo().getSchoolName());
+//			}
+			
+			   mail.setText(html,true);
 			if (user.getCc() != null && user.getCc().size() > 0) {
 				mail.setCc(user.getCc().toArray(new String[user.getCc().size()]));
 			}
@@ -120,5 +156,13 @@ public class EmailServiceImpl implements EmailService {
 		logger.info("EmailServiceImpl:sendEmailWithAttachment Method entry");
 		return EmailConstants.EMAIL_SUCCESS;
 	}
+
+	@Override
+	public School get(long id) {
+		return emailRepo.findById(id).orElse(null);
+	}
+	
+	
+	
 
 }
