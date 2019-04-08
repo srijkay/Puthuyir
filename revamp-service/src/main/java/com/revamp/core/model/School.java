@@ -1,7 +1,6 @@
 package com.revamp.core.model;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,15 +28,11 @@ import org.hibernate.annotations.Proxy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.revamp.core.lookup.PuthuyirLookUp;
 import com.revamp.core.web.util.SchoolSerializer;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -49,6 +44,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@JsonSerialize(using = SchoolSerializer.class)
 public class School extends AuditableEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8607633702511344481L;
