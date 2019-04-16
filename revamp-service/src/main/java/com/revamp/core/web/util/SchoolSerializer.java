@@ -38,7 +38,7 @@ public class SchoolSerializer extends StdSerializer<School> {
 		jgen.writeObjectField("concats", school.getContacts());
 		jgen.writeObjectField("address", school.getAddress());
 		jgen.writeObjectField("requirements", this.getRequirements(school));
-		//jgen.writeObjectField("projects", school.getProjects());
+		jgen.writeObjectField("projects", school.getProjects());
 		jgen.writeObjectField("proofOfIds", this.convertImageWrapper(school.getSchoolImages()));
 		jgen.writeEndObject();
 		}catch(Exception e) {

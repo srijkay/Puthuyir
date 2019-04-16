@@ -34,11 +34,10 @@ export class SchoolsForDonationsComponent implements OnInit {
 
   parseResponse(response:any) {
     this.schoolList = JSON.parse(response.text());
-
-    for (let school of this.schoolList) {
+    /*for (let school of this.schoolList) {
       console.log(school.proofOfIds.comments);
       console.log(school.proofOfIds.files[0]);
-    }
+    }*/
 
     this.schoolService.saveSchoolList(this.schoolList);
   }

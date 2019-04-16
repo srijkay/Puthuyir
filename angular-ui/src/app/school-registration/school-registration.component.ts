@@ -8,6 +8,7 @@ import {School} from '../model/school';
 import {Router} from "@angular/router";
 
 
+
 @Component({
   selector: 'app-school-registration',
   templateUrl: './school-registration.component.html',
@@ -49,6 +50,7 @@ export class SchoolRegistrationComponent implements OnInit {
   quantity: FormControl;
 
   comments: FormControl;
+
   //image: FormArray;
   image: FormControl;
   districtsLD: LookUps;
@@ -113,7 +115,7 @@ export class SchoolRegistrationComponent implements OnInit {
 
   createFormControls() {
     if (!(typeof this.schoolRegForm === 'object')) {
-      this.schoolName = new FormControl('', <any>Validators.required);
+      this.schoolName = new FormControl('', [Validators.required,this.trimValidator]);
       this.schoolRegNo = new FormControl('', <any>Validators.required);
       this.schoolType = new FormControl('', Validators.required);
       this.numberOfStudents = new FormControl('', Validators.required);
@@ -187,6 +189,7 @@ export class SchoolRegistrationComponent implements OnInit {
   }
 
 
+
   createForm() {
 
     this.schoolRegForm = new FormGroup({
@@ -236,7 +239,6 @@ export class SchoolRegistrationComponent implements OnInit {
   clearFile() {
     this.schoolRegForm.controls.proofOfId.get('image').setValue(null);
     this.schoolRegForm.controls.image.setValue(null);
-    //this.fileInput.nativeElement.value = '';
   }
 
   onFileChange(event) {
@@ -273,11 +275,59 @@ export class SchoolRegistrationComponent implements OnInit {
     return input;
   }
 
+  private trimValidator(control: FormControl) {
+    let eValue = control.value;
+    console.log(control);
+
+    if(eValue.trim() == "") {
+      console.log(control.touched);
+      console.log(control.dirty);
+      return {"whitespace": true};
+    }
+    return null;
+  }
+
+  private onBlurMethod(event) {
+    let eVal = event.target.value;
+    event.target.value = eVal.trim();
+    //return event.target.value.trim();
+  }
+
+  private hasAllMandatory(): boolean {
+      if (this.schoolRegForm.controls.schoolInfo.value.schoolName == '' ||
+          this.schoolRegForm.controls.schoolInfo.value.schoolRegNo == '' ||
+          this.schoolRegForm.controls.schoolInfo.value.schoolType == '' ||
+          this.schoolRegForm.controls.schoolInfo.value.numberOfTeachers == '' ||
+          this.schoolRegForm.controls.schoolInfo.value.numberOfStudents == '' ||
+          this.schoolRegForm.controls.contacts.value.priName == ''  ||
+          this.schoolRegForm.controls.contacts.value.priNum == ''  ||
+          this.schoolRegForm.controls.contacts.value.priEmail == '' ||
+          this.schoolRegForm.controls.contacts.value.secName == '' ||
+          this.schoolRegForm.controls.contacts.value.secNum == '' ||
+          this.schoolRegForm.controls.contacts.value.secEmail == '' ||
+          this.schoolRegForm.controls.address.value.addressLine1 == '' ||
+          this.schoolRegForm.controls.address.value.addressLine2 == '' ||
+          this.schoolRegForm.controls.address.value.city == '' ||
+          this.schoolRegForm.controls.address.value.district == '' ||
+          this.schoolRegForm.controls.address.value.state == '' ||
+          this.schoolRegForm.controls.address.value.pinCode == '' ||
+          this.schoolRegForm.controls.proofOfId.value.comments == '' ||
+          this.schoolRegForm.controls.proofOfId.value.image == ''  ||
+          (<FormArray>this.schoolRegForm.controls.requirements).length  == 0 ) {
+console.log('['+this.schoolRegForm.controls.schoolInfo.value.schoolType+']');
+            return false;
+          } else {
+console.log('true from hasAllMandatory');
+            return true;
+          }
+
+  }
+
   disableSubmitBtn() {
-    if (!this.schoolRegForm.valid || this.loading) {
+    if (!this.hasAllMandatory() || this.loading) {
       return true;
     } else {
-      return
+      return false;
     }
   }
 }

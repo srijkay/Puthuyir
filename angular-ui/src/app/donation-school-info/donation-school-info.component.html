@@ -5,9 +5,9 @@
         {{donationSchoolInfo.schoolInfo.schoolRegNo}}
       </div>
       <div class="card-body">
-        <table class="floatLeft">
+<table class="floatLeft">
             <tr>
-              <td><img [src]="imageUrl+donationSchoolInfo.proofOfIds.files[0]" class="img-fluid w-100" alt="Responsive image" ></td>
+              <td><img [src]="imageUrl+donationSchoolInfo.proofOfIds.files[0]" class="img-fluid w-70" alt="Responsive image" ></td>
             </tr>
           </table>
           <table border="1" class="table table-bordered floatRight">
@@ -24,10 +24,20 @@
               <td>{{requirement.quantity}}</td>
             </tr>
           </table>
-          </div>
-          </div>
-          <div class="form-group">
-            <button type="button" class="btn btn-primary btn-sm"  (click)="goToSearchResult()">Back To Search Result</button>
-            <button type="button" class="btn btn-primary btn-sm"  (click)="goToDonatePage()">Donate Now</button>
-          </div>
-          </div>
+
+
+
+      </div>
+
+      <div class="progress">
+    <div class="progress-bar"  [ngStyle]="{'width': progressWidth+'%'}">
+        {{donationSchoolInfo.projects[0].collectedAmount/donationSchoolInfo.projects[0].estimate * 100 }}%</div>
+      </div>
+    </div>
+
+    <div>&nbsp;</div>
+      <div class="form-group">
+          <button type="button" class="btn btn-primary btn-sm"  (click)="goToSearchResult()">Back To Search Result</button>
+          <button type="button" class="btn btn-primary btn-sm"  (click)="goToDonatePage()">Donate Now</button>
+      </div>
+</div>

@@ -16,6 +16,8 @@ import {DonationSchoolInfoComponent} from './donation-school-info/donation-schoo
 import {DonateScreenComponent} from './donate-screen/donate-screen.component';
 import {PaymentSummaryComponent} from './payment-summary/payment-summary.component';
 import {PaymentConfirmationComponent} from './payment-confirmation/payment-confirmation.component';
+
+
 import {} from './schools-for-donations/schools-for-donations.component';
 const routes: Routes = [
   {

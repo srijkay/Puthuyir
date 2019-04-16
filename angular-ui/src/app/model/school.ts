@@ -49,7 +49,12 @@
         address: Address;
         requirements: Requirement[];
         proofOfIds: ProofOfIds;
+        projects: Project[];
     }
 
-
-
+    export interface Project {
+      projectId:number;
+      estimate:number;
+      collectedAmount:number;
+      status:string;
+    }

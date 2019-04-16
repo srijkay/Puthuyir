@@ -16,10 +16,16 @@
           <fieldset formGroupName="schoolInfo">
             <div class="form-group">
               <label class="control-label">School Name</label><span class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">School name is required</span>
-              <input type="text" class="form-control" id="schoolName" formControlName="schoolName">
-              <div class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">
+              <input type="text" class="form-control" id="schoolName" formControlName="schoolName" (blur)="onBlurMethod($event)">
+              <!--div class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">
                 <p>School name is required</p>
+              </div -->
+              <div class="text-danger" *ngIf="(schoolName.touched && !schoolName.dirty)">
+                <p *ngIf="schoolName.errors.required">School name is required</p>
+                <p *ngIf="schoolName.errors.whitespace">School name has only whitespaces</p>
               </div>
+
+
             </div>
 
             <div class="form-group">

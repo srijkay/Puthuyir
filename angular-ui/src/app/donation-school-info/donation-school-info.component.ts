@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import {School} from '../model/school';
 import {FormGroup, FormArray} from '@angular/forms';
 import {Router} from "@angular/router";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-donation-school-info',
@@ -13,14 +14,16 @@ import {Router} from "@angular/router";
 export class DonationSchoolInfoComponent implements OnInit {
 
 donationSchoolInfo: School;
+
+progressWidth:string;
 imageUrl:string;
 
-  constructor( private schoolService: SchoolService,private router: Router ) { }
+  constructor( private schoolService: SchoolService,private router: Router, private sanitizer: DomSanitizer ) { }
 
   ngOnInit() {
     this.imageUrl = environment["school.image.dir"];
-
     this.getDonationSchoolInfo();
+    this.progressWidth = (this.donationSchoolInfo.projects[0].collectedAmount/this.donationSchoolInfo.projects[0].estimate*100).toString();
   }
 
   getDonationSchoolInfo() {

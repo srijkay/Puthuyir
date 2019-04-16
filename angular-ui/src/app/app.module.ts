@@ -63,7 +63,6 @@ export function provideConfig() {
     DonateScreenComponent,
     PaymentSummaryComponent,
     PaymentConfirmationComponent
-
     ],
   imports: [
     BrowserModule,
