@@ -34,6 +34,9 @@ public class School implements Serializable  {
 	@Column(name = "status")
 	private String status;
 	
+	@Column(name="Requirement_Fund")
+	private String Requirement_Fund;
+	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "school_id")
 	private Project projects;
