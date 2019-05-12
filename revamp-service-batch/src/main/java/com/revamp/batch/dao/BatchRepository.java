@@ -29,4 +29,9 @@ public interface BatchRepository extends CrudRepository<School, Long> {
 	@Query("UPDATE FundAllotment SET status =:status WHERE requirement_id = :requirement_id")
 	public int updateFundStatus(@Param("requirement_id") long requirement_id, @Param("status") String status);
 
+	@Modifying
+	@Query("UPDATE School SET Requirement_Fund =:Requirement_Fund WHERE school_id = :schoolid")
+	public int updateRequirementStatus(@Param("schoolid") long school_id, @Param("Requirement_Fund") String Requirement_Fund);
+
+	
 }
