@@ -70,30 +70,83 @@ public class BatchServicesImpl implements BatchServices {
 				school_id = school.getSchoolId();
 				try {
 					compareDate = betweenDates(
-							new SimpleDateFormat(BatchConstants.DATE_FORMAT).parse(school.getQuotation().getQuotationDate()),
-							dateFormat.parse(dateFormat.format(currentDate)));
+							dateFormat.parse(dateFormat.format(currentDate)),new SimpleDateFormat(BatchConstants.DATE_FORMAT).parse(school.getQuotation().getQuotationValidityDate())
+							);
+					
 					// Compare dates Less than equal to 30
 					if (compareDate <= Long.parseLong(days)) {
-						double checkDate = calculatePercentage(
+						
+						double percentageAmount = calculatePercentage(
 								Double.valueOf(school.getProjects().getCollectedAmount()),
 								Double.valueOf(school.getQuotation().getQuotatedAmount()));
-						if (checkDate >= BatchConstants.MINIMUM_PERCENTAGE && checkDate < BatchConstants.MAXIMUM_PERCENTAGE) {
+						// 30 to 99
+						if (percentageAmount >= BatchConstants.MINIMUM_PERCENTAGE && percentageAmount < BatchConstants.MAXIMUM_PERCENTAGE) {
 							batchRepo.updateFundStatus(school.getQuotation().getRequirementId(),
 									BatchConstants.PARTIAL_FUNDCOLLECTED);
-						} else {
-							batchRepo.updateFundStatus(school.getQuotation().getRequirementId(), BatchConstants.FUND_SHORTAGE);
+							batchRepo.updateRequirementStatus(school_id, BatchConstants.FUND_PARTIALLY_COLLECTED);
 							batchRepo.updateStatus(school_id, BatchConstants.FUND_COLLECTEDCLOSED);
+							
 						}
+						//>99
+						else if(percentageAmount >= BatchConstants.MAXIMUM_PERCENTAGE) {
+							
+							batchRepo.updateStatus(school_id, BatchConstants.FUND_COLLECTEDCLOSED);
+							batchRepo.updateRequirementStatus(school_id, BatchConstants.FUND_FULLYCOLLECTED);
+							batchRepo.updateFundStatus(school.getQuotation().getRequirementId(), BatchConstants.FUND_FULLYCOLLECTED);
+							
+						}
+						// less than 30%
+						else {
+							if(amountPercentage>0) {
+								batchRepo.updateStatus(school_id, BatchConstants.FUND_COLLECTEDCLOSED);
+								batchRepo.updateRequirementStatus(school_id, BatchConstants.FUND_SHORTAGE);
+								batchRepo.updateFundStatus(school.getQuotation().getRequirementId(), BatchConstants.FUND_SHORTAGE);
+							
+								
+							}else {
+							batchRepo.updateStatus(school_id, BatchConstants.FUND_INPROGRESS);
+							batchRepo.updateRequirementStatus(school_id, BatchConstants.FUND_INPROGRESS);
+							batchRepo.updateFundStatus(school.getQuotation().getRequirementId(),
+									BatchConstants.FUND_INPROGRESS);
+						
+							}
+						}
+						
 					}
 					// Compare dates greater than equal to 30
 					if (compareDate >= Long.parseLong(days)) {
 						if (amountPercentage >= BatchConstants.MAXIMUM_PERCENTAGE) {
 							batchRepo.updateStatus(school_id, BatchConstants.FUND_COLLECTEDCLOSED);
-						} else {
-							batchRepo.updateFundStatus(school.getQuotation().getRequirementId(), BatchConstants.FUND_SHORTAGE);
-							batchRepo.updateStatus(school_id, BatchConstants.FUND_COLLECTEDCLOSED);
+							batchRepo.updateRequirementStatus(school_id, BatchConstants.FUND_FULLYCOLLECTED);
+							batchRepo.updateFundStatus(school.getQuotation().getRequirementId(), BatchConstants.FUND_FULLYCOLLECTED);
+							
+							}
+						else if(amountPercentage >= BatchConstants.MINIMUM_PERCENTAGE && amountPercentage < BatchConstants.MAXIMUM_PERCENTAGE) {
+							batchRepo.updateFundStatus(school.getQuotation().getRequirementId(),
+									BatchConstants.FUND_PARTIALLY_COLLECTED);
+							batchRepo.updateStatus(school_id, BatchConstants.FUND_INPROGRESS);
+							batchRepo.updateRequirementStatus(school_id, BatchConstants.FUND_PARTIALLY_COLLECTED);
+							
+							
+						
 						}
-					}
+						
+						else {
+							if(amountPercentage>0) {
+								batchRepo.updateStatus(school_id, BatchConstants.FUND_COLLECTEDCLOSED);
+								batchRepo.updateRequirementStatus(school_id, BatchConstants.FUND_SHORTAGE);
+								batchRepo.updateFundStatus(school.getQuotation().getRequirementId(), BatchConstants.FUND_SHORTAGE);
+							
+								
+							}else {
+							batchRepo.updateStatus(school_id, BatchConstants.FUND_INPROGRESS);
+							batchRepo.updateRequirementStatus(school_id, BatchConstants.FUND_INPROGRESS);
+							batchRepo.updateFundStatus(school.getQuotation().getRequirementId(),
+									BatchConstants.FUND_INPROGRESS);
+						
+							}
+						}
+				}
 
 				} catch (IOException e) {
 					
@@ -116,7 +169,7 @@ public class BatchServicesImpl implements BatchServices {
 	 * @return
 	 */
 	public double calculatePercentage(double collectedAmount, double quotationAmount) {
-		return quotationAmount * 100 / collectedAmount;
+		return collectedAmount * 100 / quotationAmount;
 	}
 
 	/**
@@ -135,8 +188,10 @@ public class BatchServicesImpl implements BatchServices {
 	 * @return
 	 * @throws IOException
 	 */
-	public static long betweenDates(Date quotationDate, Date currentDate) throws IOException {
-		return ChronoUnit.DAYS.between(quotationDate.toInstant(), currentDate.toInstant());
+	public static long betweenDates(Date currentDate,Date quotationDate) throws IOException {
+		
+		return ChronoUnit.DAYS.between(currentDate.toInstant(),quotationDate.toInstant());
+		
 	}
 
 }
