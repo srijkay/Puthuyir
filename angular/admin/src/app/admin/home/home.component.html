@@ -1,0 +1,93 @@
+<mk-layout-wrapper>
+  <app-header></app-header>
+  <mk-layout-content>
+
+
+<div class="row">
+    <div class="col-md-3 col-xs-12">
+      <mk-box-small header="Admin" backgroundColor="aqua" iconStyleClass="">
+        <!--<mk-box-small-content>Fund Approver</mk-box-small-content>-->
+        <mk-box-small-footer>
+          <a routerLink="/adminpage"><i class="fa fa-arrow-circle-right"></i></a>
+        </mk-box-small-footer>
+      </mk-box-small>
+    </div>
+
+    <div class="col-md-3 col-xs-12">
+        <mk-box-small header="Inbox" backgroundColor="green" iconStyleClass="">
+         <!-- <mk-box-small-content>Admin</mk-box-small-content>-->
+          <mk-box-small-footer>
+            <a routerLink="/inbox"><i class="fa fa-arrow-circle-right"></i></a>
+          </mk-box-small-footer>
+        </mk-box-small>
+      </div>
+      <div class="col-md-3 col-xs-12">
+        <mk-box-small header="logout" backgroundColor="yellow" iconStyleClass="">
+         <!-- <mk-box-small-content>Volunteer</mk-box-small-content>-->
+          <mk-box-small-footer>
+            <a routerLink="/logout"><i class="fa fa-arrow-circle-right"></i></a>
+          </mk-box-small-footer>
+        </mk-box-small>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+    <div class="box-header">
+      <h3 class="box-title" style="text-align: center;">Admin Home Screen</h3>
+
+      <div class="box-tools">
+        <div class="input-group input-group-sm" style="width: 150px;">
+          <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+          <div class="input-group-btn">
+            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+    <div class="box-body table-responsive no-padding">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>School ID</th>
+          <th>School Name</th>
+          <th>Date Added</th>
+          <th>Status</th>
+          <th>District</th>
+          <th>Town</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let school of schoolList">
+          <td>{{ school.id }}</td>
+          <td>{{ school.schoolInfo.schoolName }}</td>
+          <td>{{ school.schoolInfo.createdDate }}</td>
+          <td><span [className]='getStyleForStatus(school.status)'>{{ school.status }}</span></td>
+          <td>{{ school.address.district }}</td>
+          <td>{{ school.address.city }}</td>
+          <td><button (click)="navigateToDetailsPage(school)" class="btn btn-link" > {{getSchoolDetailsStatusMessage(school.status)}} </button></td>
+        </tr>
+      </tbody>
+  </table>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+      
+</mk-layout-content>
+<app-footer></app-footer>
+</mk-layout-wrapper>
+  

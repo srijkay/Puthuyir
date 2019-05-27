@@ -1,0 +1,95 @@
+<!--<mk-layout-wrapper>
+<app-header></app-header>
+<mk-layout-content>-->
+    <div class="row">
+        <div class="col-md-3 col-xs-12">
+          <mk-box-small header="Admin" backgroundColor="aqua" iconStyleClass="">
+            <!--<mk-box-small-content>Fund Approver</mk-box-small-content>-->
+            <mk-box-small-footer>
+              <a routerLink="/admin"><i class="fa fa-arrow-circle-right"></i></a>
+            </mk-box-small-footer>
+          </mk-box-small>
+        </div>
+
+        <div class="col-md-3 col-xs-12">
+            <mk-box-small header="Inbox" backgroundColor="green" iconStyleClass="">
+             <!-- <mk-box-small-content>Admin</mk-box-small-content>-->
+              <mk-box-small-footer>
+                <a routerLink="/accessreview"><i class="fa fa-arrow-circle-right"></i></a>
+              </mk-box-small-footer>
+            </mk-box-small>
+          </div>
+          <div class="col-md-3 col-xs-12">
+            <mk-box-small header="logout" backgroundColor="yellow" iconStyleClass="">
+             <!-- <mk-box-small-content>Volunteer</mk-box-small-content>-->
+              <mk-box-small-footer>
+                <a routerLink="/logout"><i class="fa fa-arrow-circle-right"></i></a>
+              </mk-box-small-footer>
+            </mk-box-small>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="box">
+        <div class="box-header">
+          <h3 class="box-title" style="text-align: center;">Review User Access Request</h3>
+
+          <div class="box-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="box">
+        <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>User Name</th>
+              <th>Date Added</th>
+              <th>Status</th>
+              <th>Role</th>
+              <th>Town</th>
+              <th>District</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let user of users">
+
+              <td>{{ user.userid }}</td>
+              <td>{{ user.firstName }} {{ user.lastName }}</td>
+              <td>{{ user.createdDate }}</td>
+              <td><span [className]='getStyleForStatus(user.status)'> {{ user.status }} </span></td>
+              <td>{{ user.roleId }}</td>
+              <td>{{ user.address.city }}</td>
+              <td>{{ user.address.district }}</td>
+              <td><button (click)="navigateToAdminroleCheck(user)" class="btn btn-link" >More Details </button></td>
+
+             <!-- <a [routerLink]="['admin_role_check']" [queryParams]="{ user: user }"><td> details </td></a>
+             -->
+             </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  </div>
+  </div>
+  </div>
+<!--</mk-layout-content>
+<app-footer></app-footer>
+</mk-layout-wrapper>-->

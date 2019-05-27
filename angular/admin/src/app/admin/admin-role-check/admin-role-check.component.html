@@ -1,0 +1,106 @@
+              <!-- row -->              <div class="row">
+                <div class="col-md-12">
+                  <!-- The time line -->
+                  <ul class="timeline">
+                    <!-- timeline time label -->
+                    <li class="time-label">
+                          <span class="bg-red">
+                            {{user.date}}
+                          </span>
+                    </li>
+                    <!-- /.timeline-label -->
+                    <!-- timeline item -->
+                    <li>
+                      <i class="fa fa-envelope bg-blue"></i>
+
+                      <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+
+                        <h3 class="timeline-header"><a href="#">User Details</a> listed below</h3>
+
+                        <div class="timeline-body">
+                         <div class="box-body">
+                      <ul>
+                        <li>Gender - {{user.gender}}</li>
+                        <li>DOB -  {{user.dob}}</li>
+                        <li>Age-  {{calculateAge(user.dob)}} </li>
+                        <li>Email - {{user.emailAddress}}</li>
+                      <li>Role Requested -  <b><i>{{user.roleId}}</i></b></li>
+
+                       </ul>
+
+                  <h3>Contact number - {{user.phoneNumber}}</h3>
+                    <h4>Address</h4>
+                    <div> {{user.address.addressLine1}} </div>
+                    <div> {{user.address.addressLine2}} </div>
+                    <div> {{user.address.city}} </div>
+                    <div> {{user.address.locality}} </div>
+                    <div> {{user.address.district}} </div>
+                    <div> {{user.address.state}} </div>
+                    <div> {{user.address.pinCode}} </div>
+
+                    </div>
+                        </div>
+                        <div class="timeline-footer">
+
+                 <!-- <a href="#" class="btn btn-warning btn-xs">Click to view User Details</a>-->
+                  <button (click)="approveUserRequest(user,'ApprovedUser')" class="btn btn-primary btn-xs">Approve Access</button>
+                  <button (click)="approveUserRequest(user,'RejectedUser')" class="btn btn-primary btn-xs">Reject Access</button>
+                  <button [routerLink] = "['/accessreview']" class="btn btn-primary btn-xs">Back to User List</button>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- END timeline item -->
+                    <!-- timeline item -->
+                    <li>
+                      <i class="fa fa-user bg-aqua"></i>
+
+                      <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i> 25 mins ago</span>
+
+                        <h3 class="timeline-header no-border">User to resubmit the required details</h3>
+
+                      </div>
+                    </li>
+
+                    <li>
+                      <i class="fa fa-user bg-aqua"></i>
+
+                      <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i> 25 mins ago</span>
+
+                        <h3 class="timeline-header no-border"><a href="#">User request History - </a> Access Granted</h3>
+
+                      </div>
+                    </li>
+
+                    <!-- END timeline item -->
+                    <!-- timeline item -->
+
+
+                    <!-- END timeline item -->
+                    <!-- timeline time label -->
+
+                    <!-- /.timeline-label -->
+                    <!-- timeline item -->
+
+                    <!-- END timeline item -->
+
+
+
+
+                    <!-- timeline item -->
+                    <li>
+                      <div class="timeline-footer">
+                          <a href="#" class="btn btn-xs bg-maroon">Go to Top</a>
+                        </div>
+                    </li>
+                    <!-- END timeline item -->
+                    </ul>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+
+              <!-- /.row -->

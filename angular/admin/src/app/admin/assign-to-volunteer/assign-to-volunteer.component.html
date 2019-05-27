@@ -1,0 +1,214 @@
+
+    <section class="content-header">
+      <h1>
+        Volunteer Assignment Screen
+
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="../../admin_main_screen.html"><i class="fa fa-dashboard"></i> Home</a></li>
+
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title">Select Volunteers</h3>
+            </div>
+
+
+
+            <div class="box-body">
+
+              <div class="form-group" class="col-xs-4">
+                <div>
+                <h3><u>{{school.schoolInfo.schoolName}}</u></h3>
+
+                <label>Select by Area</label>
+                <select class="form-control select2" (change)="onChange($event)">
+                  <option selected="selected">Select</option>
+                  <option>Cuddalore</option>
+                  <option>Nellikuppam</option>
+                 </select>
+              </div>
+              <div class="form-group">
+                <button type="button" class=" btn btn-info" data-toggle="modal" data-target="#modal-default">
+                View Volunteers
+                </button>
+               </div>
+              </div>
+
+              <!--<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-warning">
+                Launch Warning Modal
+              </button>
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-success">
+                Launch Success Modal
+              </button>-->
+            </div>
+            <div class="form-group" class="col-xs-8" *ngIf="selectedVolunteer">
+              <br>
+              <pre>
+            <label>Selected {{selectedVolunteer}} as Volunteer for this School</label></pre>
+            <br>
+            <br>
+           <button type="submit" class="btn btn-info" (click)="confirmVolunteerForSchool()" >
+             Confirm Volunteer to this school
+           </button>
+            <button [routerLink]="['/school_new_requiremnts']" routerLinkActive="router-link-active"  type="button" class="btn btn-primary"  >
+             Back
+            </button>
+
+          </div>
+          <br>
+          </div>
+        </div>
+      </div>
+
+        <div [ngClass]="['modal', 'fade', 'in']" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Select Available Volunteers</h4>
+              </div>
+              <div class="modal-body">
+
+
+                <div class="form-group">
+                                  <label>Select Volunteer</label>
+                                  <select class="form-control"  [(ngModel)]="selectedVolunteer">
+                                    <option *ngFor="let volunteer of volunteerList" [value]="volunteer.userid">{{volunteer.firstName}} {{""}} {{volunteer.lastName}}}</option>
+                                  </select>
+                                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="assignToVolunteer()" >Save Changes</button>
+
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <div class="modal modal-primary fade" id="modal-primary">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Primary Modal</h4>
+              </div>
+              <div class="modal-body">
+                <p>One fine body&hellip;</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <div class="modal modal-info fade" id="modal-info">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Confirmed Volunteer</h4>
+              </div>
+              <div class="modal-body">
+                <p>{{selectedVolunteer}} is assigned to {{school.schoolInfo.schoolName}}&hellip;</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                <!--<button type="button" class="btn btn-outline">Save changes</button>-->
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <div class="modal modal-warning fade" id="modal-warning">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Warning Modal</h4>
+              </div>
+              <div class="modal-body">
+                <p>One fine body&hellip;</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <div class="modal modal-success fade" id="modal-success">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Success Modal</h4>
+              </div>
+              <div class="modal-body">
+                <p>One fine body&hellip;</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <div class="modal modal-danger fade" id="modal-danger">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Danger Modal</h4>
+              </div>
+              <div class="modal-body">
+                <p>One fine body&hellip;</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </section>
+    <!-- /.content -->
+  
